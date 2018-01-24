@@ -3,4 +3,8 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="new_to_vnlaw">New to VnLaw?</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

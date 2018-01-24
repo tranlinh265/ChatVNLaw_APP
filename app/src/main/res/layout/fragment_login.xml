@@ -1,85 +1,100 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/login_background"
-    android:paddingRight="30dp"
-    android:paddingLeft="30dp">
+    android:paddingRight="@dimen/login_layout_padding"
+    android:paddingLeft="@dimen/login_layout_padding"
+    tools:context=".MainActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         app:layout_heightPercent="45%"
         android:gravity="center"
         android:id="@+id/title_container">
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="VNLAW"-->
-            <!--android:gravity="center"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:textSize="50dp" />-->
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_vnlaw"/>
     </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/email_container"
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/infor_container"
+        app:layout_heightPercent="20%"
         android:layout_width="match_parent"
-        app:layout_heightPercent="10%"
-        android:layout_below="@+id/title_container"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_email"
-            android:adjustViewBounds="true"
-            android:background="@drawable/bg_default_button"
-            android:backgroundTint="@color/colorGrayDark"/>
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/colorGray"
-            android:background="@drawable/bg_default_button"
-            android:alpha="0.5"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/password_container"
-        android:layout_width="match_parent"
-        app:layout_heightPercent="10%"
-        android:layout_below="@+id/email_container"
-        android:orientation="horizontal"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_password"
-            android:adjustViewBounds="true"
-            android:backgroundTint="@color/colorGrayDark"
-            android:background="@drawable/bg_default_button"/>
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/colorGray"
-            android:alpha="0.5"
-            android:background="@drawable/bg_default_button"/>
-    </LinearLayout>
+        android:layout_below="@+id/title_container">
+        <LinearLayout
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="20%"
+            android:layout_toRightOf="@+id/email_container">
+            <ImageButton
+                android:src="@drawable/ic_sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:theme="@style/SignInButtonStyle"
+                android:stateListAnimator="@animator/button_default_animation"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/email_container"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="80%"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="@dimen/login_layout_button_padding"
+            android:paddingBottom="@dimen/login_layout_button_padding">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_email"
+                android:adjustViewBounds="true"
+                android:background="@drawable/bg_left_corner_button"
+                android:backgroundTint="@color/colorGrayDark"/>
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/colorGray"
+                android:background="@drawable/bg_right_corner_button"
+                android:alpha="0.5"
+                android:paddingLeft="@dimen/login_layout_button_padding"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/password_container"
+            app:layout_widthPercent="80%"
+            app:layout_heightPercent="50%"
+            android:layout_below="@+id/email_container"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/login_layout_button_padding"
+            android:paddingBottom="@dimen/login_layout_button_padding">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_password"
+                android:adjustViewBounds="true"
+                android:backgroundTint="@color/colorGrayDark"
+                android:background="@drawable/bg_left_corner_button"/>
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/colorGray"
+                android:alpha="0.5"
+                android:background="@drawable/bg_right_corner_button"
+                android:paddingLeft="@dimen/login_layout_button_padding"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </android.support.percent.PercentRelativeLayout>
     <LinearLayout
         android:id="@+id/forgot_password_container"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_below="@+id/password_container"
+        android:layout_below="@+id/infor_container"
         app:layout_heightPercent="10%"
         android:gravity="center">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:text="Forgot Password?"
+            android:text="@string/forgot_password"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             />
@@ -90,7 +105,6 @@
         android:layout_width="match_parent"
         app:layout_heightPercent="10%"
         android:layout_below="@+id/forgot_password_container"
-        android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
         <ImageButton
@@ -98,19 +112,21 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:src="@drawable/ic_facebook"
-            android:backgroundTint="@color/colorPrimary"
+            android:theme="@style/FacebookButtonStyle"
             android:layout_marginRight="15dp"
             android:alpha="0.9"
-            android:background="@drawable/bg_default_button"/>
+            android:stateListAnimator="@animator/button_default_animation"
+            />
+
         <ImageButton
             android:layout_marginLeft="15dp"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:theme="@style/GoogleButtonStyle"
             android:layout_height="match_parent"
             android:src="@drawable/ic_google"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:alpha="0.9"
-            android:background="@drawable/bg_default_button"/>
+            android:stateListAnimator="@animator/button_default_animation"
+            android:alpha="0.9" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/signup_container"
@@ -122,12 +138,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New to VnLaw? "
+            android:text="@string/new_to_vnlaw"
             android:textColor="@android:color/white"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create Account"
+            android:text="@string/create_account"
             android:textColor="@android:color/darker_gray"/>
     </LinearLayout>
 </android.support.percent.PercentRelativeLayout>
