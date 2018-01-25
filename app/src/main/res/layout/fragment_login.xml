@@ -26,12 +26,14 @@
         <LinearLayout
             app:layout_heightPercent="100%"
             app:layout_widthPercent="20%"
-            android:layout_toRightOf="@+id/email_container">
+            android:layout_toRightOf="@+id/email_container"
+            android:background="@android:drawable/dialog_holo_dark_frame">
             <ImageButton
                 android:src="@drawable/ic_sign_in"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:theme="@style/SignInButtonStyle"
+                android:background="@drawable/bg_default_button"
+                android:backgroundTint="@color/colorGrayDark"
                 android:stateListAnimator="@animator/button_default_animation"/>
         </LinearLayout>
         <LinearLayout
@@ -40,22 +42,22 @@
             app:layout_widthPercent="80%"
             android:orientation="horizontal"
             android:gravity="center"
-            android:paddingTop="@dimen/login_layout_button_padding"
-            android:paddingBottom="@dimen/login_layout_button_padding">
+            android:background="@android:drawable/dialog_holo_dark_frame"
+            android:alpha=".9">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_email"
                 android:adjustViewBounds="true"
                 android:background="@drawable/bg_left_corner_button"
-                android:backgroundTint="@color/colorGrayDark"/>
+                android:backgroundTint="@color/colorGrayDark" />
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/colorGray"
                 android:background="@drawable/bg_right_corner_button"
-                android:alpha="0.5"
                 android:paddingLeft="@dimen/login_layout_button_padding"
+                android:alpha=".9"
                 android:textColor="@android:color/white"/>
         </LinearLayout>
         <LinearLayout
@@ -64,22 +66,22 @@
             app:layout_heightPercent="50%"
             android:layout_below="@+id/email_container"
             android:orientation="horizontal"
-            android:paddingTop="@dimen/login_layout_button_padding"
-            android:paddingBottom="@dimen/login_layout_button_padding">
+            android:background="@android:drawable/dialog_holo_dark_frame"
+            android:alpha="0.9">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_password"
                 android:adjustViewBounds="true"
                 android:backgroundTint="@color/colorGrayDark"
-                android:background="@drawable/bg_left_corner_button"/>
+                android:background="@drawable/bg_left_corner_button" />
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/colorGray"
-                android:alpha="0.5"
                 android:background="@drawable/bg_right_corner_button"
                 android:paddingLeft="@dimen/login_layout_button_padding"
+                android:alpha=".9"
                 android:textColor="@android:color/white"/>
         </LinearLayout>
     </android.support.percent.PercentRelativeLayout>
@@ -107,26 +109,40 @@
         android:layout_below="@+id/forgot_password_container"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
-        <ImageButton
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_facebook"
-            android:theme="@style/FacebookButtonStyle"
             android:layout_marginRight="15dp"
             android:alpha="0.9"
-            android:stateListAnimator="@animator/button_default_animation"
-            />
-
-        <ImageButton
-            android:layout_marginLeft="15dp"
+            android:background="@android:drawable/dialog_holo_light_frame">
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_facebook"
+                android:alpha="0.9"
+                android:adjustViewBounds="true"
+                android:stateListAnimator="@animator/button_default_animation"
+                android:background="@color/colorPrimaryDark"
+                />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:theme="@style/GoogleButtonStyle"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_google"
-            android:stateListAnimator="@animator/button_default_animation"
-            android:alpha="0.9" />
+            android:layout_weight="1"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:layout_marginLeft="15dp"
+            android:alpha="0.9">
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_google"
+                android:background="@android:color/holo_red_dark"
+                android:stateListAnimator="@animator/button_default_animation"
+                android:alpha="0.9" />
+        </LinearLayout>
+
+
     </LinearLayout>
     <LinearLayout
         android:id="@+id/signup_container"
@@ -139,7 +155,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_to_vnlaw"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:layout_marginRight="3dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

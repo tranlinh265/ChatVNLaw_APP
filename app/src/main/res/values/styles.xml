@@ -31,4 +31,60 @@
         <item name="colorControlHighlight">@color/colorGrayDark</item>
         <item name="colorButtonNormal">@color/colorGrayDark</item>
     </style>
+
+    <style name="MessageItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="MessageItem.Text" parent="MessageItem">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="MessageItem.Timer" parent="MessageItem">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+    <style name="MessageItem.Container" parent="MessageItem">
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:background">@android:drawable/dialog_holo_light_frame</item>
+    </style>
+    <style name="MessageItem.Container.Right" parent="MessageItem.Container">
+        <item name="android:paddingRight">35dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">15dp</item>
+    </style>
+    <style name="MessageItem.Container.Left" parent="MessageItem.Container">
+        <item name="android:paddingLeft">35dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_marginLeft">15dp</item>
+    </style>
+    <style name="MessageItem.Avatar">
+        <item name="android:layout_height">@dimen/default_image_size_for_message</item>
+        <item name="android:layout_width">@dimen/default_image_size_for_message</item>
+        <item name="android:background">@android:drawable/dialog_holo_dark_frame</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="SignUpForm">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+    <style name="SignUpForm.InfoContainer" parent="SignUpForm">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginRight">@dimen/login_layout_padding</item>
+        <item name="android:layout_marginLeft">@dimen/login_layout_padding</item>
+        <item name="android:layout_marginBottom">@dimen/sign_up_button_margin</item>
+        <item name="android:layout_marginTop">@dimen/sign_up_button_margin</item>
+        <item name="android:background">@android:drawable/dialog_holo_dark_frame</item>
+        <item name="android:alpha">0.9</item>
+    </style>
+
 </resources>

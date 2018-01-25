@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="30dp">
+    <LinearLayout
+        style="@style/MessageItem.Container.Right">
+        <TextView
+            android:text="dawdawdadawdawdawddawdadawddawdawddawda"
+            style="@style/MessageItem.Text"/>
+        <TextView
+            style="@style/MessageItem.Timer"
+            android:text="5 mins ago."/>
+    </LinearLayout>
+    <ImageView
+        style="@style/MessageItem.Avatar"
+
+        android:layout_width="@dimen/default_image_size_for_message"
+        android:layout_height="@dimen/default_image_size_for_message"
+        android:src="@drawable/square_avatar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+</RelativeLayout>
