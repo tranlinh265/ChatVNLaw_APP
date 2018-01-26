@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "846136360643",
+    "firebase_url": "https://lkbc-chat.firebaseio.com",
+    "project_id": "lkbc-chat",
+    "storage_bucket": "lkbc-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846136360643:android:013efc3488c9652d",
+        "android_client_info": {
+          "package_name": "com.lkbcteam.tranlinh.chatvnlaw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846136360643-pdi9ind5aij7ao7im9np2mama0vd7fe0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lkbcteam.tranlinh.chatvnlaw",
+            "certificate_hash": "c7efdb80327a892f0cc550f5717f360992a9c50e"
+          }
+        },
+        {
+          "client_id": "846136360643-i2kk8tl8nucosbe123gj9rh1q925f4j0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCziycQpef9OCjh3msGqekjkcgyHFpR8Ko"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846136360643-i2kk8tl8nucosbe123gj9rh1q925f4j0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
