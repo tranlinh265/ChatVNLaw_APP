@@ -50,21 +50,21 @@
         <item name="android:paddingTop">20dp</item>
         <item name="android:paddingBottom">15dp</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginTop">25dp</item>
         <item name="android:layout_alignParentTop">true</item>
         <item name="android:background">@android:drawable/dialog_holo_light_frame</item>
     </style>
     <style name="MessageItem.Container.Right" parent="MessageItem.Container">
         <item name="android:paddingRight">35dp</item>
-        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingLeft">15dp</item>
         <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_marginRight">25dp</item>
     </style>
     <style name="MessageItem.Container.Left" parent="MessageItem.Container">
         <item name="android:paddingLeft">35dp</item>
-        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingRight">15dp</item>
         <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginLeft">25dp</item>
     </style>
     <style name="MessageItem.Avatar">
         <item name="android:layout_height">@dimen/default_image_size_for_message</item>

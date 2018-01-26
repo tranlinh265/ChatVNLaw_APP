@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:padding="30dp">
+    android:padding="@dimen/message_container_padding">
     <LinearLayout
         style="@style/MessageItem.Container.Right">
         <TextView
