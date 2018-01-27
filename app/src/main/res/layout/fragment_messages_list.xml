@@ -4,33 +4,46 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/transparent">
-    <LinearLayout
+    <include
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        app:layout_heightPercent="30%"
-        android:background="#18FFFF"
-        android:id="@+id/new_message_container"
-        android:orientation="horizontal"
+        layout="@layout/home_background"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        app:layout_heightPercent="25%"
+        android:layout_above="@+id/message_container">
+        <android.support.v7.widget.RecyclerView
+            android:paddingLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_unread_messages"></android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/message_container"
+        android:layout_width="match_parent"
+        app:layout_heightPercent="50%"
+        android:layout_marginBottom="?android:attr/actionBarSize"
+        android:layout_alignParentBottom="true"
         android:padding="10dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="3 New Messages"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
+            android:text="All Chats"
             android:textStyle="bold"
-            android:textSize="30dp"
-            android:padding="10dp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/new_message_container"
-        android:background="@color/colorGrayDark"></LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="?android:attr/actionBarSize"></android.support.v7.widget.RecyclerView>
+            android:id="@+id/tv_all_chat"
+            android:textSize="25dp"
+            android:paddingLeft="10dp"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/tv_all_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_messages">
+
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"

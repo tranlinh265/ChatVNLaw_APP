@@ -1,12 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:orientation="vertical" android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@android:color/white"
+    android:layout_marginRight="15dp">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines="1"
-        android:text="dawdawdjkawdjawdadaw"
+        android:padding="10dp"
+        android:id="@+id/tv_content"
+        android:text="Hey! What was the name of..."
         android:textColor="@android:color/black"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGrayLight"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/square_avatar"
+            android:id="@+id/civ_profile_image"/>
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/civ_profile_image">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_sender"
+                android:lines="1"
+                android:text="Ana Jacobson"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:text="Just now"
+                android:textAllCaps="true"
+                android:layout_width="fill_parent"
+                android:lines="1"
+                android:textColor="@android:color/holo_purple"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_time"
+                android:layout_below="@+id/tv_sender"/>
+        </RelativeLayout>
 
+    </RelativeLayout>
 </LinearLayout>

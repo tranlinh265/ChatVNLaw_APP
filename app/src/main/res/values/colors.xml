@@ -7,4 +7,7 @@
     <color name="black_overlay">#66000000</color>
     <color name="colorGrayDark">#373737</color>
     <color name="colorGray">#4E575C</color>
+    <color name="colorGrayLight">#ececec</color>
+    <color name="colorPinkLight">#b8a8e3</color>
+    <color name="colorPink">#b9a6e4</color>
 </resources>
