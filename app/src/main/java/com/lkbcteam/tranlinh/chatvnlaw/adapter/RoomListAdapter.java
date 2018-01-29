@@ -5,12 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
+import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.model.User;
 import com.lkbcteam.tranlinh.chatvnlaw.model.action.RedirectToRoomChat;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -20,13 +24,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tranlinh on 27/01/2018.
  */
 
-public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.ViewHolder> {
-    private List<Message> mMessageList;
+public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHolder> {
+    private List<Room> mRoomList;
     private Context mContext;
     private BaseFragment mBaseFragment;
 
-    public MessageListAdapter(Context context,BaseFragment baseFragment, List<Message> messageList){
-        mMessageList = messageList;
+    public RoomListAdapter(Context context, BaseFragment baseFragment, List<Room> roomList){
+        mRoomList = roomList;
         mContext = context;
         mBaseFragment = baseFragment;
     }
@@ -40,16 +44,20 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Message message = mMessageList.get(position);
-        holder.mLayoutContainer.setOnClickListener(new RedirectToRoomChat(mBaseFragment,message));
-        holder.tvSenderDisplayName.setText(message.getsenderDisplayName());
-        holder.tvMessageTime.setText(message.getmessageTime());
-        holder.tvMessageContent.setText(message.getmessageContent());
+        Room room = mRoomList.get(position);
+        User user = room.getTargetUser();
+        if(user != null){
+            holder.tvSenderDisplayName.setText(user.getDisplayName());
+//            new DownloadImageTask((ImageView) holder.civProfileImage).execute(String.valueOf(user.getPhotoURL()));
+            Picasso.with(mContext).load(String.valueOf(user.getPhotoURL())).into(holder.civProfileImage);
+            holder.mLayoutContainer.setOnClickListener(new RedirectToRoomChat(mBaseFragment,room));
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return mMessageList.size();
+        return mRoomList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

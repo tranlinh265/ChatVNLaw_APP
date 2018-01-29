@@ -17,13 +17,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.DownloadImageTask;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.MessageListAdapter;
+import com.lkbcteam.tranlinh.chatvnlaw.adapter.RoomListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.UnreadMessageListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
 import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Room;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,18 +34,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tranlinh on 27/01/2018.
  */
 
-public class FragmentMessageList extends BaseFragment {
+public class FragmentRoomList extends BaseFragment {
     private List<Message> mMessageList = new ArrayList<Message>();
     private RecyclerView mRvMessageList, mRvUnreadMessageList;
     private TextView mTvNumberOfUnread,mTvWelcomeUser;
-
+    private List<com.lkbcteam.tranlinh.chatvnlaw.model.Room> mRoomList;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser mCurrentUser;
     private CircleImageView mCivHomeProfile;
 
     public static Fragment newInstance(){
-        return new FragmentMessageList();
+        return new FragmentRoomList();
     }
 
     @Nullable
@@ -68,22 +68,20 @@ public class FragmentMessageList extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         mRvMessageList = view.findViewById(R.id.rv_messages);
         mRvUnreadMessageList = view.findViewById(R.id.rv_unread_messages);
-        Message message = new Message("dwdaw","dawd","daw");
-        mMessageList.add(message);
-        mMessageList.add(message);
-        mMessageList.add(message);
-        mMessageList.add(message);
-        mMessageList.add(message);
-        mMessageList.add(message);
+        mMessageList = new ArrayList<>();
+
+        mRoomList = new ArrayList<>();
         RecyclerView.LayoutManager mLayout = new GridLayoutManager(getContext(),1);
         mRvMessageList.setLayoutManager(mLayout);
-        MessageListAdapter adapter = new MessageListAdapter(getContext(),this, mMessageList);
+        RoomListAdapter adapter = new RoomListAdapter(getContext(),this, mRoomList);
         mRvMessageList.setAdapter(adapter);
+
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         mRvUnreadMessageList.setLayoutManager(layoutManager);
         UnreadMessageListAdapter adapter1 = new UnreadMessageListAdapter(getContext(),this, mMessageList);
         mRvUnreadMessageList.setAdapter(adapter1);
+
         mTvNumberOfUnread = view.findViewById(R.id.tv_number_of_unread);
         mTvNumberOfUnread.setText(String.valueOf(mMessageList.size()) + " New Messages");
         mTvWelcomeUser = view.findViewById(R.id.tv_welcome_user);
@@ -92,8 +90,9 @@ public class FragmentMessageList extends BaseFragment {
 
         if(mCurrentUser != null){
             mTvWelcomeUser.setText(mCurrentUser.getDisplayName());
-            new DownloadImageTask((ImageView) mCivHomeProfile).execute(String.valueOf(mCurrentUser.getPhotoUrl()));
-            Room room = new Room(this,getContext(),mCurrentUser);
+//            new DownloadImageTask((ImageView) mCivHomeProfile).execute(String.valueOf(mCurrentUser.getPhotoUrl()));
+            Picasso.with(getContext()).load(mCurrentUser.getPhotoUrl()).into(mCivHomeProfile);
+            Room room = new Room(this,getContext(),mCurrentUser, adapter, mRoomList);
             room.loadData();
         }
     }

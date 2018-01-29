@@ -5,9 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -39,10 +42,10 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
         View v = null;
         switch (viewType){
             case 0:
-                v =LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sender_messages,parent,false);
+                v =LayoutInflater.from(parent.getContext()).inflate(R.layout.item_receiver_messages,parent,false);
                 break;
             case 2:
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_receiver_messages,parent,false);
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sender_messages,parent,false);
                 break;
         }
         ViewHolder vh = new ViewHolder(v);
@@ -52,6 +55,17 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mLayoutContainer.setOnClickListener(this.mOnClickContentItem);
+        Message message = mMessageList.get(position);
+        if(message != null){
+            if(message.getmSenderUser() != null){
+//                new DownloadImageTask((ImageView) holder.mIvSenderPicture).execute(String.valueOf(message.getmSenderUser().getPhotoURL()));
+                Picasso.with(mContext).load(String.valueOf(message.getmSenderUser().getPhotoURL())).into(holder.mIvSenderPicture);
+            }
+            if(message.getmTextMessage() != null){
+                holder.mTextContent.setText(message.getmTextMessage().getContent());
+                holder.mTextTimeStamp.setText(message.getmTextMessage().getMsgTimeStamp());
+            }
+        }
     }
 
     @Override
@@ -61,11 +75,15 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private View mLayoutContainer;
+        private TextView mTextContent, mTextTimeStamp;
+        private ImageView mIvSenderPicture;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mLayoutContainer = itemView.findViewById(R.id.layout_container);
-
+            mTextContent = itemView.findViewById(R.id.tv_text_content);
+            mTextTimeStamp = itemView.findViewById(R.id.tv_text_time_stamp);
+            mIvSenderPicture = itemView.findViewById(R.id.iv_sender_picture);
         }
     }
 }

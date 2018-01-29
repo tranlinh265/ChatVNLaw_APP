@@ -1,6 +1,7 @@
 package com.lkbcteam.tranlinh.chatvnlaw.model.loaddata;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -55,14 +56,18 @@ public class User {
             }
         });
     }
-    public void getUser(String uid, final com.lkbcteam.tranlinh.chatvnlaw.model.Room roominfo){
+    public void getUser(final boolean targetUser, String uid, final com.lkbcteam.tranlinh.chatvnlaw.model.Room roominfo, final RecyclerView.Adapter adapter){
         database.getReference().child("users/" + uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 com.lkbcteam.tranlinh.chatvnlaw.model.User user = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.User.class);
                 user.setUid(dataSnapshot.getKey());
-                roominfo.setReceiver(user);
-
+                if(targetUser){
+                    roominfo.setTargetUser(user);
+                }else{
+                    roominfo.setCurrentUser(user);
+                }
+                adapter.notifyDataSetChanged();
             }
 
             @Override

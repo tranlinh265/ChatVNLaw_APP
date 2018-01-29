@@ -44,7 +44,7 @@ public class UnreadMessageListAdapter extends RecyclerView.Adapter<UnreadMessage
         holder.tvSenderDisplayName.setText(message.getsenderDisplayName());
         holder.tvMessageContent.setText(message.getmessageContent());
         holder.tvMessageTime.setText(message.getmessageTime());
-        holder.container.setOnClickListener(new RedirectToRoomChat(mBaseFragment, message));
+//        holder.container.setOnClickListener(new RedirectToRoomChat(mBaseFragment, message));
 
     }
 

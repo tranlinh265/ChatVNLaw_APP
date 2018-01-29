@@ -9,7 +9,13 @@ public class Message {
     private String mMessageContent;
     private String mMessageTime;
     private boolean mIsCurrentUser;
+    private TextMessage mTextMessage;
+    private User mTargetUser,mSenderUser;
+    private String mMessageId;
 
+    public Message(){
+
+    }
     public Message(String senderDisplayName, String messageContent, String messageTime){
         this.mSenderDisplayName = senderDisplayName;
         this.mMessageContent = messageContent;
@@ -54,5 +60,38 @@ public class Message {
 
     public void setIsCurrentUser(boolean mIsCurrentUser) {
         this.mIsCurrentUser = mIsCurrentUser;
+    }
+
+
+    public void setmTextMessage(TextMessage mTextMessage) {
+        this.mTextMessage = mTextMessage;
+    }
+
+    public void setmTargetUser(User mTargetUser) {
+        this.mTargetUser = mTargetUser;
+    }
+
+    public User getmSenderUser() {
+        return mSenderUser;
+    }
+
+    public void setmSenderUser(User mSenderUser) {
+        this.mSenderUser = mSenderUser;
+    }
+
+    public TextMessage getmTextMessage() {
+        return mTextMessage;
+    }
+
+    public User getmTargetUser() {
+        return mTargetUser;
+    }
+
+    public String getmMessageId() {
+        return mMessageId;
+    }
+
+    public void setmMessageId(String mMessageId) {
+        this.mMessageId = mMessageId;
     }
 }

@@ -12,12 +12,15 @@
         android:background="@android:drawable/dialog_holo_light_frame">
         <TextView
             style="@style/MessageItem.Text"
+            android:id="@+id/tv_text_content"
             android:text="Đội bóng mở tỷ số lại phải nếm trái đắng chỉ vì một siêu tội đồ."/>
         <TextView
+            android:id="@+id/tv_text_time_stamp"
             style="@style/MessageItem.Timer"
             android:text="5 min ago" />
     </LinearLayout>
     <ImageView
+        android:id="@+id/iv_sender_picture"
         style="@style/MessageItem.Avatar"
         android:layout_height="@dimen/default_image_size_for_message"
         android:layout_width="@dimen/default_image_size_for_message"

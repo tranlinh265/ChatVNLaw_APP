@@ -25,6 +25,6 @@ public class FragmentHomeContainer extends BaseContainerFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        replaceFragment(FragmentMessageList.newInstance(),false,false);
+        replaceFragment(FragmentRoomList.newInstance(),false,false);
     }
 }

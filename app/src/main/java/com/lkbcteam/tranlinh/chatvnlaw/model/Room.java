@@ -6,7 +6,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.model;
 
 public class Room {
     private String rid;
-    private User sender, receiver;
+    private User currentUser, targetUser;
     public Room(){
 
     }
@@ -19,19 +19,19 @@ public class Room {
         this.rid = rid;
     }
 
-    public User getSender() {
-        return sender;
+    public User getCurrentUser() {
+        return currentUser;
     }
 
-    public void setSender(User sender) {
-        this.sender = sender;
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
-    public User getReceiver() {
-        return receiver;
+    public User getTargetUser() {
+        return targetUser;
     }
 
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
+    public void setTargetUser(User targetUser) {
+        this.targetUser = targetUser;
     }
 }
