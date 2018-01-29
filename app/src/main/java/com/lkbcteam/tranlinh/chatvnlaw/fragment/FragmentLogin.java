@@ -27,7 +27,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 
 public class FragmentLogin extends BaseFragment {
     private TextView tvRegister;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private ImageButton ibtnLogin, ibtnFacebook;
     private EditText edtEmail, edtPass;
 
@@ -50,9 +50,8 @@ public class FragmentLogin extends BaseFragment {
                 goNextFragment(FragmentRegister.newInstance(),true);
             }
         });
-        mAuth = FirebaseAuth.getInstance();
 
-        basicLogin(view);
+        basicLogin();
     }
 
     @Nullable
@@ -63,7 +62,7 @@ public class FragmentLogin extends BaseFragment {
 
 
 
-    private void basicLogin(View view) {
+    private void basicLogin() {
 
 
         ibtnLogin.setOnClickListener(new View.OnClickListener() {
@@ -91,5 +90,14 @@ public class FragmentLogin extends BaseFragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null){
+            getBaseActivity().startActivity(HomeActivity.class,true);
+        }
     }
 }

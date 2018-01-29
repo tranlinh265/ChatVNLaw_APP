@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
+import com.lkbcteam.tranlinh.chatvnlaw.model.action.RedirectToRoomChat;
 
 import java.util.List;
 
@@ -21,10 +23,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UnreadMessageListAdapter extends RecyclerView.Adapter<UnreadMessageListAdapter.ViewHolder> {
     private List<Message> mMessageList;
     private Context mContext;
-
-    public UnreadMessageListAdapter(Context context, List<Message> messageList){
+    private BaseFragment mBaseFragment;
+    public UnreadMessageListAdapter(Context context,BaseFragment baseFragment, List<Message> messageList){
         mMessageList = messageList;
         mContext = context;
+        mBaseFragment = baseFragment;
     }
 
     @Override
@@ -36,6 +39,12 @@ public class UnreadMessageListAdapter extends RecyclerView.Adapter<UnreadMessage
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        Message message = mMessageList.get(position);
+
+        holder.tvSenderDisplayName.setText(message.getsenderDisplayName());
+        holder.tvMessageContent.setText(message.getmessageContent());
+        holder.tvMessageTime.setText(message.getmessageTime());
+        holder.container.setOnClickListener(new RedirectToRoomChat(mBaseFragment, message));
 
     }
 
@@ -47,6 +56,7 @@ public class UnreadMessageListAdapter extends RecyclerView.Adapter<UnreadMessage
     public class ViewHolder extends RecyclerView.ViewHolder{
         public CircleImageView civProfileImage;
         public TextView tvSenderDisplayName, tvMessageContent, tvMessageTime;
+        public View container;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -54,6 +64,7 @@ public class UnreadMessageListAdapter extends RecyclerView.Adapter<UnreadMessage
             tvSenderDisplayName = itemView.findViewById(R.id.tv_sender);
             tvMessageContent = itemView.findViewById(R.id.tv_content);
             tvMessageTime = itemView.findViewById(R.id.tv_time);
+            container = itemView.findViewById(R.id.layout_container);
         }
     }
 }

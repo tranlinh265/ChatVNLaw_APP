@@ -8,11 +8,20 @@ public class Message {
     private String mSenderDisplayName;
     private String mMessageContent;
     private String mMessageTime;
+    private boolean mIsCurrentUser;
 
     public Message(String senderDisplayName, String messageContent, String messageTime){
         this.mSenderDisplayName = senderDisplayName;
         this.mMessageContent = messageContent;
         this.mMessageTime = messageTime;
+        this.mIsCurrentUser = false;
+    }
+
+    public Message(String senderDisplayName, String messageContent, String messageTime, boolean isCurrentUser){
+        this.mSenderDisplayName = senderDisplayName;
+        this.mMessageContent = messageContent;
+        this.mMessageTime = messageTime;
+        this.mIsCurrentUser = isCurrentUser;
     }
 
     public String getsenderDisplayName() {
@@ -37,5 +46,13 @@ public class Message {
 
     public void setmessageTime(String mMessageTime) {
         this.mMessageTime = mMessageTime;
+    }
+
+    public boolean getIsCurrentUser() {
+        return mIsCurrentUser;
+    }
+
+    public void setIsCurrentUser(boolean mIsCurrentUser) {
+        this.mIsCurrentUser = mIsCurrentUser;
     }
 }

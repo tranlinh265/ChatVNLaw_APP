@@ -131,7 +131,7 @@
                 android:alpha="0.9"
                 android:adjustViewBounds="true"
                 android:stateListAnimator="@animator/button_default_animation"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/colorBlueDark" />
 
         </LinearLayout>
         <LinearLayout

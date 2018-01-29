@@ -3,6 +3,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
@@ -18,10 +19,15 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseContainerFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
+
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 
 /**
@@ -46,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity{
      * Some older devices needs a small delay between UI widget updates
      * and a change of the status and navigation bar.
      */
-    private static final int UI_ANIMATION_DELAY = 300;
+    private static final int UI_ANIMATION_DELAY = 000;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
@@ -106,9 +112,24 @@ public abstract class BaseActivity extends AppCompatActivity{
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggle();
+                Log.d("123", "onClick: ");
+                View currentFocus = getCurrentFocus();
+                if (currentFocus != null) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+                }
+                hide();
             }
         });
+        KeyboardVisibilityEvent.setEventListener(
+                this,
+                new KeyboardVisibilityEventListener() {
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        // some code depending on keyboard visiblity status
+                        hide();
+                    }
+                });
     }
 
     protected int mContainerViewId;
@@ -157,7 +178,9 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        getCurrentFragmentContainer().getCurrentFragment().goBackFragment();
+        hide();
     }
 
     protected void replaceFragment(Fragment fragment, boolean addToBackStack){
@@ -172,7 +195,7 @@ public abstract class BaseActivity extends AppCompatActivity{
         }
     }
 
-    protected void hideStatusBar(){
+    public void hideStatusBar(){
         View decorView = getWindow().getDecorView();
         // Hide the status bar.
         decorView.setSystemUiVisibility(
@@ -207,12 +230,13 @@ public abstract class BaseActivity extends AppCompatActivity{
     }
 
     private void toggle() {
+        Log.d(String.valueOf(mVisible), "toggle: ");
         if (mVisible) {
             hide();
         }
     }
 
-    private void hide() {
+    public void hide() {
         // Hide UI first
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

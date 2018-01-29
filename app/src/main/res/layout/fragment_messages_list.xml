@@ -11,7 +11,38 @@
         />
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/colorGrayDark"
+        android:layout_height="?android:attr/actionBarSize">
+        <ImageButton
+            android:id="@+id/ibtn_home_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_home_menu"
+            android:backgroundTint="@color/colorGrayDark"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/civ_home_profile"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/square_avatar"/>
+        <TextView
+            android:layout_toLeftOf="@+id/civ_home_profile"
+            android:layout_toRightOf="@+id/ibtn_home_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="Hi Linh"
+            android:id="@+id/tv_welcome_user"
+            android:textColor="@android:color/white"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
         app:layout_heightPercent="25%"
+        android:gravity="bottom"
         android:layout_above="@+id/message_container">
         <android.support.v7.widget.RecyclerView
             android:paddingLeft="20dp"

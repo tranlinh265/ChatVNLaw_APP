@@ -3,13 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/fullscreen_content">
-    <android.support.v7.widget.Toolbar
-        android:background="@color/colorGrayDark"
-        android:id="@+id/tb_home_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize">
 
-    </android.support.v7.widget.Toolbar>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"

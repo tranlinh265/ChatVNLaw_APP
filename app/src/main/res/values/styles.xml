@@ -20,8 +20,8 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
     <style name="FacebookButtonStyle" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/colorPrimary</item>
-        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
+        <item name="colorControlHighlight">#3F51B5</item>
+        <item name="colorButtonNormal">#303F9F</item>
     </style>
     <style name="GoogleButtonStyle" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@android:color/holo_red_light</item>
