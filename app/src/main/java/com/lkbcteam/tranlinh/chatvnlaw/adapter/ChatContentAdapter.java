@@ -59,7 +59,7 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
         if(message != null){
             if(message.getmSenderUser() != null){
 //                new DownloadImageTask((ImageView) holder.mIvSenderPicture).execute(String.valueOf(message.getmSenderUser().getPhotoURL()));
-                Picasso.with(mContext).load(String.valueOf(message.getmSenderUser().getPhotoURL())).into(holder.mIvSenderPicture);
+                Picasso.with(mContext).load(String.valueOf(message.getmSenderUser().getPhotoURL())).resize(50,50).centerCrop().into(holder.mIvSenderPicture);
             }
             if(message.getmTextMessage() != null){
                 holder.mTextContent.setText(message.getmTextMessage().getContent());

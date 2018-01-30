@@ -56,13 +56,13 @@
     </style>
     <style name="MessageItem.Container.Right" parent="MessageItem.Container">
         <item name="android:paddingRight">35dp</item>
-        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingLeft">25dp</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_marginRight">25dp</item>
     </style>
     <style name="MessageItem.Container.Left" parent="MessageItem.Container">
         <item name="android:paddingLeft">35dp</item>
-        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingRight">25dp</item>
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_marginLeft">25dp</item>
     </style>

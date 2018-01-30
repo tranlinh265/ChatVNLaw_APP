@@ -12,7 +12,7 @@ public class TextMessage {
     private String msgTimeStamp;
     private String senderUid;
 
-    private TextMessage(){
+    public TextMessage(){
 
     }
 
@@ -31,7 +31,11 @@ public class TextMessage {
     public void setMsgTimeStamp(String msgTimeStamp) {
         this.msgTimeStamp = msgTimeStamp;
     }
-
+    public void setMsgTimeStamp(){
+        if(!this.msgTimeStamp.isEmpty()){
+            this.msgTimeStamp = (new TimeStamp()).convertTimeStamp(this.msgTimeStamp);
+        }
+    }
     public String getSenderUid() {
         return senderUid;
     }

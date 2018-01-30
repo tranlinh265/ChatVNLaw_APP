@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -39,6 +41,7 @@ public class FragmentChatContent extends BaseFragment {
     private List<Message> mMessageList = new ArrayList<>();
     private EditText mEdtChatInput;
     private ImageButton mIbtnBack;
+    private Button mBtnSend;
     private Room mRoom;
     private TextView mTvSenderDisplayName;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -87,10 +90,18 @@ public class FragmentChatContent extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mCurrentUser = mAuth.getCurrentUser();
 
+        (new Handler()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initView(view);
+            }
+        }, 1000);
+    }
+    private void initView(View view){
         rvChatContentContainer = view.findViewById(R.id.rv_chat_content_container);
 
         mMessageList = new ArrayList<>();
@@ -109,13 +120,24 @@ public class FragmentChatContent extends BaseFragment {
             }
         });
         mTvSenderDisplayName = view.findViewById(R.id.tv_sender_displayname);
+        mBtnSend = view.findViewById(R.id.btn_send);
+
         if(mRoom != null && mCurrentUser != null){
 
             mTvSenderDisplayName.setText(mRoom.getTargetUser().getDisplayName());
-            com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Message message = new com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Message(this,getContext(),
+            final com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Message message = new com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Message(this,getContext(),
                     mRoom, mCurrentUser, adapter, mMessageList);
             message.loadData();
+            mBtnSend.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mEdtChatInput.getText().toString() != null){
+                        message.sendMessage(mEdtChatInput.getText().toString());
+                        mEdtChatInput.setText(null);
+
+                    }
+                }
+            });
         }
     }
-
 }

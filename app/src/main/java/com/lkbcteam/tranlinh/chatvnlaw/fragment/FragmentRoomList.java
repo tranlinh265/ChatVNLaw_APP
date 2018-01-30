@@ -1,6 +1,7 @@
 package com.lkbcteam.tranlinh.chatvnlaw.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -64,8 +65,17 @@ public class FragmentRoomList extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        (new Handler()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initView(view);
+            }
+        }, 500);
+
+    }
+    private void initView(View view){
         mRvMessageList = view.findViewById(R.id.rv_messages);
         mRvUnreadMessageList = view.findViewById(R.id.rv_unread_messages);
         mMessageList = new ArrayList<>();
@@ -91,7 +101,7 @@ public class FragmentRoomList extends BaseFragment {
         if(mCurrentUser != null){
             mTvWelcomeUser.setText(mCurrentUser.getDisplayName());
 //            new DownloadImageTask((ImageView) mCivHomeProfile).execute(String.valueOf(mCurrentUser.getPhotoUrl()));
-            Picasso.with(getContext()).load(mCurrentUser.getPhotoUrl()).into(mCivHomeProfile);
+            Picasso.with(getContext()).load(mCurrentUser.getPhotoUrl()).resize(50,50).centerCrop().placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(mCivHomeProfile);
             Room room = new Room(this,getContext(),mCurrentUser, adapter, mRoomList);
             room.loadData();
         }

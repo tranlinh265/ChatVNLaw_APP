@@ -11,6 +11,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.adapter.ChatContentAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.TextMessage;
+import com.lkbcteam.tranlinh.chatvnlaw.model.TimeStamp;
 
 import java.util.List;
 
@@ -35,7 +36,13 @@ public class Message {
         mAdapter = adapter;
         mCurrentUser = currentUser;
     }
-
+    public void sendMessage(String chatContent){
+        TextMessage textMessage = new TextMessage();
+        textMessage.setContent(chatContent);
+        textMessage.setSenderUid(mCurrentUser.getUid());
+        textMessage.setMsgTimeStamp((new TimeStamp()).getCurrentTime());
+        database.getReference().child("rooms/"+mRoom.getRid()+"/messages").push().setValue(textMessage);
+    }
     public void loadData(){
         database.getReference().child("rooms/"+ mRoom.getRid()+"/messages").addChildEventListener(new ChildEventListener() {
             @Override
@@ -52,6 +59,7 @@ public class Message {
                     message.setmTargetUser(mRoom.getCurrentUser());
                     message.setIsCurrentUser(false);
                 }
+                message.getmTextMessage().setMsgTimeStamp();
                 mMessageList.add(message);
                 mAdapter.notifyDataSetChanged();
             }
