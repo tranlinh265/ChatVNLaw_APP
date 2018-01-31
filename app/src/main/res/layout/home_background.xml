@@ -13,15 +13,6 @@
         android:id="@+id/new_message_container"
         android:orientation="horizontal"
         android:padding="10dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="3 New Messages"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:textSize="25dp"
-            android:id="@+id/tv_number_of_unread"
-            android:padding="10dp"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

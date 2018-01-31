@@ -42,10 +42,19 @@
     <RelativeLayout
         android:layout_width="match_parent"
         app:layout_heightPercent="25%"
-        android:gravity="bottom"
         android:layout_above="@+id/message_container">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:id="@+id/tv_number_of_unread"
+            android:padding="10dp"
+            android:layout_alignParentTop="true"/>
         <android.support.v7.widget.RecyclerView
             android:paddingLeft="20dp"
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rv_unread_messages"></android.support.v7.widget.RecyclerView>

@@ -3,7 +3,6 @@ package com.lkbcteam.tranlinh.chatvnlaw.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
@@ -15,15 +14,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseContainerFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragmentContainer;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
@@ -164,9 +161,9 @@ public abstract class BaseActivity extends AppCompatActivity{
         fragmentTransaction.commit();
     }
 
-    public BaseContainerFragment getCurrentFragmentContainer(){
+    public BaseFragmentContainer getCurrentFragmentContainer(){
         try{
-            return (BaseContainerFragment)
+            return (BaseFragmentContainer)
                     getSupportFragmentManager().findFragmentById(mContainerViewId);
         } catch (ClassCastException e){
             throw  new RuntimeException("This project must inherits BaseContainer Fragment");
@@ -184,7 +181,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     }
 
     protected void replaceFragment(Fragment fragment, boolean addToBackStack){
-        BaseContainerFragment baseContainerFragment = getCurrentFragmentContainer();
+        BaseFragmentContainer baseContainerFragment = getCurrentFragmentContainer();
         if (baseContainerFragment != null){
             BaseFragment current = baseContainerFragment.getCurrentFragment();
 

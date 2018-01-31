@@ -86,7 +86,7 @@ public class FragmentChatContent extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_chat_content,container,false);
+        return inflater.inflate(R.layout.fragment_room,container,false);
     }
 
     @Override

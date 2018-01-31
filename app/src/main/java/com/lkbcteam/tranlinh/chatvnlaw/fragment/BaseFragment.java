@@ -47,11 +47,11 @@ public abstract class BaseFragment  extends Fragment {
         goNextFragment(fragment,addToBackStack,true);
     }
     public void goNextFragment(Fragment fragment, boolean addToBackStack, boolean anim){
-        ((BaseContainerFragment) getParentFragment()).replaceFragment(fragment, addToBackStack,anim);
+        ((BaseFragmentContainer) getParentFragment()).replaceFragment(fragment, addToBackStack,anim);
     }
 
     public void goBackFragment(){
-        ((BaseContainerFragment) getParentFragment()).popFragment();
+        ((BaseFragmentContainer) getParentFragment()).popFragment();
     }
 
 

@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,7 +19,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.DownloadImageTask;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.RoomListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.UnreadMessageListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
@@ -36,7 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by tranlinh on 27/01/2018.
  */
 
-public class FragmentRoomList extends BaseFragment {
+public class FragmentHome extends BaseFragment {
     private List<Message> mMessageList = new ArrayList<Message>();
     private RecyclerView mRvMessageList, mRvUnreadMessageList;
     private TextView mTvNumberOfUnread,mTvWelcomeUser;
@@ -48,13 +46,13 @@ public class FragmentRoomList extends BaseFragment {
     private ImageButton mIbtnHomeMenu;
 
     public static Fragment newInstance(){
-        return new FragmentRoomList();
+        return new FragmentHome();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_messages_list, container,false);
+        return inflater.inflate(R.layout.fragment_home, container,false);
     }
 
     @Override
@@ -103,7 +101,7 @@ public class FragmentRoomList extends BaseFragment {
         mIbtnHomeMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goNextFragment(FragmentMenu.newInstance(),true,true);
+                goNextFragment(FragmentMenu.newInstance(0),true,false);
             }
         });
         if(mCurrentUser != null){

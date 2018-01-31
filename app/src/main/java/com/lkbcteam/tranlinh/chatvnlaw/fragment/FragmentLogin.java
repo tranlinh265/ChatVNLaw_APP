@@ -60,11 +60,7 @@ public class FragmentLogin extends BaseFragment {
         return inflater.inflate(R.layout.fragment_login,container,false);
     }
 
-
-
     private void basicLogin() {
-
-
         ibtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,13 +71,8 @@ public class FragmentLogin extends BaseFragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Toast.makeText(getActivity(), "OK",
-                                        Toast.LENGTH_SHORT).show();
                                 getBaseActivity().startActivity(HomeActivity.class,true);
                             } else {
-                                // If sign in fails, display a message to the user.
                                 Toast.makeText(getActivity(), "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
                             }

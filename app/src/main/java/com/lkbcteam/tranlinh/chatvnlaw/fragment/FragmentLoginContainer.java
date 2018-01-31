@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * Created by tranlinh on 26/01/2018.
  */
 
-public class FragmentLoginContainer extends BaseContainerFragment {
+public class FragmentLoginContainer extends BaseFragmentContainer {
     public static Fragment newInstance(){
         return  new FragmentLoginContainer();
     }

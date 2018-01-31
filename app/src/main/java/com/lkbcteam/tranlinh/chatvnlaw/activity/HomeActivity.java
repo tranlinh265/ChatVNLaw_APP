@@ -3,6 +3,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentHomeContainer;
 
@@ -11,6 +12,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentHomeContainer;
  */
 
 public class HomeActivity extends BaseActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_home);

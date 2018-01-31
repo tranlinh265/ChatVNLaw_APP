@@ -16,7 +16,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.R;
  * Created by tranlinh on 26/01/2018.
  */
 
-public abstract class BaseContainerFragment extends BaseFragment {
+public abstract class BaseFragmentContainer extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,6 +35,8 @@ public abstract class BaseContainerFragment extends BaseFragment {
             }
             if (anim){
                 fragmentTransaction.setCustomAnimations( R.animator.trans_left_in,R.animator.trans_left_out,R.animator.trans_right_in, R.animator.trans_right_out);
+            }else{
+                fragmentTransaction.setCustomAnimations(R.animator.trans_right_in, R.animator.trans_right_out, R.animator.trans_left_in,R.animator.trans_left_out);
             }
             fragmentTransaction.replace(R.id.container_framelayout, fragment,tag);
             fragmentTransaction.commit();

@@ -12,6 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/ibtn_close"
+            android:layout_alignParentRight="true"
             android:src="@drawable/ic_action_close_dark"
             android:backgroundTint="@android:color/transparent"/>
     </RelativeLayout>
@@ -27,8 +28,8 @@
             android:layout_weight="1"
             android:orientation="horizontal">
             <LinearLayout
-                style="@style/MenuStyle.Container"
-                android:background="@color/colorLightPink">
+                android:id="@+id/item_home_container"
+                style="@style/MenuStyle.Container">
                 <ImageView
                     style="@style/MenuStyle.Icon"
                     android:src="@drawable/ic_action_home" />
@@ -37,6 +38,7 @@
                     android:text="Home"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/item_noti_container"
                 style="@style/MenuStyle.Container">
                 <ImageView
                     style="@style/MenuStyle.Icon"
@@ -52,6 +54,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
             <LinearLayout
+                android:id="@+id/item_profile_container"
                 style="@style/MenuStyle.Container">
                 <ImageView
                     style="@style/MenuStyle.Icon"
@@ -61,6 +64,7 @@
                     android:text="Profile"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/item_todos_container"
                 style="@style/MenuStyle.Container">
                 <ImageView
                     style="@style/MenuStyle.Icon"
@@ -76,6 +80,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
             <LinearLayout
+                android:id="@+id/item_search_law_container"
                 style="@style/MenuStyle.Container">
                 <ImageView
                     style="@style/MenuStyle.Icon"
@@ -85,17 +90,20 @@
                     android:text="Search Law"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/item_search_lawyer_container"
                 style="@style/MenuStyle.Container">
                 <ImageView
                     style="@style/MenuStyle.Icon"
                     android:src="@drawable/ic_action_search_lawer"/>
                 <TextView
                     style="@style/MenuStyle.Description"
-                    android:text="Search Lawer"/>
+                    android:text="Search Lawyer"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <Button
+        android:id="@+id/btn_logout"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/layout_menu_container"
         app:layout_widthPercent="80%"
         app:layout_heightPercent="10%"

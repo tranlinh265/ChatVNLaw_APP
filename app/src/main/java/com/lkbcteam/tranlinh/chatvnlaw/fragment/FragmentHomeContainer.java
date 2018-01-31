@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * Created by tranlinh on 27/01/2018.
  */
 
-public class FragmentHomeContainer extends BaseContainerFragment {
+public class FragmentHomeContainer extends BaseFragmentContainer {
     public static Fragment newInstance(){
         return new FragmentHomeContainer();
     }
@@ -25,6 +25,6 @@ public class FragmentHomeContainer extends BaseContainerFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        replaceFragment(FragmentRoomList.newInstance(),false,false);
+        replaceFragment(FragmentHome.newInstance(),false,false);
     }
 }

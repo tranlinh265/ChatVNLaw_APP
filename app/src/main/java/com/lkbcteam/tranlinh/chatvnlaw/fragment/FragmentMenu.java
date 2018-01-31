@@ -1,24 +1,44 @@
 package com.lkbcteam.tranlinh.chatvnlaw.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 
 /**
  * Created by tranlinh on 31/01/2018.
  */
 
-public class FragmentMenu extends BaseFragment {
+public class FragmentMenu extends BaseFragment implements View.OnClickListener{
     private ImageButton mIbtnCloseMenu;
+    private int mPosition;
 
+    private View mHomeContainer, mNotiContainer, mTodosContainer, mProfileContainer, mSearchLawContainer, mSearchLawyerContainer;
+    private Button mBtnLogout;
+
+    public FragmentMenu(){
+
+    }
+    @SuppressLint("ValidFragment")
+    public FragmentMenu(int position){
+        mPosition = position;
+    }
     public static FragmentMenu newInstance() {
         return new FragmentMenu();
+    }
+
+    public static FragmentMenu newInstance(int position) {
+        return new FragmentMenu(position);
     }
 
     @Nullable
@@ -30,12 +50,77 @@ public class FragmentMenu extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mIbtnCloseMenu =  view.findViewById(R.id.ibtn_close);
-        mIbtnCloseMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mHomeContainer = view.findViewById(R.id.item_home_container);
+        mNotiContainer = view.findViewById(R.id.item_noti_container);
+        mTodosContainer = view.findViewById(R.id.item_todos_container);
+        mProfileContainer = view.findViewById(R.id.item_profile_container);
+        mSearchLawContainer = view.findViewById(R.id.item_search_law_container);
+        mSearchLawyerContainer = view.findViewById(R.id.item_search_lawyer_container);
+        mBtnLogout = view.findViewById(R.id.btn_logout);
+
+        switch (mPosition){
+            case 0:
+                changeBackgroundColor(mHomeContainer);
+                break;
+            case 1:
+                changeBackgroundColor(mNotiContainer);
+                break;
+            case 2:
+                changeBackgroundColor(mProfileContainer);
+                break;
+            case 3:
+                changeBackgroundColor(mTodosContainer);
+                break;
+            case 4:
+                changeBackgroundColor(mSearchLawContainer);
+                break;
+            case 5:
+                changeBackgroundColor(mSearchLawyerContainer);
+                break;
+        }
+        mIbtnCloseMenu.setOnClickListener(this);
+        mHomeContainer.setOnClickListener(this);
+        mNotiContainer.setOnClickListener(this);
+        mTodosContainer.setOnClickListener(this);
+        mProfileContainer.setOnClickListener(this);
+        mSearchLawContainer.setOnClickListener(this);
+        mSearchLawyerContainer.setOnClickListener(this);
+        mBtnLogout.setOnClickListener(this);
+    }
+
+    private void changeBackgroundColor(View view){
+        view.setBackgroundColor(getResources().getColor(R.color.colorPinkLight));
+    }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.item_home_container:
+                goNextFragment(FragmentHome.newInstance(), true,true);
+                break;
+            case R.id.item_noti_container:
+                goNextFragment(FragmentNotification.newInstance(), true,true);
+                break;
+            case R.id.item_profile_container:
+                goNextFragment(FragmentProfile.newInstance(),true,true);
+                break;
+            case R.id.item_search_law_container:
+                goNextFragment(FragmentSearchLaw.newInstance(),true,true);
+                break;
+            case R.id.item_search_lawyer_container:
+                goNextFragment(FragmentSearchLawyer.newInstance(),true,true);
+                break;
+            case R.id.item_todos_container:
+                goNextFragment(FragmentTodos.newInstance(),true,true);
+                break;
+            case R.id.ibtn_close:
                 goBackFragment();
-            }
-        });
+                break;
+            case R.id.btn_logout:
+                FirebaseAuth.getInstance().signOut();
+                getBaseActivity().startActivity(MainActivity.class,true);
+                break;
+        }
     }
 }

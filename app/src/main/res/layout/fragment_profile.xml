@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorGrayDark"
+        android:layout_height="?android:attr/actionBarSize">
+        <ImageButton
+            android:id="@+id/ibtn_home_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_home_menu"
+            android:backgroundTint="@color/colorGrayDark"/>
+    </RelativeLayout>
+    <include
+        layout="@layout/home_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?android:attr/actionBarSize">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/square_avatar"/>
+            <TextView
+                style="@style/ProfileStyle.Label"
+                android:text="@string/profile_name"/>
+            <EditText
+                style="@style/ProfileStyle.Edittext" />
+            <TextView
+                style="@style/ProfileStyle.Label"
+                android:text="@string/profile_birth"/>
+            <EditText
+                style="@style/ProfileStyle.Edittext" />
+            <TextView
+                style="@style/ProfileStyle.Label"
+                android:text="@string/profile_card_number"/>
+            <EditText
+                style="@style/ProfileStyle.Edittext" />
+            <TextView
+                style="@style/ProfileStyle.Label"
+                android:text="@string/profile_certificate"/>
+            <EditText
+                style="@style/ProfileStyle.Edittext" />
+            <TextView
+                style="@style/ProfileStyle.Label"
+                android:text="@string/profile_category"/>
+            <EditText
+                style="@style/ProfileStyle.Edittext" />
+            <TextView
+                style="@style/ProfileStyle.Label"
+                android:text="@string/profile_experience"/>
+            <EditText
+                style="@style/ProfileStyle.Edittext" />
+            <TextView
+                style="@style/ProfileStyle.Label"
+                android:text="@string/profile_intro"/>
+            <EditText
+                style="@style/ProfileStyle.Edittext" />
+            <TextView
+                style="@style/ProfileStyle.Label"
+                android:text="@string/profile_achievement"/>
+            <EditText
+                style="@style/ProfileStyle.Edittext" />
+            <TextView
+                style="@style/ProfileStyle.Label"
+                android:text="@string/profile_education"/>
+            <EditText
+                style="@style/ProfileStyle.Edittext" />
+            <TextView
+                style="@style/ProfileStyle.Label"
+                android:text="@string/profile_workplace"/>
+            <EditText
+                style="@style/ProfileStyle.Edittext" />
+        </LinearLayout>
+    </ScrollView>
+</android.support.percent.PercentRelativeLayout>
