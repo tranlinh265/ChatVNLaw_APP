@@ -86,5 +86,23 @@
         <item name="android:background">@android:drawable/dialog_holo_dark_frame</item>
         <item name="android:alpha">0.9</item>
     </style>
+    <style name="MenuStyle">
 
+    </style>
+    <style name="MenuStyle.Container">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="MenuStyle.Icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="MenuStyle.Description">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
 </resources>

@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/fullscreen_content"
     tools:openDrawer="start">
@@ -12,12 +11,4 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:id="@+id/content"></FrameLayout>
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:background="@android:color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header_home"
-        app:menu="@menu/activity_home_drawer" />
 </android.support.v4.widget.DrawerLayout>

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +45,7 @@ public class FragmentRoomList extends BaseFragment {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser mCurrentUser;
     private CircleImageView mCivHomeProfile;
+    private ImageButton mIbtnHomeMenu;
 
     public static Fragment newInstance(){
         return new FragmentRoomList();
@@ -97,7 +99,13 @@ public class FragmentRoomList extends BaseFragment {
         mTvWelcomeUser = view.findViewById(R.id.tv_welcome_user);
         mCurrentUser = mAuth.getCurrentUser();
         mCivHomeProfile = view.findViewById(R.id.civ_home_profile);
-
+        mIbtnHomeMenu = view.findViewById(R.id.ibtn_home_menu);
+        mIbtnHomeMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goNextFragment(FragmentMenu.newInstance(),true,true);
+            }
+        });
         if(mCurrentUser != null){
             mTvWelcomeUser.setText(mCurrentUser.getDisplayName());
 //            new DownloadImageTask((ImageView) mCivHomeProfile).execute(String.valueOf(mCurrentUser.getPhotoUrl()));

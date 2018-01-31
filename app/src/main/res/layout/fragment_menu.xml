@@ -11,6 +11,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:id="@+id/ibtn_close"
             android:src="@drawable/ic_action_close_dark"
             android:backgroundTint="@android:color/transparent"/>
     </RelativeLayout>
@@ -25,73 +26,73 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
+            <LinearLayout
+                style="@style/MenuStyle.Container"
+                android:background="@color/colorLightPink">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_home"
-                    android:layout_centerInParent="true"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
+                    style="@style/MenuStyle.Icon"
+                    android:src="@drawable/ic_action_home" />
+                <TextView
+                    style="@style/MenuStyle.Description"
+                    android:text="Home"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/MenuStyle.Container">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/MenuStyle.Icon"
                     android:src="@drawable/ic_action_noti"/>
-            </RelativeLayout>
+                <TextView
+                    style="@style/MenuStyle.Description"
+                    android:text="Notification"/>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
+            <LinearLayout
+                style="@style/MenuStyle.Container">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/MenuStyle.Icon"
                     android:src="@drawable/ic_action_profile"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
+                <TextView
+                    style="@style/MenuStyle.Description"
+                    android:text="Profile"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/MenuStyle.Container">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/MenuStyle.Icon"
                     android:src="@drawable/ic_action_todo_list"/>
-            </RelativeLayout>
+                <TextView
+                    style="@style/MenuStyle.Description"
+                    android:text="Todos"/>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
+            <LinearLayout
+                style="@style/MenuStyle.Container">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/MenuStyle.Icon"
                     android:src="@drawable/ic_action_search_law"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
+                <TextView
+                    style="@style/MenuStyle.Description"
+                    android:text="Search Law"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/MenuStyle.Container">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/MenuStyle.Icon"
                     android:src="@drawable/ic_action_search_lawer"/>
-            </RelativeLayout>
+                <TextView
+                    style="@style/MenuStyle.Description"
+                    android:text="Search Lawer"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <Button
