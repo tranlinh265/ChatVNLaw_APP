@@ -5,53 +5,94 @@ package com.lkbcteam.tranlinh.chatvnlaw.model;
  */
 
 public class Message {
-    private String mSenderDisplayName;
-    private String mMessageContent;
-    private String mMessageTime;
     private boolean mIsCurrentUser;
-    private TextMessage mTextMessage;
     private User mTargetUser,mSenderUser;
     private String mMessageId;
+    private Info mMessageInfo;
 
     public Message(){
 
     }
-    public Message(String senderDisplayName, String messageContent, String messageTime){
-        this.mSenderDisplayName = senderDisplayName;
-        this.mMessageContent = messageContent;
-        this.mMessageTime = messageTime;
-        this.mIsCurrentUser = false;
-    }
 
-    public Message(String senderDisplayName, String messageContent, String messageTime, boolean isCurrentUser){
-        this.mSenderDisplayName = senderDisplayName;
-        this.mMessageContent = messageContent;
-        this.mMessageTime = messageTime;
-        this.mIsCurrentUser = isCurrentUser;
-    }
+    public static class Info{
+        private String content;
+        private String contentType;
+        private String downloadURL;
+        private String msgTimeStamp;
+        private String name;
+        private String senderUid;
+        private int height, width;
+        public Info(){
 
-    public String getsenderDisplayName() {
-        return mSenderDisplayName;
-    }
+        }
 
-    public void setsenderDisplayName(String mSenderDisplayName) {
-        this.mSenderDisplayName = mSenderDisplayName;
-    }
+        public String getContent() {
+            return content;
+        }
 
-    public String getmessageContent() {
-        return mMessageContent;
-    }
+        public void setContent(String content) {
+            this.content = content;
+        }
 
-    public void setmessageContent(String mMessageContent) {
-        this.mMessageContent = mMessageContent;
-    }
+        public String getContentType() {
+            return contentType;
+        }
 
-    public String getmessageTime() {
-        return mMessageTime;
-    }
+        public void setContentType(String contentType) {
+            this.contentType = contentType;
+        }
 
-    public void setmessageTime(String mMessageTime) {
-        this.mMessageTime = mMessageTime;
+        public String getDownloadURL() {
+            return downloadURL;
+        }
+
+        public void setDownloadURL(String downloadURL) {
+            this.downloadURL = downloadURL;
+        }
+
+        public String getMsgTimeStamp() {
+            return msgTimeStamp;
+        }
+        public void setMsgTimeStamp(){
+            if(!this.msgTimeStamp.isEmpty()){
+                this.msgTimeStamp = TimeStamp.convertTimeStamp(this.msgTimeStamp);
+            }
+        }
+        public void setMsgTimeStamp(String msgTimeStamp) {
+            this.msgTimeStamp = msgTimeStamp;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getSenderUid() {
+            return senderUid;
+        }
+
+        public void setSenderUid(String senderUid) {
+            this.senderUid = senderUid;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public int getWidth() {
+            return width;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
     }
 
     public boolean getIsCurrentUser() {
@@ -60,11 +101,6 @@ public class Message {
 
     public void setIsCurrentUser(boolean mIsCurrentUser) {
         this.mIsCurrentUser = mIsCurrentUser;
-    }
-
-
-    public void setmTextMessage(TextMessage mTextMessage) {
-        this.mTextMessage = mTextMessage;
     }
 
     public void setmTargetUser(User mTargetUser) {
@@ -79,9 +115,6 @@ public class Message {
         this.mSenderUser = mSenderUser;
     }
 
-    public TextMessage getmTextMessage() {
-        return mTextMessage;
-    }
 
     public User getmTargetUser() {
         return mTargetUser;
@@ -94,4 +127,13 @@ public class Message {
     public void setmMessageId(String mMessageId) {
         this.mMessageId = mMessageId;
     }
+
+    public Info getmMessageInfo() {
+        return mMessageInfo;
+    }
+
+    public void setmMessageInfo(Info mMessageInfo) {
+        this.mMessageInfo = mMessageInfo;
+    }
+
 }

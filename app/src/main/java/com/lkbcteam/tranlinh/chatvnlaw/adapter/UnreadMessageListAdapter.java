@@ -40,10 +40,12 @@ public class UnreadMessageListAdapter extends RecyclerView.Adapter<UnreadMessage
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Message message = mMessageList.get(position);
+//        if(message.getmMessageInfo() != null){
+//            holder.tvSenderDisplayName.setText(message.);
+//            holder.tvMessageContent.setText(message.getmessageContent());
+//            holder.tvMessageTime.setText(message.getmessageTime());
+//        }
 
-        holder.tvSenderDisplayName.setText(message.getsenderDisplayName());
-        holder.tvMessageContent.setText(message.getmessageContent());
-        holder.tvMessageTime.setText(message.getmessageTime());
 //        holder.container.setOnClickListener(new RedirectToRoomChat(mBaseFragment, message));
 
     }

@@ -8,4 +8,6 @@
     <string name="create_account">Create Account</string>
     <string name="sign_up">Sign Up</string>
     <string name="send">Send</string>
+    <string name="google_url"><a href="http://www.google.com">http://www.google.com</a></string>
+    <string name="url_format"><a href="%s">%s</a></string>
 </resources>

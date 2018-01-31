@@ -10,7 +10,24 @@
         <TextView
             android:text="dawdawdaddawdawddawda"
             style="@style/MessageItem.Text"
-            android:id="@+id/tv_text_content"/>
+            android:id="@+id/tv_text_content" />
+
+        <TextView
+            android:id="@+id/tv_file_url"
+            style="@style/MessageItem.Text"
+            android:text="@string/google_url"
+            android:textColorLink="@color/colorGrayDark"
+            android:autoLink="web"
+            android:gravity="center"
+            android:drawableLeft="@drawable/ic_file_padding" />
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/default_avatar"
+            android:adjustViewBounds="true"
+            android:id="@+id/iv_image_content"
+            android:scaleType="centerCrop"/>
         <TextView
             android:id="@+id/tv_text_time_stamp"
             style="@style/MessageItem.Timer"

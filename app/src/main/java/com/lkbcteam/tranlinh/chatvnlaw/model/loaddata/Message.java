@@ -1,6 +1,7 @@
 package com.lkbcteam.tranlinh.chatvnlaw.model.loaddata;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -9,6 +10,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ChatContentAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.model.FileMessage;
+import com.lkbcteam.tranlinh.chatvnlaw.model.ImageMessage;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.TextMessage;
 import com.lkbcteam.tranlinh.chatvnlaw.model.TimeStamp;
@@ -47,10 +50,12 @@ public class Message {
         database.getReference().child("rooms/"+ mRoom.getRid()+"/messages").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                TextMessage textMessage = dataSnapshot.getValue(TextMessage.class);
+//                TextMessage textMessage = dataSnapshot.getValue(TextMessage.class);
+                com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info info = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info.class);
                 com.lkbcteam.tranlinh.chatvnlaw.model.Message message = new com.lkbcteam.tranlinh.chatvnlaw.model.Message();
-                message.setmTextMessage(textMessage);
-                if(textMessage.getSenderUid().equals(mCurrentUser.getUid())){
+//                message.setmTextMessage(textMessage);
+                message.setmMessageInfo(info);
+                if(info.getSenderUid().equals(mCurrentUser.getUid())){
                     message.setmSenderUser(mRoom.getCurrentUser());
                     message.setmTargetUser(mRoom.getTargetUser());
                     message.setIsCurrentUser(true);
@@ -59,7 +64,7 @@ public class Message {
                     message.setmTargetUser(mRoom.getCurrentUser());
                     message.setIsCurrentUser(false);
                 }
-                message.getmTextMessage().setMsgTimeStamp();
+                message.getmMessageInfo().setMsgTimeStamp();
                 mMessageList.add(message);
                 mAdapter.notifyDataSetChanged();
             }
