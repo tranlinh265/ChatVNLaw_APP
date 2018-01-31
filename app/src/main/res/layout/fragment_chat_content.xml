@@ -18,7 +18,7 @@
             android:id="@+id/ibtn_back"
             android:backgroundTint="@color/colorGrayDark"/>
         <ImageButton
-            android:src="@drawable/ic_menu"
+            android:src="@drawable/ic_info"
             android:id="@+id/ibtn_menu"
             android:backgroundTint="@color/colorGrayDark"
             android:layout_width="wrap_content"
@@ -32,7 +32,6 @@
             android:layout_toLeftOf="@+id/ibtn_menu"
             android:layout_toRightOf="@id/ibtn_back"
             android:layout_centerVertical="true"
-            android:text="Rebecca, Victoria"
             android:gravity="center"
             android:id="@+id/tv_sender_displayname"/>
     </RelativeLayout>

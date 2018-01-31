@@ -72,7 +72,7 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
                     if(message.getmMessageInfo().getContentType().contains("image/")){
                         holder.mIvImageContent.setVisibility(View.VISIBLE);
                         holder.mFileUrl.setVisibility(View.GONE);
-                        Picasso.with(mContext).load(String.valueOf(message.getmMessageInfo().getDownloadURL())).resize(300,(300* (int)(message.getmMessageInfo().getHeight() / message.getmMessageInfo().getWidth()))).centerCrop().into(holder.mIvImageContent);
+                        Picasso.with(mContext).load(String.valueOf(message.getmMessageInfo().getDownloadURL())).resize(700,(700*message.getmMessageInfo().getHeight()/ message.getmMessageInfo().getWidth())).centerCrop().placeholder(R.drawable.spinning_loading_icon).into(holder.mIvImageContent);
 
                     }else{
                         holder.mFileUrl.setVisibility(View.VISIBLE);

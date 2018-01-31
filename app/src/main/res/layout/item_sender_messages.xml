@@ -29,7 +29,7 @@
             android:src="@drawable/default_avatar"
             android:adjustViewBounds="true"
             android:id="@+id/iv_image_content"
-            android:scaleType="centerCrop"/>
+            android:backgroundTint="@android:color/white"/>
         <TextView
             android:id="@+id/tv_text_time_stamp"
             style="@style/MessageItem.Timer"
