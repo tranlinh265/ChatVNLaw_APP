@@ -31,7 +31,6 @@ public class Room {
         mCurrentUser =currentUser;
         mAdapter = adapter;
         mRoomList = roomList;
-
     }
     public void loadData(){
         database.getReference().child("reference/"+ mCurrentUser.getUid()).addChildEventListener(new ChildEventListener() {

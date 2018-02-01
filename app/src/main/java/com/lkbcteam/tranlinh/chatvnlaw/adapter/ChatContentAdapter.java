@@ -1,6 +1,11 @@
 package com.lkbcteam.tranlinh.chatvnlaw.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -13,7 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentFileContent;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
+import com.lkbcteam.tranlinh.chatvnlaw.model.action.DownLoadFile;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,11 +35,13 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
     private List<Message> mMessageList;
     private Context mContext;
     private View.OnClickListener mOnClickContentItem;
+    private BaseFragment mBaseFragment;
 
-    public ChatContentAdapter(Context context, List<Message> messageList, View.OnClickListener onClickContentItem) {
+    public ChatContentAdapter(Context context,BaseFragment baseFragment, List<Message> messageList, View.OnClickListener onClickContentItem) {
         mMessageList = messageList;
         mContext = context;
         mOnClickContentItem = onClickContentItem;
+        mBaseFragment = baseFragment;
     }
 
     @Override
@@ -60,10 +70,9 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mLayoutContainer.setOnClickListener(this.mOnClickContentItem);
-        Message message = mMessageList.get(position);
+        final Message message = mMessageList.get(position);
         if(message != null){
             if(message.getmSenderUser() != null){
-//                new DownloadImageTask((ImageView) holder.mIvSenderPicture).execute(String.valueOf(message.getmSenderUser().getPhotoURL()));
                 Picasso.with(mContext).load(String.valueOf(message.getmSenderUser().getPhotoURL())).resize(50,50).centerCrop().into(holder.mIvSenderPicture);
             }
             if(message.getmMessageInfo() != null){
@@ -77,14 +86,18 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
                     }else{
                         holder.mFileUrl.setVisibility(View.VISIBLE);
                         holder.mIvImageContent.setVisibility(View.GONE);
-                        holder.mFileUrl.setClickable(true);
-                        String text = "<a href='http://www.google.com'> google </a>";
-                        holder.mFileUrl.setText(Html.fromHtml(text));
-                        holder.mFileUrl.setMovementMethod(LinkMovementMethod.getInstance());
-
-//                        String fileUrl = String.format("<a href=\"%s\">%s</a>",message.getmMessageInfo().getDownloadURL(), message.getmMessageInfo().getName());
-//                        Log.d(fileUrl, "onBindViewHolder: ");
-//                        holder.mFileUrl.setText(Html.fromHtml(fileUrl));
+                        holder.mFileUrl.setPaintFlags(holder.mFileUrl.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                        holder.mFileUrl.setText(message.getmMessageInfo().getName());
+                        holder.mFileUrl.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+//                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(message.getmMessageInfo().getDownloadURL()));
+//                            mContext.startActivity(browserIntent);
+                                showAlertDialog(message.getmMessageInfo());
+//                            mBaseFragment.goNextFragment(FragmentFileContent.newInstance(message.getmMessageInfo().getDownloadURL(), message.getmMessageInfo().getName()),true);
+//                            DownLoadFile.DownLoadFileViaUrl(mContext,message.getmMessageInfo().getName(), message.getmMessageInfo().getDownloadURL());
+                            }
+                        });
 
                     }
                 }else{
@@ -97,6 +110,30 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
                 holder.mTextTimeStamp.setText(message.getmMessageInfo().getMsgTimeStamp());
             }
         }
+    }
+
+    public void showAlertDialog(final Message.Info info){
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle(info.getName());
+        builder.setCancelable(true);
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setPositiveButton("Download", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(info.getDownloadURL()));
+                mContext.startActivity(browserIntent);
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
 
     @Override

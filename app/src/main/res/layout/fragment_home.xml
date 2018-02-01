@@ -39,19 +39,21 @@
             android:textColor="@android:color/white"
             />
     </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:id="@+id/tv_number_of_unread"
+        android:padding="10dp"
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:layout_alignParentTop="true"/>
     <RelativeLayout
         android:layout_width="match_parent"
         app:layout_heightPercent="25%"
         android:layout_above="@+id/message_container">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:textSize="25dp"
-            android:id="@+id/tv_number_of_unread"
-            android:padding="10dp"
-            android:layout_alignParentTop="true"/>
+
         <android.support.v7.widget.RecyclerView
             android:paddingLeft="20dp"
             android:layout_alignParentBottom="true"

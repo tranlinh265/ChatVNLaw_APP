@@ -19,7 +19,7 @@
             android:backgroundTint="@color/colorGrayDark"/>
         <ImageButton
             android:src="@drawable/ic_info"
-            android:id="@+id/ibtn_menu"
+            android:id="@+id/ibtn_info"
             android:backgroundTint="@color/colorGrayDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

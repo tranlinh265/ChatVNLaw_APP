@@ -35,12 +35,12 @@ import java.util.List;
  * Created by tranlinh on 29/01/2018.
  */
 
-public class FragmentChatContent extends BaseFragment {
+public class FragmentRoom extends BaseFragment {
     private RecyclerView rvChatContentContainer;
     private RelativeLayout mLayoutContainer;
     private List<Message> mMessageList = new ArrayList<>();
     private EditText mEdtChatInput;
-    private ImageButton mIbtnBack;
+    private ImageButton mIbtnBack,mIbtnInfo;
     private Button mBtnSend;
     private Room mRoom;
     private TextView mTvSenderDisplayName;
@@ -59,7 +59,7 @@ public class FragmentChatContent extends BaseFragment {
         }
     };
 
-    public FragmentChatContent(){
+    public FragmentRoom(){
 
     }
 
@@ -73,15 +73,15 @@ public class FragmentChatContent extends BaseFragment {
     }
 
     @SuppressLint("ValidFragment")
-    public FragmentChatContent(Room room) {
+    public FragmentRoom(Room room) {
         this.mRoom = room;
     }
 
-    public static FragmentChatContent newInstance() {
-        return new FragmentChatContent();
+    public static FragmentRoom newInstance() {
+        return new FragmentRoom();
     }
-    public static FragmentChatContent newInstance(Room room) {
-        return new FragmentChatContent(room);
+    public static FragmentRoom newInstance(Room room) {
+        return new FragmentRoom(room);
     }
     @Nullable
     @Override
@@ -107,7 +107,7 @@ public class FragmentChatContent extends BaseFragment {
         mMessageList = new ArrayList<>();
         RecyclerView.LayoutManager mLayout = new GridLayoutManager(getContext(),1);
         rvChatContentContainer.setLayoutManager(mLayout);
-        ChatContentAdapter adapter = new ChatContentAdapter(getContext(), mMessageList, mHideSoftKey);
+        ChatContentAdapter adapter = new ChatContentAdapter(getContext(),this, mMessageList, mHideSoftKey);
         rvChatContentContainer.setAdapter(adapter);
 
         mEdtChatInput = view.findViewById(R.id.edt_chat_input);
@@ -122,6 +122,13 @@ public class FragmentChatContent extends BaseFragment {
         mTvSenderDisplayName = view.findViewById(R.id.tv_sender_displayname);
         mBtnSend = view.findViewById(R.id.btn_send);
 
+        mIbtnInfo = view.findViewById(R.id.ibtn_info);
+        mIbtnInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goNextFragment(FragmentRoomInfo.newInstance(),true);
+            }
+        });
         if(mRoom != null && mCurrentUser != null){
 
             mTvSenderDisplayName.setText(mRoom.getTargetUser().getDisplayName());

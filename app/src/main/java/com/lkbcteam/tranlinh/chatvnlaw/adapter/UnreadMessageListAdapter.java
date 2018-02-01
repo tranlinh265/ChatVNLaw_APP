@@ -39,7 +39,7 @@ public class UnreadMessageListAdapter extends RecyclerView.Adapter<UnreadMessage
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Message message = mMessageList.get(position);
+//        Message message = mMessageList.get(position);
 //        if(message.getmMessageInfo() != null){
 //            holder.tvSenderDisplayName.setText(message.);
 //            holder.tvMessageContent.setText(message.getmessageContent());
@@ -52,8 +52,10 @@ public class UnreadMessageListAdapter extends RecyclerView.Adapter<UnreadMessage
 
     @Override
     public int getItemCount() {
-        return mMessageList.size();
+//        return mMessageList.size();
+        return 5;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public CircleImageView civProfileImage;

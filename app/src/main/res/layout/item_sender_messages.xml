@@ -18,8 +18,6 @@
             android:id="@+id/tv_file_url"
             style="@style/MessageItem.Text"
             android:text="@string/google_url"
-            android:textColorLink="@color/colorGrayDark"
-            android:autoLink="web"
             android:gravity="center"
             android:drawableLeft="@drawable/ic_file_padding" />
         <ImageView
