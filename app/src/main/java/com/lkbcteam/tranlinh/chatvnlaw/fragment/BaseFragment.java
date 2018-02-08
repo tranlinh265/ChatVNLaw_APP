@@ -33,8 +33,15 @@ public abstract class BaseFragment  extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initView(view);
+        initData(view);
     }
+    protected void initView(View view){
 
+    }
+    protected void initData(View view){
+
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

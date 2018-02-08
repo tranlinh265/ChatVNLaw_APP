@@ -70,12 +70,13 @@ public class FragmentHome extends BaseFragment {
         (new Handler()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                initView(view);
+                initViewChild(view);
             }
         }, 500);
 
     }
-    private void initView(View view){
+
+    private void initViewChild(View view){
         mRvMessageList = view.findViewById(R.id.rv_messages);
         mRvUnreadMessageList = view.findViewById(R.id.rv_unread_messages);
         mMessageList = new ArrayList<>();

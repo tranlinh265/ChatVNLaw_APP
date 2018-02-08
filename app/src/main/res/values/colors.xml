@@ -12,4 +12,9 @@
     <color name="colorPink">#b9a6e4</color>
     <color name="colorBlueDark">#303F9F</color>
     <color name="colorLightPink">#b8a6e4</color>
+    <color name="colorPdf">#cc4b4c</color>
+    <color name="colorZip">#0f0f0f</color>
+    <color name="colorTxt">#94a5a5</color>
+    <color name="colorHtml">#ec6531</color>
+    <color name="colorFile">#1F0CA6</color>
 </resources>

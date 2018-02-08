@@ -59,10 +59,6 @@ public class FragmentRoom extends BaseFragment {
         }
     };
 
-    public FragmentRoom(){
-
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -72,16 +68,10 @@ public class FragmentRoom extends BaseFragment {
         }
     }
 
-    @SuppressLint("ValidFragment")
-    public FragmentRoom(Room room) {
-        this.mRoom = room;
-    }
-
-    public static FragmentRoom newInstance() {
-        return new FragmentRoom();
-    }
     public static FragmentRoom newInstance(Room room) {
-        return new FragmentRoom(room);
+        FragmentRoom fragmentRoom = new FragmentRoom();
+        fragmentRoom.setmRoom(room);
+        return fragmentRoom;
     }
     @Nullable
     @Override
@@ -97,11 +87,11 @@ public class FragmentRoom extends BaseFragment {
         (new Handler()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                initView(view);
+                initViewChild(view);
             }
         }, 1000);
     }
-    private void initView(View view){
+    private void initViewChild(View view){
         rvChatContentContainer = view.findViewById(R.id.rv_chat_content_container);
 
         mMessageList = new ArrayList<>();
@@ -126,7 +116,7 @@ public class FragmentRoom extends BaseFragment {
         mIbtnInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goNextFragment(FragmentRoomInfo.newInstance(),true);
+                goNextFragment(FragmentRoomInfo.newInstance(mCurrentUser, mRoom),true);
             }
         });
         if(mRoom != null && mCurrentUser != null){
@@ -146,5 +136,9 @@ public class FragmentRoom extends BaseFragment {
                 }
             });
         }
+    }
+
+    public void setmRoom(Room mRoom) {
+        this.mRoom = mRoom;
     }
 }

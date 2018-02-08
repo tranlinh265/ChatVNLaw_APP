@@ -6,6 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:id="@+id/ibtn_image_shared"
-        android:src="@drawable/default_avatar" />
+        android:id="@+id/iv_image_shared"
+         />
 </LinearLayout>

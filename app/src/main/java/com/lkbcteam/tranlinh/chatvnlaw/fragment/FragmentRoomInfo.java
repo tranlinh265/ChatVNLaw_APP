@@ -11,10 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.FileListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageListAdapter;
+import com.lkbcteam.tranlinh.chatvnlaw.model.File;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
+import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.CustomImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +30,20 @@ import java.util.List;
 public class FragmentRoomInfo extends BaseFragment {
 
     private RecyclerView mRvFileList,mRvImageListLeft,mRvImageListRight;
-    private List<Message.Info> mFiles,mLeftImages,mRightImages;
+    private List<File> mFiles,mImages,mLeftImages,mRightImages;
     private FileListAdapter mFileListAdapter;
     private ImageButton mIbtnBack;
+    private FirebaseUser firebaseUser;
+    private Room room;
     private ImageListAdapter mLeftImageListAdapter, mRightImageListAdapter;
+    private com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.File loadFile;
+    private CustomImage loadImage;
 
-    public static FragmentRoomInfo newInstance() {
-        return new FragmentRoomInfo();
+    public static FragmentRoomInfo newInstance(FirebaseUser firebaseUser, Room room) {
+        FragmentRoomInfo fragmentRoomInfo = new FragmentRoomInfo();
+        fragmentRoomInfo.setFirebaseUser(firebaseUser);
+        fragmentRoomInfo.setRoom(room);
+        return fragmentRoomInfo;
     }
 
     @Nullable
@@ -44,20 +55,30 @@ public class FragmentRoomInfo extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mFiles = new ArrayList<>();
+    }
+
+    @Override
+    protected void initView(View view) {
+        super.initView(view);
         mRvFileList = view.findViewById(R.id.rv_file_container);
         mRvImageListLeft = view.findViewById(R.id.rv_image_container_1);
         mRvImageListRight = view.findViewById(R.id.rv_image_container_2);
+        mIbtnBack = view.findViewById(R.id.ibtn_back);
+    }
+
+    @Override
+    protected void initData(View view) {
+        super.initData(view);
+        mFiles = new ArrayList<>();
+        mLeftImages = new ArrayList<>();
+        mRightImages = new ArrayList<>();
+        mImages = new ArrayList<>();
 
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         mRvFileList.setLayoutManager(layoutManager);
         mFileListAdapter = new FileListAdapter(getContext(),this, mFiles);
         mRvFileList.setAdapter(mFileListAdapter);
-
-        mLeftImages = new ArrayList<>();
-        mRightImages = new ArrayList<>();
-
         RecyclerView.LayoutManager mLayout1 = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false){
             @Override
             public boolean canScrollVertically() {
@@ -73,14 +94,13 @@ public class FragmentRoomInfo extends BaseFragment {
         };
 
         mRvImageListRight.setLayoutManager(mLayout2);
-
         mLeftImageListAdapter = new ImageListAdapter(getContext(),this, mLeftImages);
+        mLeftImageListAdapter.setAllImages(mImages);
         mRightImageListAdapter = new ImageListAdapter(getContext(),this, mRightImages);
-
+        mRightImageListAdapter.setAllImages(mImages);
+        mRightImageListAdapter.setAdded(1);
         mRvImageListRight.setAdapter(mRightImageListAdapter);
         mRvImageListLeft.setAdapter(mLeftImageListAdapter);
-
-        mIbtnBack = view.findViewById(R.id.ibtn_back);
         mIbtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +108,33 @@ public class FragmentRoomInfo extends BaseFragment {
             }
         });
 
+        loadFile = new com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.File(getContext(),this, firebaseUser, room);
+        loadFile.setFileList(mFiles);
+        loadFile.setFileAdapter(mFileListAdapter);
+        loadFile.loadFileData();
 
+        loadImage = new CustomImage(getContext(),this,firebaseUser,room);
+        loadImage.setLeftImageList(mLeftImages);
+        loadImage.setRightImageList(mRightImages);
+        loadImage.setLeftImageListAdapter(mLeftImageListAdapter);
+        loadImage.setRightImageListAdapter(mRightImageListAdapter);
+        loadImage.setFileList(mImages);
+        loadImage.loadImageData();
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public FirebaseUser getFirebaseUser() {
+        return firebaseUser;
+    }
+
+    public void setFirebaseUser(FirebaseUser firebaseUser) {
+        this.firebaseUser = firebaseUser;
     }
 }
