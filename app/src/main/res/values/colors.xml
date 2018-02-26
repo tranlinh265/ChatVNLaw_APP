@@ -17,4 +17,7 @@
     <color name="colorTxt">#94a5a5</color>
     <color name="colorHtml">#ec6531</color>
     <color name="colorFile">#1F0CA6</color>
+    <color name="colorYellow">#ffd700</color>
+
+    <color name="colorReady">#76ff03</color>
 </resources>

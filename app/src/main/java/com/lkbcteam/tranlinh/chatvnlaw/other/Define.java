@@ -9,6 +9,9 @@ public class Define {
     public interface Api{
         String BASE_URL = "http://vnlawapi.datalab.vn";
         String SEARCH_LAWYER = "/api/search/lawyers";
+        String ALL_LAWYERS = "api/lawyers";
+        String TOP_LAWYERS = "api/lawyers/top";
+        String LAWYER_NAME = "api/lawyers/names";
     }
     public interface  Table{
          String TABLE_ROOMS = "rooms";

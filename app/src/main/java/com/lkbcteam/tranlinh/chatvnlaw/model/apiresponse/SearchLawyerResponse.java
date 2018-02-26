@@ -1,9 +1,10 @@
-package com.lkbcteam.tranlinh.chatvnlaw.model;
+package com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse;
 
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.lkbcteam.tranlinh.chatvnlaw.model.Lawyer;
 
 import java.util.List;
 

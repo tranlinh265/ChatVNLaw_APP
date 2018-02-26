@@ -1,5 +1,7 @@
 package com.lkbcteam.tranlinh.chatvnlaw.model;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -24,10 +26,11 @@ public class Lawyer {
     private String photoUrl;
     @SerializedName("rate")
     @Expose
-    private Integer rate;
+    private Float rate;
     @SerializedName("intro")
     @Expose
     private String intro;
+    @Nullable
     @SerializedName("cost")
     @Expose
     private Integer cost;
@@ -79,11 +82,11 @@ public class Lawyer {
         this.photoUrl = photoUrl;
     }
 
-    public Integer getRate() {
+    public Float getRate() {
         return rate;
     }
 
-    public void setRate(Integer rate) {
+    public void setRate(Float rate) {
         this.rate = rate;
     }
 

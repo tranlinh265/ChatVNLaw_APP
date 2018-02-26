@@ -2,6 +2,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Menu;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
@@ -18,5 +19,11 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         super.onCreate(savedInstanceState);
         replaceContainerFragment(R.id.content, FragmentHomeContainer.newInstance());
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        return true;
     }
 }
