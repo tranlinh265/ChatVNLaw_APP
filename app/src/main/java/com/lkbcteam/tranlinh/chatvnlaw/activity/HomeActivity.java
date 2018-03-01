@@ -20,10 +20,5 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         replaceContainerFragment(R.id.content, FragmentHomeContainer.newInstance());
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
-    }
+
 }

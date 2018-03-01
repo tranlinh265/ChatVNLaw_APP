@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.google.android.flexbox.FlexboxLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:flexWrap="wrap"
+        app:alignItems="stretch"
+        app:alignContent="stretch">
+
+        <TextView
+            android:id="@+id/tv_hinh_su"
+            style="@style/SpecializationTextViewStyle"
+            android:text="@string/specializations_hinh_su"/>
+
+        <TextView
+            android:id="@+id/tv_so_huu_tri_tue"
+            style="@style/SpecializationTextViewStyle"
+            android:text="@string/specializations_so_huu_tri_tue"/>
+        <TextView
+            android:id="@+id/tv_hon_nhan_gia_dinh"
+            style="@style/SpecializationTextViewStyle"
+            android:text="@string/specializations_hon_nhan_gia_dinh"/>
+        <TextView
+            android:id="@+id/tv_nha_dat_xay_dung"
+            style="@style/SpecializationTextViewStyle"
+            android:text="@string/specializations_nha_dat_xay_dung"/>
+        <TextView
+            android:id="@+id/tv_tai_chinh_ngan_hang"
+            style="@style/SpecializationTextViewStyle"
+            android:text="@string/specializations_tai_chinh_ngan_hang"/>
+        <TextView
+            android:id="@+id/tv_dan_su"
+            style="@style/SpecializationTextViewStyle"
+            android:text="@string/specializations_dan_su"/>
+        <TextView
+            android:id="@+id/tv_lao_dong_bao_hiem"
+            style="@style/SpecializationTextViewStyle"
+            android:text="@string/specializations_lao_dong_bao_hiem"/>
+        <TextView
+            android:id="@+id/tv_doanh_nghiep"
+            style="@style/SpecializationTextViewStyle"
+            android:text="@string/specializations_doanh_nghiep"/>
+    </com.google.android.flexbox.FlexboxLayout>
+</LinearLayout>

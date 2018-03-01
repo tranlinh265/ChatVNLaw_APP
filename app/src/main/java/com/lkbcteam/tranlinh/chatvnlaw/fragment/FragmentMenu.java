@@ -1,6 +1,7 @@
 package com.lkbcteam.tranlinh.chatvnlaw.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivitySearchLawer;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 
 /**
@@ -26,19 +28,14 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
     private View mHomeContainer, mNotiContainer, mTodosContainer, mProfileContainer, mSearchLawContainer, mSearchLawyerContainer;
     private Button mBtnLogout;
 
-    public FragmentMenu(){
-
-    }
-    @SuppressLint("ValidFragment")
-    public FragmentMenu(int position){
-        mPosition = position;
-    }
     public static FragmentMenu newInstance() {
         return new FragmentMenu();
     }
 
     public static FragmentMenu newInstance(int position) {
-        return new FragmentMenu(position);
+        FragmentMenu fragmentMenu = new FragmentMenu();
+        fragmentMenu.mPosition = position;
+        return fragmentMenu;
     }
 
     @Nullable
@@ -109,7 +106,12 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                 goNextFragment(FragmentSearchLaw.newInstance(),true,true);
                 break;
             case R.id.item_search_lawyer_container:
-                goNextFragment(FragmentSearchLawyer.newInstance(),true,true);
+                if (mPosition == 5){
+                    goBackFragment();
+                }else{
+                    getBaseActivity().startActivity(ActivitySearchLawer.class,false);
+                }
+//                goNextFragment(FragmentSearchLawyer.newInstance(),true,true);
                 break;
             case R.id.item_todos_container:
                 goNextFragment(FragmentTodos.newInstance(),true,true);

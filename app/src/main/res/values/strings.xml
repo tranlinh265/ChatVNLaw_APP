@@ -20,4 +20,15 @@
     <string name="profile_achievement">Thành tích</string>
     <string name="profile_education">Học vấn</string>
     <string name="profile_workplace">Nơi công tác</string>
+
+
+    <string name="specializations_hinh_su">Hình sự</string>
+    <string name="specializations_so_huu_tri_tue">Sở hữu trí tuệ</string>
+    <string name="specializations_hon_nhan_gia_dinh">Hôn nhân &amp; gia đình</string>
+    <string name="specializations_nha_dat_xay_dung">Nhà đất - Xây dựng</string>
+    <string name="specializations_tai_chinh_ngan_hang">Tài chính - Ngân hàng</string>
+    <string name="specializations_dan_su">Dân sự</string>
+    <string name="specializations_lao_dong_bao_hiem">Lao động - Bảo hiểm xã hội</string>
+    <string name="specializations_doanh_nghiep">Doanh nghiệp</string>
+
 </resources>

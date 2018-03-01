@@ -55,7 +55,6 @@ public class FragmentRoom extends BaseFragment {
                 InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
             }
-            getBaseActivity().hide();
         }
     };
 
