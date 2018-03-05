@@ -23,6 +23,7 @@ public class Define {
          String TABLE_TASKS = "tasks";
          String TABLE_ROLES = "roles";
          String TABLE_NOTES = "notes";
+
     }
     public interface  Balance {
          String AMOUNT= "amount";

@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivitySearchLawer;
+import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivityTodoList;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 
 /**
@@ -27,10 +28,6 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
 
     private View mHomeContainer, mNotiContainer, mTodosContainer, mProfileContainer, mSearchLawContainer, mSearchLawyerContainer;
     private Button mBtnLogout;
-
-    public static FragmentMenu newInstance() {
-        return new FragmentMenu();
-    }
 
     public static FragmentMenu newInstance(int position) {
         FragmentMenu fragmentMenu = new FragmentMenu();
@@ -114,7 +111,12 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
 //                goNextFragment(FragmentSearchLawyer.newInstance(),true,true);
                 break;
             case R.id.item_todos_container:
-                goNextFragment(FragmentTodos.newInstance(),true,true);
+                if( mPosition == 3){
+                    goBackFragment();
+                }else{
+                    getBaseActivity().startActivity(ActivityTodoList.class,false);
+                }
+//                goNextFragment(FragmentTodos.newInstance(),true,true);
                 break;
             case R.id.ibtn_close:
                 goBackFragment();
