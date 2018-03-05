@@ -58,6 +58,7 @@ public class Define {
          String ROLE = "role";
          String STATUS = "status";
          String USERNAME = "username";
+         String TOKEN = "deviceToken";
     }
     public interface  Room{
          String ROOM_ID = "rid";
