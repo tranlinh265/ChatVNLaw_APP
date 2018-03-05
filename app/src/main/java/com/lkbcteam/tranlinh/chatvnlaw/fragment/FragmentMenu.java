@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivitySearchLawer;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivityTodoList;
+import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 
 /**
@@ -91,7 +92,12 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.item_home_container:
-                goNextFragment(FragmentHome.newInstance(), true,true);
+                if (mPosition == 0){
+                    goBackFragment();
+                }else{
+                    getBaseActivity().startActivity(HomeActivity.class, false);
+                }
+//                goNextFragment(FragmentHome.newInstance(), true,true);
                 break;
             case R.id.item_noti_container:
                 goNextFragment(FragmentNotification.newInstance(), true,true);

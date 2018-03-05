@@ -21,6 +21,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentFileContent;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
+import com.lkbcteam.tranlinh.chatvnlaw.model.Time;
 import com.lkbcteam.tranlinh.chatvnlaw.model.action.DownLoadFile;
 import com.squareup.picasso.Picasso;
 
@@ -107,7 +108,8 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
                     holder.mIvImageContent.setVisibility(View.GONE);
 
                 }
-                holder.mTextTimeStamp.setText(message.getmMessageInfo().getMsgTimeStamp());
+                Time time = message.getmMessageInfo().getTime();
+                holder.mTextTimeStamp.setText(time.getHour()+":"+time.getMinute());
             }
         }
     }

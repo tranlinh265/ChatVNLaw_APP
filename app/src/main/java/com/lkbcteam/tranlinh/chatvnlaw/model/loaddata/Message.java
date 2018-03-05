@@ -15,6 +15,8 @@ import com.lkbcteam.tranlinh.chatvnlaw.model.ImageMessage;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.TextMessage;
 import com.lkbcteam.tranlinh.chatvnlaw.model.TimeStamp;
+import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
+import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataLoadingFinish;
 
 import java.util.List;
 
@@ -46,14 +48,13 @@ public class Message {
         textMessage.setMsgTimeStamp((new TimeStamp()).getCurrentTime());
         database.getReference().child("rooms/"+mRoom.getRid()+"/messages").push().setValue(textMessage);
     }
-    public void loadData(){
-        database.getReference().child("rooms/"+ mRoom.getRid()+"/messages").addChildEventListener(new ChildEventListener() {
+
+    public void loadData(String timeStamp, final OnDataLoadingFinish callback){
+        database.getReference().child(Define.Table.TABLE_ROOMS).child(mRoom.getRid()).child(Define.Room.MESSAGES).orderByChild(Define.Messages.TIMESTAMP).endAt(timeStamp).limitToLast(10).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                TextMessage textMessage = dataSnapshot.getValue(TextMessage.class);
                 com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info info = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info.class);
                 com.lkbcteam.tranlinh.chatvnlaw.model.Message message = new com.lkbcteam.tranlinh.chatvnlaw.model.Message();
-//                message.setmTextMessage(textMessage);
                 message.setmMessageInfo(info);
                 if(info.getSenderUid().equals(mCurrentUser.getUid())){
                     message.setmSenderUser(mRoom.getCurrentUser());
@@ -64,9 +65,48 @@ public class Message {
                     message.setmTargetUser(mRoom.getCurrentUser());
                     message.setIsCurrentUser(false);
                 }
-                message.getmMessageInfo().setMsgTimeStamp();
-                mMessageList.add(message);
-                mAdapter.notifyDataSetChanged();
+                callback.onSuccess(message);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void streamMessage(String timeStamp, final OnDataLoadingFinish callback){
+        database.getReference().child(Define.Table.TABLE_ROOMS).child(mRoom.getRid()).child(Define.Room.MESSAGES).orderByChild(Define.Messages.TIMESTAMP).startAt(timeStamp).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info info = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info.class);
+                com.lkbcteam.tranlinh.chatvnlaw.model.Message message = new com.lkbcteam.tranlinh.chatvnlaw.model.Message();
+                message.setmMessageInfo(info);
+                if(info.getSenderUid().equals(mCurrentUser.getUid())){
+                    message.setmSenderUser(mRoom.getCurrentUser());
+                    message.setmTargetUser(mRoom.getTargetUser());
+                    message.setIsCurrentUser(true);
+                }else{
+                    message.setmSenderUser(mRoom.getTargetUser());
+                    message.setmTargetUser(mRoom.getCurrentUser());
+                    message.setIsCurrentUser(false);
+                }
+                callback.onSuccess(message);
             }
 
             @Override

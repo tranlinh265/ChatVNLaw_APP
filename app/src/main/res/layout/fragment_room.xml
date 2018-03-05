@@ -29,14 +29,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:layout_toLeftOf="@+id/ibtn_menu"
             android:layout_toRightOf="@id/ibtn_back"
             android:layout_centerVertical="true"
             android:gravity="center"
             android:id="@+id/tv_sender_displayname"/>
     </RelativeLayout>
-    <RelativeLayout
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_below="@+id/tb_actionbar"
+        android:id="@+id/srl_list_message_container"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/chat_input_container">
@@ -47,7 +47,7 @@
             android:scrollbars="vertical">
 
         </android.support.v7.widget.RecyclerView>
-    </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <RelativeLayout
         android:id="@+id/chat_input_container"

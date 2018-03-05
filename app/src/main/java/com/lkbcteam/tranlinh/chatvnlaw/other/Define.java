@@ -62,6 +62,7 @@ public class Define {
          String TOKEN = "deviceToken";
     }
     public interface  Room{
+        String MESSAGES = "messages";
          String ROOM_ID = "rid";
          String UN_READ_MESSAGE = "unReadMessage";
          String DESCRIPTION = "description";

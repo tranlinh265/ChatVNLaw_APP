@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +28,18 @@ import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ChatContentAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataLoadingFinish;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by tranlinh on 29/01/2018.
  */
 
-public class FragmentRoom extends BaseFragment {
+public class FragmentRoom extends BaseFragment implements View.OnClickListener,SwipeRefreshLayout.OnRefreshListener{
     private RecyclerView rvChatContentContainer;
     private RelativeLayout mLayoutContainer;
     private List<Message> mMessageList = new ArrayList<>();
@@ -46,7 +50,10 @@ public class FragmentRoom extends BaseFragment {
     private TextView mTvSenderDisplayName;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser mCurrentUser;
-
+    private RecyclerView.LayoutManager mLayout;
+    private SwipeRefreshLayout srlMessageListContainer;
+    private com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Message message = null;
+    private ChatContentAdapter adapter;
     private View.OnClickListener mHideSoftKey = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -92,11 +99,13 @@ public class FragmentRoom extends BaseFragment {
     }
     private void initViewChild(View view){
         rvChatContentContainer = view.findViewById(R.id.rv_chat_content_container);
+        srlMessageListContainer = view.findViewById(R.id.srl_list_message_container);
 
         mMessageList = new ArrayList<>();
-        RecyclerView.LayoutManager mLayout = new GridLayoutManager(getContext(),1);
+        mLayout = new GridLayoutManager(getContext(),1);
+
         rvChatContentContainer.setLayoutManager(mLayout);
-        ChatContentAdapter adapter = new ChatContentAdapter(getContext(),this, mMessageList, mHideSoftKey);
+        adapter = new ChatContentAdapter(getContext(),this, mMessageList, mHideSoftKey);
         rvChatContentContainer.setAdapter(adapter);
 
         mEdtChatInput = view.findViewById(R.id.edt_chat_input);
@@ -112,25 +121,45 @@ public class FragmentRoom extends BaseFragment {
         mBtnSend = view.findViewById(R.id.btn_send);
 
         mIbtnInfo = view.findViewById(R.id.ibtn_info);
-        mIbtnInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goNextFragment(FragmentRoomInfo.newInstance(mCurrentUser, mRoom),true);
-            }
-        });
+        mIbtnInfo.setOnClickListener(this);
+        srlMessageListContainer.setOnRefreshListener(this);
         if(mRoom != null && mCurrentUser != null){
 
             mTvSenderDisplayName.setText(mRoom.getTargetUser().getDisplayName());
-            final com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Message message = new com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Message(this,getContext(),
+            message = new com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Message(this,getContext(),
                     mRoom, mCurrentUser, adapter, mMessageList);
-            message.loadData();
+            long time = System.currentTimeMillis();
+            message.loadData(String.valueOf(time),new OnDataLoadingFinish() {
+                @Override
+                public void onSuccess(Object o) {
+                    mMessageList.add((Message)o);
+                    adapter.notifyDataSetChanged();
+                    mLayout.scrollToPosition(mMessageList.size() - 1);
+                }
+
+                @Override
+                public void onFail() {
+
+                }
+            });
+            message.streamMessage(String.valueOf(time), new OnDataLoadingFinish() {
+                @Override
+                public void onSuccess(Object o) {
+                    mMessageList.add((Message)o);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFail() {
+
+                }
+            });
             mBtnSend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(mEdtChatInput.getText().toString() != null){
                         message.sendMessage(mEdtChatInput.getText().toString());
                         mEdtChatInput.setText(null);
-
                     }
                 }
             });
@@ -139,5 +168,44 @@ public class FragmentRoom extends BaseFragment {
 
     public void setmRoom(Room mRoom) {
         this.mRoom = mRoom;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ibtn_info:
+                goNextFragment(FragmentRoomInfo.newInstance(mCurrentUser, mRoom),true);
+                break;
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        if(message != null){
+            String time = String.valueOf(System.currentTimeMillis());
+            if(mMessageList.size() > 0) {
+                time = String.valueOf(Long.parseLong(mMessageList.get(0).getmMessageInfo().getMsgTimeStamp()) - 1);
+            }
+            message.loadData(time, new OnDataLoadingFinish() {
+                @Override
+                public void onSuccess(Object o) {
+                    Message message = (Message)o;
+                    int i;
+                    for ( i = 0; i < mMessageList.size() ; i++){
+                        if (Long.parseLong(mMessageList.get(i).getmMessageInfo().getMsgTimeStamp()) > Long.parseLong(message.getmMessageInfo().getMsgTimeStamp())){
+                            break;
+                        }
+                    }
+                    mMessageList.add(i,message);
+                    adapter.notifyDataSetChanged();
+                    srlMessageListContainer.setRefreshing(false);
+                }
+
+                @Override
+                public void onFail() {
+
+                }
+            });
+        }
     }
 }

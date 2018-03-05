@@ -22,6 +22,8 @@ public class Message {
         private String name;
         private String senderUid;
         private int height, width;
+        private Time time;
+
         public Info(){
 
         }
@@ -60,6 +62,7 @@ public class Message {
         }
         public void setMsgTimeStamp(String msgTimeStamp) {
             this.msgTimeStamp = msgTimeStamp;
+            this.setTime(TimeStamp.getTimeFromMiliSecond(String.valueOf(msgTimeStamp)));
         }
 
         public String getName() {
@@ -92,6 +95,14 @@ public class Message {
 
         public void setWidth(int width) {
             this.width = width;
+        }
+
+        public Time getTime() {
+            return time;
+        }
+
+        public void setTime(Time time) {
+            this.time = time;
         }
     }
 
