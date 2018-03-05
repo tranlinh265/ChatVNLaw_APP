@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Lawyer;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Specialization;
@@ -21,10 +22,19 @@ import com.squareup.picasso.Picasso;
  */
 
 public class LawyerCardAdapter extends ArrayAdapter<Lawyer> {
+    private final int OFFSET = 6;
+    private int totalResult = 0;
+    private int currentPage = 0;
+
     public LawyerCardAdapter(@NonNull Context context) {
         super(context, 0);
     }
-
+    public void setTotalResult(int totalResult){
+        this.totalResult = totalResult;
+    }
+    public void setCurrentPage(int currentPage){
+        this.currentPage = currentPage-1;
+    }
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -43,8 +53,11 @@ public class LawyerCardAdapter extends ArrayAdapter<Lawyer> {
         viewHolder.tvLawyerIntro.setText(lawyer.getIntro());
         viewHolder.tvCost.setText(String.valueOf(lawyer.getCost()));
         viewHolder.rbLawyerRating.setRating(lawyer.getRate());
-        Picasso.with(getContext()).load(lawyer.getPhotoUrl()).into(viewHolder.ivLawyerAva);
-
+        viewHolder.tvCurrentPosition.setText(String.format(getContext().getString(R.string.current_position),currentPage*OFFSET +position+1,totalResult));
+        Picasso.with(getContext())
+                .load(lawyer.getPhotoUrl())
+                .placeholder(R.drawable.spinning_loading_icon)
+                .into(viewHolder.ivLawyerAva);
         for(int i = 0; i < lawyer.getSpecializations().size(); i++){
             Specialization specialization = lawyer.getSpecializations().get(i);
             switch (specialization.getId()){
@@ -81,7 +94,7 @@ public class LawyerCardAdapter extends ArrayAdapter<Lawyer> {
 
     private static class ViewHolder{
         public ImageView ivLawyerAva;
-        public TextView tvLawyerName, tvCost, tvMoneyUnit, tvLawyerIntro;
+        public TextView tvLawyerName, tvCost, tvMoneyUnit, tvLawyerIntro, tvCurrentPosition;
         public RatingBar rbLawyerRating;
 
         public ViewHolder(View view){
@@ -91,6 +104,7 @@ public class LawyerCardAdapter extends ArrayAdapter<Lawyer> {
             tvMoneyUnit = view.findViewById(R.id.tv_money_unit);
             rbLawyerRating = view.findViewById(R.id.rb_rating);
             tvLawyerIntro = view.findViewById(R.id.tv_intro_content);
+            tvCurrentPosition = view.findViewById(R.id.tv_current_position);
         }
     }
 }

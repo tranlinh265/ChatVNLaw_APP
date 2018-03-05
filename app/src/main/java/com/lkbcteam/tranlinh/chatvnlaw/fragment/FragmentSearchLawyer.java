@@ -49,13 +49,16 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
     private ImageButton mIbtnHomeMenu;
     private APIService apiService;
     private TextView tvTitle;
-    private final String TITLE = "Tìm kiếm luật sư";;
+    private final String TITLE = "Tìm kiếm luật sư";
     private CardStackView csvSearchResult;
     private List<Lawyer> lawyers;
     private LawyerCardAdapter adapter;
     private Button btnReload;
     private ProgressBar progressBar;
     private String keyword = "";
+    private int currentPage = 0, limitPage=0;
+    private int totalResult = 0;
+    private final int OFFSET = 6;
     private ArrayList<String> suggestion = new ArrayList<>();
 
     public static FragmentSearchLawyer newInstance() {
@@ -98,6 +101,7 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
     }
 
     private void reload(){
+        currentPage = 0;
         btnReload.setVisibility(View.INVISIBLE);
         csvSearchResult.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
@@ -141,10 +145,15 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
         });
     }
     private void searchLawyer(final String lawyerName){
-        apiService.searchLawyer(lawyerName).enqueue(new Callback<SearchLawyerResponse>() {
+        apiService.searchLawyer(lawyerName,currentPage).enqueue(new Callback<SearchLawyerResponse>() {
             @Override
             public void onResponse(Call<SearchLawyerResponse> call, Response<SearchLawyerResponse> response) {
                 if (response.isSuccessful()){
+                    limitPage = response.body().getLimitPage();
+                    currentPage = response.body().getCurrentPage();
+                    totalResult = response.body().getNumberLawyers();
+                    adapter.setCurrentPage(currentPage);
+                    adapter.setTotalResult(totalResult);
                     lawyers.clear();
                     adapter.clear();
                     if(response.body().getLawyers().size() > 0){
@@ -158,7 +167,10 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
                     csvSearchResult.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
                 }else {
-                    csvSearchResult.setVisibility(View.VISIBLE);
+                    lawyers.clear();
+                    adapter.clear();
+                    keyword = "";
+                    csvSearchResult.setVisibility(View.INVISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
                 }
             }
@@ -193,7 +205,14 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
     @Override
     public void onCardSwiped(SwipeDirection direction) {
         if(csvSearchResult.getTopIndex() == adapter.getCount()){
-            btnReload.setVisibility(View.VISIBLE);
+//            btnReload.setVisibility(View.VISIBLE);
+            if(currentPage < limitPage){
+                currentPage++;
+                progressBar.setVisibility(View.VISIBLE);
+                searchLawyer(keyword);
+            }else{
+                btnReload.setVisibility(View.VISIBLE);
+            }
         }
     }
 

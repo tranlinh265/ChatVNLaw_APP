@@ -10,6 +10,7 @@
     <string name="send">Send</string>
     <string name="google_url"><a href="http://www.google.com">http://www.google.com</a></string>
     <string name="url_format"><a href="%s">%s</a></string>
+    <string name="current_position">%d/%d Kết quả</string>
     <string name="profile_name">Tên</string>
     <string name="profile_birth">Ngày sinh</string>
     <string name="profile_card_number">Số thẻ làm việc</string>
@@ -21,6 +22,12 @@
     <string name="profile_education">Học vấn</string>
     <string name="profile_workplace">Nơi công tác</string>
 
+    <string name="default_notification_channel_id" translatable="false">123456_linhtm</string>
+    <string name="data_type">data_type</string>
+    <string name="direct_message">direct_message</string>
+    <string name="data_message">message</string>
+    <string name="data_title">title</string>
+    <string name="data_message_id">message_id</string>
 
     <string name="specializations_hinh_su">Hình sự</string>
     <string name="specializations_so_huu_tri_tue">Sở hữu trí tuệ</string>
