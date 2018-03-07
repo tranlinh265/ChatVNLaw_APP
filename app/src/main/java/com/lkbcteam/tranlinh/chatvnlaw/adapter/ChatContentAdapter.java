@@ -47,6 +47,9 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
 
     @Override
     public int getItemViewType(int position) {
+        if (mMessageList.get(position).getmMessageId() == null){
+            return -1;
+        }
         if(mMessageList.get(position).getIsCurrentUser()){
             return 0;
         }
@@ -57,6 +60,9 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = null;
         switch (viewType){
+            case -1:
+                v =LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_time,parent,false);
+                break;
             case 0:
                 v =LayoutInflater.from(parent.getContext()).inflate(R.layout.item_receiver_messages,parent,false);
                 break;
@@ -64,15 +70,21 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sender_messages,parent,false);
                 break;
         }
-        ViewHolder vh = new ViewHolder(v);
+        ViewHolder vh = new ViewHolder(v,viewType);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mLayoutContainer.setOnClickListener(this.mOnClickContentItem);
+
         final Message message = mMessageList.get(position);
         if(message != null){
+            if(message.getmMessageId() == null){
+                Time time = message.getmMessageInfo().getTime();
+                holder.tvTimeDay.setText(String.format(mContext.getString(R.string.date_format),time.getDay(),time.getMonth(),time.getYear()));
+                return;
+            }
+            holder.mLayoutContainer.setOnClickListener(this.mOnClickContentItem);
             if(message.getmSenderUser() != null){
                 Picasso.with(mContext).load(String.valueOf(message.getmSenderUser().getPhotoURL())).resize(50,50).centerCrop().into(holder.mIvSenderPicture);
             }
@@ -147,15 +159,20 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
         private View mLayoutContainer;
         private TextView mTextContent, mTextTimeStamp, mFileUrl;
         private ImageView mIvSenderPicture, mIvImageContent;
+        private TextView tvTimeDay;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, int viewType) {
             super(itemView);
-            mLayoutContainer = itemView.findViewById(R.id.layout_container);
-            mTextContent = itemView.findViewById(R.id.tv_text_content);
-            mTextTimeStamp = itemView.findViewById(R.id.tv_text_time_stamp);
-            mIvSenderPicture = itemView.findViewById(R.id.iv_sender_picture);
-            mFileUrl = itemView.findViewById(R.id.tv_file_url);
-            mIvImageContent = itemView.findViewById(R.id.iv_image_content);
+            if(viewType == -1){
+                tvTimeDay = itemView.findViewById(R.id.tv_time_day);
+            }else{
+                mLayoutContainer = itemView.findViewById(R.id.layout_container);
+                mTextContent = itemView.findViewById(R.id.tv_text_content);
+                mTextTimeStamp = itemView.findViewById(R.id.tv_text_time_stamp);
+                mIvSenderPicture = itemView.findViewById(R.id.iv_sender_picture);
+                mFileUrl = itemView.findViewById(R.id.tv_file_url);
+                mIvImageContent = itemView.findViewById(R.id.iv_image_content);
+            }
         }
     }
 }

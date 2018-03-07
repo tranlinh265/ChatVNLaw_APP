@@ -56,6 +56,7 @@ public class Message {
                 com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info info = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info.class);
                 com.lkbcteam.tranlinh.chatvnlaw.model.Message message = new com.lkbcteam.tranlinh.chatvnlaw.model.Message();
                 message.setmMessageInfo(info);
+                message.setmMessageId(dataSnapshot.getKey());
                 if(info.getSenderUid().equals(mCurrentUser.getUid())){
                     message.setmSenderUser(mRoom.getCurrentUser());
                     message.setmTargetUser(mRoom.getTargetUser());
@@ -97,6 +98,7 @@ public class Message {
                 com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info info = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info.class);
                 com.lkbcteam.tranlinh.chatvnlaw.model.Message message = new com.lkbcteam.tranlinh.chatvnlaw.model.Message();
                 message.setmMessageInfo(info);
+                message.setmMessageId(dataSnapshot.getKey());
                 if(info.getSenderUid().equals(mCurrentUser.getUid())){
                     message.setmSenderUser(mRoom.getCurrentUser());
                     message.setmTargetUser(mRoom.getTargetUser());

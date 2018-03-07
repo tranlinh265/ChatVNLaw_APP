@@ -11,6 +11,7 @@
     <string name="google_url"><a href="http://www.google.com">http://www.google.com</a></string>
     <string name="url_format"><a href="%s">%s</a></string>
     <string name="current_position">%d/%d Kết quả</string>
+    <string name="date_format">%s-%s-%s</string>
     <string name="profile_name">Tên</string>
     <string name="profile_birth">Ngày sinh</string>
     <string name="profile_card_number">Số thẻ làm việc</string>

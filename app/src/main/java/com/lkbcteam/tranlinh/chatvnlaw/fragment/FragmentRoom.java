@@ -28,12 +28,14 @@ import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ChatContentAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.model.Time;
 import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataLoadingFinish;
 
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by tranlinh on 29/01/2018.
@@ -132,7 +134,20 @@ public class FragmentRoom extends BaseFragment implements View.OnClickListener,S
             message.loadData(String.valueOf(time),new OnDataLoadingFinish() {
                 @Override
                 public void onSuccess(Object o) {
-                    mMessageList.add((Message)o);
+                    if(mMessageList.size() == 0){
+                        Message tmp = new Message();
+                        tmp.setmMessageInfo(((Message)o).getmMessageInfo());
+                        mMessageList.add(tmp);
+                    }else{
+                        Message lastItem = mMessageList.get(mMessageList.size() -1);
+                        if(TimeUnit.MILLISECONDS.toDays(Long.parseLong(lastItem.getmMessageInfo().getMsgTimeStamp())) <
+                                TimeUnit.MILLISECONDS.toDays(Long.parseLong(((Message)o).getmMessageInfo().getMsgTimeStamp()))) {
+                            Message tmp = new Message();
+                            tmp.setmMessageInfo(((Message) o).getmMessageInfo());
+                            mMessageList.add(tmp);
+                        }
+                    }
+                    mMessageList.add((Message) o);
                     adapter.notifyDataSetChanged();
                     mLayout.scrollToPosition(mMessageList.size() - 1);
                 }
@@ -146,7 +161,7 @@ public class FragmentRoom extends BaseFragment implements View.OnClickListener,S
                 @Override
                 public void onSuccess(Object o) {
                     mMessageList.add((Message)o);
-                    adapter.notifyDataSetChanged();
+                    adapter.notifyItemInserted(mMessageList.size()-1);
                 }
 
                 @Override
@@ -179,6 +194,14 @@ public class FragmentRoom extends BaseFragment implements View.OnClickListener,S
         }
     }
 
+    private long toDay(String timeStampInMili){
+        return TimeUnit.MILLISECONDS.toDays(Long.parseLong(timeStampInMili));
+    }
+    private Message timeItem(Message baseItem){
+        Message tmp = new Message();
+        tmp.setmMessageInfo(baseItem.getmMessageInfo());
+        return tmp;
+    }
     @Override
     public void onRefresh() {
         if(message != null){
@@ -196,8 +219,41 @@ public class FragmentRoom extends BaseFragment implements View.OnClickListener,S
                             break;
                         }
                     }
+                    if (i == 0) {
+                        mMessageList.add(i,timeItem((Message) o));
+                        adapter.notifyItemInserted(i);
+                        i++;
+                    }else{
+                        i--;
+                        if(i == 0){
+                            if(toDay(mMessageList.get(i).getmMessageInfo().getMsgTimeStamp()) >
+                                    toDay(message.getmMessageInfo().getMsgTimeStamp())){
+                                mMessageList.add(i,timeItem((Message) o));
+                                adapter.notifyItemInserted(i);
+                                i++;
+                            }
+                        }else {
+                            if (i == mMessageList.size() - 1) {
+                                if (toDay(mMessageList.get(i).getmMessageInfo().getMsgTimeStamp()) <
+                                        toDay(message.getmMessageInfo().getMsgTimeStamp())) {
+                                    mMessageList.add(i,timeItem((Message) o));
+                                    adapter.notifyItemInserted(i);
+                                    i++;
+                                }
+                            } else {
+                                if (toDay(mMessageList.get(i).getmMessageInfo().getMsgTimeStamp()) <
+                                        toDay(message.getmMessageInfo().getMsgTimeStamp()) &&
+                                        toDay(mMessageList.get(i + 1).getmMessageInfo().getMsgTimeStamp()) >
+                                                toDay(message.getmMessageInfo().getMsgTimeStamp())) {
+                                    mMessageList.add(i,timeItem((Message) o));
+                                    adapter.notifyItemInserted(i);
+                                    i++;
+                                }
+                            }
+                        }
+                    }
                     mMessageList.add(i,message);
-                    adapter.notifyDataSetChanged();
+                    adapter.notifyItemInserted(i);
                     srlMessageListContainer.setRefreshing(false);
                 }
 

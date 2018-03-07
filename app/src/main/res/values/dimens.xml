@@ -19,4 +19,10 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="profile_width">75dp</dimen>
     <dimen name="profile_height">75dp</dimen>
+
+    <!--padding-->
+    <dimen name="padding_medium_10">10dp</dimen>
+
+    <!--size-->
+    <dimen name="line_size_tiny">1dp</dimen>
 </resources>
