@@ -108,6 +108,7 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                     goBackFragment();
                 }else{
                     getBaseActivity().startActivity(ActivityEditProfile.class,false);
+                    getBaseActivity().finish();
                 }
 //                goNextFragment(FragmentProfile.newInstance(),true,true);
                 break;
@@ -119,6 +120,7 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                     goBackFragment();
                 }else{
                     getBaseActivity().startActivity(ActivitySearchLawer.class,false);
+                    getBaseActivity().finish();
                 }
 //                goNextFragment(FragmentSearchLawyer.newInstance(),true,true);
                 break;
@@ -127,6 +129,7 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                     goBackFragment();
                 }else{
                     getBaseActivity().startActivity(ActivityTodoList.class,false);
+                    getBaseActivity().finish();
                 }
 //                goNextFragment(FragmentTodos.newInstance(),true,true);
                 break;
@@ -136,6 +139,7 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
             case R.id.btn_logout:
                 FirebaseAuth.getInstance().signOut();
                 getBaseActivity().startActivity(MainActivity.class,true);
+                getBaseActivity().finish();
                 break;
         }
     }

@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.model.*;
+import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 
 /**
  * Created by tranlinh on 29/01/2018.
@@ -22,6 +23,10 @@ public class User {
     private BaseFragment mBaseFragment;
     private Context mContext;
     private FirebaseUser mCurrentUser;
+
+    public User(){
+
+    }
     public User(BaseFragment baseFragment, Context context,  FirebaseUser currentUser){
         mBaseFragment = baseFragment;
         mContext = context;
@@ -55,6 +60,9 @@ public class User {
 
             }
         });
+    }
+    public void getUser(FirebaseUser firebaseUser, ValueEventListener callback){
+        database.getReference().child(Define.Table.TABLE_USERS).child(firebaseUser.getUid()).addListenerForSingleValueEvent(callback);
     }
     public void getUser(final boolean targetUser, String uid, final com.lkbcteam.tranlinh.chatvnlaw.model.Room roominfo, final RecyclerView.Adapter adapter){
         database.getReference().child("users/" + uid).addListenerForSingleValueEvent(new ValueEventListener() {

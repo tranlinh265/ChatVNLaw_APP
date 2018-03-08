@@ -27,7 +27,21 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/square_avatar"/>
+                android:src="@drawable/square_avatar"
+                android:id="@+id/civ_user_avatar"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorBlueLight"
+                android:textStyle="bold"
+                android:id="@+id/tv_displayname" />
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorBlueLight" />
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_name"
@@ -40,53 +54,67 @@
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_birth"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:editable="false"
+                android:id="@+id/edt_day_of_birth"/>
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_card_number"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_card_number"/>
             <TextView
                 style="@style/ProfileStyle.Label"
-                android:text="@string/profile_certificate"/>
+                android:text="@string/profile_certificate"
+                />
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_certificate"/>
             <TextView
                 style="@style/ProfileStyle.Label"
-                android:text="@string/profile_category"/>
+                android:text="@string/profile_category"
+                />
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_category"/>
             <TextView
                 style="@style/ProfileStyle.Label"
-                android:text="@string/profile_experience"/>
+                android:text="@string/profile_experience" />
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_experience"
+                android:numeric="decimal"/>
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_intro"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_intro" />
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_achievement"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_achievement" />
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_education"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_education" />
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_workplace"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_workplace" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/dialog_holo_dark_frame"
                 android:backgroundTint="@color/colorBlueLight"
                 android:text="@string/edit"
+                android:id="@+id/btn_submit"
                 android:textColor="@color/colorGrayDark"
                 android:layout_gravity="center_horizontal"
                 android:textAllCaps="false"

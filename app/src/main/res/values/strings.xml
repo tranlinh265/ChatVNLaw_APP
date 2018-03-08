@@ -29,7 +29,7 @@
     <string name="data_message">message</string>
     <string name="data_title">title</string>
     <string name="data_message_id">message_id</string>
-
+    <string name="edit_success">Cập nhật thành công</string>
     <string name="specializations_hinh_su">Hình sự</string>
     <string name="specializations_so_huu_tri_tue">Sở hữu trí tuệ</string>
     <string name="specializations_hon_nhan_gia_dinh">Hôn nhân &amp; gia đình</string>
