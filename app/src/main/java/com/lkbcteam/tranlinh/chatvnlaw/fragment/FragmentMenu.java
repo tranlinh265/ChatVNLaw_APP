@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivityEditProfile;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivitySearchLawer;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivityTodoList;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
@@ -100,13 +101,18 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
 //                goNextFragment(FragmentHome.newInstance(), true,true);
                 break;
             case R.id.item_noti_container:
-                goNextFragment(FragmentNotification.newInstance(), true,true);
+//                goNextFragment(FragmentNotification.newInstance(), true,true);
                 break;
             case R.id.item_profile_container:
-                goNextFragment(FragmentProfile.newInstance(),true,true);
+                if(mPosition ==2){
+                    goBackFragment();
+                }else{
+                    getBaseActivity().startActivity(ActivityEditProfile.class,false);
+                }
+//                goNextFragment(FragmentProfile.newInstance(),true,true);
                 break;
             case R.id.item_search_law_container:
-                goNextFragment(FragmentSearchLaw.newInstance(),true,true);
+//                goNextFragment(FragmentSearchLaw.newInstance(),true,true);
                 break;
             case R.id.item_search_lawyer_container:
                 if (mPosition == 5){

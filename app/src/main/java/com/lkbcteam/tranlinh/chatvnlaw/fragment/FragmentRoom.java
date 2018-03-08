@@ -220,10 +220,14 @@ public class FragmentRoom extends BaseFragment implements View.OnClickListener,S
                         }
                     }
                     if (i == 0) {
-                        mMessageList.add(i,timeItem((Message) o));
-                        adapter.notifyItemInserted(i);
-                        i++;
+                        if(toDay(mMessageList.get(i).getmMessageInfo().getMsgTimeStamp()) >
+                                toDay(message.getmMessageInfo().getMsgTimeStamp())){
+                            mMessageList.add(i,timeItem((Message) o));
+                            adapter.notifyItemInserted(i);
+                            i++;
+                        }
                     }else{
+
                         i--;
                         if(i == 0){
                             if(toDay(mMessageList.get(i).getmMessageInfo().getMsgTimeStamp()) >

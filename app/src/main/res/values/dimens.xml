@@ -22,7 +22,7 @@
 
     <!--padding-->
     <dimen name="padding_medium_10">10dp</dimen>
-
+    <dimen name="padding_large_50">50dp</dimen>
     <!--size-->
     <dimen name="line_size_tiny">1dp</dimen>
 </resources>

@@ -113,13 +113,17 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">15dp</item>
-        <item name="android:textColor">@android:color/holo_purple</item>
+        <item name="android:textColor">@color/colorBlueLight</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <style name="ProfileStyle.Edittext" parent="ProfileStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:lines">1</item>
         <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:editable">true</item>
+        <item name="android:textColor">@color/colorBlueLight</item>
+        <item name="android:backgroundTint">@color/colorBlueLight</item>
     </style>
     <style name="RoomInfo">
 

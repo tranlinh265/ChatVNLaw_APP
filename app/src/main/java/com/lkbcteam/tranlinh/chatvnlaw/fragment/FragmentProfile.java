@@ -14,7 +14,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.R;
  * Created by tranlinh on 31/01/2018.
  */
 
-public class FragmentProfile extends BaseFragment {
+public class FragmentProfile extends BaseFragment implements View.OnClickListener{
     private ImageButton mIbtnHomeMenu;
 
     public static FragmentProfile newInstance() {
@@ -31,11 +31,15 @@ public class FragmentProfile extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mIbtnHomeMenu = view.findViewById(R.id.ibtn_home_menu);
-        mIbtnHomeMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mIbtnHomeMenu.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ibtn_home_menu:
                 goNextFragment(FragmentMenu.newInstance(2),true,false);
-            }
-        });
+                break;
+        }
     }
 }

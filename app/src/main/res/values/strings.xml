@@ -22,7 +22,7 @@
     <string name="profile_achievement">Thành tích</string>
     <string name="profile_education">Học vấn</string>
     <string name="profile_workplace">Nơi công tác</string>
-
+    <string name="edit">Thay đổi</string>
     <string name="default_notification_channel_id" translatable="false">123456_linhtm</string>
     <string name="data_type">data_type</string>
     <string name="direct_message">direct_message</string>

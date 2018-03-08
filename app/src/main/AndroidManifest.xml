@@ -31,6 +31,8 @@
         </activity>
         <activity android:name=".activity.ActivityTodoList"
             android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.ActivityEditProfile"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".activity.ActivitySearchLawer"
             android:theme="@style/AppTheme"/>
         <service android:name=".other.notification.MyFirebaseInstanceIDService">
