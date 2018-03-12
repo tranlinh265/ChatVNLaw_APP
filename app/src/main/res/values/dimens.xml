@@ -25,4 +25,5 @@
     <dimen name="padding_large_50">50dp</dimen>
     <!--size-->
     <dimen name="line_size_tiny">1dp</dimen>
+    <dimen name="default_call_button_size">60dp</dimen>
 </resources>
