@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
@@ -45,12 +46,20 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Room room = mRoomList.get(position);
-        User user = room.getTargetUser();
+        final User user = room.getTargetUser();
         if(user != null){
             holder.tvSenderDisplayName.setText(user.getDisplayName());
 //            new DownloadImageTask((ImageView) holder.civProfileImage).execute(String.valueOf(user.getPhotoURL()));
             Picasso.with(mContext).load(String.valueOf(user.getPhotoURL())).into(holder.civProfileImage);
             holder.mLayoutContainer.setOnClickListener(new RedirectToRoomChat(mBaseFragment,room));
+            holder.tvMessageTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mBaseFragment.getBaseActivity() instanceof HomeActivity && !user.getUid().isEmpty()){
+                        ((HomeActivity)mBaseFragment.getBaseActivity()).makeCall(user.getUid());
+                    }
+                }
+            });
         }
 
     }

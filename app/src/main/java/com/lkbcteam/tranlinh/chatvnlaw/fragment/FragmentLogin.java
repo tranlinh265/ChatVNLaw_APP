@@ -1,6 +1,8 @@
 package com.lkbcteam.tranlinh.chatvnlaw.fragment;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +28,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.notification.DeviceToken;
 
 /**
@@ -121,6 +124,11 @@ public class FragmentLogin extends BaseFragment {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null){
             DeviceToken.initFirebaseCloudMessaging(currentUser);
+            SharedPreferences sp = getBaseActivity().getSharedPreferences(Define.Pubnub.SHARED_PREFS, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString(Define.Pubnub.USER_NAME, currentUser.getUid());
+            editor.apply();
+
             getBaseActivity().startActivity(HomeActivity.class,true);
         }
     }

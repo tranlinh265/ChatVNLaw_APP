@@ -72,7 +72,9 @@ dependencies {
     implementation 'io.pristine:libjingle:11139@aar'
     implementation 'com.pubnub:pubnub-android:3.7.4'
     implementation 'me.kevingleason:pnwebrtc:1.0.6@aar'
-//    implementation 'pub.devrel:easypermissions:1.1.3'
+    implementation 'pub.devrel:easypermissions:1.1.3'
+
+    implementation 'pub.devrel:easypermissions:1.1.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

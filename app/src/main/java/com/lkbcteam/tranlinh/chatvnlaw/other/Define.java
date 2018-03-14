@@ -6,6 +6,24 @@ package com.lkbcteam.tranlinh.chatvnlaw.other;
 
 public class Define {
 
+    public interface Pubnub{
+        String SHARED_PREFS = "com.lkbcteam.tranlinh.chatvnlaw.SHARED_PREFS";
+        String USER_NAME    = "com.lkbcteam.tranlinh.chatvnlaw.USERNAME";
+        String CALL_USER    = "com.lkbcteam.tranlinh.chatvnlaw.CALLUSER";
+
+        String STDBY_SUFFIX = "-stdby";
+//      String PUB_KEY = "pub-c-41480199-8449-4c3a-a44a-d29a395ba540"; // Use Your Pub Key
+//      String SUB_KEY = "sub-c-22984fba-0c86-11e8-bb84-266dd58d78d1"; // Use Your Sub Key
+
+        String PUB_KEY = "pub-c-9d0d75a5-38db-404f-ac2a-884e18b041d8"; // Use Your Pub Key
+        String SUB_KEY = "sub-c-4e25fb64-37c7-11e5-a477-0619f8945a4f"; // Use Your Sub Key
+        String JSON_CALL_USER = "call_user";
+        String CAMERA_MODE = "camera_mode";
+        String CAMERA_MODE_FRONT = "camera_front";
+        String CAMERA_MODE_BACK = "camera_back";
+        String LOG_TAG = "idk";
+        String DIALED = "dialed";
+    }
     public interface Api{
         String BASE_URL = "http://vnlawapi.datalab.vn";
         String SEARCH_LAWYER = "/api/search/lawyers";

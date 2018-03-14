@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.RoomListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.UnreadMessageListAdapter;
@@ -39,7 +41,6 @@ public class FragmentHome extends BaseFragment {
     private RecyclerView mRvMessageList, mRvUnreadMessageList;
     private TextView mTvNumberOfUnread,mTvWelcomeUser;
     private List<com.lkbcteam.tranlinh.chatvnlaw.model.Room> mRoomList;
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser mCurrentUser;
     private CircleImageView mCivHomeProfile;
@@ -61,6 +62,10 @@ public class FragmentHome extends BaseFragment {
         mCurrentUser = mAuth.getCurrentUser();
         if (mCurrentUser == null){
             getBaseActivity().startActivity(MainActivity.class,true);
+        }else{
+            if(getBaseActivity() instanceof  HomeActivity){
+                ((HomeActivity)getBaseActivity()).setUsername(mCurrentUser.getUid());
+            }
         }
     }
 
@@ -80,7 +85,6 @@ public class FragmentHome extends BaseFragment {
         mRvMessageList = view.findViewById(R.id.rv_messages);
         mRvUnreadMessageList = view.findViewById(R.id.rv_unread_messages);
         mMessageList = new ArrayList<>();
-
         mRoomList = new ArrayList<>();
         RecyclerView.LayoutManager mLayout = new GridLayoutManager(getContext(),1);
         mRvMessageList.setLayoutManager(mLayout);
