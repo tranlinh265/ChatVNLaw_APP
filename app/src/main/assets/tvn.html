@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <style>
+      .end-call {
+        background-color: red;
+        border: 0;
+        border-radius: 50%;
+        bottom: 20px;
+        cursor: pointer;
+        height: 50px;
+        left: calc((100% - 50px)/2);
+        padding-top: 5px;
+        position: absolute;
+        width: 50px;
+        z-index: 1000;
+      }
+
+      div {
+        z-index: 20000;
+      }
+
+      .my-video {
+        background-color: gray;
+        height: 100%;
+        right: 0;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        z-index: 100;
+      }
+
+      .your-video {
+        background-color: black;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 50;
+      }
+
+    </style>
+</head>
+<body>
+<div class="main">
+    <div></div>
+  <video class="your-video"></video>
+  <video class="my-video"></video>
+  <button class="end-call">
+    <img src="./phone-hangup.png"/>
+  </button>
+</div>
+</body>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/0.3.14/peer.js"></script>
+<script>
+    $(document).ready(function() {
+      $('.end-call').on('click', function() {
+        $('.my-video').animate({
+          height: "120",
+          width: "120",
+          bottom: "20",
+          right: "10"
+        }, 1000);
+      });
+
+     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    if(navigator.getUserMedia) {
+        $('div').html(navigator.getUserMedia);
+    }
+    navigator.getUserMedia({audio: true, video: true}, function(stream){
+        // Set your video displays
+
+        $('.my-video').prop('src', URL.createObjectURL(stream));
+        $('.my-video').play();
+        window.localStream = stream;
+      });
+
+    })
+  </script>
+</html> 

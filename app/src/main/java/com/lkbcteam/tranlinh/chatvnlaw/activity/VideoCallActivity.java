@@ -153,6 +153,7 @@ public class VideoCallActivity extends AppCompatActivity implements View.OnClick
         boolean dialed = extras.getBoolean(Define.Pubnub.DIALED, false);
 
         if (extras.containsKey(Define.Pubnub.CALL_USER) && !dialed) {
+            Log.e(String.valueOf(!dialed), "initPeerConnectionFactory: " );
             String callUser = extras.getString(Define.Pubnub.CALL_USER, "");
             connectToUser(callUser);
         }
@@ -211,7 +212,8 @@ public class VideoCallActivity extends AppCompatActivity implements View.OnClick
                 @Override
                 public void run() {
                     try{
-                        if(remoteStream.videoTracks.size() == 0) return;
+                        if(remoteStream.videoTracks.size() == 0 && remoteStream.audioTracks.size() == 0) return;
+
                         remoteStream.videoTracks.get(0).addRenderer(new VideoRenderer(remoteRender));
                         VideoRendererGui.update(remoteRender, 0, 0, 100, 100, RendererCommon.ScalingType.SCALE_ASPECT_FILL, false);
                         VideoRendererGui.update(localRender, 72, 72, 25, 25, RendererCommon.ScalingType.SCALE_ASPECT_FIT, true);

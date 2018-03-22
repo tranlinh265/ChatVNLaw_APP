@@ -1,14 +1,12 @@
 package com.lkbcteam.tranlinh.chatvnlaw.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +15,15 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.RoomListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.UnreadMessageListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
-import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.FirebaseData;
+import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataChange;
+import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataLoadingFinish;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -72,13 +71,13 @@ public class FragmentHome extends BaseFragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        (new Handler()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                initViewChild(view);
-            }
-        }, 500);
-
+//        (new Handler()).postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                initViewChild(view);
+//            }
+//        }, 500);
+        initViewChild(view);
     }
 
     private void initViewChild(View view){
@@ -88,7 +87,7 @@ public class FragmentHome extends BaseFragment {
         mRoomList = new ArrayList<>();
         RecyclerView.LayoutManager mLayout = new GridLayoutManager(getContext(),1);
         mRvMessageList.setLayoutManager(mLayout);
-        RoomListAdapter adapter = new RoomListAdapter(getContext(),this, mRoomList);
+        final RoomListAdapter adapter = new RoomListAdapter(getContext(),this, mRoomList);
         mRvMessageList.setAdapter(adapter);
 
         LinearLayoutManager layoutManager
@@ -111,10 +110,29 @@ public class FragmentHome extends BaseFragment {
         });
         if(mCurrentUser != null){
             mTvWelcomeUser.setText(mCurrentUser.getDisplayName());
-//            new DownloadImageTask((ImageView) mCivHomeProfile).execute(String.valueOf(mCurrentUser.getPhotoUrl()));
             Picasso.with(getContext()).load(mCurrentUser.getPhotoUrl()).resize(50,50).centerCrop().placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(mCivHomeProfile);
-            Room room = new Room(this,getContext(),mCurrentUser, adapter, mRoomList);
-            room.loadData();
+            FirebaseData.getRoomList(new OnDataLoadingFinish() {
+                @Override
+                public void onSuccess(Object o) {
+                    com.lkbcteam.tranlinh.chatvnlaw.model.Room room = (com.lkbcteam.tranlinh.chatvnlaw.model.Room) o;
+                    mRoomList.add(room);
+                }
+
+                @Override
+                public void onFail() {
+
+                }
+
+                @Override
+                public void onDataNotExist() {
+
+                }
+            }, new OnDataChange() {
+                @Override
+                public void onDataChange() {
+                    adapter.notifyDataSetChanged();
+                }
+            });
         }
     }
 }

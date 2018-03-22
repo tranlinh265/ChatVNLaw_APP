@@ -1,16 +1,14 @@
 package com.lkbcteam.tranlinh.chatvnlaw.fragment;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
@@ -27,6 +25,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 public class FragmentMenu extends BaseFragment implements View.OnClickListener{
     private ImageButton mIbtnCloseMenu;
     private int mPosition;
+    private boolean accessible;
 
     private View mHomeContainer, mNotiContainer, mTodosContainer, mProfileContainer, mSearchLawContainer, mSearchLawyerContainer;
     private Button mBtnLogout;
@@ -37,6 +36,16 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
         return fragmentMenu;
     }
 
+    public static FragmentMenu newInstance(int position, boolean accessible) {
+
+//        Bundle args = new Bundle();
+
+        FragmentMenu fragment = new FragmentMenu();
+        fragment.mPosition = position;
+        fragment.accessible = accessible;
+//        fragment.setArguments(args);
+        return fragment;
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -101,11 +110,18 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
 //                goNextFragment(FragmentHome.newInstance(), true,true);
                 break;
             case R.id.item_noti_container:
+//                Intent intent = new Intent(getBaseActivity(), ActivityWebView.class);
+//                startActivity(intent);
 //                goNextFragment(FragmentNotification.newInstance(), true,true);
                 break;
             case R.id.item_profile_container:
                 if(mPosition ==2){
-                    goBackFragment();
+                    if(accessible){
+                        goBackFragment();
+                    }else{
+                        Toast.makeText(getContext(), getContext().getString(R.string.notice_cant_access), Toast.LENGTH_LONG).show();
+                    }
+
                 }else{
                     getBaseActivity().startActivity(ActivityEditProfile.class,false);
                     getBaseActivity().finish();

@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.model.FirebaseLawyer;
-import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Lawyer;
+import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.FirebaseData;
 import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.User;
 import com.squareup.picasso.Picasso;
 
@@ -97,20 +96,26 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
 
                 }
             });
-            Lawyer.getLawyerInfo(firebaseUser, new ValueEventListener() {
+            FirebaseData.getLawyerInfo(firebaseUser, new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    FirebaseLawyer lawyer = dataSnapshot.getValue(FirebaseLawyer.class);
-                    edtName.setText(lawyer.getFullname());
-                    edtAchievement.setText(lawyer.getAchievement());
-                    edtCardNumber.setText(lawyer.getCardNumber());
-                    edtCategory.setText(lawyer.getCategory());
-                    edtCertificate.setText(lawyer.getCertificate());
-                    edtDayOfBirth.setText(lawyer.getBirthday());
-                    edtEducation.setText(lawyer.getEducation());
-                    edtIntro.setText(lawyer.getIntro());
-                    edtExperience.setText(lawyer.getExp());
-                    edtWorkPlace.setText(lawyer.getWorkPlace());
+                    if(dataSnapshot.exists()){
+                        FirebaseLawyer lawyer = dataSnapshot.getValue(FirebaseLawyer.class);
+
+                        edtName.setText(lawyer.getFullname());
+                        edtAchievement.setText(lawyer.getAchievement());
+                        edtCardNumber.setText(lawyer.getCardNumber());
+                        edtCategory.setText(lawyer.getCategory());
+                        edtCertificate.setText(lawyer.getCertificate());
+                        edtDayOfBirth.setText(lawyer.getBirthday());
+                        edtEducation.setText(lawyer.getEducation());
+                        edtIntro.setText(lawyer.getIntro());
+                        edtExperience.setText(lawyer.getExp());
+                        edtWorkPlace.setText(lawyer.getWorkPlace());
+                    }else{
+                        Toast.makeText(getContext(), getContext().getString(R.string.notice_cant_access),Toast.LENGTH_LONG).show();
+                        goNextFragment(FragmentMenu.newInstance(2, false),true,false);
+                    }
                 }
 
                 @Override
@@ -125,7 +130,7 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ibtn_home_menu:
-                goNextFragment(FragmentMenu.newInstance(2),true,false);
+                goNextFragment(FragmentMenu.newInstance(2, true),true,false);
                 break;
             case R.id.btn_submit:
                 submitInfo();
@@ -152,7 +157,7 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
         lawyer.setExp(edtExperience.getText().toString());
         lawyer.setIntro(edtIntro.getText().toString());
         lawyer.setWorkPlace(edtWorkPlace.getText().toString());
-        Lawyer.updateLawyerInfo(firebaseUser,lawyer);
+        FirebaseData.updateLawyerInfo(firebaseUser,lawyer);
         Toast.makeText(getContext(), getContext().getString(R.string.edit_success),Toast.LENGTH_LONG).show();
     }
     private void showDatePicker(){

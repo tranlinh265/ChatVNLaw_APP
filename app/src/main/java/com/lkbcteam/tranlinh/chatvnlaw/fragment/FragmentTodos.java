@@ -40,6 +40,7 @@ public class FragmentTodos extends BaseFragment implements View.OnClickListener{
     private TodoListAdapter adapter;
     private RecyclerView rvTodoList;
     private TextView tvTitle;
+    private TextView tvDataNotExist;
 
     public static FragmentTodos newInstance() {
         return new FragmentTodos();
@@ -65,6 +66,7 @@ public class FragmentTodos extends BaseFragment implements View.OnClickListener{
         rvTodoList = view.findViewById(R.id.rv_todo_list);
         tvTitle = view.findViewById(R.id.tv_fragment_title);
         tvTitle.setText(TITLE);
+        tvDataNotExist = view.findViewById(R.id.tv_data_not_exist);
     }
 
     @Override
@@ -86,6 +88,7 @@ public class FragmentTodos extends BaseFragment implements View.OnClickListener{
             @Override
             public void onSuccess(Object o) {
                 progressBar.setVisibility(View.GONE);
+                tvDataNotExist.setVisibility(View.GONE);
                 rvTodoList.setVisibility(View.VISIBLE);
                 TodoItem item = (TodoItem)o;
                 if(todos.size() == 0){
@@ -142,7 +145,14 @@ public class FragmentTodos extends BaseFragment implements View.OnClickListener{
 
             @Override
             public void onFail() {
+                progressBar.setVisibility(View.GONE);
+                tvDataNotExist.setVisibility(View.VISIBLE);
+            }
 
+            @Override
+            public void onDataNotExist() {
+                progressBar.setVisibility(View.GONE);
+                tvDataNotExist.setVisibility(View.VISIBLE);
             }
         });
     }

@@ -38,5 +38,6 @@
     <string name="specializations_dan_su">Dân sự</string>
     <string name="specializations_lao_dong_bao_hiem">Lao động - Bảo hiểm xã hội</string>
     <string name="specializations_doanh_nghiep">Doanh nghiệp</string>
-
+    <string name="notice_cant_access">Bạn không có quyền truy cập vào đây</string>
+    <string name="notice_data_not_exist">Không có dữ liệu</string>
 </resources>

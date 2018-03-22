@@ -25,9 +25,10 @@
             android:id="@+id/tv_sender"
             android:lines="1"
             app:layout_widthPercent="50%"
+            android:layout_toLeftOf="@+id/ibtn_call"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Tuan anh"
+            android:layout_alignParentLeft="true"
             android:textColor="@android:color/holo_purple"/>
         <TextView
             android:id="@+id/tv_time"
@@ -40,8 +41,17 @@
             android:textAllCaps="true"
             android:textColor="@android:color/holo_purple"
             android:gravity="right"
+            android:visibility="gone"
             android:layout_alignBottom="@id/tv_sender"
             android:layout_alignTop="@id/tv_sender"/>
+        <ImageButton
+            android:id="@+id/ibtn_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_phone"
+            android:background="@android:color/transparent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
         <TextView
             android:id="@+id/tv_content"
             android:layout_marginTop="10dp"
@@ -49,7 +59,7 @@
             android:layout_below="@+id/tv_sender"
             android:lines="1"
             android:textColor="@android:color/white"
-            android:text="This look good..."
+            android:layout_toLeftOf="@+id/ibtn_call"
             android:layout_width="match_parent" />
     </android.support.percent.PercentRelativeLayout>
     <View

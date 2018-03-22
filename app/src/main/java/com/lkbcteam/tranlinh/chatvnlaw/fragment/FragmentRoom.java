@@ -29,6 +29,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.adapter.ChatContentAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Time;
+import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.FirebaseData;
 import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataLoadingFinish;
 
 
@@ -131,7 +132,7 @@ public class FragmentRoom extends BaseFragment implements View.OnClickListener,S
             message = new com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.Message(this,getContext(),
                     mRoom, mCurrentUser, adapter, mMessageList);
             long time = System.currentTimeMillis();
-            message.loadData(String.valueOf(time),new OnDataLoadingFinish() {
+            FirebaseData.getMessageHistory(mRoom,String.valueOf(time),new OnDataLoadingFinish() {
                 @Override
                 public void onSuccess(Object o) {
                     if(mMessageList.size() == 0){
@@ -156,6 +157,11 @@ public class FragmentRoom extends BaseFragment implements View.OnClickListener,S
                 public void onFail() {
 
                 }
+
+                @Override
+                public void onDataNotExist() {
+
+                }
             });
             message.streamMessage(String.valueOf(time), new OnDataLoadingFinish() {
                 @Override
@@ -168,12 +174,17 @@ public class FragmentRoom extends BaseFragment implements View.OnClickListener,S
                 public void onFail() {
 
                 }
+
+                @Override
+                public void onDataNotExist() {
+
+                }
             });
             mBtnSend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(mEdtChatInput.getText().toString() != null){
-                        message.sendMessage(mEdtChatInput.getText().toString());
+                        FirebaseData.sendMessage(mEdtChatInput.getText().toString(), mRoom.getRid());
                         mEdtChatInput.setText(null);
                     }
                 }
@@ -209,7 +220,7 @@ public class FragmentRoom extends BaseFragment implements View.OnClickListener,S
             if(mMessageList.size() > 0) {
                 time = String.valueOf(Long.parseLong(mMessageList.get(0).getmMessageInfo().getMsgTimeStamp()) - 1);
             }
-            message.loadData(time, new OnDataLoadingFinish() {
+            FirebaseData.getMessageHistory(mRoom,time, new OnDataLoadingFinish() {
                 @Override
                 public void onSuccess(Object o) {
                     Message message = (Message)o;
@@ -263,6 +274,11 @@ public class FragmentRoom extends BaseFragment implements View.OnClickListener,S
 
                 @Override
                 public void onFail() {
+
+                }
+
+                @Override
+                public void onDataNotExist() {
 
                 }
             });

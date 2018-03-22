@@ -15,6 +15,8 @@ public class Define {
 //      String PUB_KEY = "pub-c-41480199-8449-4c3a-a44a-d29a395ba540"; // Use Your Pub Key
 //      String SUB_KEY = "sub-c-22984fba-0c86-11e8-bb84-266dd58d78d1"; // Use Your Sub Key
 
+//        String PUB_KEY = "pub-c-daeb24b3-d3b6-459e-b376-e217c45078f4"; // Use Your Pub Key
+//        String SUB_KEY = "sub-c-696c546a-16b1-11e8-bb84-266dd58d78d1"; // Use Your Sub Key
         String PUB_KEY = "pub-c-9d0d75a5-38db-404f-ac2a-884e18b041d8"; // Use Your Pub Key
         String SUB_KEY = "sub-c-4e25fb64-37c7-11e5-a477-0619f8945a4f"; // Use Your Sub Key
         String JSON_CALL_USER = "call_user";
@@ -104,6 +106,7 @@ public class Define {
     }
 
     public interface  UnreadMessage {
+        String CONTENT = "content";
          String COUNT = "count";
          String LASTMESSAGE = "lastMessage";
          String TIMESTAMP = "msgTimeStamp";

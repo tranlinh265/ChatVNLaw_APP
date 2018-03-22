@@ -48,19 +48,16 @@ public class HomeActivity extends BaseActivity {
         String stdbyChannel = this.username + Define.Pubnub.STDBY_SUFFIX;
         this.pubnub = new Pubnub(Define.Pubnub.PUB_KEY, Define.Pubnub.SUB_KEY);
         this.pubnub.setUUID(this.username);
-        Log.e("123", "initPubnub: "+this.username );
         try {
             this.pubnub.subscribe(stdbyChannel, new Callback() {
                 @Override
                 public void successCallback(String channel, Object message) {
-                    Log.d(Define.Pubnub.LOG_TAG, "MESSAGE: " + message.toString());
                     if (!(message instanceof JSONObject)) return; // Ignore if not JSONObject
                     JSONObject jsonMsg = (JSONObject) message;
                     try {
                         if (!jsonMsg.has(Define.Pubnub.JSON_CALL_USER)) return;
                         String user = jsonMsg.getString(Define.Pubnub.JSON_CALL_USER);
                         // Consider Accept/Reject call here
-                        Log.e(user, "successCallback: " );
                         Intent intent = new Intent(HomeActivity.this, IncomingCallActivity.class);
                         intent.putExtra(Define.Pubnub.USER_NAME, username);
                         intent.putExtra(Define.Pubnub.JSON_CALL_USER, user);
@@ -97,6 +94,11 @@ public class HomeActivity extends BaseActivity {
         try {
             jsonCall.put(Define.Pubnub.JSON_CALL_USER, this.username);
             pubnub.publish(callNumStdBy, jsonCall, new Callback() {
+                @Override
+                public void successCallback(String channel, Object message, String timetoken) {
+                    super.successCallback(channel, message, timetoken);
+                }
+
                 @Override
                 public void successCallback(String channel, Object message) {
                     Log.d(Define.Pubnub.LOG_TAG, "SUCCESS: " + message.toString());

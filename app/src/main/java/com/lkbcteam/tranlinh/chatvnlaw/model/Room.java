@@ -7,6 +7,8 @@ package com.lkbcteam.tranlinh.chatvnlaw.model;
 public class Room {
     private String rid;
     private User currentUser, targetUser;
+    private String lastMessContent;
+
     public Room(){
 
     }
@@ -33,5 +35,13 @@ public class Room {
 
     public void setTargetUser(User targetUser) {
         this.targetUser = targetUser;
+    }
+
+    public String getLastMessContent() {
+        return lastMessContent;
+    }
+
+    public void setLastMessContent(String lastMessContent) {
+        this.lastMessContent = lastMessContent;
     }
 }

@@ -55,6 +55,8 @@
             android:theme="@style/AppTheme"/>
         <activity android:name=".activity.IncomingCallActivity"
             android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.ActivityWebView"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".activity.VideoCallActivity"
             android:theme="@style/AppTheme"/>
         <service android:name=".other.notification.MyFirebaseInstanceIDService">
