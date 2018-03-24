@@ -20,10 +20,13 @@ import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.RoomListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.UnreadMessageListAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.FirebaseData;
 import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataChange;
 import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataLoadingFinish;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentMenu;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -39,7 +42,7 @@ public class FragmentHome extends BaseFragment {
     private List<Message> mMessageList = new ArrayList<Message>();
     private RecyclerView mRvMessageList, mRvUnreadMessageList;
     private TextView mTvNumberOfUnread,mTvWelcomeUser;
-    private List<com.lkbcteam.tranlinh.chatvnlaw.model.Room> mRoomList;
+    private List<Room> mRoomList;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser mCurrentUser;
     private CircleImageView mCivHomeProfile;
@@ -114,7 +117,7 @@ public class FragmentHome extends BaseFragment {
             FirebaseData.getRoomList(new OnDataLoadingFinish() {
                 @Override
                 public void onSuccess(Object o) {
-                    com.lkbcteam.tranlinh.chatvnlaw.model.Room room = (com.lkbcteam.tranlinh.chatvnlaw.model.Room) o;
+                    Room room = (Room) o;
                     mRoomList.add(room);
                 }
 

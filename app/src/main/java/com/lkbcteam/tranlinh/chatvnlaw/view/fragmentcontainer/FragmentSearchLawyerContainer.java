@@ -1,8 +1,10 @@
-package com.lkbcteam.tranlinh.chatvnlaw.fragment;
+package com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentSearchLawyer;
 
 /**
  * Created by tranlinh on 01/03/2018.

@@ -1,6 +1,7 @@
-package com.lkbcteam.tranlinh.chatvnlaw.model;
+package com.lkbcteam.tranlinh.chatvnlaw.model.entity;
 
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.TimeStamp;
 
 /**
  * Created by tranlinh on 30/01/2018.

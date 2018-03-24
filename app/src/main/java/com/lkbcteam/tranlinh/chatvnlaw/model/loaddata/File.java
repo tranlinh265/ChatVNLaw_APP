@@ -9,9 +9,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.FileListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageListAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
-import com.lkbcteam.tranlinh.chatvnlaw.model.*;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 
 import java.util.List;

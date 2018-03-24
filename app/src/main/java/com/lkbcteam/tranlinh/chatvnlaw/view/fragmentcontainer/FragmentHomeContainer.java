@@ -1,4 +1,4 @@
-package com.lkbcteam.tranlinh.chatvnlaw.fragment;
+package com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,6 +25,7 @@ public class FragmentHomeContainer extends BaseFragmentContainer {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        replaceFragment(FragmentHome.newInstance(),false,false);
+//        replaceFragment(FragmentHome.newInstance(),false,false);
+        replaceFragment(com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentHome.newInstance(),false,false);
     }
 }

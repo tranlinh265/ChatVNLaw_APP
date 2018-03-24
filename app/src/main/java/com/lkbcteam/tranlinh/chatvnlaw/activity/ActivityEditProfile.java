@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentEditProfileContainer;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.FragmentEditProfileContainer;
 
 /**
  * Created by tranlinh on 08/03/2018.

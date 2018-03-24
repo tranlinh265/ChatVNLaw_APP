@@ -1,4 +1,4 @@
-package com.lkbcteam.tranlinh.chatvnlaw.fragment;
+package com.lkbcteam.tranlinh.chatvnlaw.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -37,13 +37,9 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
     }
 
     public static FragmentMenu newInstance(int position, boolean accessible) {
-
-//        Bundle args = new Bundle();
-
         FragmentMenu fragment = new FragmentMenu();
         fragment.mPosition = position;
         fragment.accessible = accessible;
-//        fragment.setArguments(args);
         return fragment;
     }
     @Nullable

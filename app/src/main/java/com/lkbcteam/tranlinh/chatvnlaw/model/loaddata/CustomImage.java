@@ -7,8 +7,8 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageListAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
-import com.lkbcteam.tranlinh.chatvnlaw.model.*;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class CustomImage extends File {
     private ImageListAdapter leftImageListAdapter, rightImageListAdapter;
     private List<com.lkbcteam.tranlinh.chatvnlaw.model.File> leftImageList, rightImageList;
 
-    public CustomImage(Context context, BaseFragment baseFragment, FirebaseUser firebaseUser, com.lkbcteam.tranlinh.chatvnlaw.model.Room room) {
+    public CustomImage(Context context, BaseFragment baseFragment, FirebaseUser firebaseUser, Room room) {
         super(context, baseFragment, firebaseUser, room);
     }
 

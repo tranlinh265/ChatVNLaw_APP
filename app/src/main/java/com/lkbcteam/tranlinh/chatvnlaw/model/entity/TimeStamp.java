@@ -1,9 +1,11 @@
-package com.lkbcteam.tranlinh.chatvnlaw.model;
+package com.lkbcteam.tranlinh.chatvnlaw.model.entity;
 
 
 import java.util.Calendar;
 import android.os.Build;
 import android.text.format.DateFormat;
+
+import com.lkbcteam.tranlinh.chatvnlaw.model.Time;
 
 import java.util.Locale;
 

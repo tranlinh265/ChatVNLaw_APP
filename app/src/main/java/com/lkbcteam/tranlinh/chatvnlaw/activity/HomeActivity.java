@@ -5,12 +5,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.Menu;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentHomeContainer;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.FragmentHomeContainer;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.pubnub.api.Callback;
 import com.pubnub.api.Pubnub;

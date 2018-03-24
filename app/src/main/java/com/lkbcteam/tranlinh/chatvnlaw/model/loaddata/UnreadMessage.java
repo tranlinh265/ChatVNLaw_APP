@@ -3,12 +3,11 @@ package com.lkbcteam.tranlinh.chatvnlaw.model.loaddata;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataLoadingFinish;
 

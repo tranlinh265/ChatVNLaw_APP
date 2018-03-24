@@ -1,4 +1,4 @@
-package com.lkbcteam.tranlinh.chatvnlaw.fragment;
+package com.lkbcteam.tranlinh.chatvnlaw.view.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.lkbcteam.tranlinh.chatvnlaw.activity.BaseActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.BaseFragmentContainer;
 
 /**
  * Created by tranlinh on 26/01/2018.

@@ -6,14 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.User;
 import com.lkbcteam.tranlinh.chatvnlaw.model.action.RedirectToRoomChat;
 import com.squareup.picasso.Picasso;
@@ -51,7 +49,6 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
         if(user != null){
             holder.tvSenderDisplayName.setText(user.getDisplayName());
             Picasso.with(mContext).load(String.valueOf(user.getPhotoURL())).into(holder.civProfileImage);
-            holder.mLayoutContainer.setOnClickListener(new RedirectToRoomChat(mBaseFragment,room));
             holder.ibtnCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -62,6 +59,8 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
             });
             holder.tvMessageContent.setText(room.getLastMessContent());
         }
+        holder.mLayoutContainer.setOnClickListener(new RedirectToRoomChat(mBaseFragment,room));
+
 
     }
 

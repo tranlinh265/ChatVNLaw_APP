@@ -3,7 +3,6 @@ package com.lkbcteam.tranlinh.chatvnlaw.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,9 +15,9 @@ import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.FileListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.File;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.CustomImage;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +38,11 @@ public class FragmentRoomInfo extends BaseFragment {
     private com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.File loadFile;
     private CustomImage loadImage;
 
+    public static FragmentRoomInfo newInstance(Room room) {
+        FragmentRoomInfo fragment = new FragmentRoomInfo();
+        fragment.setRoom(room);
+        return fragment;
+    }
     public static FragmentRoomInfo newInstance(FirebaseUser firebaseUser, Room room) {
         FragmentRoomInfo fragmentRoomInfo = new FragmentRoomInfo();
         fragmentRoomInfo.setFirebaseUser(firebaseUser);

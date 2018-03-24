@@ -2,7 +2,6 @@ package com.lkbcteam.tranlinh.chatvnlaw.model.loaddata;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -10,8 +9,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
-import com.lkbcteam.tranlinh.chatvnlaw.model.*;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 
 /**
@@ -64,7 +63,7 @@ public class User {
     public void getUser(FirebaseUser firebaseUser, ValueEventListener callback){
         database.getReference().child(Define.Table.TABLE_USERS).child(firebaseUser.getUid()).addListenerForSingleValueEvent(callback);
     }
-    public void getUser(final boolean targetUser, String uid, final com.lkbcteam.tranlinh.chatvnlaw.model.Room roominfo, final RecyclerView.Adapter adapter){
+    public void getUser(final boolean targetUser, String uid, final Room roominfo, final RecyclerView.Adapter adapter){
         database.getReference().child("users/" + uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -1,4 +1,7 @@
-package com.lkbcteam.tranlinh.chatvnlaw.model;
+package com.lkbcteam.tranlinh.chatvnlaw.model.entity;
+
+import com.lkbcteam.tranlinh.chatvnlaw.model.Time;
+import com.lkbcteam.tranlinh.chatvnlaw.model.User;
 
 /**
  * Created by tranlinh on 27/01/2018.

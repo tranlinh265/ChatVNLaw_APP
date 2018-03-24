@@ -1,4 +1,4 @@
-package com.lkbcteam.tranlinh.chatvnlaw.fragment;
+package com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentLogin;
 
 /**
  * Created by tranlinh on 26/01/2018.

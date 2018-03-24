@@ -1,15 +1,9 @@
 package com.lkbcteam.tranlinh.chatvnlaw.activity;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentLoginContainer;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.FragmentLoginContainer;
 
 
 public class MainActivity extends BaseActivity {

@@ -2,7 +2,6 @@ package com.lkbcteam.tranlinh.chatvnlaw.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,11 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.model.File;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
 
-import java.net.URI;
 import java.util.List;
 
 /**

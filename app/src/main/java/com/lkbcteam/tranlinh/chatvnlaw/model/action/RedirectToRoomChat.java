@@ -1,11 +1,12 @@
 package com.lkbcteam.tranlinh.chatvnlaw.model.action;
 
 
+import android.util.Log;
 import android.view.View;
 
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentRoom;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentRoom;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 
 /**
  * Created by tranlinh on 29/01/2018.
@@ -20,6 +21,7 @@ public class RedirectToRoomChat implements View.OnClickListener {
     }
     @Override
     public void onClick(View view) {
+        Log.e("123", "onClick: " );
         mBaseFragment.goNextFragment(FragmentRoom.newInstance(mRoom),true);
     }
 }

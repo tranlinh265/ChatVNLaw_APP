@@ -103,6 +103,7 @@ public class Define {
          String SENDERID = "senderUid";
          String CONTENT = "content";
          String TAGS = "tags";
+         String INFO = "info";
     }
 
     public interface  UnreadMessage {

@@ -34,20 +34,16 @@
             android:gravity="center"
             android:id="@+id/tv_sender_displayname"/>
     </RelativeLayout>
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:layout_below="@+id/tb_actionbar"
-        android:id="@+id/srl_list_message_container"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/chat_input_container">
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rv_chat_content_container"
-            android:scrollbars="vertical">
 
-        </android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_chat_content_container"
+        android:scrollbars="vertical"
+        android:layout_below="@+id/tb_actionbar"
+        android:layout_above="@+id/chat_input_container">
+
+    </android.support.v7.widget.RecyclerView>
 
     <RelativeLayout
         android:id="@+id/chat_input_container"

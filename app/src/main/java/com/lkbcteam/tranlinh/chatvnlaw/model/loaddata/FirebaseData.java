@@ -8,9 +8,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lkbcteam.tranlinh.chatvnlaw.model.FirebaseLawyer;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
-import com.lkbcteam.tranlinh.chatvnlaw.model.TextMessage;
-import com.lkbcteam.tranlinh.chatvnlaw.model.TimeStamp;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.*;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.TextMessage;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.TimeStamp;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataChange;
 import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataLoadingFinish;
@@ -28,7 +29,7 @@ public class FirebaseData {
         database.getReference().child(Define.Table.TABLE_REFERENCE+"/"+ mCurrentUser.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                final com.lkbcteam.tranlinh.chatvnlaw.model.Room room = new com.lkbcteam.tranlinh.chatvnlaw.model.Room();
+                final Room room = new Room();
                 room.setRid(String.valueOf(dataSnapshot.getValue()));
 
                 FirebaseData.getUser(dataSnapshot.getKey(), new OnDataLoadingFinish() {
@@ -157,8 +158,8 @@ public class FirebaseData {
         database.getReference().child(Define.Table.TABLE_ROOMS).child(room.getRid()).child(Define.Room.MESSAGES).orderByChild(Define.Messages.TIMESTAMP).endAt(timeStamp).limitToLast(10).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info info = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info.class);
-                com.lkbcteam.tranlinh.chatvnlaw.model.Message message = new com.lkbcteam.tranlinh.chatvnlaw.model.Message();
+                com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message.Info info = dataSnapshot.getValue(Message.Info.class);
+                Message message = new Message();
                 message.setmMessageInfo(info);
                 message.setmMessageId(dataSnapshot.getKey());
                 if(info.getSenderUid().equals(currentUser.getUid())){
@@ -202,8 +203,8 @@ public class FirebaseData {
         database.getReference().child(Define.Table.TABLE_ROOMS).child(room.getRid()).child(Define.Room.MESSAGES).orderByChild(Define.Messages.TIMESTAMP).startAt(timeStamp).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info info = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.Message.Info.class);
-                com.lkbcteam.tranlinh.chatvnlaw.model.Message message = new com.lkbcteam.tranlinh.chatvnlaw.model.Message();
+                Message.Info info = dataSnapshot.getValue(Message.Info.class);
+                Message message = new Message();
                 message.setmMessageInfo(info);
                 message.setmMessageId(dataSnapshot.getKey());
                 if(info.getSenderUid().equals(currentUser.getUid())){

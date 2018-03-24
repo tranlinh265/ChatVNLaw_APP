@@ -23,6 +23,8 @@ import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.model.FirebaseLawyer;
 import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.FirebaseData;
 import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.User;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentMenu;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;

@@ -1,7 +1,5 @@
 package com.lkbcteam.tranlinh.chatvnlaw.fragment;
 
-import android.annotation.SuppressLint;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,15 +24,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ChatContentAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Time;
+import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.HistoryMessageInterator;
+import com.lkbcteam.tranlinh.chatvnlaw.model.listener.LoadRoomMessageListener;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.FirebaseData;
 import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataLoadingFinish;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -99,10 +98,23 @@ public class FragmentRoom extends BaseFragment implements View.OnClickListener,S
                 initViewChild(view);
             }
         }, 1000);
+        HistoryMessageInterator historyMessageInterator = new HistoryMessageInterator(new LoadRoomMessageListener.HistoryMessage() {
+            @Override
+            public void onLoadSuccess(List<Message> historyList) {
+                Log.e(String.valueOf(historyList.size()), "onLoadSuccess: " );
+            }
+
+            @Override
+            public void onLoadFalure(String error) {
+
+            }
+        });
+        long time = System.currentTimeMillis();
+        historyMessageInterator.loadHistory(mRoom.getRid(),String.valueOf(time),10);
     }
     private void initViewChild(View view){
         rvChatContentContainer = view.findViewById(R.id.rv_chat_content_container);
-        srlMessageListContainer = view.findViewById(R.id.srl_list_message_container);
+//        srlMessageListContainer = view.findViewById(R.id.srl_list_message_container);
 
         mMessageList = new ArrayList<>();
         mLayout = new GridLayoutManager(getContext(),1);
