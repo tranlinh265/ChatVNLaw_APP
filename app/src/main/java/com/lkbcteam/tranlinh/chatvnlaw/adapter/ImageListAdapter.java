@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentImageDetail;
-import com.lkbcteam.tranlinh.chatvnlaw.model.File;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

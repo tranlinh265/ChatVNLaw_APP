@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageDetailAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageDetailViewPager;
-import com.lkbcteam.tranlinh.chatvnlaw.model.File;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
 import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 
 import java.util.List;

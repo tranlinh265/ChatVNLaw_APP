@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentLogin;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentLogin;
 
 /**
  * Created by tranlinh on 26/01/2018.

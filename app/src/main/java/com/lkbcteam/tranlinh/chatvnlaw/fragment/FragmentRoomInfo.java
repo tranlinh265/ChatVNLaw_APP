@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.FileListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageListAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.model.File;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.CustomImage;
 import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;

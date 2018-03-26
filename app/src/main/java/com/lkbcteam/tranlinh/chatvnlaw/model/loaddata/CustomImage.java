@@ -19,7 +19,7 @@ import java.util.List;
 
 public class CustomImage extends File {
     private ImageListAdapter leftImageListAdapter, rightImageListAdapter;
-    private List<com.lkbcteam.tranlinh.chatvnlaw.model.File> leftImageList, rightImageList;
+    private List<com.lkbcteam.tranlinh.chatvnlaw.model.entity.File> leftImageList, rightImageList;
 
     public CustomImage(Context context, BaseFragment baseFragment, FirebaseUser firebaseUser, Room room) {
         super(context, baseFragment, firebaseUser, room);
@@ -30,7 +30,7 @@ public class CustomImage extends File {
         database.getReference().child(Define.Table.TABLE_ROOMS+"/" + room.getRid()+ "/" + Define.Room.SHARED_IMAGES).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                com.lkbcteam.tranlinh.chatvnlaw.model.File file = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.File.class);
+                com.lkbcteam.tranlinh.chatvnlaw.model.entity.File file = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.entity.File.class);
                 fileList.add(file);
                 switch (fileList.size() % 2){
                     case 1:
@@ -82,19 +82,19 @@ public class CustomImage extends File {
         this.rightImageListAdapter = rightImageListAdapter;
     }
 
-    public List<com.lkbcteam.tranlinh.chatvnlaw.model.File> getLeftImageList() {
+    public List<com.lkbcteam.tranlinh.chatvnlaw.model.entity.File> getLeftImageList() {
         return leftImageList;
     }
 
-    public void setLeftImageList(List<com.lkbcteam.tranlinh.chatvnlaw.model.File> leftImageList) {
+    public void setLeftImageList(List<com.lkbcteam.tranlinh.chatvnlaw.model.entity.File> leftImageList) {
         this.leftImageList = leftImageList;
     }
 
-    public List<com.lkbcteam.tranlinh.chatvnlaw.model.File> getRightImageList() {
+    public List<com.lkbcteam.tranlinh.chatvnlaw.model.entity.File> getRightImageList() {
         return rightImageList;
     }
 
-    public void setRightImageList(List<com.lkbcteam.tranlinh.chatvnlaw.model.File> rightImageList) {
+    public void setRightImageList(List<com.lkbcteam.tranlinh.chatvnlaw.model.entity.File> rightImageList) {
         this.rightImageList = rightImageList;
     }
 }

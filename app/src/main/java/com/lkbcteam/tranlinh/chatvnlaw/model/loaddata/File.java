@@ -27,7 +27,7 @@ public class File {
     protected FileListAdapter fileAdapter;
     protected ImageListAdapter imageAdapter;
     protected Room room;
-    protected List<com.lkbcteam.tranlinh.chatvnlaw.model.File> fileList;
+    protected List<com.lkbcteam.tranlinh.chatvnlaw.model.entity.File> fileList;
     public File(Context context, BaseFragment baseFragment, FirebaseUser firebaseUser, Room room){
         this.mBaseFragment = baseFragment;
         this.mContext = context;
@@ -38,7 +38,7 @@ public class File {
         database.getReference().child(Define.Table.TABLE_ROOMS+"/" + room.getRid() + "/" +Define.Room.SHARED_FILES).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                com.lkbcteam.tranlinh.chatvnlaw.model.File file = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.File.class);
+                com.lkbcteam.tranlinh.chatvnlaw.model.entity.File file = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.entity.File.class);
                 fileList.add(file);
                 fileAdapter.notifyDataSetChanged();
             }
@@ -68,7 +68,7 @@ public class File {
         database.getReference().child(Define.Table.TABLE_ROOMS+"/" + room.getRid()+ "/" + Define.Room.SHARED_IMAGES).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                com.lkbcteam.tranlinh.chatvnlaw.model.File file = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.File.class);
+                com.lkbcteam.tranlinh.chatvnlaw.model.entity.File file = dataSnapshot.getValue(com.lkbcteam.tranlinh.chatvnlaw.model.entity.File.class);
                 fileList.add(file);
                 imageAdapter.notifyDataSetChanged();
             }
@@ -110,11 +110,11 @@ public class File {
         this.imageAdapter = imageAdapter;
     }
 
-    public List<com.lkbcteam.tranlinh.chatvnlaw.model.File> getFileList() {
+    public List<com.lkbcteam.tranlinh.chatvnlaw.model.entity.File> getFileList() {
         return fileList;
     }
 
-    public void setFileList(List<com.lkbcteam.tranlinh.chatvnlaw.model.File> fileList) {
+    public void setFileList(List<com.lkbcteam.tranlinh.chatvnlaw.model.entity.File> fileList) {
         this.fileList = fileList;
     }
 }

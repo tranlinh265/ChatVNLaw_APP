@@ -1,4 +1,4 @@
-package com.lkbcteam.tranlinh.chatvnlaw.model;
+package com.lkbcteam.tranlinh.chatvnlaw.model.entity;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 

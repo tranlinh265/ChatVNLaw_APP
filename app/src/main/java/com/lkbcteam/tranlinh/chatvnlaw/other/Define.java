@@ -6,6 +6,38 @@ package com.lkbcteam.tranlinh.chatvnlaw.other;
 
 public class Define {
 
+    public interface RailServer{
+        String TEST_URL = "http://192.168.15.137:4000/";
+        String RELEASE_URL = "";
+        boolean USE_TEST = true;
+        String BASE_API_URL = USE_TEST ? TEST_URL : RELEASE_URL;
+        String X_API_KEY = "b1c7f840acdee887f402236e82736eba";
+
+        String API_LOGIN_URL = "api/login";
+        String API_SIGNUP_URL = "api/signup";
+        String API_LOGOUT_URL = "api/logout";
+        String API_GET_ROOM_URL = "api/users/{username}/rooms";
+
+        String X_API_TOKEN_KEY = "x-api-token";
+        String X_USER_TOKEN = "x-user-token";
+        String X_USER_EMAIL = "x-user-email";
+
+        interface LoginField{
+            String LOGIN = "login";
+            String EMAIL = LOGIN+"[email]";
+            String password = LOGIN+"[password]";
+        }
+
+        interface SignupField{
+            String SIGNUP = "signup";
+            String ID = SIGNUP + "[id]";
+            String EMAIL = SIGNUP + "[email]";
+            String PASSWORD = SIGNUP + "[password]";
+            String PASSWORD_CONFIRM = SIGNUP + "[password_confirmation]";
+            String DISPLAYNAME = SIGNUP + "[profile_attibutes][displayName]";
+            String USERNAME = SIGNUP + "[profile_attibutes][userName]";
+        }
+    }
     public interface Pubnub{
         String SHARED_PREFS = "com.lkbcteam.tranlinh.chatvnlaw.SHARED_PREFS";
         String USER_NAME    = "com.lkbcteam.tranlinh.chatvnlaw.USERNAME";

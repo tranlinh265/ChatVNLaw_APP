@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ChatContentAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentRoomInfo;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.RoomPresenter;

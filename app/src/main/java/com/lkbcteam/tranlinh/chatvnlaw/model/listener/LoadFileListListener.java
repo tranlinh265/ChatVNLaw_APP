@@ -1,6 +1,6 @@
 package com.lkbcteam.tranlinh.chatvnlaw.model.listener;
 
-import com.lkbcteam.tranlinh.chatvnlaw.model.File;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
 
 /**
  * Created by tranlinh on 24/03/2018.
