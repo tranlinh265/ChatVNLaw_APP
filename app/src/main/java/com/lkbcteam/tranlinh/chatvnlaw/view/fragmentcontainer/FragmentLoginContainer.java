@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentLogin;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentStartApp1;
 
 /**
  * Created by tranlinh on 26/01/2018.
@@ -27,6 +28,6 @@ public class FragmentLoginContainer extends BaseFragmentContainer {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        replaceFragment(FragmentLogin.newInstance(),false,false);
+        replaceFragment(FragmentStartApp1.newInstance(),false,false);
     }
 }

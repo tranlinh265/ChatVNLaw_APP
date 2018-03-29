@@ -1,5 +1,6 @@
 package com.lkbcteam.tranlinh.chatvnlaw.other;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -17,11 +18,11 @@ public class SharePreference {
     private static final String USERNAME = "com.lkbcteam.tranlinh.chatvnlaw.USERNAME";
     private static final String USER_TOKEN  = "com.lkbcteam.tranlinh.chatvnlaw.USER_TOKEN";
 
-    public SharePreference(BaseActivity activity){
+    public SharePreference(Activity activity){
         this.sp = activity.getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE);
     }
 
-    public static SharePreference getInstance(BaseActivity activity){
+    public static SharePreference getInstance(Activity activity){
         if(sharePreference == null){
             sharePreference = new SharePreference(activity);
         }

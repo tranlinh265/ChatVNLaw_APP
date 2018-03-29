@@ -3,6 +3,11 @@ package com.lkbcteam.tranlinh.chatvnlaw.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +26,14 @@ import com.lkbcteam.tranlinh.chatvnlaw.view.LoginView;
  */
 
 public class FragmentLogin extends BaseFragment implements View.OnClickListener, LoginView{
-
+    private static final long MOVE_DEFAULT_TIME = 2000;
+    private static final long FADE_DEFAULT_TIME = 1300;
     private TextView tvRegister;
     private ImageButton ibtnLogin;
     private EditText edtEmail, edtPass;
     private LoginPresenter loginPresenter;
+
+    private FragmentManager fragmentManager;
 
     public static FragmentLogin newInstance() {
 
@@ -49,6 +57,7 @@ public class FragmentLogin extends BaseFragment implements View.OnClickListener,
         ibtnLogin = view.findViewById(R.id.ibtn_login);
         edtEmail = view.findViewById(R.id.edt_email);
         edtPass = view.findViewById(R.id.edt_password);
+        fragmentManager = getActivity().getSupportFragmentManager();
 
         tvRegister.setOnClickListener(this);
         ibtnLogin.setOnClickListener(this);
@@ -72,11 +81,28 @@ public class FragmentLogin extends BaseFragment implements View.OnClickListener,
                 }
                 break;
             case R.id.tv_register:
-                goNextFragment(FragmentRegister.newInstance(),true);
+                goNextFragment();
                 break;
         }
     }
 
+    private void goNextFragment(){
+        Fragment previousFragment = fragmentManager.findFragmentById(R.id.fullscreen_content);
+        Fragment nextFragment = FragmentRegister.newInstance();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        Fade exitFade = new Fade();
+        exitFade.setDuration(FADE_DEFAULT_TIME);
+        previousFragment.setExitTransition(exitFade);
+
+        Fade enterFade = new Fade();
+        enterFade.setStartDelay(MOVE_DEFAULT_TIME + FADE_DEFAULT_TIME);
+        enterFade.setDuration(FADE_DEFAULT_TIME);
+        nextFragment.setEnterTransition(enterFade);
+
+        fragmentTransaction.replace(R.id.fullscreen_content, nextFragment);
+        fragmentTransaction.commitAllowingStateLoss();
+    }
     @Override
     public void loginSucess() {
         getBaseActivity().startActivity(HomeActivity.class,true);

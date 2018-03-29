@@ -27,11 +27,7 @@ public class FragmentRegister extends BaseFragment implements View.OnClickListen
     private RegisterPresenter presenter;
 
     public static FragmentRegister newInstance() {
-
-        Bundle args = new Bundle();
-
         FragmentRegister fragment = new FragmentRegister();
-        fragment.setArguments(args);
         return fragment;
     }
 

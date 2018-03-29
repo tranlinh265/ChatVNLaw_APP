@@ -1,9 +1,10 @@
 apply plugin: 'com.android.application'
+
 android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.lkbcteam.tranlinh.chatvnlaw"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -14,6 +15,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 
@@ -26,6 +31,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.android.support:percent:26.1.0'
     compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:transition:26.1.0'
 
     compile 'com.android.support:recyclerview-v7:26.1.0'
 

@@ -40,4 +40,7 @@
     <string name="specializations_doanh_nghiep">Doanh nghiệp</string>
     <string name="notice_cant_access">Bạn không có quyền truy cập vào đây</string>
     <string name="notice_data_not_exist">Không có dữ liệu</string>
+    <string name="start_app_description">Tra cứu, tư vấn pháp luật trực tuyến</string>
+
+    <string name="logoTransitionName">logoTransitionName</string>
 </resources>

@@ -26,4 +26,7 @@
     <!--size-->
     <dimen name="line_size_tiny">1dp</dimen>
     <dimen name="default_call_button_size">60dp</dimen>
+    <dimen name="logo_size">90dp</dimen>
+    <dimen name="logo_size_big">150dp</dimen>
+    <dimen name="start_app_text_size">20sp</dimen>
 </resources>

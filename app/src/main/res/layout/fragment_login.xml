@@ -14,9 +14,10 @@
         android:gravity="center"
         android:id="@+id/title_container">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_vnlaw"/>
+            android:layout_width="@dimen/logo_size_big"
+            android:layout_height="@dimen/logo_size_big"
+            android:src="@drawable/can_"
+            android:transitionName="@string/logoTransitionName"/>
     </RelativeLayout>
     <android.support.percent.PercentRelativeLayout
         android:id="@+id/infor_container"
