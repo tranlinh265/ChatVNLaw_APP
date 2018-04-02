@@ -87,7 +87,8 @@ public class LoginPresenter implements AccountListener.Login {
 
     @Override
     public void onFirebaseLoginSuccess(String email, String password) {
-        accountInterator.loginWithRail(email,password);
+//        accountInterator.loginWithRail(email,password);
+        loginView.loginSucess();
     }
 
     @Override

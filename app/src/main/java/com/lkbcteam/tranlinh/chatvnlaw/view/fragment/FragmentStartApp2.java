@@ -25,17 +25,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 
 /**
  * Created by tranlinh on 29/03/2018.
  */
 
-public class FragmentStartApp2 extends Fragment {
+public class FragmentStartApp2 extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment {
     private static final long MOVE_DEFAULT_TIME = 2000;
     private static final long FADE_DEFAULT_TIME = 1300;
 
-    private FragmentManager fragmentManager;
     private ImageView ivLogo;
     private Handler delayedTransactionHandler = new Handler();
     private Runnable runnable = () -> performTransition();
@@ -58,7 +58,6 @@ public class FragmentStartApp2 extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        fragmentManager = getActivity().getSupportFragmentManager();
         ivLogo = view.findViewById(R.id.fragment2_logo);
         tvWelcome = view.findViewById(R.id.tv_welcome_user);
         pbLoading = view.findViewById(R.id.pb_loading);
@@ -74,22 +73,15 @@ public class FragmentStartApp2 extends Fragment {
             tvWelcome.setText(String.format("Chào mừng @dawdwa"));
             tvWelcome.setVisibility(View.VISIBLE);
             (new Handler()).postDelayed((Runnable) () -> {
-                Intent intent = new Intent(getActivity(), HomeActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.animator.trans_right_in,R.animator.trans_left_out);
-                getActivity().finish();
+                getBaseActivity().startActivity(HomeActivity.class, false);
             }, 3000);
         }else{
             // relogin
-            Fragment previousFragment = fragmentManager.findFragmentById(R.id.fullscreen_content);
+            Fragment previousFragment = getFragmentManager().findFragmentById(R.id.container_framelayout);
             Fragment nextFragment = FragmentLogin.newInstance();
 
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
+            pbLoading.setVisibility(View.GONE);
             // 1. Exit for Previous Fragment
-//            Fade exitFade = new Fade();
-//            exitFade.setDuration(FADE_DEFAULT_TIME);
-//            previousFragment.setExitTransition(exitFade);
 
             Slide slide = new Slide();
             slide.setDuration(FADE_DEFAULT_TIME);
@@ -107,9 +99,7 @@ public class FragmentStartApp2 extends Fragment {
             enterFade.setDuration(FADE_DEFAULT_TIME);
             nextFragment.setEnterTransition(enterFade);
 
-            fragmentTransaction.addSharedElement(ivLogo, ivLogo.getTransitionName());
-            fragmentTransaction.replace(R.id.fullscreen_content, nextFragment);
-            fragmentTransaction.commitAllowingStateLoss();
+            goNextFragment(nextFragment,false,ivLogo);
         }
     }
     @Override

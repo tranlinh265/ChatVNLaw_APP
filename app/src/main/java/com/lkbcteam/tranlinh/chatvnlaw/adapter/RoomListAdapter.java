@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
-import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
+
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.User;
-import com.lkbcteam.tranlinh.chatvnlaw.model.action.RedirectToRoomChat;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -28,6 +28,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
     private List<Room> mRoomList;
     private Context mContext;
     private BaseFragment mBaseFragment;
+    private onChatMessageClick callback;
 
     public RoomListAdapter(Context context, BaseFragment baseFragment, List<Room> roomList){
         mRoomList = roomList;
@@ -49,19 +50,26 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
         if(user != null){
             holder.tvSenderDisplayName.setText(user.getDisplayName());
             Picasso.with(mContext).load(String.valueOf(user.getPhotoURL())).into(holder.civProfileImage);
-            holder.ibtnCall.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(mBaseFragment.getBaseActivity() instanceof HomeActivity && !user.getUid().isEmpty()){
-                        ((HomeActivity)mBaseFragment.getBaseActivity()).makeCall(user.getUid());
-                    }
+            holder.ibtnCall.setOnClickListener(v -> {
+                if(mBaseFragment.getBaseActivity() instanceof HomeActivity && !user.getUid().isEmpty()){
+                    ((HomeActivity)mBaseFragment.getBaseActivity()).makeCall(user.getUid());
                 }
             });
             holder.tvMessageContent.setText(room.getLastMessContent());
         }
-        holder.mLayoutContainer.setOnClickListener(new RedirectToRoomChat(mBaseFragment,room));
+        holder.mLayoutContainer.setOnClickListener(v -> {
+            callback.onClick(room);
+        });
 
 
+    }
+
+    public void setCallback(onChatMessageClick callback) {
+        this.callback = callback;
+    }
+
+    public interface onChatMessageClick{
+        void onClick(Object o);
     }
 
     @Override

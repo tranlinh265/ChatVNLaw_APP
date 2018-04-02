@@ -11,8 +11,8 @@ import android.view.ViewGroup;
  * Created by tranlinh on 27/01/2018.
  */
 
-public class FragmentHomeContainer extends BaseFragmentContainer {
-    public static Fragment newInstance(){
+public class FragmentHomeContainer extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragmentContainer {
+    public static FragmentHomeContainer newInstance(){
         return new FragmentHomeContainer();
     }
 
@@ -25,7 +25,6 @@ public class FragmentHomeContainer extends BaseFragmentContainer {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        replaceFragment(FragmentHome.newInstance(),false,false);
-        replaceFragment(com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentHome.newInstance(),false,false);
+        replaceFragment(com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentHome.newInstance(),false, null);
     }
 }

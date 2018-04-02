@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.RegisterPresenter;
 import com.lkbcteam.tranlinh.chatvnlaw.view.RegisterView;
 
@@ -19,7 +20,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.view.RegisterView;
  * Created by tranlinh on 26/03/2018.
  */
 
-public class FragmentRegister extends BaseFragment implements View.OnClickListener, RegisterView{
+public class FragmentRegister extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment implements View.OnClickListener, RegisterView{
 
     private ImageButton ibtnBackToLogin;
     private EditText edtEmail, edtPassword, edtPasswordConfirm, edtDisplayname;
@@ -62,6 +63,7 @@ public class FragmentRegister extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ibtn_back_to_login:
+//                goNextFragment(FragmentLogin.newInstance(),false,false);
                 goBackFragment();
                 break;
             case R.id.btn_register:

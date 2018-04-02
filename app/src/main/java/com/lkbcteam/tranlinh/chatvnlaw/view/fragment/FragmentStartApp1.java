@@ -16,18 +16,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
 
 /**
  * Created by tranlinh on 29/03/2018.
  */
 
-public class FragmentStartApp1 extends Fragment {
+public class FragmentStartApp1 extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment {
     private static final long MOVE_DEFAULT_TIME = 2000;
     private static final long FADE_DEFAULT_TIME = 1300;
 
     private Handler delayedTransactionHandler = new Handler();
     private Runnable runnable = this::performTransition;
-    private FragmentManager fragmentManager;
 
     private ImageView ivLogo;
 
@@ -47,15 +47,12 @@ public class FragmentStartApp1 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ivLogo = view.findViewById(R.id.iv_logo);
 
-        fragmentManager = getActivity().getSupportFragmentManager();
         delayedTransactionHandler.postDelayed(runnable, 3000);
     }
 
     private void performTransition() {
-        Fragment previousFragment = fragmentManager.findFragmentById(R.id.fullscreen_content);
         Fragment nextFragment = FragmentStartApp2.newInstance();
-
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment previousFragment = getFragmentManager().findFragmentById(R.id.container_framelayout);
 
         // 1. Exit for Previous Fragment
         Fade exitFade = new Fade();
@@ -75,9 +72,7 @@ public class FragmentStartApp1 extends Fragment {
         enterFade.setDuration(FADE_DEFAULT_TIME);
         nextFragment.setEnterTransition(enterFade);
 
-        fragmentTransaction.addSharedElement(ivLogo, ivLogo.getTransitionName());
-        fragmentTransaction.replace(R.id.fullscreen_content, nextFragment);
-        fragmentTransaction.commitAllowingStateLoss();
+        goNextFragment(nextFragment,false,ivLogo);
     }
 
     @Override

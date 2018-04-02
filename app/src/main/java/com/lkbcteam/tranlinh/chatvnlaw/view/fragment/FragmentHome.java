@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.RoomListAdapter;
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.HomePresenter;
 import com.lkbcteam.tranlinh.chatvnlaw.view.HomeView;
@@ -24,7 +26,7 @@ import java.util.List;
  * Created by tranlinh on 24/03/2018.
  */
 
-public class FragmentHome extends BaseFragment implements HomeView, View.OnClickListener {
+public class FragmentHome extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment implements HomeView, View.OnClickListener,RoomListAdapter.onChatMessageClick {
 
     private RecyclerView rvRoomList;
     private List<Room> roomList;
@@ -54,6 +56,7 @@ public class FragmentHome extends BaseFragment implements HomeView, View.OnClick
         layoutManager = new GridLayoutManager(getContext(), 1);
         rvRoomList.setLayoutManager(layoutManager);
         adapter = new RoomListAdapter(getContext(),this,roomList);
+        adapter.setCallback(this);
         rvRoomList.setAdapter(adapter);
 
         ibtnHomeMenu = view.findViewById(R.id.ibtn_home_menu);
@@ -90,5 +93,13 @@ public class FragmentHome extends BaseFragment implements HomeView, View.OnClick
     @Override
     public void notifyDataInsert(int position) {
         adapter.notifyItemInserted(position);
+    }
+
+    @Override
+    public void onClick(Object o) {
+        Slide slide = new Slide();
+        slide.setDuration(1000);
+        getBaseActivity().getWindow().setExitTransition(slide);
+        goNextFragment(FragmentRoom.newInstance((Room)o),true,true);
     }
 }
