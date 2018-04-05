@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:background="@color/colorGrayDark">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:text="10:30pm"
+        android:textColor="@color/colorGrayLight"
+        android:id="@+id/tv_text_time_stamp"/>
+    <RelativeLayout
+        android:layout_below="@id/tv_text_time_stamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chat_content_bg_1110"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="15dp"
+        android:paddingRight="15dp">
+        <TextView
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Người cho anh cảm thấy cuộc sống này anh càng phải trân trọng
+Ngày nào em cũng bên anh"/>
+    </RelativeLayout>
+</RelativeLayout>

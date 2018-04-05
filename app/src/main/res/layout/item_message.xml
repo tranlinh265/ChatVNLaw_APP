@@ -13,8 +13,7 @@
         android:id="@+id/civ_profile_image"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:src="@drawable/default_avatar"
-        android:transitionName="@string/target_user_avatar_transiton"/>
+        android:src="@drawable/default_avatar" />
     <android.support.percent.PercentRelativeLayout
         android:layout_toRightOf="@+id/civ_profile_image"
         android:layout_height="wrap_content"

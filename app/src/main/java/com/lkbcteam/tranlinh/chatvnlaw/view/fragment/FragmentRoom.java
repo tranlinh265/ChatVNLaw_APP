@@ -28,6 +28,8 @@ import com.lkbcteam.tranlinh.chatvnlaw.presenter.RoomPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by tranlinh on 24/03/2018.
  */
@@ -44,6 +46,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
     private ImageButton mIbtnBack,mIbtnInfo;
     private boolean isloading = true;
     private ProgressBar pbLoading;
+    private CircleImageView civTargetUserAvatar;
 
     private View.OnClickListener mHideSoftKey = view -> {
         View currentFocus = getActivity().getCurrentFocus();
@@ -59,6 +62,17 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         return fragment;
     }
 
+    public static FragmentRoom newInstance(Room room, int position) {
+        
+        Bundle args = new Bundle();
+        
+        FragmentRoom fragment = new FragmentRoom();
+        args.putString("position", String.valueOf(position));
+        args.putSerializable("room", room);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,11 +82,15 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
     @Override
     protected void initView(View view) {
         super.initView(view);
+        civTargetUserAvatar = view.findViewById(R.id.iv_target_user_avatar);
 
-//        Slide slide = new Slide();
-//        slide.setDuration(1000);
-//        getBaseActivity().getWindow().setEnterTransition(slide);
-
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+            String position = bundle.getString("position");
+            civTargetUserAvatar.setTransitionName(getContext().getString(R.string.target_user_avatar_transiton) + position);
+            Room room = (Room)bundle.getSerializable("room");
+            setRoom(room);
+        }
         mMessageList = new ArrayList<>();
         rvChatContentContainer = view.findViewById(R.id.rv_chat_content_container);
         mLayout = new GridLayoutManager(getContext(),1);

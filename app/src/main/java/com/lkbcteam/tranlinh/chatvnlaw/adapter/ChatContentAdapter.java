@@ -124,19 +124,11 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
         builder.setTitle(info.getName());
         builder.setCancelable(true);
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.setPositiveButton("Download", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(info.getDownloadURL()));
-                mContext.startActivity(browserIntent);
-            }
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.setPositiveButton("Download", (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(info.getDownloadURL()));
+            mContext.startActivity(browserIntent);
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();

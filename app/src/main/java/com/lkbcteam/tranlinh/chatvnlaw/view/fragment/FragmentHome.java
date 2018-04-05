@@ -8,6 +8,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.transition.TransitionSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,8 +101,8 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     }
 
     @Override
-    public void onClick(Object o, View view) {
-        Fragment nextFragment = FragmentRoom.newInstance((Room)o);
+    public void onClick(Object o, int position, View view) {
+        Fragment nextFragment = FragmentRoom.newInstance((Room)o, position);
         Fragment previousFragment = getFragmentManager().findFragmentById(R.id.container_framelayout);
 
         // 1. Exit for Previous Fragment
@@ -107,22 +110,18 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
         exitFade.setDuration(FADE_DEFAULT_TIME);
         previousFragment.setExitTransition(exitFade);
 
-//        // 2. Shared Elements Transition
-//        TransitionSet enterTransitionSet = new TransitionSet();
-//        enterTransitionSet.addTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move));
-//        enterTransitionSet.setDuration(MOVE_DEFAULT_TIME);
-//        enterTransitionSet.setStartDelay(FADE_DEFAULT_TIME);
-//        nextFragment.setSharedElementEnterTransition(enterTransitionSet);
+        Transition sharedElementEnterTransition = TransitionInflater.from(getContext()).inflateTransition(R.transition.default_transition);
+        sharedElementEnterTransition.setDuration(FADE_DEFAULT_TIME);
 
-        ChangeBounds changeBoundsTransition = new ChangeBounds();
-        nextFragment.setSharedElementEnterTransition(changeBoundsTransition);
+        previousFragment.setSharedElementReturnTransition(sharedElementEnterTransition);
+        nextFragment.setSharedElementEnterTransition(sharedElementEnterTransition);
 
         // 3. Enter Transition for New Fragment
-        Slide slideTransition = new Slide(Gravity.LEFT);
-//        slideTransition.setStartDelay(MOVE_DEFAULT_TIME + FADE_DEFAULT_TIME);
+        Slide slideTransition = new Slide(Gravity.RIGHT);
+
         slideTransition.setDuration(FADE_DEFAULT_TIME);
         nextFragment.setEnterTransition(slideTransition);
 
-        goNextFragment(FragmentRoom.newInstance((Room)o),true,view);
+        goNextFragment(nextFragment,true,view);
     }
 }

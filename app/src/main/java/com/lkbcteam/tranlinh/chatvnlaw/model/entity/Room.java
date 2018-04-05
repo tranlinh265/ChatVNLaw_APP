@@ -2,11 +2,13 @@ package com.lkbcteam.tranlinh.chatvnlaw.model.entity;
 
 import com.lkbcteam.tranlinh.chatvnlaw.model.User;
 
+import java.io.Serializable;
+
 /**
  * Created by tranlinh on 29/01/2018.
  */
 
-public class Room {
+public class Room implements Serializable {
     private String rid;
     private User currentUser, targetUser;
     private String lastMessContent;

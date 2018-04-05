@@ -57,8 +57,9 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
             });
             holder.tvMessageContent.setText(room.getLastMessContent());
         }
+        holder.civProfileImage.setTransitionName(mContext.getResources().getString(R.string.target_user_avatar_transiton) + String.valueOf(position));
         holder.mLayoutContainer.setOnClickListener(v -> {
-            callback.onClick(room, holder.civProfileImage);
+            callback.onClick(room, position, holder.civProfileImage);
         });
 
 
@@ -69,7 +70,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
     }
 
     public interface onChatMessageClick{
-        void onClick(Object o, View view);
+        void onClick(Object o,int position, View view);
     }
 
     @Override
