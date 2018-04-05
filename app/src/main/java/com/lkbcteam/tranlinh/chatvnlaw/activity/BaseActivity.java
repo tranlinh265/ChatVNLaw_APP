@@ -178,7 +178,7 @@ public abstract class BaseActivity extends AppCompatActivity{
             if (current != null && fragment != null && current.getClass().getSimpleName().contentEquals(fragment.getClass().getSimpleName())){
                 return;
             }
-            baseContainerFragment.replaceFragment(fragment,addToBackStack);
+            baseContainerFragment.replaceFragment(fragment,addToBackStack,true);
         }
     }
 

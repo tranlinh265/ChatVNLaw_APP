@@ -14,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Time;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

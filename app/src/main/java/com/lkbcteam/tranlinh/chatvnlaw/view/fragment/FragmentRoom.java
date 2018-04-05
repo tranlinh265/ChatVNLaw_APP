@@ -35,7 +35,7 @@ import java.util.List;
  * Created by tranlinh on 24/03/2018.
  */
 
-public class FragmentRoom extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment implements RoomView,View.OnClickListener  {
+public class FragmentRoom extends BaseFragment implements RoomView,View.OnClickListener  {
     private RecyclerView rvChatContentContainer;
     private List<Message> mMessageList;
     private Room room;
@@ -48,14 +48,11 @@ public class FragmentRoom extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseF
     private boolean isloading = true;
     private ProgressBar pbLoading;
 
-    private View.OnClickListener mHideSoftKey = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            View currentFocus = getActivity().getCurrentFocus();
-            if (currentFocus != null) {
-                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
-            }
+    private View.OnClickListener mHideSoftKey = view -> {
+        View currentFocus = getActivity().getCurrentFocus();
+        if (currentFocus != null) {
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
         }
     };
 
@@ -75,9 +72,9 @@ public class FragmentRoom extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseF
     protected void initView(View view) {
         super.initView(view);
 
-        Slide slide = new Slide();
-        slide.setDuration(1000);
-        getBaseActivity().getWindow().setEnterTransition(slide);
+//        Slide slide = new Slide();
+//        slide.setDuration(1000);
+//        getBaseActivity().getWindow().setEnterTransition(slide);
 
         mMessageList = new ArrayList<>();
         rvChatContentContainer = view.findViewById(R.id.rv_chat_content_container);

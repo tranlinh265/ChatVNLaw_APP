@@ -43,4 +43,5 @@
     <string name="start_app_description">Tra cứu, tư vấn pháp luật trực tuyến</string>
 
     <string name="logoTransitionName">logoTransitionName</string>
+    <string name="target_user_avatar_transiton">targetUserAvatar</string>
 </resources>

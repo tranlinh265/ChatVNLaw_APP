@@ -26,7 +26,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.view.LoginView;
  * Created by tranlinh on 26/03/2018.
  */
 
-public class FragmentLogin extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment implements View.OnClickListener, LoginView{
+public class FragmentLogin extends BaseFragment implements View.OnClickListener, LoginView{
     private static final long MOVE_DEFAULT_TIME = 2000;
     private static final long FADE_DEFAULT_TIME = 1300;
     private TextView tvRegister;

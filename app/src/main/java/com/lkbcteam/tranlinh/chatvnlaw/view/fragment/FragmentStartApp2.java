@@ -32,7 +32,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
  * Created by tranlinh on 29/03/2018.
  */
 
-public class FragmentStartApp2 extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment {
+public class FragmentStartApp2 extends BaseFragment {
     private static final long MOVE_DEFAULT_TIME = 2000;
     private static final long FADE_DEFAULT_TIME = 1300;
 

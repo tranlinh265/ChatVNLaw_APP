@@ -31,11 +31,20 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/default_avatar"
+            android:layout_toRightOf="@id/ibtn_back"
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_target_user_avatar"
+            android:transitionName="@string/target_user_avatar_transiton"/>
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:layout_toRightOf="@id/ibtn_back"
+            android:layout_toRightOf="@id/iv_target_user_avatar"
+            android:layout_toLeftOf="@+id/ibtn_info"
             android:layout_centerVertical="true"
             android:gravity="center"
             android:id="@+id/tv_sender_displayname"/>

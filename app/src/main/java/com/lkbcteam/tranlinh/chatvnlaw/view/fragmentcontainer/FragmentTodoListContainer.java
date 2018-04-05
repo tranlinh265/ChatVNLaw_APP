@@ -19,6 +19,6 @@ public class FragmentTodoListContainer extends BaseFragmentContainer {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        replaceFragment(FragmentTodos.newInstance(),false);
+        replaceFragment(FragmentTodos.newInstance(),false,true);
     }
 }

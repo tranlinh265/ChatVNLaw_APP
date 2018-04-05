@@ -13,7 +13,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentStartApp1;
  * Created by tranlinh on 26/01/2018.
  */
 
-public class FragmentLoginContainer extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragmentContainer {
+public class FragmentLoginContainer extends BaseFragmentContainer {
     public static FragmentLoginContainer newInstance(){
         return  new FragmentLoginContainer();
     }

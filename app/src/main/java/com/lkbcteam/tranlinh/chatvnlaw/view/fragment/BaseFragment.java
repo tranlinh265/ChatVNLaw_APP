@@ -2,6 +2,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.view.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -15,52 +16,58 @@ import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.BaseFragmentContai
 
 public abstract class BaseFragment  extends Fragment {
 
-    private BaseActivity mBaseActivity;
+    private BaseActivity baseActivity;
 
     public BaseActivity getBaseActivity(){
-        return mBaseActivity;
+        return baseActivity;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof BaseActivity){
-            mBaseActivity = (BaseActivity)context;
-        } else {
-            throw new RuntimeException("Fragment must be attach to BaseActivity");
+        if( context instanceof BaseActivity){
+            baseActivity = (BaseActivity) context;
+        }else {
+            throw new RuntimeException("Fragment must be attact to BaseActivity");
         }
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
         initData(view);
     }
-    protected void initView(View view){
 
-    }
-    protected void initData(View view){
+    protected void initView(View view){}
 
-    }
+    protected void initData(View view){}
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
 
     public void startActivity(Class activity, boolean animation){
-        mBaseActivity.startActivity(activity,animation);
+        baseActivity.startActivity(activity,animation);
     }
+
     public void goNextFragment(Fragment fragment, boolean addToBackStack){
-        goNextFragment(fragment,addToBackStack,true);
-    }
-    public void goNextFragment(Fragment fragment, boolean addToBackStack, boolean anim){
-        ((BaseFragmentContainer) getParentFragment()).replaceFragment(fragment, addToBackStack,anim);
+        ((BaseFragmentContainer)getParentFragment()).replaceFragment(fragment,addToBackStack,null);
     }
 
+    public void goNextFragment(Fragment fragment, boolean addToBackStack, View sharedView){
+        ((BaseFragmentContainer)getParentFragment()).replaceFragment(fragment,addToBackStack,sharedView);
+    }
+
+    public void goNextFragment(Fragment fragment, boolean addToBackStack, boolean enterTransition){
+        ((BaseFragmentContainer)getParentFragment()).replaceFragment(fragment,addToBackStack,enterTransition);
+    }
+
+    public void goNextFragment(Fragment fragment, boolean addToBackStack, boolean enterTransition, View sharedView){
+        ((BaseFragmentContainer)getParentFragment()).replaceFragment(fragment,addToBackStack,enterTransition,sharedView);
+    }
     public void goBackFragment(){
-        ((BaseFragmentContainer) getParentFragment()).popFragment();
+        ((BaseFragmentContainer)getParentFragment()).popFragment();
     }
-
-
 }

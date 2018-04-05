@@ -22,7 +22,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
  * Created by tranlinh on 29/03/2018.
  */
 
-public class FragmentStartApp1 extends com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment {
+public class FragmentStartApp1 extends BaseFragment {
     private static final long MOVE_DEFAULT_TIME = 2000;
     private static final long FADE_DEFAULT_TIME = 1300;
 

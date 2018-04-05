@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.FileListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageListAdapter;
+
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentImageDetail;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.RoomInfoPresenter;
@@ -26,7 +28,7 @@ import java.util.List;
  * Created by tranlinh on 24/03/2018.
  */
 
-public class FragmentRoomInfo extends BaseFragment implements View.OnClickListener, RoomInfoView{
+public class FragmentRoomInfo extends BaseFragment implements View.OnClickListener, RoomInfoView, ImageListAdapter.onItemImageClick{
 
     private RecyclerView rvFileList,rvImageListLeft,rvImageListRight;
     private List<File> fileList,leftImageList,rightImageList;
@@ -92,9 +94,10 @@ public class FragmentRoomInfo extends BaseFragment implements View.OnClickListen
         rvImageListLeft.setLayoutManager(leftImagesLayoutManager);
         rvImageListRight.setLayoutManager(rightImagesLayoutManager);
 
-        leftImageListAdapter = new ImageListAdapter(getContext(),this,leftImageList);
-        rightImageListAdapter = new ImageListAdapter(getContext(), this, rightImageList);
-
+        leftImageListAdapter = new ImageListAdapter(getContext(),leftImageList);
+        leftImageListAdapter.setCallback(this);
+        rightImageListAdapter = new ImageListAdapter(getContext(), rightImageList);
+        rightImageListAdapter.setCallback(this);
         rvImageListLeft.setAdapter(leftImageListAdapter);
         rvImageListRight.setAdapter(rightImageListAdapter);
 
@@ -129,5 +132,15 @@ public class FragmentRoomInfo extends BaseFragment implements View.OnClickListen
     @Override
     public void showErrorMessage(String error) {
         Toast.makeText(getContext(),error,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onItemImageClick(Object o, int position) {
+
+    }
+
+    @Override
+    public void onItemImageClick(List<File> list, int position) {
+        goNextFragment(FragmentImageDetail.newInstance(list, position),true);
     }
 }

@@ -11,9 +11,9 @@ import android.widget.TextView;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.User;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -58,7 +58,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
             holder.tvMessageContent.setText(room.getLastMessContent());
         }
         holder.mLayoutContainer.setOnClickListener(v -> {
-            callback.onClick(room);
+            callback.onClick(room, holder.civProfileImage);
         });
 
 
@@ -69,7 +69,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
     }
 
     public interface onChatMessageClick{
-        void onClick(Object o);
+        void onClick(Object o, View view);
     }
 
     @Override

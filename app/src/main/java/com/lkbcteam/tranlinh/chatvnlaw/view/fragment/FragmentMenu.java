@@ -17,6 +17,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivitySearchLawer;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivityTodoList;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
 
 /**
  * Created by tranlinh on 31/01/2018.

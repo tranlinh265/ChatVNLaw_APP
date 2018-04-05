@@ -23,6 +23,6 @@ public class FragmentSearchLawyerContainer extends BaseFragmentContainer {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        replaceFragment(FragmentSearchLawyer.newInstance(),false);
+        replaceFragment(FragmentSearchLawyer.newInstance(),false,true);
     }
 }
