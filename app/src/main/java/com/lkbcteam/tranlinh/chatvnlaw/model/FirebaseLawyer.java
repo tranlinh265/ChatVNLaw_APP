@@ -4,7 +4,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.model;
  * Created by tranlinh on 08/03/2018.
  */
 
-public class FirebaseLawyer {
+public class  FirebaseLawyer {
     private String achievement,birthday,cardNumber,category,certificate,education,exp,fullname;
     private String intro,phoneNumber,workPlace;
 
