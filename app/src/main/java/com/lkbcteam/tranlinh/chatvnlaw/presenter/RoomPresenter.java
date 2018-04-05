@@ -3,8 +3,6 @@ package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.HistoryMessageInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.IncomingMessageInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
-import com.lkbcteam.tranlinh.chatvnlaw.model.listener.LoadRoomMessageListener;
-import com.lkbcteam.tranlinh.chatvnlaw.view.RoomView;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -13,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * Created by tranlinh on 24/03/2018.
  */
 
-public class RoomPresenter implements LoadRoomMessageListener.HistoryMessage, LoadRoomMessageListener.IncomingMessage {
+public class RoomPresenter implements HistoryMessageInterator.HistoryMessage, IncomingMessageInterator.IncomingMessage {
     private static int LIMIT_MESSAGE = 10;
 
     private IncomingMessageInterator incomingMessageInterator;
@@ -101,5 +99,15 @@ public class RoomPresenter implements LoadRoomMessageListener.HistoryMessage, Lo
     @Override
     public void onLoadFalure(String error) {
         roomView.showError(error);
+    }
+
+    /**
+     * Created by tranlinh on 24/03/2018.
+     */
+
+    public static interface RoomView {
+        void notifyMessageAdded(int position);
+        void notifyListMessage(boolean scrollToLast);
+        void showError(String error);
     }
 }

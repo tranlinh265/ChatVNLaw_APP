@@ -3,16 +3,14 @@ package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 import com.google.firebase.auth.FirebaseUser;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.BaseActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.AccountInterator;
-import com.lkbcteam.tranlinh.chatvnlaw.model.listener.AccountListener;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 import com.lkbcteam.tranlinh.chatvnlaw.other.notification.DeviceToken;
-import com.lkbcteam.tranlinh.chatvnlaw.view.RegisterView;
 
 /**
  * Created by tranlinh on 26/03/2018.
  */
 
-public class RegisterPresenter implements AccountListener.Signup {
+public class RegisterPresenter implements AccountInterator.AccountListener.Signup {
 
     private RegisterView registerView;
     private AccountInterator accountInterator;
@@ -76,5 +74,14 @@ public class RegisterPresenter implements AccountListener.Signup {
 
     public void setBaseActivity(BaseActivity baseActivity) {
         this.baseActivity = baseActivity;
+    }
+
+    /**
+     * Created by tranlinh on 26/03/2018.
+     */
+
+    public static interface RegisterView {
+        void registerSuccess();
+        void registerFalure(String error);
     }
 }

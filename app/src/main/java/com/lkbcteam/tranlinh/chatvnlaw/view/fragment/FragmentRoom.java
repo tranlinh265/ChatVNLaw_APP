@@ -9,7 +9,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
-import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +21,9 @@ import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ChatContentAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.RoomPresenter;
-import com.lkbcteam.tranlinh.chatvnlaw.view.RoomView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +32,7 @@ import java.util.List;
  * Created by tranlinh on 24/03/2018.
  */
 
-public class FragmentRoom extends BaseFragment implements RoomView,View.OnClickListener  {
+public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView,View.OnClickListener  {
     private RecyclerView rvChatContentContainer;
     private List<Message> mMessageList;
     private Room room;

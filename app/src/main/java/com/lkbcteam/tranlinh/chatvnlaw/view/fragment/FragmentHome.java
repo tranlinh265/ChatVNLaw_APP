@@ -7,10 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.ChangeBounds;
-import android.transition.Fade;
 import android.transition.Slide;
-import android.transition.TransitionInflater;
-import android.transition.TransitionSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +17,8 @@ import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.RoomListAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.HomePresenter;
-import com.lkbcteam.tranlinh.chatvnlaw.view.HomeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +27,7 @@ import java.util.List;
  * Created by tranlinh on 24/03/2018.
  */
 
-public class FragmentHome extends BaseFragment implements HomeView, View.OnClickListener,RoomListAdapter.onChatMessageClick {
+public class FragmentHome extends BaseFragment implements HomePresenter.HomeView, View.OnClickListener,RoomListAdapter.onChatMessageClick {
     private static final long MOVE_DEFAULT_TIME = 2000;
     private static final long FADE_DEFAULT_TIME = 1300;
     private RecyclerView rvRoomList;

@@ -8,7 +8,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.lkbcteam.tranlinh.chatvnlaw.model.listener.AccountListener;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.APIService;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.ApiUtils;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.LoginResponse;
@@ -142,5 +141,25 @@ public class AccountInterator {
         result += "." + String.valueOf(System.currentTimeMillis());
         Log.e("123", "getUsername: " +result );
         return result;
+    }
+
+    /**
+     * Created by tranlinh on 26/03/2018.
+     */
+
+    public static interface AccountListener {
+        interface Login{
+            void onRailLoginSuccess(String userToken);
+            void onRailLoginFalure();
+            void onFirebaseLoginSuccess(String email, String password);
+            void onFirebaseLoginFalure();
+        }
+
+        interface Signup{
+            void onRailSignupSuccess(String userToken);
+            void onRailSignupFalure();
+            void onFirebaseSignupSuccess(String email, String password, String passwordConfirm, String displayName);
+            void onFirebaseSignupFalure();
+        }
     }
 }

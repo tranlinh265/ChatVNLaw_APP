@@ -11,7 +11,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
-import com.lkbcteam.tranlinh.chatvnlaw.model.listener.LoadRoomListListener;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 
 /**
@@ -59,5 +58,14 @@ public class RoomListInterator {
                 loadRoomListListener.onLoadRoomListFalure(databaseError.getMessage());
             }
         });
+    }
+
+    /**
+     * Created by tranlinh on 24/03/2018.
+     */
+
+    public static interface LoadRoomListListener {
+        void onLoadRoomListSuccess(Room room);
+        void onLoadRoomListFalure(String error);
     }
 }

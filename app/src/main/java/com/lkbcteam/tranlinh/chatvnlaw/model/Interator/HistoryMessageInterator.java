@@ -9,7 +9,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
-import com.lkbcteam.tranlinh.chatvnlaw.model.listener.LoadRoomMessageListener;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 
 import java.util.ArrayList;
@@ -21,11 +20,11 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class HistoryMessageInterator {
-    private LoadRoomMessageListener.HistoryMessage historyMessageListener;
+    private HistoryMessage historyMessageListener;
     private FirebaseDatabase database;
     private FirebaseUser currentUser;
 
-    public HistoryMessageInterator(LoadRoomMessageListener.HistoryMessage historyMessageListener){
+    public HistoryMessageInterator(HistoryMessage historyMessageListener){
         this.historyMessageListener = historyMessageListener;
         database = FirebaseDatabase.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -72,6 +71,11 @@ public class HistoryMessageInterator {
                         historyMessageListener.onLoadFalure(databaseError.getMessage());
                     }
                 });
+    }
+
+    public interface HistoryMessage{
+        void onLoadSuccess(List<Message> historyList);
+        void onLoadFalure(String error);
     }
 }
 

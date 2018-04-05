@@ -12,15 +12,13 @@ import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.RegisterPresenter;
-import com.lkbcteam.tranlinh.chatvnlaw.view.RegisterView;
 
 /**
  * Created by tranlinh on 26/03/2018.
  */
 
-public class FragmentRegister extends BaseFragment implements View.OnClickListener, RegisterView{
+public class FragmentRegister extends BaseFragment implements View.OnClickListener, RegisterPresenter.RegisterView {
 
     private ImageButton ibtnBackToLogin;
     private EditText edtEmail, edtPassword, edtPasswordConfirm, edtDisplayname;

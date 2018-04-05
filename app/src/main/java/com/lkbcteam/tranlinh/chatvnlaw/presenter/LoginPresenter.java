@@ -1,23 +1,20 @@
 package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseUser;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.BaseActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.AccountInterator;
-import com.lkbcteam.tranlinh.chatvnlaw.model.listener.AccountListener;
-import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 import com.lkbcteam.tranlinh.chatvnlaw.other.notification.DeviceToken;
-import com.lkbcteam.tranlinh.chatvnlaw.view.LoginView;
 
 /**
  * Created by tranlinh on 26/03/2018.
  */
 
-public class LoginPresenter implements AccountListener.Login {
+public class LoginPresenter implements AccountInterator.AccountListener.Login {
     private LoginView loginView;
     private AccountInterator accountInterator;
     private BaseActivity baseActivity;
@@ -94,5 +91,14 @@ public class LoginPresenter implements AccountListener.Login {
     @Override
     public void onFirebaseLoginFalure() {
         loginView.loginFalure("Authentication firebase failed");
+    }
+
+    /**
+     * Created by tranlinh on 26/03/2018.
+     */
+
+    public static interface LoginView {
+        void loginSucess();
+        void loginFalure(String error);
     }
 }

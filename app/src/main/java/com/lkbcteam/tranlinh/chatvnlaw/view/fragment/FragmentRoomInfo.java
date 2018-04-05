@@ -15,11 +15,9 @@ import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.FileListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageListAdapter;
 
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentImageDetail;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.RoomInfoPresenter;
-import com.lkbcteam.tranlinh.chatvnlaw.view.RoomInfoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +26,7 @@ import java.util.List;
  * Created by tranlinh on 24/03/2018.
  */
 
-public class FragmentRoomInfo extends BaseFragment implements View.OnClickListener, RoomInfoView, ImageListAdapter.onItemImageClick{
+public class FragmentRoomInfo extends BaseFragment implements View.OnClickListener, RoomInfoPresenter.RoomInfoView, ImageListAdapter.onItemImageClick{
 
     private RecyclerView rvFileList,rvImageListLeft,rvImageListRight;
     private List<File> fileList,leftImageList,rightImageList;

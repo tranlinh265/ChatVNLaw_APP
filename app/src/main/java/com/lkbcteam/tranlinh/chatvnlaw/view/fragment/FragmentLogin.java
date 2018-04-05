@@ -3,11 +3,6 @@ package com.lkbcteam.tranlinh.chatvnlaw.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.transition.Fade;
-import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +13,13 @@ import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.LoginPresenter;
-import com.lkbcteam.tranlinh.chatvnlaw.view.LoginView;
 
 /**
  * Created by tranlinh on 26/03/2018.
  */
 
-public class FragmentLogin extends BaseFragment implements View.OnClickListener, LoginView{
+public class FragmentLogin extends BaseFragment implements View.OnClickListener, LoginPresenter.LoginView {
     private static final long MOVE_DEFAULT_TIME = 2000;
     private static final long FADE_DEFAULT_TIME = 1300;
     private TextView tvRegister;

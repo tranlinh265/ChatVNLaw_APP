@@ -9,7 +9,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.TextMessage;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.TimeStamp;
-import com.lkbcteam.tranlinh.chatvnlaw.model.listener.LoadRoomMessageListener;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 
 /**
@@ -17,11 +16,11 @@ import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
  */
 
 public class IncomingMessageInterator {
-    private LoadRoomMessageListener.IncomingMessage incomingMessage;
+    private IncomingMessage incomingMessage;
     private FirebaseUser currentUser;
     private FirebaseDatabase database;
 
-    public IncomingMessageInterator(LoadRoomMessageListener.IncomingMessage incomingMessage){
+    public IncomingMessageInterator(IncomingMessage incomingMessage){
         this.incomingMessage = incomingMessage;
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
@@ -67,5 +66,10 @@ public class IncomingMessageInterator {
                         incomingMessage.onLoadFalure(databaseError.getMessage());
                     }
                 });
+    }
+
+    public interface IncomingMessage{
+        void onLoadSuccess(Message message);
+        void onLoadFalure(String error);
     }
 }

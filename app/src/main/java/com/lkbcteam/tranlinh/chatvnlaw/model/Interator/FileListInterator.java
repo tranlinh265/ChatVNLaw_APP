@@ -9,7 +9,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
-import com.lkbcteam.tranlinh.chatvnlaw.model.listener.LoadFileListListener;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 
 /**
@@ -65,4 +64,13 @@ public class FileListInterator {
             loadFileListListener.onLoadFalure(databaseError.getMessage());
         }
     };
+
+    /**
+     * Created by tranlinh on 24/03/2018.
+     */
+
+    public static interface LoadFileListListener {
+        void onLoadSuccess(File file);
+        void onLoadFalure(String error);
+    }
 }
