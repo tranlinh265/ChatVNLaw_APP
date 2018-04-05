@@ -6,6 +6,11 @@
     android:layout_marginRight="10dp"
     android:layout_marginTop="5dp"
     android:background="@color/colorGrayDark">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv_sender_picture"
+        android:visibility="gone"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,15 +20,18 @@
         android:textColor="@color/colorGrayLight"
         android:id="@+id/tv_text_time_stamp"/>
     <RelativeLayout
+        android:id="@+id/layout_container"
         android:layout_below="@id/tv_text_time_stamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/chat_content_bg_1110"
         android:paddingLeft="15dp"
+        android:layout_alignParentRight="true"
         android:paddingTop="10dp"
         android:paddingBottom="15dp"
         android:paddingRight="15dp">
         <TextView
+            android:id="@+id/tv_text_content"
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
