@@ -61,7 +61,6 @@ public class HistoryMessageInterator {
                                 }
                             }
                             historyList.add(message);
-                            Log.e("messid", "onDataChange: " + ds.getKey());
                         }
                         historyMessageListener.onLoadSuccess(historyList);
                     }

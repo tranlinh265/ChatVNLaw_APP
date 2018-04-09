@@ -43,6 +43,11 @@ public class IncomingMessageInterator {
                         Message message = new Message();
                         message.setmMessageInfo(info);
                         message.setmMessageId(dataSnapshot.getKey());
+                        if(message.getmMessageInfo().getSenderUid().equals(currentUser.getUid())){
+                            message.setIsCurrentUser(true);
+                        }else{
+                            message.setIsCurrentUser(false);
+                        }
                         incomingMessage.onLoadSuccess(message);
                     }
 

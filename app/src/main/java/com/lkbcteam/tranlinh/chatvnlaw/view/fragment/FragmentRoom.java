@@ -134,7 +134,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
             rvChatContentContainer.setVisibility(View.VISIBLE);
             roomPresenter.loadHistoryMessage(room.getRid());
             roomPresenter.loadIncomingMessage(room.getRid());
-        },3000);
+        },500);
 
     }
 
