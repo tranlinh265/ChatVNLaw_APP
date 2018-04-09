@@ -24,7 +24,7 @@ public class DownLoadFile {
     public static void DownLoadFileViaUrl(final Context context, String fileName, String url){
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference httpsReference = storage.getReferenceFromUrl(url);
-        Log.d("in", "onClick: ");
+        Log.d("in", "onChatMessageItemClicked: ");
         File outputDir = context.getCacheDir();
         try {
             final File localFile = File.createTempFile(getPrefixAndSuffix(fileName).get(0), getPrefixAndSuffix(fileName).get(1));
@@ -32,13 +32,13 @@ public class DownLoadFile {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     // Local temp file has been created
-                    Log.d(localFile.getAbsolutePath(), "onClick: ");
+                    Log.d(localFile.getAbsolutePath(), "onChatMessageItemClicked: ");
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
                     // Handle any errors
-                    Log.d("fail", "onClick: ");
+                    Log.d("fail", "onChatMessageItemClicked: ");
 
                 }
             });

@@ -31,13 +31,11 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
     private List<Message> mMessageList;
     private Context mContext;
     private View.OnClickListener mOnClickContentItem;
-    private BaseFragment mBaseFragment;
 
-    public ChatContentAdapter(Context context,BaseFragment baseFragment, List<Message> messageList, View.OnClickListener onClickContentItem) {
+    public ChatContentAdapter(Context context, List<Message> messageList, View.OnClickListener onClickContentItem) {
         mMessageList = messageList;
         mContext = context;
         mOnClickContentItem = onClickContentItem;
-        mBaseFragment = baseFragment;
     }
 
     @Override
@@ -71,7 +69,11 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        if(holder.getViewType() != -1){
+            holder.mFileUrl.setVisibility(View.GONE);
+            holder.mIvImageContent.setVisibility(View.GONE);
+            holder.mTextContent.setVisibility(View.GONE);
+        }
         final Message message = mMessageList.get(position);
         if(message != null){
             if(holder.getViewType() == -1){
@@ -85,26 +87,26 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
             }
             if(message.getmMessageInfo() != null){
                 if(message.getmMessageInfo().getContentType() != null){
-//                    holder.mTextContent.setVisibility(View.GONE);
-//                    if(message.getmMessageInfo().getContentType().contains("image/")){
-//                        holder.mIvImageContent.setVisibility(View.VISIBLE);
-//                        holder.mFileUrl.setVisibility(View.GONE);
-//                        Picasso.with(mContext).load(String.valueOf(message.getmMessageInfo().getDownloadURL())).resize(700,(700*message.getmMessageInfo().getHeight()/ message.getmMessageInfo().getWidth())).centerCrop().placeholder(R.drawable.spinning_loading_icon).into(holder.mIvImageContent);
-//
-//                    }else{
-//                        holder.mFileUrl.setVisibility(View.VISIBLE);
-//                        holder.mIvImageContent.setVisibility(View.GONE);
-//                        holder.mFileUrl.setPaintFlags(holder.mFileUrl.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-//                        holder.mFileUrl.setText(message.getmMessageInfo().getName());
-//                        holder.mFileUrl.setOnClickListener(view -> {
-////                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(message.getmMessageInfo().getDownloadURL()));
-////                            mContext.startActivity(browserIntent);
-//                            showAlertDialog(message.getmMessageInfo());
-////                            mBaseFragment.goNextFragment(FragmentFileContent.newInstance(message.getmMessageInfo().getDownloadURL(), message.getmMessageInfo().getName()),true);
-////                            DownLoadFile.DownLoadFileViaUrl(mContext,message.getmMessageInfo().getName(), message.getmMessageInfo().getDownloadURL());
-//                        });
-//
-//                    }
+                    holder.mTextContent.setVisibility(View.GONE);
+                    if(message.getmMessageInfo().getContentType().contains("image/")){
+                        holder.mIvImageContent.setVisibility(View.VISIBLE);
+                        holder.mFileUrl.setVisibility(View.GONE);
+                        Picasso.with(mContext).load(String.valueOf(message.getmMessageInfo().getDownloadURL())).resize(700,(700*message.getmMessageInfo().getHeight()/ message.getmMessageInfo().getWidth())).centerCrop().placeholder(R.drawable.spinning_loading_icon).into(holder.mIvImageContent);
+
+                    }else{
+                        holder.mFileUrl.setVisibility(View.VISIBLE);
+                        holder.mIvImageContent.setVisibility(View.GONE);
+                        holder.mFileUrl.setPaintFlags(holder.mFileUrl.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                        holder.mFileUrl.setText(message.getmMessageInfo().getName());
+                        holder.mFileUrl.setOnClickListener(view -> {
+//                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(message.getmMessageInfo().getDownloadURL()));
+//                            mContext.startActivity(browserIntent);
+                            showAlertDialog(message.getmMessageInfo());
+//                            mBaseFragment.goNextFragment(FragmentFileContent.newInstance(message.getmMessageInfo().getDownloadURL(), message.getmMessageInfo().getName()),true);
+//                            DownLoadFile.DownLoadFileViaUrl(mContext,message.getmMessageInfo().getName(), message.getmMessageInfo().getDownloadURL());
+                        });
+
+                    }
                 }else{
                     holder.mTextContent.setVisibility(View.VISIBLE);
                     holder.mTextContent.setText(message.getmMessageInfo().getContent());
@@ -189,8 +191,8 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
                 mTextContent = itemView.findViewById(R.id.tv_text_content);
                 mTextTimeStamp = itemView.findViewById(R.id.tv_text_time_stamp);
                 mIvSenderPicture = itemView.findViewById(R.id.iv_sender_picture);
-//                mFileUrl = itemView.findViewById(R.id.tv_file_url);
-//                mIvImageContent = itemView.findViewById(R.id.iv_image_content);
+                mFileUrl = itemView.findViewById(R.id.tv_file_url);
+                mIvImageContent = itemView.findViewById(R.id.iv_image_content);
             }
         }
 

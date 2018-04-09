@@ -138,6 +138,7 @@ public class AccountInterator {
         result = result.replace("/đ/g", "d");
         result = result.replace("/\\W+/g", " ");
         result = result.replace("/\\s/g", ".");
+        result = result.replace(" ",".");
         result += "." + String.valueOf(System.currentTimeMillis());
         Log.e("123", "getUsername: " +result );
         return result;

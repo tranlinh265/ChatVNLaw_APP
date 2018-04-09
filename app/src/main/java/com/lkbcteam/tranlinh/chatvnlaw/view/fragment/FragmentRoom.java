@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,7 +96,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         rvChatContentContainer = view.findViewById(R.id.rv_chat_content_container);
         mLayout = new GridLayoutManager(getContext(),1);
         rvChatContentContainer.setLayoutManager(mLayout);
-        adapter = new ChatContentAdapter(getContext(),this, mMessageList, mHideSoftKey);
+        adapter = new ChatContentAdapter(getContext(),mMessageList, mHideSoftKey);
         rvChatContentContainer.setAdapter(adapter);
         mIbtnBack = view.findViewById(R.id.ibtn_back);
         mEdtChatInput = view.findViewById(R.id.edt_chat_input);
@@ -143,6 +144,11 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
     }
 
     @Override
+    public void notifyMessageRemoved(int position) {
+        adapter.notifyItemRemoved(position);
+    }
+
+    @Override
     public void notifyListMessage(boolean scrollTolast) {
         adapter.notifyDataSetChanged();
         if(scrollTolast){
@@ -168,7 +174,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
                 break;
             case R.id.btn_send:
                 String chatContent = mEdtChatInput.getText().toString();
-                if(chatContent != null){
+                if(!TextUtils.isEmpty(chatContent)){
                     roomPresenter.sendMessage(room.getRid(), chatContent);
                     mEdtChatInput.setText(null);
                 }

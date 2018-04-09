@@ -27,13 +27,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHolder> {
     private List<Room> mRoomList;
     private Context mContext;
-    private BaseFragment mBaseFragment;
-    private onChatMessageClick callback;
+    private onClick callback;
 
-    public RoomListAdapter(Context context, BaseFragment baseFragment, List<Room> roomList){
+    public RoomListAdapter(Context context, List<Room> roomList){
         mRoomList = roomList;
         mContext = context;
-        mBaseFragment = baseFragment;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,26 +49,23 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
             holder.tvSenderDisplayName.setText(user.getDisplayName());
             Picasso.with(mContext).load(String.valueOf(user.getPhotoURL())).into(holder.civProfileImage);
             holder.ibtnCall.setOnClickListener(v -> {
-                if(mBaseFragment.getBaseActivity() instanceof HomeActivity && !user.getUid().isEmpty()){
-                    ((HomeActivity)mBaseFragment.getBaseActivity()).makeCall(user.getUid());
-                }
+                callback.onCallItemClicked(user.getUid());
             });
             holder.tvMessageContent.setText(room.getLastMessContent());
         }
         holder.civProfileImage.setTransitionName(mContext.getResources().getString(R.string.target_user_avatar_transiton) + String.valueOf(position));
         holder.mLayoutContainer.setOnClickListener(v -> {
-            callback.onClick(room, position, holder.civProfileImage);
+            callback.onChatMessageItemClicked(room, position, holder.civProfileImage);
         });
-
-
     }
 
-    public void setCallback(onChatMessageClick callback) {
+    public void setCallback(onClick callback) {
         this.callback = callback;
     }
 
-    public interface onChatMessageClick{
-        void onClick(Object o,int position, View view);
+    public interface onClick {
+        void onChatMessageItemClicked(Object o, int position, View view);
+        void onCallItemClicked(String uid);
     }
 
     @Override

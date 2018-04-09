@@ -6,11 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.ChangeBounds;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
-import android.transition.TransitionSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.RoomListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.HomePresenter;
@@ -30,7 +29,7 @@ import java.util.List;
  * Created by tranlinh on 24/03/2018.
  */
 
-public class FragmentHome extends BaseFragment implements HomePresenter.HomeView, View.OnClickListener,RoomListAdapter.onChatMessageClick {
+public class FragmentHome extends BaseFragment implements HomePresenter.HomeView, View.OnClickListener,RoomListAdapter.onClick {
     private static final long MOVE_DEFAULT_TIME = 2000;
     private static final long FADE_DEFAULT_TIME = 1300;
     private RecyclerView rvRoomList;
@@ -60,7 +59,7 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
         rvRoomList = view.findViewById(R.id.rv_messages);
         layoutManager = new GridLayoutManager(getContext(), 1);
         rvRoomList.setLayoutManager(layoutManager);
-        adapter = new RoomListAdapter(getContext(),this,roomList);
+        adapter = new RoomListAdapter(getContext(),roomList);
         adapter.setCallback(this);
         rvRoomList.setAdapter(adapter);
 
@@ -101,7 +100,7 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     }
 
     @Override
-    public void onClick(Object o, int position, View view) {
+    public void onChatMessageItemClicked(Object o, int position, View view) {
         Fragment nextFragment = FragmentRoom.newInstance((Room)o, position);
         Fragment previousFragment = getFragmentManager().findFragmentById(R.id.container_framelayout);
 
@@ -123,5 +122,10 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
         nextFragment.setEnterTransition(slideTransition);
 
         goNextFragment(nextFragment,true,view);
+    }
+
+    @Override
+    public void onCallItemClicked(String uid) {
+        ((HomeActivity)getBaseActivity()).makeCall(uid);
     }
 }

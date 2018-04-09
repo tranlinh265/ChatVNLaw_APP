@@ -98,8 +98,8 @@ public abstract class BaseActivity extends AppCompatActivity{
 //        mContentView = findViewById(R.id.fullscreen_content);
 //        mContentView.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onClick(View view) {
-//                Log.d("123", "onClick: ");
+//            public void onChatMessageItemClicked(View view) {
+//                Log.d("123", "onChatMessageItemClicked: ");
 //                View currentFocus = getCurrentFocus();
 //                if (currentFocus != null) {
 //                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);

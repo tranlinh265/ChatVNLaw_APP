@@ -31,11 +31,29 @@
         android:paddingBottom="15dp"
         android:paddingRight="15dp">
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_text_content"
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Người cho anh cảm thấy cuộc sống này anh càng phải trân trọng
 Ngày nào em cũng bên anh"/>
+        <TextView
+            android:id="@+id/tv_file_url"
+            style="@style/MessageItem.Text"
+            android:text="@string/google_url"
+            android:gravity="center"
+            android:visibility="gone"
+            android:drawableLeft="@drawable/ic_file_padding" />
+        <ImageView
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/default_avatar"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@android:color/white"
+            android:id="@+id/iv_image_content" />
+
     </RelativeLayout>
 </RelativeLayout>

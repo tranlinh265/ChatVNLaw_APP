@@ -65,6 +65,7 @@ public class RoomPresenter implements HistoryMessageInterator.HistoryMessage, In
             Message fistItem = messageList.get(0);
             if(toDay(lastItem.getmMessageInfo().getMsgTimeStamp()) == toDay(fistItem.getmMessageInfo().getMsgTimeStamp())){
                 messageList.remove(0);
+                roomView.notifyMessageRemoved(0);
             }
             for(int i = 0; i < historyList.size(); i++){
                 Message tmp = historyList.get(i);
@@ -105,8 +106,9 @@ public class RoomPresenter implements HistoryMessageInterator.HistoryMessage, In
      * Created by tranlinh on 24/03/2018.
      */
 
-    public static interface RoomView {
+    public interface RoomView {
         void notifyMessageAdded(int position);
+        void notifyMessageRemoved(int position);
         void notifyListMessage(boolean scrollToLast);
         void showError(String error);
     }

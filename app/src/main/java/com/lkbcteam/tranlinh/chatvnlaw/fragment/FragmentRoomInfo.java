@@ -107,7 +107,7 @@
 //        mRvImageListLeft.setAdapter(mLeftImageListAdapter);
 //        mIbtnBack.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onClick(View view) {
+//            public void onChatMessageItemClicked(View view) {
 //                goBackFragment();
 //            }
 //        });

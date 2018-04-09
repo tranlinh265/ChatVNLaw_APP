@@ -7,7 +7,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.other;
 public class Define {
 
     public interface RailServer{
-        String TEST_URL = "http://192.168.15.137:4000/";
+        String TEST_URL = "http://vnlawapi.datalab.vn/";
         String RELEASE_URL = "";
         boolean USE_TEST = true;
         String BASE_API_URL = USE_TEST ? TEST_URL : RELEASE_URL;
