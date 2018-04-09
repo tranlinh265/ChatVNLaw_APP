@@ -11,6 +11,7 @@
     <string name="google_url"><a href="http://www.google.com">http://www.google.com</a></string>
     <string name="url_format"><a href="%s">%s</a></string>
     <string name="current_position">%d/%d Kết quả</string>
+    <string name="date_format">%s-%s-%s</string>
     <string name="profile_name">Tên</string>
     <string name="profile_birth">Ngày sinh</string>
     <string name="profile_card_number">Số thẻ làm việc</string>
@@ -21,14 +22,14 @@
     <string name="profile_achievement">Thành tích</string>
     <string name="profile_education">Học vấn</string>
     <string name="profile_workplace">Nơi công tác</string>
-
+    <string name="edit">Thay đổi</string>
     <string name="default_notification_channel_id" translatable="false">123456_linhtm</string>
     <string name="data_type">data_type</string>
     <string name="direct_message">direct_message</string>
     <string name="data_message">message</string>
     <string name="data_title">title</string>
     <string name="data_message_id">message_id</string>
-
+    <string name="edit_success">Cập nhật thành công</string>
     <string name="specializations_hinh_su">Hình sự</string>
     <string name="specializations_so_huu_tri_tue">Sở hữu trí tuệ</string>
     <string name="specializations_hon_nhan_gia_dinh">Hôn nhân &amp; gia đình</string>
@@ -37,5 +38,10 @@
     <string name="specializations_dan_su">Dân sự</string>
     <string name="specializations_lao_dong_bao_hiem">Lao động - Bảo hiểm xã hội</string>
     <string name="specializations_doanh_nghiep">Doanh nghiệp</string>
+    <string name="notice_cant_access">Bạn không có quyền truy cập vào đây</string>
+    <string name="notice_data_not_exist">Không có dữ liệu</string>
+    <string name="start_app_description">Tra cứu, tư vấn pháp luật trực tuyến</string>
 
+    <string name="logoTransitionName">logoTransitionName</string>
+    <string name="target_user_avatar_transiton">targetUserAvatar</string>
 </resources>

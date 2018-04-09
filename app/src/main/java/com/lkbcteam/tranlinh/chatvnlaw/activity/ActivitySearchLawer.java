@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.Menu;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentSearchLawyerContainer;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.FragmentSearchLawyerContainer;
 
 /**
  * Created by tranlinh on 01/03/2018.

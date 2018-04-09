@@ -9,7 +9,8 @@ import retrofit2.Retrofit;
  */
 
 public class ApiUtils {
+
     public static APIService getService(){
-        return RetrofitClient.getClient(Define.Api.BASE_URL).create(APIService.class);
+        return RetrofitClient.getClient(Define.RailServer.BASE_API_URL).create(APIService.class);
     }
 }

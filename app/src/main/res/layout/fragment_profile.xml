@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true" android:focusableInTouchMode="true">
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@color/colorGrayDark"
@@ -13,75 +14,113 @@
             android:src="@drawable/ic_home_menu"
             android:backgroundTint="@color/colorGrayDark"/>
     </RelativeLayout>
-    <include
-        layout="@layout/home_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?android:attr/actionBarSize">
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:background="@color/colorGrayDark">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/dialog_holo_light_frame"
-            android:layout_margin="10dp"
             android:orientation="vertical">
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/square_avatar"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/square_avatar"
+                android:id="@+id/civ_user_avatar"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorBlueLight"
+                android:textStyle="bold"
+                android:id="@+id/tv_displayname" />
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorBlueLight" />
             <TextView
                 style="@style/ProfileStyle.Label"
-                android:text="@string/profile_name"/>
+                android:text="@string/profile_name"
+                android:id="@+id/tv_label_name" />
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                android:layout_below="@+id/tv_label_name"
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_name" />
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_birth"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:editable="false"
+                android:id="@+id/edt_day_of_birth"/>
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_card_number"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_card_number"/>
             <TextView
                 style="@style/ProfileStyle.Label"
-                android:text="@string/profile_certificate"/>
+                android:text="@string/profile_certificate"
+                />
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_certificate"/>
             <TextView
                 style="@style/ProfileStyle.Label"
-                android:text="@string/profile_category"/>
+                android:text="@string/profile_category"
+                />
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_category"/>
             <TextView
                 style="@style/ProfileStyle.Label"
-                android:text="@string/profile_experience"/>
+                android:text="@string/profile_experience" />
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_experience"
+                android:numeric="decimal"/>
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_intro"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_intro" />
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_achievement"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_achievement" />
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_education"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_education" />
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_workplace"/>
             <EditText
-                style="@style/ProfileStyle.Edittext" />
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_workplace" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/dialog_holo_dark_frame"
+                android:backgroundTint="@color/colorBlueLight"
+                android:text="@string/edit"
+                android:id="@+id/btn_submit"
+                android:textColor="@color/colorGrayDark"
+                android:layout_gravity="center_horizontal"
+                android:textAllCaps="false"
+                android:layout_margin="@dimen/padding_medium_10"
+                android:paddingRight="@dimen/padding_large_50"
+                android:paddingLeft="@dimen/padding_large_50"/>
         </LinearLayout>
     </ScrollView>
 </android.support.percent.PercentRelativeLayout>

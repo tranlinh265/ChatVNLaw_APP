@@ -14,9 +14,10 @@
         android:gravity="center"
         android:id="@+id/title_container">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_vnlaw"/>
+            android:layout_width="@dimen/logo_size_big"
+            android:layout_height="@dimen/logo_size_big"
+            android:src="@drawable/can_"
+            android:transitionName="@string/logoTransitionName"/>
     </RelativeLayout>
     <android.support.percent.PercentRelativeLayout
         android:id="@+id/infor_container"
@@ -53,13 +54,14 @@
                 android:background="@drawable/bg_left_corner_button"
                 android:backgroundTint="@color/colorGrayDark" />
             <EditText
-                android:text="linhtm@gmail.com"
+                android:paddingRight="20dp"
+                android:singleLine="true"
                 android:id="@+id/edt_email"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/colorGray"
                 android:background="@drawable/bg_right_corner_button"
-                android:paddingLeft="@dimen/login_layout_button_padding"
+                android:paddingLeft="10dp"
                 android:alpha=".9"
                 android:textColor="@android:color/white"/>
         </LinearLayout>
@@ -79,13 +81,15 @@
                 android:backgroundTint="@color/colorGrayDark"
                 android:background="@drawable/bg_left_corner_button" />
             <EditText
-                android:text="123456"
+                android:paddingRight="20dp"
+                android:singleLine="true"
+                android:password="true"
                 android:id="@+id/edt_password"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/colorGray"
                 android:background="@drawable/bg_right_corner_button"
-                android:paddingLeft="@dimen/login_layout_button_padding"
+                android:paddingLeft="10dp"
                 android:alpha=".9"
                 android:textColor="@android:color/white"/>
         </LinearLayout>

@@ -1,16 +1,13 @@
 package com.lkbcteam.tranlinh.chatvnlaw.fragment;
 
 import android.app.SearchManager;
-import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +28,8 @@ import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.LawyerNameResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.SearchLawyerResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.APIService;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.ApiUtils;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentMenu;
 import com.yuyakaido.android.cardstackview.CardStackView;
 import com.yuyakaido.android.cardstackview.SwipeDirection;
 

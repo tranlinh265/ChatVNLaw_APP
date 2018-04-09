@@ -12,6 +12,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 
 /**
  * Created by tranlinh on 01/02/2018.

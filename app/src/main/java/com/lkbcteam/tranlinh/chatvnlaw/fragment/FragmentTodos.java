@@ -3,11 +3,8 @@ package com.lkbcteam.tranlinh.chatvnlaw.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +18,8 @@ import com.lkbcteam.tranlinh.chatvnlaw.adapter.TodoListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.TodoItem;
 import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.TodoList;
 import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataLoadingFinish;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +39,7 @@ public class FragmentTodos extends BaseFragment implements View.OnClickListener{
     private TodoListAdapter adapter;
     private RecyclerView rvTodoList;
     private TextView tvTitle;
+    private TextView tvDataNotExist;
 
     public static FragmentTodos newInstance() {
         return new FragmentTodos();
@@ -65,6 +65,7 @@ public class FragmentTodos extends BaseFragment implements View.OnClickListener{
         rvTodoList = view.findViewById(R.id.rv_todo_list);
         tvTitle = view.findViewById(R.id.tv_fragment_title);
         tvTitle.setText(TITLE);
+        tvDataNotExist = view.findViewById(R.id.tv_data_not_exist);
     }
 
     @Override
@@ -86,6 +87,7 @@ public class FragmentTodos extends BaseFragment implements View.OnClickListener{
             @Override
             public void onSuccess(Object o) {
                 progressBar.setVisibility(View.GONE);
+                tvDataNotExist.setVisibility(View.GONE);
                 rvTodoList.setVisibility(View.VISIBLE);
                 TodoItem item = (TodoItem)o;
                 if(todos.size() == 0){
@@ -142,7 +144,14 @@ public class FragmentTodos extends BaseFragment implements View.OnClickListener{
 
             @Override
             public void onFail() {
+                progressBar.setVisibility(View.GONE);
+                tvDataNotExist.setVisibility(View.VISIBLE);
+            }
 
+            @Override
+            public void onDataNotExist() {
+                progressBar.setVisibility(View.GONE);
+                tvDataNotExist.setVisibility(View.VISIBLE);
             }
         });
     }

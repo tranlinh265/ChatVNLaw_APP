@@ -1,30 +1,20 @@
 package com.lkbcteam.tranlinh.chatvnlaw.activity;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragmentContainer;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
-
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.BaseFragmentContainer;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 
 
 /**
@@ -108,8 +98,8 @@ public abstract class BaseActivity extends AppCompatActivity{
 //        mContentView = findViewById(R.id.fullscreen_content);
 //        mContentView.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onClick(View view) {
-//                Log.d("123", "onClick: ");
+//            public void onChatMessageItemClicked(View view) {
+//                Log.d("123", "onChatMessageItemClicked: ");
 //                View currentFocus = getCurrentFocus();
 //                if (currentFocus != null) {
 //                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -188,7 +178,7 @@ public abstract class BaseActivity extends AppCompatActivity{
             if (current != null && fragment != null && current.getClass().getSimpleName().contentEquals(fragment.getClass().getSimpleName())){
                 return;
             }
-            baseContainerFragment.replaceFragment(fragment,addToBackStack);
+            baseContainerFragment.replaceFragment(fragment,addToBackStack,true);
         }
     }
 

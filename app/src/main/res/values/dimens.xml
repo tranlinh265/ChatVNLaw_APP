@@ -19,4 +19,14 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="profile_width">75dp</dimen>
     <dimen name="profile_height">75dp</dimen>
+
+    <!--padding-->
+    <dimen name="padding_medium_10">10dp</dimen>
+    <dimen name="padding_large_50">50dp</dimen>
+    <!--size-->
+    <dimen name="line_size_tiny">1dp</dimen>
+    <dimen name="default_call_button_size">60dp</dimen>
+    <dimen name="logo_size">90dp</dimen>
+    <dimen name="logo_size_big">150dp</dimen>
+    <dimen name="start_app_text_size">20sp</dimen>
 </resources>

@@ -7,4 +7,5 @@ package com.lkbcteam.tranlinh.chatvnlaw.other;
 public interface OnDataLoadingFinish {
     public void onSuccess(Object o);
     public void onFail();
+    public void onDataNotExist();
 }

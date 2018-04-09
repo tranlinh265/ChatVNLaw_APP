@@ -8,12 +8,11 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
+import com.google.firebase.database.ValueEventListener;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 import com.lkbcteam.tranlinh.chatvnlaw.model.TodoItem;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.OnDataLoadingFinish;
-
-import java.util.List;
 
 /**
  * Created by tranlinh on 05/03/2018.
@@ -32,13 +31,32 @@ public class TodoList {
     }
 
     public void loadTodoList(final OnDataLoadingFinish callback){
+
+        database.getReference().child(Define.Table.TABLE_TASKS).child(mCurrentUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
+                    callback.onDataNotExist();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         database.getReference().child(Define.Table.TABLE_TASKS).child(mCurrentUser.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    TodoItem item = snapshot.getValue(TodoItem.class);
-                    callback.onSuccess(item);
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        TodoItem item = snapshot.getValue(TodoItem.class);
+                        callback.onSuccess(item);
+                    }
+                }else{
+                    callback.onFail();
                 }
+
             }
 
             @Override
@@ -58,8 +76,10 @@ public class TodoList {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Log.e(databaseError.getMessage(), "onCancelled: " );
+                callback.onFail();
             }
+
         });
     }
 }

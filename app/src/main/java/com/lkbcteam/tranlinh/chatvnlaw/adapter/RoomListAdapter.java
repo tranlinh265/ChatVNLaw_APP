@@ -5,15 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
+
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.User;
-import com.lkbcteam.tranlinh.chatvnlaw.model.action.RedirectToRoomChat;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,12 +27,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHolder> {
     private List<Room> mRoomList;
     private Context mContext;
-    private BaseFragment mBaseFragment;
+    private onClick callback;
 
-    public RoomListAdapter(Context context, BaseFragment baseFragment, List<Room> roomList){
+    public RoomListAdapter(Context context, List<Room> roomList){
         mRoomList = roomList;
         mContext = context;
-        mBaseFragment = baseFragment;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -45,14 +44,28 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Room room = mRoomList.get(position);
-        User user = room.getTargetUser();
+        final User user = room.getTargetUser();
         if(user != null){
             holder.tvSenderDisplayName.setText(user.getDisplayName());
-//            new DownloadImageTask((ImageView) holder.civProfileImage).execute(String.valueOf(user.getPhotoURL()));
             Picasso.with(mContext).load(String.valueOf(user.getPhotoURL())).into(holder.civProfileImage);
-            holder.mLayoutContainer.setOnClickListener(new RedirectToRoomChat(mBaseFragment,room));
+            holder.ibtnCall.setOnClickListener(v -> {
+                callback.onCallItemClicked(user.getUid());
+            });
+            holder.tvMessageContent.setText(room.getLastMessContent());
         }
+        holder.civProfileImage.setTransitionName(mContext.getResources().getString(R.string.target_user_avatar_transiton) + String.valueOf(position));
+        holder.mLayoutContainer.setOnClickListener(v -> {
+            callback.onChatMessageItemClicked(room, position, holder.civProfileImage);
+        });
+    }
 
+    public void setCallback(onClick callback) {
+        this.callback = callback;
+    }
+
+    public interface onClick {
+        void onChatMessageItemClicked(Object o, int position, View view);
+        void onCallItemClicked(String uid);
     }
 
     @Override
@@ -63,15 +76,16 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public CircleImageView civProfileImage;
-        public TextView tvSenderDisplayName, tvMessageContent, tvMessageTime;
+        public TextView tvSenderDisplayName, tvMessageContent;
         public View mLayoutContainer;
+        public ImageButton ibtnCall;
 
         public ViewHolder(View itemView) {
             super(itemView);
             civProfileImage = itemView.findViewById(R.id.civ_profile_image);
             tvSenderDisplayName = itemView.findViewById(R.id.tv_sender);
             tvMessageContent = itemView.findViewById(R.id.tv_content);
-            tvMessageTime = itemView.findViewById(R.id.tv_time);
+            ibtnCall = itemView.findViewById(R.id.ibtn_call);
             mLayoutContainer = itemView.findViewById(R.id.message_container);
         }
     }

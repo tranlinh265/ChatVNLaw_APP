@@ -1,5 +1,7 @@
 package com.lkbcteam.tranlinh.chatvnlaw.model;
 
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.TimeStamp;
+
 /**
  * Created by tranlinh on 05/03/2018.
  */

@@ -6,6 +6,59 @@ package com.lkbcteam.tranlinh.chatvnlaw.other;
 
 public class Define {
 
+    public interface RailServer{
+        String TEST_URL = "http://vnlawapi.datalab.vn/";
+        String RELEASE_URL = "";
+        boolean USE_TEST = true;
+        String BASE_API_URL = USE_TEST ? TEST_URL : RELEASE_URL;
+        String X_API_KEY = "b1c7f840acdee887f402236e82736eba";
+
+        String API_LOGIN_URL = "api/login";
+        String API_SIGNUP_URL = "api/signup";
+        String API_LOGOUT_URL = "api/logout";
+        String API_GET_ROOM_URL = "api/rooms";
+
+        String X_API_TOKEN_KEY = "x-api-token";
+        String X_USER_TOKEN = "x-user-token";
+        String X_USER_EMAIL = "x-user-email";
+
+        interface LoginField{
+            String LOGIN = "login";
+            String EMAIL = LOGIN+"[email]";
+            String password = LOGIN+"[password]";
+        }
+
+        interface SignupField{
+            String SIGNUP = "signup";
+            String ID = SIGNUP + "[id]";
+            String EMAIL = SIGNUP + "[email]";
+            String PASSWORD = SIGNUP + "[password]";
+            String PASSWORD_CONFIRM = SIGNUP + "[password_confirmation]";
+            String DISPLAYNAME = SIGNUP + "[profile_attributes][displayName]";
+            String USERNAME = SIGNUP + "[profile_attributes][userName]";
+            String ROLE = SIGNUP + "[user_role_attributes][role_id]";
+        }
+    }
+    public interface Pubnub{
+        String SHARED_PREFS = "com.lkbcteam.tranlinh.chatvnlaw.SHARED_PREFS";
+        String USER_NAME    = "com.lkbcteam.tranlinh.chatvnlaw.USERNAME";
+        String CALL_USER    = "com.lkbcteam.tranlinh.chatvnlaw.CALLUSER";
+
+        String STDBY_SUFFIX = "-stdby";
+//      String PUB_KEY = "pub-c-41480199-8449-4c3a-a44a-d29a395ba540"; // Use Your Pub Key
+//      String SUB_KEY = "sub-c-22984fba-0c86-11e8-bb84-266dd58d78d1"; // Use Your Sub Key
+
+//        String PUB_KEY = "pub-c-daeb24b3-d3b6-459e-b376-e217c45078f4"; // Use Your Pub Key
+//        String SUB_KEY = "sub-c-696c546a-16b1-11e8-bb84-266dd58d78d1"; // Use Your Sub Key
+        String PUB_KEY = "pub-c-9d0d75a5-38db-404f-ac2a-884e18b041d8"; // Use Your Pub Key
+        String SUB_KEY = "sub-c-4e25fb64-37c7-11e5-a477-0619f8945a4f"; // Use Your Sub Key
+        String JSON_CALL_USER = "call_user";
+        String CAMERA_MODE = "camera_mode";
+        String CAMERA_MODE_FRONT = "camera_front";
+        String CAMERA_MODE_BACK = "camera_back";
+        String LOG_TAG = "idk";
+        String DIALED = "dialed";
+    }
     public interface Api{
         String BASE_URL = "http://vnlawapi.datalab.vn";
         String SEARCH_LAWYER = "/api/search/lawyers";
@@ -62,6 +115,7 @@ public class Define {
          String TOKEN = "deviceToken";
     }
     public interface  Room{
+        String MESSAGES = "messages";
          String ROOM_ID = "rid";
          String UN_READ_MESSAGE = "unReadMessage";
          String DESCRIPTION = "description";
@@ -82,9 +136,11 @@ public class Define {
          String SENDERID = "senderUid";
          String CONTENT = "content";
          String TAGS = "tags";
+         String INFO = "info";
     }
 
     public interface  UnreadMessage {
+        String CONTENT = "content";
          String COUNT = "count";
          String LASTMESSAGE = "lastMessage";
          String TIMESTAMP = "msgTimeStamp";

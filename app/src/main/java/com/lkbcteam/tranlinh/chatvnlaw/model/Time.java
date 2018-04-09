@@ -7,6 +7,14 @@ package com.lkbcteam.tranlinh.chatvnlaw.model;
 public class Time {
     private String day,month,year, hour,minute,second;
 
+    public Time(){
+
+    }
+    public Time(String day,String month, String year){
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
     public String getDay() {
         return day;
     }

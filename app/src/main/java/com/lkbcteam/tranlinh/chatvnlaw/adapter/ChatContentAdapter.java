@@ -7,10 +7,7 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
-import android.util.Log;
+import android.util.TimeUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentFileContent;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
-import com.lkbcteam.tranlinh.chatvnlaw.model.action.DownLoadFile;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
+import com.lkbcteam.tranlinh.chatvnlaw.model.Time;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by tranlinh on 29/01/2018.
@@ -35,17 +31,18 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
     private List<Message> mMessageList;
     private Context mContext;
     private View.OnClickListener mOnClickContentItem;
-    private BaseFragment mBaseFragment;
 
-    public ChatContentAdapter(Context context,BaseFragment baseFragment, List<Message> messageList, View.OnClickListener onClickContentItem) {
+    public ChatContentAdapter(Context context, List<Message> messageList, View.OnClickListener onClickContentItem) {
         mMessageList = messageList;
         mContext = context;
         mOnClickContentItem = onClickContentItem;
-        mBaseFragment = baseFragment;
     }
 
     @Override
     public int getItemViewType(int position) {
+        if (mMessageList.get(position).getmMessageId() == null){
+            return -1;
+        }
         if(mMessageList.get(position).getIsCurrentUser()){
             return 0;
         }
@@ -56,22 +53,35 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = null;
         switch (viewType){
+            case -1:
+                v =LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_time,parent,false);
+                break;
             case 0:
-                v =LayoutInflater.from(parent.getContext()).inflate(R.layout.item_receiver_messages,parent,false);
+                v =LayoutInflater.from(parent.getContext()).inflate(R.layout.item_receiver_messages_new_design,parent,false);
                 break;
             case 2:
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sender_messages,parent,false);
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sender_messages_new_design,parent,false);
                 break;
         }
-        ViewHolder vh = new ViewHolder(v);
+        ViewHolder vh = new ViewHolder(v,viewType);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mLayoutContainer.setOnClickListener(this.mOnClickContentItem);
+        if(holder.getViewType() != -1){
+            holder.mFileUrl.setVisibility(View.GONE);
+            holder.mIvImageContent.setVisibility(View.GONE);
+            holder.mTextContent.setVisibility(View.GONE);
+        }
         final Message message = mMessageList.get(position);
         if(message != null){
+            if(holder.getViewType() == -1){
+                Time time = message.getmMessageInfo().getTime();
+                holder.tvTimeDay.setText(String.format(mContext.getString(R.string.date_format),time.getDay(),time.getMonth(),time.getYear()));
+                return;
+            }
+            holder.mLayoutContainer.setOnClickListener(this.mOnClickContentItem);
             if(message.getmSenderUser() != null){
                 Picasso.with(mContext).load(String.valueOf(message.getmSenderUser().getPhotoURL())).resize(50,50).centerCrop().into(holder.mIvSenderPicture);
             }
@@ -88,26 +98,57 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
                         holder.mIvImageContent.setVisibility(View.GONE);
                         holder.mFileUrl.setPaintFlags(holder.mFileUrl.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                         holder.mFileUrl.setText(message.getmMessageInfo().getName());
-                        holder.mFileUrl.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
+                        holder.mFileUrl.setOnClickListener(view -> {
 //                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(message.getmMessageInfo().getDownloadURL()));
 //                            mContext.startActivity(browserIntent);
-                                showAlertDialog(message.getmMessageInfo());
+                            showAlertDialog(message.getmMessageInfo());
 //                            mBaseFragment.goNextFragment(FragmentFileContent.newInstance(message.getmMessageInfo().getDownloadURL(), message.getmMessageInfo().getName()),true);
 //                            DownLoadFile.DownLoadFileViaUrl(mContext,message.getmMessageInfo().getName(), message.getmMessageInfo().getDownloadURL());
-                            }
                         });
 
                     }
                 }else{
                     holder.mTextContent.setVisibility(View.VISIBLE);
                     holder.mTextContent.setText(message.getmMessageInfo().getContent());
-                    holder.mFileUrl.setVisibility(View.GONE);
-                    holder.mIvImageContent.setVisibility(View.GONE);
+//                    holder.mFileUrl.setVisibility(View.GONE);
+//                    holder.mIvImageContent.setVisibility(View.GONE);
 
                 }
-                holder.mTextTimeStamp.setText(message.getmMessageInfo().getMsgTimeStamp());
+                Time time = message.getmMessageInfo().getTime();
+                String str = time.getHour()+":"+time.getMinute();
+
+                if(holder.getViewType() == 2){
+                    if(message.getmSenderUser() != null){
+                        str = message.getmSenderUser().getDisplayName()+ "," + str;
+                    }
+                }
+                holder.mTextTimeStamp.setText(str);
+
+                if (position == 0) {
+                    if (holder.getViewType() ==2)
+                        holder.mIvSenderPicture.setVisibility(View.VISIBLE);
+                    return;
+                }
+                if (holder.getViewType() == 0 && mMessageList.get(position -1).getIsCurrentUser()){
+                    int duration = (int) (TimeUnit.MILLISECONDS.toMinutes(Long.parseLong(message.getmMessageInfo().getMsgTimeStamp())) -
+                                                TimeUnit.MILLISECONDS.toMinutes(Long.parseLong(mMessageList.get(position -1).getmMessageInfo().getMsgTimeStamp())));
+                    if(duration <= 5){
+                        holder.mTextTimeStamp.setVisibility(View.GONE);
+                        holder.mLayoutContainer.setBackgroundResource(R.drawable.chat_content_bg_1010);
+                    }
+
+                    return;
+                }
+                if (holder.getViewType() == 2 && !mMessageList.get(position -1).getIsCurrentUser()){
+                    int duration = (int) (TimeUnit.MILLISECONDS.toMinutes(Long.parseLong(message.getmMessageInfo().getMsgTimeStamp())) -
+                            TimeUnit.MILLISECONDS.toMinutes(Long.parseLong(mMessageList.get(position -1).getmMessageInfo().getMsgTimeStamp())));
+                    if(duration <= 5){
+                        holder.mIvSenderPicture.setVisibility(View.INVISIBLE);
+                        holder.mTextTimeStamp.setVisibility(View.GONE);
+                        holder.mLayoutContainer.setBackgroundResource(R.drawable.chat_content_bg_0101);
+                    }
+                    return;
+                }
             }
         }
     }
@@ -117,19 +158,11 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
         builder.setTitle(info.getName());
         builder.setCancelable(true);
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.setPositiveButton("Download", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(info.getDownloadURL()));
-                mContext.startActivity(browserIntent);
-            }
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.setPositiveButton("Download", (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(info.getDownloadURL()));
+            mContext.startActivity(browserIntent);
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -145,15 +178,30 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
         private View mLayoutContainer;
         private TextView mTextContent, mTextTimeStamp, mFileUrl;
         private ImageView mIvSenderPicture, mIvImageContent;
+        private TextView tvTimeDay;
+        private int viewType;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, int viewType) {
             super(itemView);
-            mLayoutContainer = itemView.findViewById(R.id.layout_container);
-            mTextContent = itemView.findViewById(R.id.tv_text_content);
-            mTextTimeStamp = itemView.findViewById(R.id.tv_text_time_stamp);
-            mIvSenderPicture = itemView.findViewById(R.id.iv_sender_picture);
-            mFileUrl = itemView.findViewById(R.id.tv_file_url);
-            mIvImageContent = itemView.findViewById(R.id.iv_image_content);
+            setViewType(viewType);
+            if(viewType == -1){
+                tvTimeDay = itemView.findViewById(R.id.tv_time_day);
+            }else{
+                mLayoutContainer = itemView.findViewById(R.id.layout_container);
+                mTextContent = itemView.findViewById(R.id.tv_text_content);
+                mTextTimeStamp = itemView.findViewById(R.id.tv_text_time_stamp);
+                mIvSenderPicture = itemView.findViewById(R.id.iv_sender_picture);
+                mFileUrl = itemView.findViewById(R.id.tv_file_url);
+                mIvImageContent = itemView.findViewById(R.id.iv_image_content);
+            }
+        }
+
+        public int getViewType() {
+            return viewType;
+        }
+
+        public void setViewType(int viewType) {
+            this.viewType = viewType;
         }
     }
 }

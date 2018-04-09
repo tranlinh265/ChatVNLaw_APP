@@ -8,10 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.BaseFragment;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentImageDetail;
-import com.lkbcteam.tranlinh.chatvnlaw.model.File;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Message;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -24,11 +21,11 @@ public class ImageListAdapter extends RecyclerView.Adapter <ImageListAdapter.Vie
 
     private List<File> mImageList, allImages;
     private Context mContext;
-    private BaseFragment mBaseFragment;
     private int added = 0;
-    public ImageListAdapter(Context context, BaseFragment baseFragment, List<File> imageList){
+    private onItemImageClick callback;
+
+    public ImageListAdapter(Context context, List<File> imageList){
         mContext = context;
-        mBaseFragment = baseFragment;
         mImageList = imageList;
     }
 
@@ -46,7 +43,7 @@ public class ImageListAdapter extends RecyclerView.Adapter <ImageListAdapter.Vie
         holder.ivImageShared.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mBaseFragment.goNextFragment(FragmentImageDetail.newInstance(allImages, position*2 + added),true);
+                callback.onItemImageClick(allImages, position*2+added);
             }
         });
     }
@@ -69,11 +66,20 @@ public class ImageListAdapter extends RecyclerView.Adapter <ImageListAdapter.Vie
         this.added = added;
     }
 
+    public void setCallback(onItemImageClick callback) {
+        this.callback = callback;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView ivImageShared;
         public ViewHolder(View itemView) {
             super(itemView);
             ivImageShared = itemView.findViewById(R.id.iv_image_shared);
         }
+    }
+
+    public interface onItemImageClick{
+        void onItemImageClick(Object o, int position);
+        void onItemImageClick(List<File> list, int position);
     }
 }

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentTodoListContainer;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.FragmentTodoListContainer;
 
 /**
  * Created by tranlinh on 05/03/2018.
