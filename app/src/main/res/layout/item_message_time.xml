@@ -17,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_time_day"
+        android:textColor="@android:color/white"
         android:paddingLeft="@dimen/padding_medium_10"
         android:paddingRight="@dimen/padding_medium_10"/>
     <View

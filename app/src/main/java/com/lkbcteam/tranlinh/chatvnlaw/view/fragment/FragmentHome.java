@@ -104,24 +104,13 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
         Fragment nextFragment = FragmentRoom.newInstance((Room)o, position);
         Fragment previousFragment = getFragmentManager().findFragmentById(R.id.container_framelayout);
 
-        // 1. Exit for Previous Fragment
-        Slide exitFade = new Slide(Gravity.LEFT);
-        exitFade.setDuration(FADE_DEFAULT_TIME);
-        previousFragment.setExitTransition(exitFade);
-
         Transition sharedElementEnterTransition = TransitionInflater.from(getContext()).inflateTransition(R.transition.default_transition);
         sharedElementEnterTransition.setDuration(FADE_DEFAULT_TIME);
 
         previousFragment.setSharedElementReturnTransition(sharedElementEnterTransition);
         nextFragment.setSharedElementEnterTransition(sharedElementEnterTransition);
 
-        // 3. Enter Transition for New Fragment
-        Slide slideTransition = new Slide(Gravity.RIGHT);
-
-        slideTransition.setDuration(FADE_DEFAULT_TIME);
-        nextFragment.setEnterTransition(slideTransition);
-
-        goNextFragment(nextFragment,true,view);
+        goNextFragment(nextFragment,true,true,view);
     }
 
     @Override

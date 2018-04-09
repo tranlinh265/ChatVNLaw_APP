@@ -40,7 +40,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
     private List<Message> mMessageList;
     private Room room;
     private EditText mEdtChatInput;
-    private Button mBtnSend;
+    private ImageButton mBtnSend;
     private RoomPresenter roomPresenter;
     private ChatContentAdapter adapter;
     private RecyclerView.LayoutManager mLayout;
@@ -180,7 +180,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
                 }
                 break;
             case R.id.ibtn_info:
-                goNextFragment(FragmentRoomInfo.newInstance(room),true);
+                goNextFragment(FragmentRoomInfo.newInstance(room),true,true);
                 break;
         }
     }
