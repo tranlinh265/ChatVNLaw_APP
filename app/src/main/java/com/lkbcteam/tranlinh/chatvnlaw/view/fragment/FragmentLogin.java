@@ -20,8 +20,6 @@ import com.lkbcteam.tranlinh.chatvnlaw.presenter.LoginPresenter;
  */
 
 public class FragmentLogin extends BaseFragment implements View.OnClickListener, LoginPresenter.LoginView {
-    private static final long MOVE_DEFAULT_TIME = 2000;
-    private static final long FADE_DEFAULT_TIME = 1300;
     private TextView tvRegister;
     private ImageButton ibtnLogin;
     private EditText edtEmail, edtPass;

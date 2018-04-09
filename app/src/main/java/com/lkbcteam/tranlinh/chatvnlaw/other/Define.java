@@ -16,7 +16,7 @@ public class Define {
         String API_LOGIN_URL = "api/login";
         String API_SIGNUP_URL = "api/signup";
         String API_LOGOUT_URL = "api/logout";
-        String API_GET_ROOM_URL = "api/users/{username}/rooms";
+        String API_GET_ROOM_URL = "api/rooms";
 
         String X_API_TOKEN_KEY = "x-api-token";
         String X_USER_TOKEN = "x-user-token";
@@ -34,8 +34,9 @@ public class Define {
             String EMAIL = SIGNUP + "[email]";
             String PASSWORD = SIGNUP + "[password]";
             String PASSWORD_CONFIRM = SIGNUP + "[password_confirmation]";
-            String DISPLAYNAME = SIGNUP + "[profile_attibutes][displayName]";
-            String USERNAME = SIGNUP + "[profile_attibutes][userName]";
+            String DISPLAYNAME = SIGNUP + "[profile_attributes][displayName]";
+            String USERNAME = SIGNUP + "[profile_attributes][userName]";
+            String ROLE = SIGNUP + "[user_role_attributes][role_id]";
         }
     }
     public interface Pubnub{

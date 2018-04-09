@@ -54,6 +54,10 @@
             android:background="@drawable/bg_left_corner_button"
             android:backgroundTint="@color/colorGrayDark"/>
         <EditText
+            android:singleLine="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:textColor="@android:color/white"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/colorGray"
@@ -74,6 +78,11 @@
             android:backgroundTint="@color/colorGrayDark"
             android:background="@drawable/bg_left_corner_button"/>
         <EditText
+            android:password="true"
+            android:singleLine="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:textColor="@android:color/white"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/colorGray"
@@ -94,6 +103,11 @@
             android:backgroundTint="@color/colorGrayDark"
             android:background="@drawable/bg_left_corner_button"/>
         <EditText
+            android:singleLine="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:textColor="@android:color/white"
+            android:password="true"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/colorGray"
@@ -114,6 +128,10 @@
             android:backgroundTint="@color/colorGrayDark"
             android:background="@drawable/bg_left_corner_button"/>
         <EditText
+            android:singleLine="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:textColor="@android:color/white"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/colorGray"

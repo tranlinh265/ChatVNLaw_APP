@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,9 +42,9 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
         switch (item.getType()){
             case 1:
                 if(item.getStatus() == 0){
-                    holder.civUndone.setVisibility(View.VISIBLE);
+                    holder.cbJobDone.setChecked(false);
                 }else{
-                    holder.civDone.setVisibility(View.VISIBLE);
+                    holder.cbJobDone.setChecked(true);
                 }
                 holder.llTimer.setVisibility(View.GONE);
                 holder.prlItemContainer.setVisibility(View.VISIBLE);
@@ -69,13 +70,11 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
         public LinearLayout llTimer;
         public PercentRelativeLayout prlItemContainer;
         public TextView tvTimeDay,tvHour,tvTargetUser,tvContent;
-        public CircleImageView civStatus,civDone,civUndone;
+        public CheckBox cbJobDone;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            civDone = itemView.findViewById(R.id.civ_done);
-            civUndone = itemView.findViewById(R.id.civ_undone);
-            civStatus = itemView.findViewById(R.id.civ_status);
+            cbJobDone = itemView.findViewById(R.id.cb_job_done);
             llTimer = itemView.findViewById(R.id.ll_right_layout_timer);
             prlItemContainer = itemView.findViewById(R.id.prl_right_layout_item_container);
             tvTimeDay = itemView.findViewById(R.id.tv_time_day);

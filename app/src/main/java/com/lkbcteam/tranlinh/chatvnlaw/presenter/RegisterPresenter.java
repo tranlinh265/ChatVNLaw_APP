@@ -57,8 +57,10 @@ public class RegisterPresenter implements AccountInterator.AccountListener.Signu
     }
 
     @Override
-    public void onRailSignupFalure() {
-        registerView.registerFalure("error with rail");
+    public void onRailSignupFalure(String errorMessage) {
+        FirebaseUser currentUser = getCurrentUser();
+        currentUser.delete();
+        registerView.registerFalure(errorMessage);
     }
 
     @Override

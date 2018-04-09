@@ -25,34 +25,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
             <RelativeLayout
+                android:background="@drawable/checkbox_bg"
                 android:layout_width="20dp"
                 android:layout_height="20dp">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerInParent="true"
-                    android:src="@color/colorGrayDark"
-                    app:civ_border_width="3dp"
-                    android:id="@+id/civ_status"
-                    app:civ_border_color="@android:color/white"/>
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerInParent="true"
-                    android:src="@color/colorRed"
-                    app:civ_border_width="3dp"
-                    android:id="@+id/civ_undone"
-                    android:visibility="gone"
-                    app:civ_border_color="@android:color/white"/>
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="20dp"
-                    android:id="@+id/civ_done"
-                    android:layout_height="20dp"
-                    android:layout_centerInParent="true"
-                    android:src="@color/colorReady"
-                    android:visibility="gone"
-                    app:civ_border_width="3dp"
-                    app:civ_border_color="@android:color/white"/>
+                <CheckBox
+                    android:layout_marginLeft="3dp"
+                    android:button="@drawable/checkbox_state"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cb_job_done"/>
             </RelativeLayout>
 
             <View

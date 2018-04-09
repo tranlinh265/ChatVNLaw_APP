@@ -2,6 +2,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.other.apihelper;
 
 import android.support.annotation.Nullable;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.LawyerNameResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.SearchLawyerResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.TopLawyerResponse;
@@ -39,7 +40,8 @@ public interface APIService {
         @Field(Define.RailServer.SignupField.PASSWORD) String password,
         @Field(Define.RailServer.SignupField.PASSWORD_CONFIRM) String passwordConfirm,
         @Field(Define.RailServer.SignupField.DISPLAYNAME) String displayName,
-        @Field(Define.RailServer.SignupField.USERNAME) String username
+        @Field(Define.RailServer.SignupField.USERNAME) String username,
+        @Field(Define.RailServer.SignupField.ROLE) String role
     );
 
     @FormUrlEncoded
@@ -51,7 +53,6 @@ public interface APIService {
 
     @GET(Define.RailServer.API_GET_ROOM_URL)
     Call<RoomListResponse> getRoomList(
-        @Path("username") String username,
         @Header(Define.RailServer.X_USER_TOKEN) String userToken,
         @Header(Define.RailServer.X_USER_EMAIL)String userEmail
     );

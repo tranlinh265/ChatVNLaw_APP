@@ -2,6 +2,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.model.Interator;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -82,7 +83,8 @@ public class AccountInterator {
         FirebaseUser currentUser = this.getCurrentUser();
         if(currentUser != null){
             final String username = getUsername(displayName);
-            apiService.signup(currentUser.getUid(),email,password,passConfirm,displayName, username).enqueue(new Callback<SignupResponse>() {
+            String role = "1";
+            apiService.signup(currentUser.getUid(),email,password,passConfirm,displayName, username,role).enqueue(new Callback<SignupResponse>() {
                 @Override
                 public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
                     if(response.isSuccessful()){
@@ -90,17 +92,17 @@ public class AccountInterator {
                         if(userToken != null){
                             signupCallback.onRailSignupSuccess(userToken);
                         }else{
-                            signupCallback.onRailSignupFalure();
+                            signupCallback.onRailSignupFalure("user token null");
                         }
                     }else{
-                        signupCallback.onRailSignupFalure();
+                        signupCallback.onRailSignupFalure(String.valueOf(response.code()));
                     }
                 }
 
                 @Override
                 public void onFailure(Call<SignupResponse> call, Throwable t) {
                     t.printStackTrace();
-                    signupCallback.onRailSignupFalure();
+                    signupCallback.onRailSignupFalure("error");
                 }
             });
         }
@@ -148,7 +150,7 @@ public class AccountInterator {
      * Created by tranlinh on 26/03/2018.
      */
 
-    public static interface AccountListener {
+    public interface AccountListener {
         interface Login{
             void onRailLoginSuccess(String userToken);
             void onRailLoginFalure();
@@ -158,7 +160,7 @@ public class AccountInterator {
 
         interface Signup{
             void onRailSignupSuccess(String userToken);
-            void onRailSignupFalure();
+            void onRailSignupFalure(String errorMessage);
             void onFirebaseSignupSuccess(String email, String password, String passwordConfirm, String displayName);
             void onFirebaseSignupFalure();
         }

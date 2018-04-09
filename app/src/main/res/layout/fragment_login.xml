@@ -54,13 +54,14 @@
                 android:background="@drawable/bg_left_corner_button"
                 android:backgroundTint="@color/colorGrayDark" />
             <EditText
-                android:text="linhtm@gmail.com"
+                android:paddingRight="20dp"
+                android:singleLine="true"
                 android:id="@+id/edt_email"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/colorGray"
                 android:background="@drawable/bg_right_corner_button"
-                android:paddingLeft="@dimen/login_layout_button_padding"
+                android:paddingLeft="10dp"
                 android:alpha=".9"
                 android:textColor="@android:color/white"/>
         </LinearLayout>
@@ -80,13 +81,15 @@
                 android:backgroundTint="@color/colorGrayDark"
                 android:background="@drawable/bg_left_corner_button" />
             <EditText
-                android:text="123456"
+                android:paddingRight="20dp"
+                android:singleLine="true"
+                android:password="true"
                 android:id="@+id/edt_password"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/colorGray"
                 android:background="@drawable/bg_right_corner_button"
-                android:paddingLeft="@dimen/login_layout_button_padding"
+                android:paddingLeft="10dp"
                 android:alpha=".9"
                 android:textColor="@android:color/white"/>
         </LinearLayout>

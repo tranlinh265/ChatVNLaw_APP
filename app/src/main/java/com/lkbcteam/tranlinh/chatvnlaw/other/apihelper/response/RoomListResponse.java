@@ -1,7 +1,5 @@
 package com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response;
 
-import android.support.annotation.Nullable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,7 +10,6 @@ import java.util.List;
  */
 
 public class RoomListResponse {
-    @Nullable
     @SerializedName("rooms")
     @Expose
     private List<Room> rooms = null;
@@ -25,36 +22,14 @@ public class RoomListResponse {
         this.rooms = rooms;
     }
 
-    public class Room {
+    public class Lawyer {
 
-        @SerializedName("id")
-        @Expose
-        private String id;
-        @SerializedName("lawyer_id")
-        @Expose
-        private Integer lawyerId;
         @SerializedName("user_id")
         @Expose
         private String userId;
-        @SerializedName("description")
+        @SerializedName("profile")
         @Expose
-        private String description;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public Integer getLawyerId() {
-            return lawyerId;
-        }
-
-        public void setLawyerId(Integer lawyerId) {
-            this.lawyerId = lawyerId;
-        }
+        private Profile profile;
 
         public String getUserId() {
             return userId;
@@ -64,13 +39,106 @@ public class RoomListResponse {
             this.userId = userId;
         }
 
-        public String getDescription() {
-            return description;
+        public Profile getProfile() {
+            return profile;
         }
 
-        public void setDescription(String description) {
-            this.description = description;
+        public void setProfile(Profile profile) {
+            this.profile = profile;
         }
 
     }
+
+    public class Profile {
+
+        @SerializedName("displayName")
+        @Expose
+        private String displayName;
+        @SerializedName("avatar")
+        @Expose
+        private String avatar;
+
+        public String getDisplayName() {
+            return displayName;
+        }
+
+        public void setDisplayName(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getAvatar() {
+            return avatar;
+        }
+
+        public void setAvatar(String avatar) {
+            this.avatar = avatar;
+        }
+
+    }
+
+    public class Room {
+
+        @SerializedName("id")
+        @Expose
+        private String id;
+        @SerializedName("lawyer")
+        @Expose
+        private Lawyer lawyer;
+        @SerializedName("user")
+        @Expose
+        private User user;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public Lawyer getLawyer() {
+            return lawyer;
+        }
+
+        public void setLawyer(Lawyer lawyer) {
+            this.lawyer = lawyer;
+        }
+
+        public User getUser() {
+            return user;
+        }
+
+        public void setUser(User user) {
+            this.user = user;
+        }
+
+    }
+
+    public class User {
+
+        @SerializedName("id")
+        @Expose
+        private String id;
+        @SerializedName("profile")
+        @Expose
+        private Profile profile;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public Profile getProfile() {
+            return profile;
+        }
+
+        public void setProfile(Profile profile) {
+            this.profile = profile;
+        }
+
+    }
+
 }
