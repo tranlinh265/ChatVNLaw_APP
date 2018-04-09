@@ -4,6 +4,8 @@ package com.lkbcteam.tranlinh.chatvnlaw.model.Interator;
  * Created by tranlinh on 24/03/2018.
  */
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -12,6 +14,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.ApiUtils;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Model
@@ -19,23 +29,42 @@ import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
  * send room info to presenter through call back LoadRoomListener
  * */
 public class RoomListInterator {
-    private LoadRoomListListener loadRoomListListener;
+    private LoadRoomListListener callback;
     private FirebaseDatabase database;
     private FirebaseUser currentUser;
 
-    public RoomListInterator(LoadRoomListListener loadRoomListListener){
-        this.loadRoomListListener = loadRoomListListener;
+    public RoomListInterator(LoadRoomListListener callback){
+        this.callback = callback;
         database = FirebaseDatabase.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
+    public void getRoomListFromRail(){
+        ApiUtils.getService().getRoomList("bxU1x3FBz59pkaS7CBtPSngF", "linhtm@gmail.com").enqueue(new Callback<RoomListResponse>() {
+            @Override
+            public void onResponse(Call<RoomListResponse> call, Response<RoomListResponse> response) {
+                if(response.isSuccessful()){
+                    RoomListResponse roomListResponse = response.body();
+                    callback.onLoadRoomListFromRailSuccess(roomListResponse.getRooms());
+                }else{
+                    callback.onLoadRoomListFromRailFalure("response error");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RoomListResponse> call, Throwable t) {
+                t.printStackTrace();
+                callback.onLoadRoomListFromRailFalure("server error");
+            }
+        });
+    }
     public void getRoomList(){
         database.getReference().child(Define.Table.TABLE_REFERENCE).child(currentUser.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Room room = new Room();
                 room.setRid(String.valueOf(dataSnapshot.getValue()));
-                loadRoomListListener.onLoadRoomListSuccess(room);
+                callback.onLoadRoomListSuccess(room);
             }
 
             @Override
@@ -55,7 +84,7 @@ public class RoomListInterator {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                loadRoomListListener.onLoadRoomListFalure(databaseError.getMessage());
+                callback.onLoadRoomListFalure(databaseError.getMessage());
             }
         });
     }
@@ -64,7 +93,9 @@ public class RoomListInterator {
      * Created by tranlinh on 24/03/2018.
      */
 
-    public static interface LoadRoomListListener {
+    public interface LoadRoomListListener {
+        void onLoadRoomListFromRailSuccess(List<RoomListResponse.Room> roomList);
+        void onLoadRoomListFromRailFalure(String error);
         void onLoadRoomListSuccess(Room room);
         void onLoadRoomListFalure(String error);
     }

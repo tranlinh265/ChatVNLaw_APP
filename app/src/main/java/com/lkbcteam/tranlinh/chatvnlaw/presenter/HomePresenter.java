@@ -2,6 +2,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.RoomListInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 
 import java.util.List;
 
@@ -21,8 +22,21 @@ public class HomePresenter implements RoomListInterator.LoadRoomListListener {
         roomListInterator = new RoomListInterator(this);
     }
 
-    public void loadRoomList(){
+    public void loadRoomListFromFirebase(){
         roomListInterator.getRoomList();
+    }
+
+    public void loadRoomListFromRail(){
+        roomListInterator.getRoomListFromRail();
+    }
+    @Override
+    public void onLoadRoomListFromRailSuccess(List<RoomListResponse.Room> roomList) {
+
+    }
+
+    @Override
+    public void onLoadRoomListFromRailFalure(String error) {
+        homeView.displayError(error);
     }
 
     @Override

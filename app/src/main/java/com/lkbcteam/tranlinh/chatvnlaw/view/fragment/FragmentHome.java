@@ -6,10 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Slide;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +70,7 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     protected void initData(View view) {
         super.initData(view);
         homePresenter = new HomePresenter(this,roomList);
-        homePresenter.loadRoomList();
+        homePresenter.loadRoomListFromFirebase();
     }
 
     @Override
