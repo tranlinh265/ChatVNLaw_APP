@@ -1,5 +1,7 @@
 package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 
+import android.util.Log;
+
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.RoomListInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
@@ -14,9 +16,9 @@ public class HomePresenter implements RoomListInterator.LoadRoomListListener {
 
     private HomeView homeView;
     private RoomListInterator roomListInterator;
-    private List<Room> roomList;
+    private List<RoomListResponse.Room> roomList;
 
-    public HomePresenter(HomeView homeView, List<Room> roomList){
+    public HomePresenter(HomeView homeView, List<RoomListResponse.Room> roomList){
         this.homeView = homeView;
         this.roomList = roomList;
         roomListInterator = new RoomListInterator(this);
@@ -26,12 +28,15 @@ public class HomePresenter implements RoomListInterator.LoadRoomListListener {
         roomListInterator.getRoomList();
     }
 
-    public void loadRoomListFromRail(){
-        roomListInterator.getRoomListFromRail();
+    public void loadRoomListFromRail(String userToken){
+        roomListInterator.getRoomListFromRail(userToken);
     }
     @Override
-    public void onLoadRoomListFromRailSuccess(List<RoomListResponse.Room> roomList) {
+    public void onLoadRoomListFromRailSuccess(List<RoomListResponse.Room> rooms) {
 
+        this.roomList.clear();
+        this.roomList.addAll(rooms);
+        homeView.notifyDataChanged();
     }
 
     @Override
@@ -41,8 +46,8 @@ public class HomePresenter implements RoomListInterator.LoadRoomListListener {
 
     @Override
     public void onLoadRoomListSuccess(Room room) {
-        roomList.add(room);
-        homeView.notifyDataInsert(roomList.size() -1);
+//        roomList.add(room);
+//        homeView.notifyDataInsert(roomList.size() -1);
     }
 
     @Override
@@ -54,8 +59,9 @@ public class HomePresenter implements RoomListInterator.LoadRoomListListener {
      * Created by tranlinh on 24/03/2018.
      */
 
-    public static interface HomeView {
+    public interface HomeView {
         void displayListRoom();
+        void notifyDataChanged();
         void displayError(String error);
         void notifyDataInsert(int position);
     }

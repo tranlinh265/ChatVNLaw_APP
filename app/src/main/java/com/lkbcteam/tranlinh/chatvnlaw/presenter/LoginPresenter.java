@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.BaseActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.AccountInterator;
@@ -79,6 +80,7 @@ public class LoginPresenter implements AccountInterator.AccountListener.Login {
 
     @Override
     public void onRailLoginFalure() {
+        FirebaseAuth.getInstance().signOut();
         loginView.loginFalure("Authentication rails failed");
     }
 

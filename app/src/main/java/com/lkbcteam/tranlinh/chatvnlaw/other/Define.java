@@ -6,6 +6,8 @@ package com.lkbcteam.tranlinh.chatvnlaw.other;
 
 public class Define {
 
+    public static final String DEFAULT_AVATAR = "https://image.ibb.co/i23jUF/default_ava.png";
+
     public interface RailServer{
         String TEST_URL = "http://vnlawapi.datalab.vn/";
         String RELEASE_URL = "";

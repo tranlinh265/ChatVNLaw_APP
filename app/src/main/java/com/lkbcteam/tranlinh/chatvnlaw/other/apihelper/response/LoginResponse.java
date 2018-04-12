@@ -1,7 +1,5 @@
 package com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response;
 
-import android.support.annotation.Nullable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,10 +11,15 @@ public class LoginResponse {
     @SerializedName("message")
     @Expose
     private String message;
-    @Nullable
-    @SerializedName("user_token")
+    @SerializedName("userToken")
     @Expose
     private String userToken;
+    @SerializedName("userName")
+    @Expose
+    private String userName;
+    @SerializedName("role")
+    @Expose
+    private String role;
 
     public String getMessage() {
         return message;
@@ -33,4 +36,21 @@ public class LoginResponse {
     public void setUserToken(String userToken) {
         this.userToken = userToken;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
 }

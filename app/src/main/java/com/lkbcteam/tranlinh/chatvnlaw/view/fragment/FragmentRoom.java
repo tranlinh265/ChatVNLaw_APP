@@ -14,17 +14,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ChatContentAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
-import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.RoomPresenter;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView,View.OnClickListener  {
     private RecyclerView rvChatContentContainer;
     private List<Message> mMessageList;
-    private Room room;
+    private RoomListResponse.Room room;
     private EditText mEdtChatInput;
     private ImageButton mBtnSend;
     private RoomPresenter roomPresenter;
@@ -48,6 +49,8 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
     private boolean isloading = true;
     private ProgressBar pbLoading;
     private CircleImageView civTargetUserAvatar;
+    private RoomListResponse.User targetUser;
+    private TextView tvTargetUserDisplayName;
 
     private View.OnClickListener mHideSoftKey = view -> {
         View currentFocus = getActivity().getCurrentFocus();
@@ -57,13 +60,13 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         }
     };
 
-    public static FragmentRoom newInstance(Room room) {
+    public static FragmentRoom newInstance(RoomListResponse.Room room) {
         FragmentRoom fragment = new FragmentRoom();
         fragment.setRoom(room);
         return fragment;
     }
 
-    public static FragmentRoom newInstance(Room room, int position) {
+    public static FragmentRoom newInstance(RoomListResponse.Room room, int position) {
         
         Bundle args = new Bundle();
         
@@ -84,13 +87,16 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
     protected void initView(View view) {
         super.initView(view);
         civTargetUserAvatar = view.findViewById(R.id.iv_target_user_avatar);
-
+        tvTargetUserDisplayName = view.findViewById(R.id.tv_sender_displayname);
         Bundle bundle = getArguments();
         if(bundle!=null){
             String position = bundle.getString("position");
             civTargetUserAvatar.setTransitionName(getContext().getString(R.string.target_user_avatar_transiton) + position);
-            Room room = (Room)bundle.getSerializable("room");
+            RoomListResponse.Room room = (RoomListResponse.Room)bundle.getSerializable("room");
             setRoom(room);
+            setTargetUser();
+            Picasso.with(getContext()).load(targetUser.getProfile().getAvatar().getThumbSmall().getUrl()).into(civTargetUserAvatar);
+            tvTargetUserDisplayName.setText(targetUser.getProfile().getDisplayName());
         }
         mMessageList = new ArrayList<>();
         rvChatContentContainer = view.findViewById(R.id.rv_chat_content_container);
@@ -118,7 +124,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
                     if(!isloading){
                         isloading = true;
                         long time = Long.parseLong(mMessageList.get(0).getmMessageInfo().getMsgTimeStamp()) - 1;
-                        roomPresenter.loadHistoryMessage(room.getRid(), String.valueOf(time));
+                        roomPresenter.loadHistoryMessage(String.valueOf(room.getId()), String.valueOf(time));
                     }
                 }
             }
@@ -132,8 +138,8 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         (new Handler()).postDelayed(() -> {
             pbLoading.setVisibility(View.GONE);
             rvChatContentContainer.setVisibility(View.VISIBLE);
-            roomPresenter.loadHistoryMessage(room.getRid());
-            roomPresenter.loadIncomingMessage(room.getRid());
+            roomPresenter.loadHistoryMessage(String.valueOf(room.getId()));
+            roomPresenter.loadIncomingMessage(String.valueOf(room.getId()));
         },500);
 
     }
@@ -162,7 +168,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         Toast.makeText(getContext(),error, Toast.LENGTH_LONG).show();
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(RoomListResponse.Room room) {
         this.room = room;
     }
 
@@ -175,13 +181,27 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
             case R.id.btn_send:
                 String chatContent = mEdtChatInput.getText().toString();
                 if(!TextUtils.isEmpty(chatContent)){
-                    roomPresenter.sendMessage(room.getRid(), chatContent);
+                    roomPresenter.sendMessage(String.valueOf(room.getId()), chatContent);
                     mEdtChatInput.setText(null);
                 }
                 break;
             case R.id.ibtn_info:
-                goNextFragment(FragmentRoomInfo.newInstance(room),true,true);
+//                goNextFragment(FragmentRoomInfo.newInstance(room),true,true);
                 break;
         }
+    }
+
+    public RoomListResponse.User getTargetUser() {
+        return targetUser;
+    }
+    private void setTargetUser(){
+        if(this.room.isCurrentUserIsLawyer()){
+            setTargetUser(room.getUser());
+        }else{
+            setTargetUser(room.getLawyer());
+        }
+    }
+    public void setTargetUser(RoomListResponse.User targetUser) {
+        this.targetUser = targetUser;
     }
 }

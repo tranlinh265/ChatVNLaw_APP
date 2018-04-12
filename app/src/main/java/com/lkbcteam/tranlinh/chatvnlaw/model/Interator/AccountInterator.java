@@ -1,6 +1,7 @@
 package com.lkbcteam.tranlinh.chatvnlaw.model.Interator;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -49,7 +50,7 @@ public class AccountInterator {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.isSuccessful()){
                     String userToken = response.body().getUserToken();
-                    if(userToken != null){
+                    if(!TextUtils.isEmpty(userToken)){
                         loginCallback.onRailLoginSuccess(userToken);
 
                     }else{

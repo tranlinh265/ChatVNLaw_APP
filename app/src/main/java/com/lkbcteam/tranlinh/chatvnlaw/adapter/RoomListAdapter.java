@@ -2,6 +2,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 
-import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.model.User;
-import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -25,11 +24,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHolder> {
-    private List<Room> mRoomList;
+    private List<RoomListResponse.Room> mRoomList;
     private Context mContext;
     private onClick callback;
 
-    public RoomListAdapter(Context context, List<Room> roomList){
+    public RoomListAdapter(Context context, List<RoomListResponse.Room> roomList){
         mRoomList = roomList;
         mContext = context;
     }
@@ -43,20 +42,27 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Room room = mRoomList.get(position);
-        final User user = room.getTargetUser();
-        if(user != null){
-            holder.tvSenderDisplayName.setText(user.getDisplayName());
-            Picasso.with(mContext).load(String.valueOf(user.getPhotoURL())).into(holder.civProfileImage);
-            holder.ibtnCall.setOnClickListener(v -> {
-                callback.onCallItemClicked(user.getUid());
-            });
-            holder.tvMessageContent.setText(room.getLastMessContent());
+        RoomListResponse.Room room = mRoomList.get(position);
+        RoomListResponse.User user;
+        if(room.isCurrentUserIsLawyer()){
+            user = room.getUser();
+        }else{
+            user = room.getLawyer();
         }
-        holder.civProfileImage.setTransitionName(mContext.getResources().getString(R.string.target_user_avatar_transiton) + String.valueOf(position));
-        holder.mLayoutContainer.setOnClickListener(v -> {
-            callback.onChatMessageItemClicked(room, position, holder.civProfileImage);
-        });
+
+        if(user != null){
+            holder.tvSenderDisplayName.setText(user.getProfile().getDisplayName());
+
+            Picasso.with(mContext).load(String.valueOf(user.getProfile().getAvatar().getThumbSmall().getUrl())).into(holder.civProfileImage);
+            holder.ibtnCall.setOnClickListener(v -> {
+                String id = room.isCurrentUserIsLawyer() ? user.getUserId() : user.getId();
+                callback.onCallItemClicked(id);
+            });
+            holder.civProfileImage.setTransitionName(mContext.getResources().getString(R.string.target_user_avatar_transiton) + String.valueOf(position));
+            holder.mLayoutContainer.setOnClickListener(v -> {
+                callback.onChatMessageItemClicked(room, position, holder.civProfileImage);
+            });
+        }
     }
 
     public void setCallback(onClick callback) {

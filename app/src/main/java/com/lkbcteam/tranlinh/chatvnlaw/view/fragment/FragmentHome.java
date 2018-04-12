@@ -17,7 +17,8 @@ import android.widget.Toast;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.RoomListAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.HomePresenter;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     private static final long MOVE_DEFAULT_TIME = 2000;
     private static final long FADE_DEFAULT_TIME = 1300;
     private RecyclerView rvRoomList;
-    private List<Room> roomList;
+    private List<RoomListResponse.Room> roomList;
     private RecyclerView.LayoutManager layoutManager;
     private RoomListAdapter adapter;
     private ImageButton ibtnHomeMenu;
@@ -70,7 +71,8 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     protected void initData(View view) {
         super.initData(view);
         homePresenter = new HomePresenter(this,roomList);
-        homePresenter.loadRoomListFromFirebase();
+//        homePresenter.loadRoomListFromFirebase();
+        homePresenter.loadRoomListFromRail(SharePreference.getInstance(getActivity()).getUserToken());
     }
 
     @Override
@@ -88,6 +90,11 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     }
 
     @Override
+    public void notifyDataChanged() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void displayError(String error) {
         Toast.makeText(getContext(),error,Toast.LENGTH_LONG).show();
     }
@@ -99,7 +106,7 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
 
     @Override
     public void onChatMessageItemClicked(Object o, int position, View view) {
-        Fragment nextFragment = FragmentRoom.newInstance((Room)o, position);
+        Fragment nextFragment = FragmentRoom.newInstance((RoomListResponse.Room)o, position);
         Fragment previousFragment = getFragmentManager().findFragmentById(R.id.container_framelayout);
 
         Transition sharedElementEnterTransition = TransitionInflater.from(getContext()).inflateTransition(R.transition.default_transition);
