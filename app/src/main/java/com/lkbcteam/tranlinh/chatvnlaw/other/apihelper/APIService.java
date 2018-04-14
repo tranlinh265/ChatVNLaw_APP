@@ -10,6 +10,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.LoginResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.SignupResponse;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.UserInfoResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -55,5 +56,10 @@ public interface APIService {
     Call<RoomListResponse> getRoomList(
         @Header(Define.RailServer.X_USER_TOKEN) String userToken,
         @Header(Define.RailServer.X_USER_EMAIL)String userEmail
+    );
+
+    @GET(Define.RailServer.API_GET_USER_INFO)
+    Call<UserInfoResponse> getUserInfo(
+        @Path("username") String username
     );
 }

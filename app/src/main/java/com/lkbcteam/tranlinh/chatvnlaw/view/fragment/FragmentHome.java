@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
@@ -20,9 +21,12 @@ import com.lkbcteam.tranlinh.chatvnlaw.adapter.RoomListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.HomePresenter;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by tranlinh on 24/03/2018.
@@ -37,6 +41,8 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     private RoomListAdapter adapter;
     private ImageButton ibtnHomeMenu;
     private HomePresenter homePresenter;
+    private CircleImageView civProfileImage;
+    private TextView tvUserDisplayName;
 
     public static FragmentHome newInstance() {
         FragmentHome fragment = new FragmentHome();
@@ -61,7 +67,8 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
         adapter = new RoomListAdapter(getContext(),roomList);
         adapter.setCallback(this);
         rvRoomList.setAdapter(adapter);
-
+        civProfileImage = view.findViewById(R.id.civ_home_profile);
+        tvUserDisplayName = view.findViewById(R.id.tv_welcome_user);
         ibtnHomeMenu = view.findViewById(R.id.ibtn_home_menu);
         ibtnHomeMenu.setOnClickListener(this);
 
@@ -73,6 +80,7 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
         homePresenter = new HomePresenter(this,roomList);
 //        homePresenter.loadRoomListFromFirebase();
         homePresenter.loadRoomListFromRail(SharePreference.getInstance(getActivity()).getUserToken());
+        homePresenter.loadUserInfo(SharePreference.getInstance(getActivity()).getUsername());
     }
 
     @Override
@@ -83,6 +91,12 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
                 break;
         }
     }
+
+    @Override
+    public void displayProfileImage(String url) {
+        Picasso.with(getContext()).load(url).into(civProfileImage);
+    }
+
 
     @Override
     public void displayListRoom() {
@@ -102,6 +116,11 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     @Override
     public void notifyDataInsert(int position) {
         adapter.notifyItemInserted(position);
+    }
+
+    @Override
+    public void displayUserDisplayName(String displayName) {
+        tvUserDisplayName.setText(displayName);
     }
 
     @Override

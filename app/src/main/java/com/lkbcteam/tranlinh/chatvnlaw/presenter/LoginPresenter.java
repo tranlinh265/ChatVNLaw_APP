@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.BaseActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.AccountInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.LoginResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.notification.DeviceToken;
 
 /**
@@ -61,10 +62,11 @@ public class LoginPresenter implements AccountInterator.AccountListener.Login {
         SharePreference.getInstance(baseActivity).setUsername(currentUser.getUid());
     }
 
-    public void storeCurrentUser(String userToken){
+    public void storeCurrentUser(LoginResponse response){
         FirebaseUser currentUser = this.getCurrentUser();
-        SharePreference.getInstance(baseActivity).setUsername(currentUser.getUid());
-        SharePreference.getInstance(baseActivity).setUserToken(userToken);
+        SharePreference.getInstance(baseActivity).setUserId(currentUser.getUid());
+        SharePreference.getInstance(baseActivity).setUserToken(response.getUserToken());
+        SharePreference.getInstance(baseActivity).setUsername(response.getUserName());
     }
 
     public void setBaseActivity(BaseActivity baseActivity) {
@@ -72,9 +74,9 @@ public class LoginPresenter implements AccountInterator.AccountListener.Login {
     }
 
     @Override
-    public void onRailLoginSuccess(String userToken) {
+    public void onRailLoginSuccess(LoginResponse response) {
         this.initCloudMessaging();
-        this.storeCurrentUser(userToken);
+        this.storeCurrentUser(response);
         loginView.loginSucess();
     }
 

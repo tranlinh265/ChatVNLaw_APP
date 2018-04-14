@@ -51,7 +51,7 @@ public class AccountInterator {
                 if(response.isSuccessful()){
                     String userToken = response.body().getUserToken();
                     if(!TextUtils.isEmpty(userToken)){
-                        loginCallback.onRailLoginSuccess(userToken);
+                        loginCallback.onRailLoginSuccess(response.body());
 
                     }else{
                         loginCallback.onRailLoginFalure();
@@ -143,7 +143,6 @@ public class AccountInterator {
         result = result.replace("/\\s/g", ".");
         result = result.replace(" ",".");
         result += "." + String.valueOf(System.currentTimeMillis());
-        Log.e("123", "getUsername: " +result );
         return result;
     }
 
@@ -153,7 +152,7 @@ public class AccountInterator {
 
     public interface AccountListener {
         interface Login{
-            void onRailLoginSuccess(String userToken);
+            void onRailLoginSuccess(LoginResponse response);
             void onRailLoginFalure();
             void onFirebaseLoginSuccess(String email, String password);
             void onFirebaseLoginFalure();

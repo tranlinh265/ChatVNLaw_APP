@@ -140,6 +140,9 @@ public class RoomListResponse {
             return url;
         }
 
+        public String getRealUrl(){
+            return Define.RailServer.BASE_API_URL + url;
+        }
         public void setUrl(String url) {
             this.url = url;
         }

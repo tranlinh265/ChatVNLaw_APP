@@ -19,6 +19,7 @@ public class Define {
         String API_SIGNUP_URL = "api/signup";
         String API_LOGOUT_URL = "api/logout";
         String API_GET_ROOM_URL = "api/rooms";
+        String API_GET_USER_INFO = "api/users/{username}";
 
         String X_API_TOKEN_KEY = "x-api-token";
         String X_USER_TOKEN = "x-user-token";
