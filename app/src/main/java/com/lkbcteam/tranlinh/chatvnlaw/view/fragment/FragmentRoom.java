@@ -186,7 +186,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
                 }
                 break;
             case R.id.ibtn_info:
-//                goNextFragment(FragmentRoomInfo.newInstance(room),true,true);
+                goNextFragment(FragmentRoomInfo.newInstance(room),true,true);
                 break;
         }
     }

@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomFileListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 
 import java.util.List;
@@ -24,11 +24,11 @@ import java.util.List;
  */
 
 public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHolder> {
-    private List<File> mFileList;
+    private List<RoomFileListResponse.File> mFileList;
     private Context mContext;
     private BaseFragment mBaseFragment;
 
-    public FileListAdapter(Context context, BaseFragment baseFragment, List<File> fileList){
+    public FileListAdapter(Context context, BaseFragment baseFragment, List<RoomFileListResponse.File> fileList){
         mContext = context;
         mBaseFragment = baseFragment;
         mFileList = fileList;
@@ -44,54 +44,49 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final File file = mFileList.get(position);
-        holder.tvFileName.setText(file.getName());
-        holder.tvFileSize.setText(String.valueOf(file.getSize()) + "KB");
-        holder.tvFileContentType.setText(file.getContentType());
-        holder.ibtnDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getDownloadURL()));
-                mContext.startActivity(browserIntent);
-            }
-        });
-        holder.ibtnShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT,
-                        "Hey check out my file: "+ file.getDownloadURL());
-                shareIntent.setType("text/plain");
-                mContext.startActivity(shareIntent);
-            }
-        });
-        Log.d(file.getContentType(), "onBindViewHolder: ");
-        Log.d(String.valueOf(file.getContentType().contains("application")), "onBindViewHolder: ");
-        if(file.getContentType().contains("text")){
-            if(file.getContentType().contains("HTML")){
-                changeColorBaseOnFileType(holder,R.drawable.html,R.color.colorHtml,R.color.html);
-//                holder.ivFileType.setImageResource(R.drawable.html);
-            }else{
-                changeColorBaseOnFileType(holder,R.drawable.txt,R.color.colorTxt,R.color.txt);
-
-//                holder.ivFileType.setImageResource(R.drawable.txt);
-            }
-        }else {
-            if(file.getContentType().contains("application")){
-                if (file.getContentType().contains("pdf")){
-                    changeColorBaseOnFileType(holder,R.drawable.pdf,R.color.colorPdf,R.color.pdf);
-
-//                    holder.ivFileType.setImageResource(R.drawable.pdf);
-                }else{
-                    if (file.getContentType().contains("zip")){
-                        changeColorBaseOnFileType(holder,R.drawable.zip,R.color.colorZip,R.color.zip);
-
-//                        holder.ivFileType.setImageResource(R.drawable.zip);
-                    }
-                }
-            }
-        }
+//        final RoomFileListResponse.File file = mFileList.get(position);
+//        holder.tvFileName.setText(file.getName());
+//        holder.tvFileSize.setText(String.valueOf(file.getSize()) + "KB");
+//        holder.tvFileContentType.setText(file.getContentType());
+//        holder.ibtnDownload.setOnClickListener(view -> {
+//            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getDownloadURL()));
+//            mContext.startActivity(browserIntent);
+//        });
+//        holder.ibtnShare.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent shareIntent = new Intent();
+//                shareIntent.setAction(Intent.ACTION_SEND);
+//                shareIntent.putExtra(Intent.EXTRA_TEXT,
+//                        "Hey check out my file: "+ file.getDownloadURL());
+//                shareIntent.setType("text/plain");
+//                mContext.startActivity(shareIntent);
+//            }
+//        });
+//        if(file.getContentType().contains("text")){
+//            if(file.getContentType().contains("HTML")){
+//                changeColorBaseOnFileType(holder,R.drawable.html,R.color.colorHtml,R.color.html);
+////                holder.ivFileType.setImageResource(R.drawable.html);
+//            }else{
+//                changeColorBaseOnFileType(holder,R.drawable.txt,R.color.colorTxt,R.color.txt);
+//
+////                holder.ivFileType.setImageResource(R.drawable.txt);
+//            }
+//        }else {
+//            if(file.getContentType().contains("application")){
+//                if (file.getContentType().contains("pdf")){
+//                    changeColorBaseOnFileType(holder,R.drawable.pdf,R.color.colorPdf,R.color.pdf);
+//
+////                    holder.ivFileType.setImageResource(R.drawable.pdf);
+//                }else{
+//                    if (file.getContentType().contains("zip")){
+//                        changeColorBaseOnFileType(holder,R.drawable.zip,R.color.colorZip,R.color.zip);
+//
+////                        holder.ivFileType.setImageResource(R.drawable.zip);
+//                    }
+//                }
+//            }
+//        }
     }
 
     private void changeColorBaseOnFileType(ViewHolder holder, int fileImage, int color, int colorXmlId){
