@@ -78,7 +78,7 @@ public class RoomListResponse {
 
     }
 
-    public class Room implements Serializable {
+    public class Room {
 
         @SerializedName("id")
         @Expose

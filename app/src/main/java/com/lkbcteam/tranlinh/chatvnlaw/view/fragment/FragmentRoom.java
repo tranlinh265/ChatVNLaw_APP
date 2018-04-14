@@ -1,15 +1,21 @@
 package com.lkbcteam.tranlinh.chatvnlaw.view.fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,16 +33,28 @@ import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.RoomPresenter;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by tranlinh on 24/03/2018.
  */
 
 public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView,View.OnClickListener  {
+
+    public final static int PICK_IMAGE_REQUEST = 1;
+    public final static int READ_EXTERNAL_REQUEST = 2;
+
+
     private RecyclerView rvChatContentContainer;
     private List<Message> mMessageList;
     private RoomListResponse.Room room;
@@ -51,7 +69,8 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
     private CircleImageView civTargetUserAvatar;
     private RoomListResponse.User targetUser;
     private TextView tvTargetUserDisplayName;
-
+    private ImageButton ibtnPickImage;
+    private int position = 0;
     private View.OnClickListener mHideSoftKey = view -> {
         View currentFocus = getActivity().getCurrentFocus();
         if (currentFocus != null) {
@@ -71,8 +90,10 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         Bundle args = new Bundle();
         
         FragmentRoom fragment = new FragmentRoom();
-        args.putString("position", String.valueOf(position));
-        args.putSerializable("room", room);
+        fragment.room = room;
+        fragment.position = position;
+//        args.putString("position", String.valueOf(position));
+//        args.putSerializable("room", room);
         fragment.setArguments(args);
         return fragment;
     }
@@ -88,16 +109,16 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         super.initView(view);
         civTargetUserAvatar = view.findViewById(R.id.iv_target_user_avatar);
         tvTargetUserDisplayName = view.findViewById(R.id.tv_sender_displayname);
-        Bundle bundle = getArguments();
-        if(bundle!=null){
-            String position = bundle.getString("position");
-            civTargetUserAvatar.setTransitionName(getContext().getString(R.string.target_user_avatar_transiton) + position);
-            RoomListResponse.Room room = (RoomListResponse.Room)bundle.getSerializable("room");
-            setRoom(room);
+//        Bundle bundle = getArguments();
+//        if(bundle!=null){
+//            String position = bundle.getString("position");
+            civTargetUserAvatar.setTransitionName(getContext().getString(R.string.target_user_avatar_transiton) + this.position);
+//            RoomListResponse.Room room = (RoomListResponse.Room)bundle.getSerializable("room");
+//            setRoom(room);
             setTargetUser();
             Picasso.with(getContext()).load(targetUser.getProfile().getAvatar().getThumbSmall().getUrl()).into(civTargetUserAvatar);
             tvTargetUserDisplayName.setText(targetUser.getProfile().getDisplayName());
-        }
+//        }
         mMessageList = new ArrayList<>();
         rvChatContentContainer = view.findViewById(R.id.rv_chat_content_container);
         mLayout = new GridLayoutManager(getContext(),1);
@@ -112,7 +133,8 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         mIbtnBack.setOnClickListener(this);
         mBtnSend.setOnClickListener(this);
         pbLoading = view.findViewById(R.id.pb_loading);
-
+        ibtnPickImage = view.findViewById(R.id.ibtn_pick_image);
+        ibtnPickImage.setOnClickListener(this);
         rvChatContentContainer.addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -188,6 +210,9 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
             case R.id.ibtn_info:
                 goNextFragment(FragmentRoomInfo.newInstance(room),true,true);
                 break;
+            case R.id.ibtn_pick_image:
+                requestPermission();
+                break;
         }
     }
 
@@ -203,5 +228,51 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
     }
     public void setTargetUser(RoomListResponse.User targetUser) {
         this.targetUser = targetUser;
+    }
+    private void requestPermission(){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            pickImage();
+            return;
+        }
+
+        int result = ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE);
+        if(result == PackageManager.PERMISSION_GRANTED){
+            pickImage();
+        }else{
+            requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, READ_EXTERNAL_REQUEST);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode != READ_EXTERNAL_REQUEST) return;
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            pickImage();
+        }else{
+
+        }
+    }
+
+    private void pickImage(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select a File to Upload"),
+                PICK_IMAGE_REQUEST);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null &&
+                data.getData() != null) {
+            Uri uri = data.getData();
+            Log.e("debug", "onActivityResult: " + roomPresenter.getRealPathFromUriPath(uri,getActivity()));
+            String filePath = roomPresenter.getRealPathFromUriPath(uri, getActivity());
+            File file = new File(filePath);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+            MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+            RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
+        }
     }
 }

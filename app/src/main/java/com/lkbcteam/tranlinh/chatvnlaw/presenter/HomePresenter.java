@@ -1,5 +1,10 @@
 package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 
+import android.app.Activity;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
+
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.RoomListInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.UserInfoInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
@@ -65,7 +70,6 @@ public class HomePresenter implements RoomListInterator.LoadRoomListListener, Us
         homeView.displayProfileImage(response.getUserInfo().getProfile().getAvatar().getThumbSmall().getRealUrl());
         homeView.displayUserDisplayName(response.getUserInfo().getProfile().getDisplayName());
     }
-
 
     /**
      * Created by tranlinh on 24/03/2018.

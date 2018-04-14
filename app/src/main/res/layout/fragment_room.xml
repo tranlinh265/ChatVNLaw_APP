@@ -72,6 +72,12 @@
         android:minHeight="?android:attr/actionBarSize"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_send"
+            android:backgroundTint="@android:color/transparent"
+            android:id="@+id/ibtn_pick_image" />
         <EditText
             android:layout_centerVertical="true"
             android:textColorHighlight="@android:color/white"
@@ -79,6 +85,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edt_chat_input"
             android:layout_toLeftOf="@+id/btn_send"
+            android:layout_toRightOf="@+id/ibtn_pick_image"
             android:textColor="@android:color/white"
             android:backgroundTint="@color/colorGray"
             android:paddingBottom="3dp"
@@ -86,7 +93,7 @@
             android:paddingRight="20dp"
             android:paddingTop="3dp"
             android:background="@drawable/edt_bg"
-            android:layout_marginLeft="20dp"/>
+            android:maxHeight="?android:attr/actionBarSize"/>
         <ImageButton
             android:layout_centerVertical="true"
             android:src="@drawable/icon_send"
@@ -94,8 +101,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:id="@+id/btn_send"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@android:color/transparent"
-            android:textAllCaps="false"/>
+            android:backgroundTint="@android:color/transparent" />
     </RelativeLayout>
 </RelativeLayout>

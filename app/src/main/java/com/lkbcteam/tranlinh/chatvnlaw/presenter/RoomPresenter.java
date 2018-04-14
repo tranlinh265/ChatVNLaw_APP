@@ -1,5 +1,10 @@
 package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 
+import android.app.Activity;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
+
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.HistoryMessageInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.IncomingMessageInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
@@ -95,6 +100,17 @@ public class RoomPresenter implements HistoryMessageInterator.HistoryMessage, In
         }
         messageList.add(message);
         roomView.notifyMessageAdded(messageList.size() -1);
+    }
+
+    public String getRealPathFromUriPath(Uri uri, Activity activity){
+        Cursor cursor = activity.getContentResolver().query(uri, null, null, null,null);
+        if(cursor == null){
+            return uri.getPath();
+        }else{
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(idx);
+        }
     }
 
     @Override
