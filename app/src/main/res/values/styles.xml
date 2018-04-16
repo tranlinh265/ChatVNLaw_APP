@@ -118,6 +118,12 @@
         <item name="android:textColor">@color/colorBlueLight</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="ProfileStyle.CheckBox" >
+        <item name="android:buttonTint">@color/colorGrayLight</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:textColor">@color/colorBlueLight</item>
+    </style>
     <style name="ProfileStyle.Edittext" parent="ProfileStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

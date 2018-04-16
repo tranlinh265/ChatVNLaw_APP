@@ -13,6 +13,11 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_home_menu"
             android:backgroundTint="@color/colorGrayDark"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -26,6 +31,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/square_avatar"
                 android:id="@+id/civ_user_avatar"/>
@@ -74,9 +80,61 @@
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_category"
                 />
-            <EditText
-                style="@style/ProfileStyle.Edittext"
-                android:id="@+id/edt_category"/>
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:flexDirection="row"
+                app:flexWrap="wrap"
+                style="@style/ProfileStyle">
+                <CheckBox
+                    style="@style/ProfileStyle.CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/specializations_hinh_su"
+                    android:checked="true" />
+                <CheckBox
+                    style="@style/ProfileStyle.CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/specializations_so_huu_tri_tue"/>
+                <CheckBox
+                    style="@style/ProfileStyle.CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/specializations_hon_nhan_gia_dinh"/>
+                <CheckBox
+                    style="@style/ProfileStyle.CheckBox"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/specializations_nha_dat_xay_dung"/>
+                <CheckBox
+                    style="@style/ProfileStyle.CheckBox"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/specializations_tai_chinh_ngan_hang"/>
+                <CheckBox
+                    style="@style/ProfileStyle.CheckBox"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/specializations_dan_su"/>
+                <CheckBox
+                    style="@style/ProfileStyle.CheckBox"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/specializations_lao_dong_bao_hiem"/>
+                <CheckBox
+                    style="@style/ProfileStyle.CheckBox"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/specializations_doanh_nghiep"/>
+
+            </com.google.android.flexbox.FlexboxLayout>
             <TextView
                 style="@style/ProfileStyle.Label"
                 android:text="@string/profile_experience" />

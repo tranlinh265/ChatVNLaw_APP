@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.TodoListAdapter;
+import com.lkbcteam.tranlinh.chatvnlaw.adapter.TodoListAdapter1;
 import com.lkbcteam.tranlinh.chatvnlaw.model.TodoItem;
 import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.TodoList;
 
@@ -30,7 +30,7 @@ public class FragmentTodoList extends BaseFragment implements View.OnClickListen
     private ProgressBar progressBar;
     private TodoList todoListLoader;
     private List<TodoItem> todos;
-    private TodoListAdapter adapter;
+    private TodoListAdapter1 adapter;
     private RecyclerView rvTodoList;
     private TextView tvTitle;
     private TextView tvDataNotExist;
@@ -77,9 +77,8 @@ public class FragmentTodoList extends BaseFragment implements View.OnClickListen
         }
         mLayout = new GridLayoutManager(getContext(),1);
         rvTodoList.setLayoutManager(mLayout);
-        adapter = new TodoListAdapter(getContext(), todos);
+        adapter = new TodoListAdapter1(getContext(), todos);
         rvTodoList.setAdapter(adapter);
-
     }
 
     @Override

@@ -31,6 +31,11 @@
             android:id="@+id/tv_welcome_user"
             android:textColor="@android:color/white"
             />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
     <TextView
         android:layout_width="match_parent"

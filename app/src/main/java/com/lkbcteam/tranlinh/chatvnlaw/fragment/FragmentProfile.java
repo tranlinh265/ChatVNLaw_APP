@@ -38,7 +38,7 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
     private FirebaseUser firebaseUser;
     private TextView tvUserName,tvDisplayName;
     private CircleImageView civUserAvatar;
-    private EditText edtName,edtDayOfBirth,edtCardNumber,edtCertificate,edtCategory,edtExperience,edtIntro,edtAchievement,edtEducation,edtWorkPlace;
+    private EditText edtName,edtDayOfBirth,edtCardNumber,edtCertificate,edtExperience,edtIntro,edtAchievement,edtEducation,edtWorkPlace;
     private Button btnSubmit;
 
     public static FragmentProfile newInstance() {
@@ -69,7 +69,6 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
         edtDayOfBirth.setOnClickListener(this);
         edtCardNumber = view.findViewById(R.id.edt_card_number);
         edtCertificate = view.findViewById(R.id.edt_certificate);
-        edtCategory = view.findViewById(R.id.edt_category);
         edtExperience =view.findViewById(R.id.edt_experience);
         edtIntro = view.findViewById(R.id.edt_intro);
         edtAchievement = view.findViewById(R.id.edt_achievement);
@@ -107,7 +106,6 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
                         edtName.setText(lawyer.getFullname());
                         edtAchievement.setText(lawyer.getAchievement());
                         edtCardNumber.setText(lawyer.getCardNumber());
-                        edtCategory.setText(lawyer.getCategory());
                         edtCertificate.setText(lawyer.getCertificate());
                         edtDayOfBirth.setText(lawyer.getBirthday());
                         edtEducation.setText(lawyer.getEducation());
@@ -153,7 +151,6 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
         lawyer.setAchievement(edtAchievement.getText().toString());
         lawyer.setBirthday(edtDayOfBirth.getText().toString());
         lawyer.setCardNumber(edtCardNumber.getText().toString());
-        lawyer.setCategory(edtCategory.getText().toString());
         lawyer.setCertificate(edtCertificate.getText().toString());
         lawyer.setEducation(edtEducation.getText().toString());
         lawyer.setExp(edtExperience.getText().toString());

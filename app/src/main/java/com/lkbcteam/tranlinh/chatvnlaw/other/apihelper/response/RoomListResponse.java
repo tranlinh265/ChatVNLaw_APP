@@ -137,7 +137,7 @@ public class RoomListResponse {
         private String url;
 
         public String getUrl() {
-            return url;
+            return Define.RailServer.BASE_API_URL + url;
         }
 
         public String getRealUrl(){
@@ -210,7 +210,7 @@ public class RoomListResponse {
             }
         }
         public String getUrl() {
-            return url;
+            return Define.RailServer.BASE_API_URL + url;
         }
 
         public void setUrl(String url) {

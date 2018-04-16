@@ -8,6 +8,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.SearchLawyerResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.TopLawyerResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.LoginResponse;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.ProfileResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomFileListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.SignupResponse;
@@ -69,5 +70,10 @@ public interface APIService {
             @Header(Define.RailServer.X_USER_TOKEN) String userToken,
             @Header(Define.RailServer.X_USER_EMAIL) String userEmail,
             @Path("roomId") String roomId
+    );
+
+    @GET(Define.RailServer.API_GET_PROFILE_DATA)
+    Call<ProfileResponse> getLawyerProfileData(
+            @Path("username") String username
     );
 }

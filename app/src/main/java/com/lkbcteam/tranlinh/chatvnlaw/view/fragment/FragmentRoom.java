@@ -71,6 +71,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
     private TextView tvTargetUserDisplayName;
     private ImageButton ibtnPickImage;
     private int position = 0;
+
     private View.OnClickListener mHideSoftKey = view -> {
         View currentFocus = getActivity().getCurrentFocus();
         if (currentFocus != null) {
@@ -135,6 +136,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         pbLoading = view.findViewById(R.id.pb_loading);
         ibtnPickImage = view.findViewById(R.id.ibtn_pick_image);
         ibtnPickImage.setOnClickListener(this);
+        ibtnPickImage.setVisibility(View.GONE);
         rvChatContentContainer.addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
