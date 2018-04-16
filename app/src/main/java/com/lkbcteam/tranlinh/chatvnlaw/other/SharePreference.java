@@ -14,9 +14,11 @@ public class SharePreference {
     public static SharePreference sharePreference;
     public SharedPreferences sp;
 
-    private static final String SHARED_PREFERENCE = "com.lkbcteam.tranlinh.chatvnlaw.SHARED_PREFERENCE";
-    private static final String USERNAME = "com.lkbcteam.tranlinh.chatvnlaw.USERNAME";
-    private static final String USER_TOKEN  = "com.lkbcteam.tranlinh.chatvnlaw.USER_TOKEN";
+    private static final String APP_INFO = "com.lkbcteam.tranlinh.chatvnlaw.";
+    private static final String SHARED_PREFERENCE = APP_INFO + "SHARED_PREFERENCE";
+    private static final String USERNAME = APP_INFO + "USERNAME";
+    private static final String USER_TOKEN  = APP_INFO + "USER_TOKEN";
+    private static final String USER_ID = APP_INFO + "USER_ID";
 
     public SharePreference(Activity activity){
         this.sp = activity.getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE);
@@ -38,6 +40,15 @@ public class SharePreference {
         pushString(USERNAME, username);
     }
 
+    public void setUserId(String userId){
+        pushString(USER_ID, userId);
+    }
+    public String getUserId(){
+        return sp.getString(USER_ID, "");
+    }
+    public String getUsername(){
+        return sp.getString(USERNAME, "");
+    }
     public void setUserToken(String userToken){
         pushString(USER_TOKEN, userToken);
     }

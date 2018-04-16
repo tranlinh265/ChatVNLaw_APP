@@ -1,6 +1,7 @@
 package com.lkbcteam.tranlinh.chatvnlaw.model.Interator;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -49,8 +50,8 @@ public class AccountInterator {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.isSuccessful()){
                     String userToken = response.body().getUserToken();
-                    if(userToken != null){
-                        loginCallback.onRailLoginSuccess(userToken);
+                    if(!TextUtils.isEmpty(userToken)){
+                        loginCallback.onRailLoginSuccess(response.body());
 
                     }else{
                         loginCallback.onRailLoginFalure();
@@ -142,7 +143,6 @@ public class AccountInterator {
         result = result.replace("/\\s/g", ".");
         result = result.replace(" ",".");
         result += "." + String.valueOf(System.currentTimeMillis());
-        Log.e("123", "getUsername: " +result );
         return result;
     }
 
@@ -152,7 +152,7 @@ public class AccountInterator {
 
     public interface AccountListener {
         interface Login{
-            void onRailLoginSuccess(String userToken);
+            void onRailLoginSuccess(LoginResponse response);
             void onRailLoginFalure();
             void onFirebaseLoginSuccess(String email, String password);
             void onFirebaseLoginFalure();

@@ -2,7 +2,9 @@ package com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -56,7 +58,7 @@ public class RoomListResponse {
         private String displayName;
         @SerializedName("avatar")
         @Expose
-        private String avatar;
+        private Avatar avatar;
 
         public String getDisplayName() {
             return displayName;
@@ -66,11 +68,11 @@ public class RoomListResponse {
             this.displayName = displayName;
         }
 
-        public String getAvatar() {
+        public Avatar getAvatar() {
             return avatar;
         }
 
-        public void setAvatar(String avatar) {
+        public void setAvatar(Avatar avatar) {
             this.avatar = avatar;
         }
 
@@ -80,27 +82,33 @@ public class RoomListResponse {
 
         @SerializedName("id")
         @Expose
-        private String id;
+        private Integer id;
         @SerializedName("lawyer")
         @Expose
-        private Lawyer lawyer;
+        private User lawyer;
         @SerializedName("user")
         @Expose
         private User user;
 
-        public String getId() {
+        private boolean currentUserIsLawyer = false;
+
+        public Integer getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setDefaultAvatar(){
+            lawyer.getProfile().getAvatar().setDefaultAvatar();
+            user.getProfile().getAvatar().setDefaultAvatar();
+        }
+        public void setId(Integer id) {
             this.id = id;
         }
 
-        public Lawyer getLawyer() {
+        public User getLawyer() {
             return lawyer;
         }
 
-        public void setLawyer(Lawyer lawyer) {
+        public void setLawyer(User lawyer) {
             this.lawyer = lawyer;
         }
 
@@ -112,9 +120,40 @@ public class RoomListResponse {
             this.user = user;
         }
 
+
+        public boolean isCurrentUserIsLawyer() {
+            return currentUserIsLawyer;
+        }
+
+        public void setCurrentUserIsLawyer(boolean currentUserIsLawyer) {
+            this.currentUserIsLawyer = currentUserIsLawyer;
+        }
+    }
+
+    public class Thumb {
+
+        @SerializedName("url")
+        @Expose
+        private String url;
+
+        public String getUrl() {
+            return Define.RailServer.BASE_API_URL + url;
+        }
+
+        public String getRealUrl(){
+            return Define.RailServer.BASE_API_URL + url;
+        }
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
     }
 
     public class User {
+
+        @SerializedName("user_id")
+        @Expose
+        private String userId;
 
         @SerializedName("id")
         @Expose
@@ -139,6 +178,68 @@ public class RoomListResponse {
             this.profile = profile;
         }
 
-    }
+        public String getUserId() {
+            return userId;
+        }
 
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+    }
+    public class Avatar {
+
+        @SerializedName("url")
+        @Expose
+        private String url;
+        @SerializedName("thumb")
+        @Expose
+        private Thumb thumb;
+        @SerializedName("thumb_medium")
+        @Expose
+        private Thumb thumbMedium;
+        @SerializedName("thumb_small")
+        @Expose
+        private Thumb thumbSmall;
+
+        public void setDefaultAvatar(){
+            if(url.equals("/default-ava/")){
+                url = Define.DEFAULT_AVATAR;
+                thumb.setUrl(Define.DEFAULT_AVATAR);
+                thumbMedium.setUrl(Define.DEFAULT_AVATAR);
+                thumbSmall.setUrl(Define.DEFAULT_AVATAR);
+            }
+        }
+        public String getUrl() {
+            return Define.RailServer.BASE_API_URL + url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public Thumb getThumb() {
+            return thumb;
+        }
+
+        public void setThumb(Thumb thumb) {
+            this.thumb = thumb;
+        }
+
+        public Thumb getThumbMedium() {
+            return thumbMedium;
+        }
+
+        public void setThumbMedium(Thumb thumbMedium) {
+            this.thumbMedium = thumbMedium;
+        }
+
+        public Thumb getThumbSmall() {
+            return thumbSmall;
+        }
+
+        public void setThumbSmall(Thumb thumbSmall) {
+            this.thumbSmall = thumbSmall;
+        }
+
+    }
 }

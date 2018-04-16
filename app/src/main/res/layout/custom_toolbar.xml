@@ -15,17 +15,26 @@
     android:contentInsetEnd="0dp"
     app:contentInsetRight="0dp"
     app:contentInsetEnd="0dp">
-    <ImageButton
-        android:id="@+id/ibtn_home_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_home_menu"
-        android:backgroundTint="@color/colorGrayDark"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:id="@+id/tv_fragment_title"
-        android:textColor="@android:color/white"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/ibtn_home_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_home_menu"
+            android:backgroundTint="@color/colorGrayDark"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:id="@+id/tv_fragment_title"
+            android:textColor="@android:color/white"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
 </android.support.v7.widget.Toolbar>

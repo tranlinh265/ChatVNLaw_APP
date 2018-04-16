@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomFileListResponse;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -19,12 +19,12 @@ import java.util.List;
 
 public class ImageListAdapter extends RecyclerView.Adapter <ImageListAdapter.ViewHolder>{
 
-    private List<File> mImageList, allImages;
+    private List<RoomFileListResponse.File> mImageList, allImages;
     private Context mContext;
     private int added = 0;
     private onItemImageClick callback;
 
-    public ImageListAdapter(Context context, List<File> imageList){
+    public ImageListAdapter(Context context, List<RoomFileListResponse.File> imageList){
         mContext = context;
         mImageList = imageList;
     }
@@ -38,8 +38,8 @@ public class ImageListAdapter extends RecyclerView.Adapter <ImageListAdapter.Vie
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        final File image = mImageList.get(position);
-        Picasso.with(mContext).load(String.valueOf(image.getDownloadURL())).resize(400,(400*image.getHeight()/ image.getWidth())).centerCrop().placeholder(R.drawable.spinning_loading_icon).into(holder.ivImageShared);
+        final RoomFileListResponse.File image = mImageList.get(position);
+        Picasso.with(mContext).load(String.valueOf(image.getFile().getThumb().getRealUrl())).into(holder.ivImageShared);
         holder.ivImageShared.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,11 +54,11 @@ public class ImageListAdapter extends RecyclerView.Adapter <ImageListAdapter.Vie
 //        return 15;
     }
 
-    public List<File> getAllImages() {
+    public List<RoomFileListResponse.File> getAllImages() {
         return allImages;
     }
 
-    public void setAllImages(List<File> allImages) {
+    public void setAllImages(List<RoomFileListResponse.File> allImages) {
         this.allImages = allImages;
     }
 
@@ -80,6 +80,6 @@ public class ImageListAdapter extends RecyclerView.Adapter <ImageListAdapter.Vie
 
     public interface onItemImageClick{
         void onItemImageClick(Object o, int position);
-        void onItemImageClick(List<File> list, int position);
+        void onItemImageClick(List<RoomFileListResponse.File> list, int position);
     }
 }

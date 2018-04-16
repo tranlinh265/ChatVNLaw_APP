@@ -1,7 +1,11 @@
 package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 
-import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
+
+import android.util.Log;
+
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.FileListInterator;
+import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomFileListResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +17,10 @@ import java.util.List;
 public class RoomInfoPresenter implements FileListInterator.LoadFileListListener {
 
     private FileListInterator fileListInterator;
-    private List<File> fileList, imageList,leftImageList, rightImageList;
+    private List<RoomFileListResponse.File> fileList, imageList,leftImageList, rightImageList;
     private RoomInfoView roomInfoView;
 
-    public RoomInfoPresenter(RoomInfoView roomInfoView, List<File> fileList, List<File> leftImageList, List<File> rightImageList){
+    public RoomInfoPresenter(RoomInfoView roomInfoView, List<RoomFileListResponse.File> fileList, List<RoomFileListResponse.File> leftImageList, List<RoomFileListResponse.File> rightImageList){
         this.roomInfoView = roomInfoView;
         this.imageList = new ArrayList<>();
         this.leftImageList = leftImageList;
@@ -28,6 +32,9 @@ public class RoomInfoPresenter implements FileListInterator.LoadFileListListener
         this.fileListInterator = fileListInterator;
     }
 
+    public void getRoomFileListFromRails(String userToken, String userEmail, String roomId){
+        fileListInterator.loadRoomFileFromRails(userToken,userEmail,roomId);
+    }
     public void loadFileList(String roomId){
         fileListInterator.loadFileItem(roomId);
     }
@@ -38,24 +45,49 @@ public class RoomInfoPresenter implements FileListInterator.LoadFileListListener
 
     @Override
     public void onLoadSuccess(File file) {
-        if(file.getContentType().contains("image")){
-            imageList.add(file);
-            if(imageList.size() % 2 == 1){
-                leftImageList.add(file);
-                roomInfoView.notifyWhenImageListChange(true,leftImageList.size() -1);
-            }else{
-                rightImageList.add(file);
-                roomInfoView.notifyWhenImageListChange(false,rightImageList.size() -1);
-            }
-        }else{
-            fileList.add(file);
-            roomInfoView.notifyWhenFileListChange(fileList.size() - 1);
-        }
+//        if(file.getContentType().contains("image")){
+//            imageList.add(file);
+//            if(imageList.size() % 2 == 1){
+//                leftImageList.add(file);
+//                roomInfoView.notifyWhenImageListChange(true,leftImageList.size() -1);
+//            }else{
+//                rightImageList.add(file);
+//                roomInfoView.notifyWhenImageListChange(false,rightImageList.size() -1);
+//            }
+//        }else{
+//            fileList.add(file);
+//            roomInfoView.notifyWhenFileListChange(fileList.size() - 1);
+//        }
     }
 
     @Override
     public void onLoadFalure(String error) {
         roomInfoView.showErrorMessage(error);
+    }
+
+    @Override
+    public void onLoadFromRailsSuccess(RoomFileListResponse response) {
+        if(response.getFiles().size()> 0){
+            Log.e("123", "onLoadFromRailsSuccess: "+ response.getFiles().size() );
+            for (RoomFileListResponse.File file : response.getFiles()){
+                switch (file.getContentTypeId()){
+                    case 1:
+                        // image
+                        imageList.add(file);
+                        if(imageList.size() % 2 == 1){
+                            leftImageList.add(file);
+                        }else {
+                            rightImageList.add(file);
+                        }
+                        break;
+                    case 2:
+                        // file
+                        fileList.add(file);
+                        break;
+                }
+            }
+        }
+        roomInfoView.notifyDataSetChanged();
     }
 
     /**
@@ -66,5 +98,6 @@ public class RoomInfoPresenter implements FileListInterator.LoadFileListListener
         void notifyWhenImageListChange(boolean left, int position);
         void notifyWhenFileListChange(int position);
         void showErrorMessage(String error);
+        void notifyDataSetChanged();
     }
 }

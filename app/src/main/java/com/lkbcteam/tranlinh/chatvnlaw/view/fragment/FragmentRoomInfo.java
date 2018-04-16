@@ -15,8 +15,9 @@ import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.FileListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageListAdapter;
 
-import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
-import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
+import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomFileListResponse;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.RoomInfoPresenter;
 
 import java.util.ArrayList;
@@ -29,16 +30,16 @@ import java.util.List;
 public class FragmentRoomInfo extends BaseFragment implements View.OnClickListener, RoomInfoPresenter.RoomInfoView, ImageListAdapter.onItemImageClick{
 
     private RecyclerView rvFileList,rvImageListLeft,rvImageListRight;
-    private List<File> fileList,leftImageList,rightImageList;
+    private List<RoomFileListResponse.File> fileList,leftImageList,rightImageList;
     private FileListAdapter fileListAdapter;
     private ImageButton ibtnBack;
     private ImageListAdapter leftImageListAdapter, rightImageListAdapter;
-    private Room room;
+    private RoomListResponse.Room room;
     private LinearLayoutManager filesLayoutManager;
     private RecyclerView.LayoutManager leftImagesLayoutManager, rightImagesLayoutManager;
     private RoomInfoPresenter presenter;
 
-    public static FragmentRoomInfo newInstance(Room room) {
+    public static FragmentRoomInfo newInstance(RoomListResponse.Room room) {
         FragmentRoomInfo fragment = new FragmentRoomInfo();
         fragment.room = room;
         return fragment;
@@ -100,8 +101,11 @@ public class FragmentRoomInfo extends BaseFragment implements View.OnClickListen
         rvImageListRight.setAdapter(rightImageListAdapter);
 
         presenter = new RoomInfoPresenter(this,fileList,leftImageList,rightImageList);
-        presenter.loadFileList(room.getRid());
-        presenter.loadImageList(room.getRid());
+//        presenter.loadFileList(String.valueOf(room.getId()));
+//        presenter.loadImageList(String.valueOf(room.getId()));
+
+        presenter.getRoomFileListFromRails(SharePreference.getInstance(getActivity()).getUserToken(),
+                "linhtm@gmail.com", String.valueOf(room.getId()));
     }
 
     @Override
@@ -133,12 +137,19 @@ public class FragmentRoomInfo extends BaseFragment implements View.OnClickListen
     }
 
     @Override
+    public void notifyDataSetChanged() {
+        leftImageListAdapter.notifyDataSetChanged();
+        rightImageListAdapter.notifyDataSetChanged();
+        fileListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onItemImageClick(Object o, int position) {
 
     }
 
     @Override
-    public void onItemImageClick(List<File> list, int position) {
-        goNextFragment(FragmentImageDetail.newInstance(list, position),true);
+    public void onItemImageClick(List<RoomFileListResponse.File> list, int position) {
+//        goNextFragment(FragmentImageDetail.newInstance(list, position),true);
     }
 }

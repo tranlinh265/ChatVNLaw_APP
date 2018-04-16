@@ -6,6 +6,8 @@ package com.lkbcteam.tranlinh.chatvnlaw.other;
 
 public class Define {
 
+    public static final String DEFAULT_AVATAR = "https://image.ibb.co/i23jUF/default_ava.png";
+
     public interface RailServer{
         String TEST_URL = "http://vnlawapi.datalab.vn/";
         String RELEASE_URL = "";
@@ -17,6 +19,9 @@ public class Define {
         String API_SIGNUP_URL = "api/signup";
         String API_LOGOUT_URL = "api/logout";
         String API_GET_ROOM_URL = "api/rooms";
+        String API_GET_USER_INFO = "api/users/{username}";
+        String API_GET_ROOM_FILE_LIST = "/api/rooms/{roomId}/room_files/";
+        String API_GET_PROFILE_DATA = "/api/lawyers/{username}";
 
         String X_API_TOKEN_KEY = "x-api-token";
         String X_USER_TOKEN = "x-user-token";

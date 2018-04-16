@@ -24,6 +24,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
  */
 
 public class FragmentMenu extends BaseFragment implements View.OnClickListener{
+
     private ImageButton mIbtnCloseMenu;
     private int mPosition;
     private boolean accessible;
