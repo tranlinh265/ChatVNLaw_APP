@@ -51,11 +51,11 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
         }
 
         if(user != null){
-            holder.tvSenderDisplayName.setText(user.getProfile().getDisplayName());
+            holder.tvSenderDisplayName.setText(user.getDisplayName());
 
-            Picasso.with(mContext).load(String.valueOf(user.getProfile().getAvatar().getThumbSmall().getUrl())).into(holder.civProfileImage);
+            Picasso.with(mContext).load(String.valueOf(user.getAvatar().getThumbSmall().getUrl())).into(holder.civProfileImage);
             holder.ibtnCall.setOnClickListener(v -> {
-                String id = room.isCurrentUserIsLawyer() ? user.getUserId() : user.getId();
+                String id = user.getUid();
                 callback.onCallItemClicked(id);
             });
             holder.civProfileImage.setTransitionName(mContext.getResources().getString(R.string.target_user_avatar_transiton) + String.valueOf(position));

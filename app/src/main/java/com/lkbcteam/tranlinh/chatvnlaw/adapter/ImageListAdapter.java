@@ -39,7 +39,7 @@ public class ImageListAdapter extends RecyclerView.Adapter <ImageListAdapter.Vie
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final RoomFileListResponse.File image = mImageList.get(position);
-        Picasso.with(mContext).load(String.valueOf(image.getFile().getThumb().getRealUrl())).into(holder.ivImageShared);
+        Picasso.with(mContext).load(String.valueOf(image.getFile().getThumb().getUrl())).into(holder.ivImageShared);
         holder.ivImageShared.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

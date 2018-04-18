@@ -117,8 +117,8 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
 //            RoomListResponse.Room room = (RoomListResponse.Room)bundle.getSerializable("room");
 //            setRoom(room);
             setTargetUser();
-            Picasso.with(getContext()).load(targetUser.getProfile().getAvatar().getThumbSmall().getUrl()).into(civTargetUserAvatar);
-            tvTargetUserDisplayName.setText(targetUser.getProfile().getDisplayName());
+            Picasso.with(getContext()).load(targetUser.getAvatar().getThumbSmall().getUrl()).into(civTargetUserAvatar);
+            tvTargetUserDisplayName.setText(targetUser.getDisplayName());
 //        }
         mMessageList = new ArrayList<>();
         rvChatContentContainer = view.findViewById(R.id.rv_chat_content_container);

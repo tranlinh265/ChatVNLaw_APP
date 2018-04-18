@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.ProfileInterator;
+import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.ProfileResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.EditProfilePresenter;
 import com.squareup.picasso.Picasso;
@@ -78,7 +79,7 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
     protected void initData(View view) {
         super.initData(view);
         presenter = new EditProfilePresenter(this);
-        presenter.getProfileData("name1.1510112753493");
+        presenter.getProfileData(SharePreference.getInstance(getActivity()).getUsername());
     }
 
     @Override

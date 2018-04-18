@@ -49,7 +49,7 @@ public class RoomListInterator {
                 if(response.isSuccessful()){
                     RoomListResponse roomListResponse = response.body();
                     for (RoomListResponse.Room room : roomListResponse.getRooms()){
-                        room.setCurrentUserIsLawyer(currentUser.getUid().equals(room.getLawyer().getUserId()));
+                        room.setCurrentUserIsLawyer(currentUser.getUid());
 //                        room.setDefaultAvatar();
                     }
                     callback.onLoadRoomListFromRailSuccess(roomListResponse.getRooms());

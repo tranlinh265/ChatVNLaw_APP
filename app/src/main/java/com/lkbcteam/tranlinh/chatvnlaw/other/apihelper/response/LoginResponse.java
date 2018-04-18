@@ -8,6 +8,9 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class LoginResponse {
+    @SerializedName("id")
+    @Expose
+    private String id;
     @SerializedName("message")
     @Expose
     private String message;
@@ -17,9 +20,23 @@ public class LoginResponse {
     @SerializedName("userName")
     @Expose
     private String userName;
+    @SerializedName("displayName")
+    @Expose
+    private String displayName;
     @SerializedName("role")
     @Expose
     private String role;
+    @SerializedName("avatar")
+    @Expose
+    private RoomListResponse.Avatar avatar;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getMessage() {
         return message;
@@ -45,6 +62,14 @@ public class LoginResponse {
         this.userName = userName;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
     public String getRole() {
         return role;
     }
@@ -53,4 +78,11 @@ public class LoginResponse {
         this.role = role;
     }
 
+    public RoomListResponse.Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(RoomListResponse.Avatar avatar) {
+        this.avatar = avatar;
+    }
 }

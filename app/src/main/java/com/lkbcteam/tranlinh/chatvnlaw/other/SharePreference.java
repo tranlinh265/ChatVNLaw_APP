@@ -19,6 +19,8 @@ public class SharePreference {
     private static final String USERNAME = APP_INFO + "USERNAME";
     private static final String USER_TOKEN  = APP_INFO + "USER_TOKEN";
     private static final String USER_ID = APP_INFO + "USER_ID";
+    private static final String ROLE = APP_INFO + "ROLE";
+    private static final String EMAIL = APP_INFO + "EMAIL";
 
     public SharePreference(Activity activity){
         this.sp = activity.getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE);
@@ -55,5 +57,18 @@ public class SharePreference {
 
     public String getUserToken(){
         return sp.getString(USER_TOKEN, "");
+    }
+
+    public void setRole(String role){
+        pushString(ROLE, role);
+    }
+    public String getRole(){
+        return sp.getString(ROLE, "");
+    }
+    public void setEmail(String email){
+        pushString(EMAIL, email);
+    }
+    public String getEmail(){
+        return sp.getString(EMAIL, "");
     }
 }

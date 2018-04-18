@@ -67,7 +67,7 @@ public class HomePresenter implements RoomListInterator.LoadRoomListListener, Us
 
     @Override
     public void onLoadSuccess(UserInfoResponse response) {
-        homeView.displayProfileImage(response.getUserInfo().getProfile().getAvatar().getThumbSmall().getRealUrl());
+        homeView.displayProfileImage(response.getUserInfo().getProfile().getAvatar().getThumbSmall().getUrl());
         homeView.displayUserDisplayName(response.getUserInfo().getProfile().getDisplayName());
     }
 

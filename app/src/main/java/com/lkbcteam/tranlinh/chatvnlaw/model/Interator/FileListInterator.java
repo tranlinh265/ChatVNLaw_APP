@@ -62,7 +62,6 @@ public class FileListInterator {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             File file = dataSnapshot.getValue(File.class);
-            Log.e("123", "onChildAdded: "+ file.getDownloadURL() );
             loadFileListListener.onLoadSuccess(file);
         }
 

@@ -67,6 +67,7 @@ public class LoginPresenter implements AccountInterator.AccountListener.Login {
         SharePreference.getInstance(baseActivity).setUserId(currentUser.getUid());
         SharePreference.getInstance(baseActivity).setUserToken(response.getUserToken());
         SharePreference.getInstance(baseActivity).setUsername(response.getUserName());
+        SharePreference.getInstance(baseActivity).setRole(response.getRole());
     }
 
     public void setBaseActivity(BaseActivity baseActivity) {
@@ -83,12 +84,14 @@ public class LoginPresenter implements AccountInterator.AccountListener.Login {
     @Override
     public void onRailLoginFalure() {
         FirebaseAuth.getInstance().signOut();
+        SharePreference.getInstance(baseActivity).setEmail("");
         loginView.loginFalure("Authentication rails failed");
     }
 
     @Override
     public void onFirebaseLoginSuccess(String email, String password) {
         accountInterator.loginWithRail(email,password);
+        SharePreference.getInstance(baseActivity).setEmail(email);
 //        loginView.loginSucess();
     }
 
@@ -101,7 +104,7 @@ public class LoginPresenter implements AccountInterator.AccountListener.Login {
      * Created by tranlinh on 26/03/2018.
      */
 
-    public static interface LoginView {
+    public interface LoginView {
         void loginSucess();
         void loginFalure(String error);
     }

@@ -24,33 +24,6 @@ public class RoomListResponse {
         this.rooms = rooms;
     }
 
-    public class Lawyer {
-
-        @SerializedName("user_id")
-        @Expose
-        private String userId;
-        @SerializedName("profile")
-        @Expose
-        private Profile profile;
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
-
-        public Profile getProfile() {
-            return profile;
-        }
-
-        public void setProfile(Profile profile) {
-            this.profile = profile;
-        }
-
-    }
-
     public class Profile {
 
         @SerializedName("displayName")
@@ -89,17 +62,23 @@ public class RoomListResponse {
         @SerializedName("user")
         @Expose
         private User user;
+        @SerializedName("description")
+        @Expose
+        private String description;
 
-        private boolean currentUserIsLawyer = false;
+        public boolean currentUserIsLawyer = false;
 
+        public void setCurrentUserIsLawyer(String uid){
+            this.currentUserIsLawyer = uid.equals(lawyer.getUid());
+        }
+
+        public boolean isCurrentUserIsLawyer(){
+            return this.currentUserIsLawyer;
+        }
         public Integer getId() {
             return id;
         }
 
-        public void setDefaultAvatar(){
-            lawyer.getProfile().getAvatar().setDefaultAvatar();
-            user.getProfile().getAvatar().setDefaultAvatar();
-        }
         public void setId(Integer id) {
             this.id = id;
         }
@@ -120,14 +99,14 @@ public class RoomListResponse {
             this.user = user;
         }
 
-
-        public boolean isCurrentUserIsLawyer() {
-            return currentUserIsLawyer;
+        public String getDescription() {
+            return description;
         }
 
-        public void setCurrentUserIsLawyer(boolean currentUserIsLawyer) {
-            this.currentUserIsLawyer = currentUserIsLawyer;
+        public void setDescription(String description) {
+            this.description = description;
         }
+
     }
 
     public class Thumb {
@@ -140,9 +119,6 @@ public class RoomListResponse {
             return Define.RailServer.BASE_API_URL + url;
         }
 
-        public String getRealUrl(){
-            return Define.RailServer.BASE_API_URL + url;
-        }
         public void setUrl(String url) {
             this.url = url;
         }
@@ -151,40 +127,73 @@ public class RoomListResponse {
 
     public class User {
 
-        @SerializedName("user_id")
-        @Expose
-        private String userId;
-
         @SerializedName("id")
         @Expose
-        private String id;
-        @SerializedName("profile")
+        private Integer id;
+        @SerializedName("uid")
         @Expose
-        private Profile profile;
+        private String uid;
+        @SerializedName("status")
+        @Expose
+        private String status;
+        @SerializedName("displayName")
+        @Expose
+        private String displayName;
+        @SerializedName("avatar")
+        @Expose
+        private Avatar avatar;
+        @SerializedName("userName")
+        @Expose
+        private String userName;
 
-        public String getId() {
+        public Integer getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(Integer id) {
             this.id = id;
         }
 
-        public Profile getProfile() {
-            return profile;
+        public String getUid() {
+            return uid;
         }
 
-        public void setProfile(Profile profile) {
-            this.profile = profile;
+        public void setUid(String uid) {
+            this.uid = uid;
         }
 
-        public String getUserId() {
-            return userId;
+        public String getStatus() {
+            return status;
         }
 
-        public void setUserId(String userId) {
-            this.userId = userId;
+        public void setStatus(String status) {
+            this.status = status;
         }
+
+        public String getDisplayName() {
+            return displayName;
+        }
+
+        public void setDisplayName(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public Avatar getAvatar() {
+            return avatar;
+        }
+
+        public void setAvatar(Avatar avatar) {
+            this.avatar = avatar;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
     }
     public class Avatar {
 
@@ -201,14 +210,6 @@ public class RoomListResponse {
         @Expose
         private Thumb thumbSmall;
 
-        public void setDefaultAvatar(){
-            if(url.equals("/default-ava/")){
-                url = Define.DEFAULT_AVATAR;
-                thumb.setUrl(Define.DEFAULT_AVATAR);
-                thumbMedium.setUrl(Define.DEFAULT_AVATAR);
-                thumbSmall.setUrl(Define.DEFAULT_AVATAR);
-            }
-        }
         public String getUrl() {
             return Define.RailServer.BASE_API_URL + url;
         }
