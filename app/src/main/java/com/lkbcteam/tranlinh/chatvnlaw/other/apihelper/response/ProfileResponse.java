@@ -1,5 +1,7 @@
 package com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -39,9 +41,21 @@ public class ProfileResponse {
         @SerializedName("specializes")
         @Expose
         private List<Specialize> specializes = null;
+        @SerializedName("lawyer_specializes")
+        @Expose
+        private List<LawyerSpecialize> lawyerSpecializes = null;
         @SerializedName("status")
         @Expose
         private String status;
+
+        public List<LawyerSpecialize> getLawyerSpecializes() {
+            return lawyerSpecializes;
+        }
+
+        public void setLawyerSpecializes(List<LawyerSpecialize> lawyerSpecializes) {
+            this.lawyerSpecializes = lawyerSpecializes;
+        }
+
 
         public String getEmail() {
             return email;
@@ -87,6 +101,22 @@ public class ProfileResponse {
     /**
      * Created by tranlinh on 09/04/2018.
      */
+
+    public class LawyerSpecialize {
+
+        @SerializedName("id")
+        @Expose
+        private Integer id;
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+    }
 
     public static class LawyerProfile {
 
@@ -207,26 +237,9 @@ public class ProfileResponse {
      */
 
     public static class Specialize {
-        @SerializedName("id")
-        @Expose
-        private Integer id;
         @SerializedName("name")
         @Expose
         private String name;
-        @SerializedName("created_at")
-        @Expose
-        private String createdAt;
-        @SerializedName("updated_at")
-        @Expose
-        private String updatedAt;
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
 
         public String getName() {
             return name;
@@ -234,22 +247,6 @@ public class ProfileResponse {
 
         public void setName(String name) {
             this.name = name;
-        }
-
-        public String getCreatedAt() {
-            return createdAt;
-        }
-
-        public void setCreatedAt(String createdAt) {
-            this.createdAt = createdAt;
-        }
-
-        public String getUpdatedAt() {
-            return updatedAt;
-        }
-
-        public void setUpdatedAt(String updatedAt) {
-            this.updatedAt = updatedAt;
         }
     }
 
@@ -288,7 +285,10 @@ public class ProfileResponse {
         }
 
         public String getBirthday() {
-            return birthday;
+            if (TextUtils.isEmpty(birthday)){
+                return birthday;
+            }
+            return birthday.split("T")[0];
         }
 
         public void setBirthday(String birthday) {

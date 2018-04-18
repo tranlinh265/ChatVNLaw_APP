@@ -92,47 +92,54 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/specializations_hinh_su"
-                    android:checked="true" />
+                    android:id="@+id/cb_hs"/>
                 <CheckBox
                     style="@style/ProfileStyle.CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/specializations_so_huu_tri_tue"/>
+                    android:text="@string/specializations_so_huu_tri_tue"
+                    android:id="@+id/cb_shtt"/>
                 <CheckBox
                     style="@style/ProfileStyle.CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/specializations_hon_nhan_gia_dinh"/>
-                <CheckBox
-                    style="@style/ProfileStyle.CheckBox"
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/specializations_nha_dat_xay_dung"/>
+                    android:text="@string/specializations_hon_nhan_gia_dinh"
+                    android:id="@+id/cb_hngd"/>
                 <CheckBox
                     style="@style/ProfileStyle.CheckBox"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/specializations_tai_chinh_ngan_hang"/>
+                    android:text="@string/specializations_nha_dat_xay_dung"
+                    android:id="@+id/cb_ndxd"/>
                 <CheckBox
                     style="@style/ProfileStyle.CheckBox"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/specializations_dan_su"/>
+                    android:text="@string/specializations_tai_chinh_ngan_hang"
+                    android:id="@+id/cb_tcnh"/>
                 <CheckBox
                     style="@style/ProfileStyle.CheckBox"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/specializations_lao_dong_bao_hiem"/>
+                    android:text="@string/specializations_dan_su"
+                    android:id="@+id/cb_ds"/>
                 <CheckBox
                     style="@style/ProfileStyle.CheckBox"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/specializations_doanh_nghiep"/>
+                    android:text="@string/specializations_lao_dong_bao_hiem"
+                    android:id="@+id/cb_ldbhxh"/>
+                <CheckBox
+                    style="@style/ProfileStyle.CheckBox"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/specializations_doanh_nghiep"
+                    android:id="@+id/cb_dn"/>
 
             </com.google.android.flexbox.FlexboxLayout>
             <TextView

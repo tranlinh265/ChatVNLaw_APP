@@ -171,12 +171,7 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
             startYear = currentDay.split("/")[2];
         }
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                getContext(), new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                edtDayOfBirth.setText(String.format("%d/%d/%d",dayOfMonth,month,year));
-            }
-        }, Integer.parseInt(startYear), Integer.parseInt(startMonth), Integer.parseInt(startDay));
+                getContext(), (view, year, month, dayOfMonth) -> edtDayOfBirth.setText(String.format("%d/%d/%d",dayOfMonth,month,year)), Integer.parseInt(startYear), Integer.parseInt(startMonth), Integer.parseInt(startDay));
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
         datePickerDialog.show();
     }

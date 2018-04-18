@@ -1,12 +1,15 @@
 package com.lkbcteam.tranlinh.chatvnlaw.view.fragment;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -27,12 +30,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FragmentEditProfile extends BaseFragment implements View.OnClickListener, EditProfilePresenter.EditProfileView{
 
+    private final String DEFAULT_START_DAY = "26";
+    private final String DEFAULT_START_MONTH = "5";
+    private final String DEFAULT_START_YEAR = "1995";
+
     private ImageButton ibtnHomeMenu;
 
     private TextView tvUserName,tvDisplayName;
     private CircleImageView civUserAvatar;
     private EditText edtName,edtDayOfBirth,edtCardNumber,edtCertificate,edtCategory,edtExperience,edtIntro,edtAchievement,edtEducation,edtWorkPlace;
     private Button btnSubmit;
+    private CheckBox cbHs, cbShtt, cbHngd, cbNdxd, cbTcnh, cbDs, cbLdbhxh, cbDn;
 
     private EditProfilePresenter presenter;
 
@@ -72,6 +80,15 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
         edtEducation = view.findViewById(R.id.edt_education);
         edtWorkPlace = view.findViewById(R.id.edt_workplace);
         btnSubmit = view.findViewById(R.id.btn_submit);
+        cbHs = view.findViewById(R.id.cb_hs);
+        cbShtt = view.findViewById(R.id.cb_shtt);
+        cbHngd = view.findViewById(R.id.cb_hngd);
+        cbNdxd = view.findViewById(R.id.cb_ndxd);
+        cbTcnh = view.findViewById(R.id.cb_tcnh);
+        cbDs = view.findViewById(R.id.cb_ds);
+        cbLdbhxh = view.findViewById(R.id.cb_ldbhxh);
+        cbDn = view.findViewById(R.id.cb_dn);
+        edtDayOfBirth.setOnClickListener( v -> showDatePicker());
         btnSubmit.setOnClickListener(this);
     }
 
@@ -114,8 +131,55 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
         edtIntro.setText(data.getLawyerInfo().getLawyerProfile().getIntro());
         edtExperience.setText(data.getLawyerInfo().getLawyerProfile().getExp());
         edtWorkPlace.setText(data.getLawyerInfo().getLawyerProfile().getWorkPlace());
+        if(data.getLawyerInfo().getLawyerSpecializes().size() > 0){
+            for (ProfileResponse.LawyerSpecialize specialize : data.getLawyerInfo().getLawyerSpecializes()){
+                switch (specialize.getId()){
+                    case 1:
+                        cbHs.setChecked(true);
+                        break;
+                    case 2:
+                        cbShtt.setChecked(true);
+                        break;
+                    case 3:
+                        cbHngd.setChecked(true);
+                        break;
+                    case 4:
+                        cbNdxd.setChecked(true);
+                        break;
+                    case 5:
+                        cbTcnh.setChecked(true);
+                        break;
+                    case 6:
+                        cbDs.setChecked(true);
+                        break;
+                    case 7:
+                        cbLdbhxh.setChecked(true);
+                        break;
+                    case 8:
+                        cbDn.setChecked(true);
+                        break;
+                }
+            }
+        }
     }
 
+    private void showDatePicker(){
+        String currentDay = edtDayOfBirth.getText().toString();
+        String startDay = DEFAULT_START_DAY;
+        String startMonth = DEFAULT_START_MONTH;
+        String startYear = DEFAULT_START_YEAR;
+
+        if(TextUtils.isEmpty(currentDay)){
+            startYear= currentDay.split("-")[0];
+            startMonth = currentDay.split("-")[1];
+            startDay = currentDay.split("-")[2];
+        }
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) ->
+                edtDayOfBirth.setText(String.format("%d-%d-%d", year, month,dayOfMonth))
+                ,Integer.parseInt(startYear) , Integer.parseInt(startMonth), Integer.parseInt(startDay));
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+        datePickerDialog.show();
+    }
     @Override
     public void onLoadFailure(String error) {
         Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
