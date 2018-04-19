@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.FragmentHomeContainer;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.pubnub.api.Callback;
@@ -23,10 +24,9 @@ import org.json.JSONObject;
 
 public class HomeActivity extends BaseActivity {
 
-    private SharedPreferences sp;
     private Pubnub pubnub;
-    private String username = "";
-    
+    private String username;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_home);
@@ -36,8 +36,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void initView(){
-        this.sp = getSharedPreferences(Define.Pubnub.SHARED_PREFS, MODE_PRIVATE);
-        this.username = this.sp.getString(Define.Pubnub.USER_NAME, "");
+        this.username = SharePreference.getInstance(this).getUserId();
         initPubnub();
     }
     private void initPubnub(){

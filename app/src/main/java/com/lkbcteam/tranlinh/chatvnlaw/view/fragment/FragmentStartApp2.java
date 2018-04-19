@@ -90,12 +90,13 @@ public class FragmentStartApp2 extends BaseFragment {
         enterFade.setDuration(FADE_DEFAULT_TIME);
         nextFragment.setEnterTransition(enterFade);
 
+        SharePreference.getInstance(getActivity()).resetShareReferenceData();
         goNextFragment(nextFragment,false,ivLogo);
     }
 
     private void loginSuccess(String displayName){
         pbLoading.setVisibility(View.GONE);
-        tvWelcome.setText(String.format(Define.Notice.WELCOME) + SharePreference.getInstance(getActivity()).getUsername());
+        tvWelcome.setText(String.format(Define.Notice.WELCOME) +displayName);
         tvWelcome.setVisibility(View.VISIBLE);
         (new Handler()).postDelayed((Runnable) () -> {
             getBaseActivity().startActivity(HomeActivity.class, false);
@@ -104,22 +105,26 @@ public class FragmentStartApp2 extends BaseFragment {
     private void performTransition() {
         String userToken = SharePreference.getInstance(getActivity()).getUserToken();
         String userName = SharePreference.getInstance(getActivity()).getUsername();
-        if(firebaseUser != null && !TextUtils.isEmpty(userToken) && !TextUtils.isEmpty(userName)){
+        String email = SharePreference.getInstance(getActivity()).getEmail();
+
+        if(firebaseUser != null && !TextUtils.isEmpty(userToken) && !TextUtils.isEmpty(userName) && !TextUtils.isEmpty(email)){
             // hide progress bar and show welcome text
-            ApiUtils.getService().getUserInfo(userName).enqueue(new Callback<UserInfoResponse>() {
+            ApiUtils.getService().checkToken(userName, userToken,email,"online").enqueue(new Callback<UserInfoResponse.UserInfo>() {
                 @Override
-                public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
+                public void onResponse(Call<UserInfoResponse.UserInfo> call, Response<UserInfoResponse.UserInfo> response) {
                     if(response.isSuccessful()){
-                        loginSuccess(response.body().getUserInfo().getProfile().getDisplayName());
+                        loginSuccess(response.body().getProfile().getDisplayName());
                     }else {
                         relogin();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<UserInfoResponse> call, Throwable t) {
+                public void onFailure(Call<UserInfoResponse.UserInfo> call, Throwable t) {
                     relogin();
+
                 }
+
             });
         }else{
             // relogin

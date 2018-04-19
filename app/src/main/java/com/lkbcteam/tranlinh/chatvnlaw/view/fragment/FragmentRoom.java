@@ -125,6 +125,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         mLayout = new GridLayoutManager(getContext(),1);
         rvChatContentContainer.setLayoutManager(mLayout);
         adapter = new ChatContentAdapter(getContext(),mMessageList, mHideSoftKey);
+        adapter.setTargetUserPhotourl(targetUser.getAvatar().getThumbSmall().getUrl());
         rvChatContentContainer.setAdapter(adapter);
         mIbtnBack = view.findViewById(R.id.ibtn_back);
         mEdtChatInput = view.findViewById(R.id.edt_chat_input);

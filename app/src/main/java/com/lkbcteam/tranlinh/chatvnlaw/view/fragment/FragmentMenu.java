@@ -115,28 +115,33 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                         SnackbarHelper.showLongSnackBar(parrentLayout, Define.Notice.LAWYER_ONLY);
                     }
                 }else{
-                    getBaseActivity().startActivity(ActivityEditProfile.class,false);
-                    getBaseActivity().finish();
+                    if(SharePreference.getInstance(getActivity()).getRole().equals("Lawyer")) {
+                        getBaseActivity().startActivity(ActivityEditProfile.class,false);
+                        getBaseActivity().finish();
+                    }else{
+                        SnackbarHelper.showLongSnackBar(parrentLayout, Define.Notice.LAWYER_ONLY);
+                    }
+
                 }
                 break;
             case R.id.item_search_law_container:
 //                goNextFragment(FragmentSearchLaw.newInstance(),true,true);
                 break;
             case R.id.item_search_lawyer_container:
-                if (mPosition == 5){
-                    goBackFragment();
-                }else{
-                    getBaseActivity().startActivity(ActivitySearchLawer.class,false);
-                    getBaseActivity().finish();
-                }
+//                if (mPosition == 5){
+//                    goBackFragment();
+//                }else{
+//                    getBaseActivity().startActivity(ActivitySearchLawer.class,false);
+//                    getBaseActivity().finish();
+//                }
                 break;
             case R.id.item_todos_container:
-                if( mPosition == 3){
-                    goBackFragment();
-                }else{
-                    getBaseActivity().startActivity(ActivityTodoList.class,false);
-                    getBaseActivity().finish();
-                }
+//                if( mPosition == 3){
+//                    goBackFragment();
+//                }else{
+//                    getBaseActivity().startActivity(ActivityTodoList.class,false);
+//                    getBaseActivity().finish();
+//                }
                 break;
             case R.id.ibtn_close:
                 goBackFragment();

@@ -31,6 +31,7 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
     private List<Message> mMessageList;
     private Context mContext;
     private View.OnClickListener mOnClickContentItem;
+    private String targetUserPhotourl = "";
 
     public ChatContentAdapter(Context context, List<Message> messageList, View.OnClickListener onClickContentItem) {
         mMessageList = messageList;
@@ -82,9 +83,8 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
                 return;
             }
             holder.mLayoutContainer.setOnClickListener(this.mOnClickContentItem);
-            if(message.getmSenderUser() != null){
-                Picasso.with(mContext).load(String.valueOf(message.getmSenderUser().getPhotoURL())).resize(50,50).centerCrop().into(holder.mIvSenderPicture);
-            }
+            Picasso.with(mContext).load(targetUserPhotourl).resize(50,50).centerCrop().into(holder.mIvSenderPicture);
+
             if(message.getmMessageInfo() != null){
                 if(message.getmMessageInfo().getContentType() != null){
                     holder.mTextContent.setVisibility(View.GONE);
@@ -172,6 +172,10 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
     @Override
     public int getItemCount() {
         return mMessageList.size();
+    }
+
+    public void setTargetUserPhotourl(String targetUserPhotourl) {
+        this.targetUserPhotourl = targetUserPhotourl;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

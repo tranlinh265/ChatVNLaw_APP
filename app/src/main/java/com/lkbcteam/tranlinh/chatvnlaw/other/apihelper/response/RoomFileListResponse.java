@@ -10,16 +10,29 @@ import java.util.List;
  */
 
 public class RoomFileListResponse {
-    @SerializedName("files")
+    @SerializedName("list_files")
     @Expose
     private List<File> files = null;
+
+    @SerializedName("list_files_names")
+    @Expose
+    private List<String> listFilesNames = null;
 
     public List<File> getFiles() {
         return files;
     }
 
+
     public void setFiles(List<File> files) {
         this.files = files;
+    }
+
+    public List<String> getListFilesNames() {
+        return listFilesNames;
+    }
+
+    public void setListFilesNames(List<String> listFilesNames) {
+        this.listFilesNames = listFilesNames;
     }
 
     public class File {

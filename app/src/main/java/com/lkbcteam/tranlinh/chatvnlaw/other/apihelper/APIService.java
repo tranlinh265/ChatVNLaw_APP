@@ -18,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -93,5 +94,14 @@ public interface APIService {
             @Field(Define.RailServer.LawyerProfileFiled.INTRO) String intro,
             @Field(Define.RailServer.LawyerProfileFiled.EXP) String exp,
             @Field(Define.RailServer.LawyerProfileFiled.WORK_PLACE) String workPlace
+    );
+
+    @FormUrlEncoded
+    @PATCH(Define.RailServer.API_UPDATE_USER)
+    Call<UserInfoResponse.UserInfo> checkToken(
+            @Path("username") String username,
+            @Header(Define.RailServer.X_USER_TOKEN) String userToken,
+            @Header(Define.RailServer.X_USER_EMAIL) String email,
+            @Field("users[status]") String status
     );
 }

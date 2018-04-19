@@ -23,6 +23,9 @@ public class Define {
         String API_GET_ROOM_FILE_LIST = "/api/rooms/{roomId}/room_files/";
         String API_GET_PROFILE_DATA = "/api/lawyers/{username}";
         String API_UPDATE_LAWYER_INFO = "/api/lawyers/{username}";
+        String API_UPDATE_USER = "/api/users/{username}";
+
+
         String X_API_TOKEN_KEY = "x-api-token";
         String X_USER_TOKEN = "x-user-token";
         String X_USER_EMAIL = "x-user-email";
