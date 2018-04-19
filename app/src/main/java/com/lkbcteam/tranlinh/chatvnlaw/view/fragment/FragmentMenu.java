@@ -18,6 +18,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivityTodoList;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
+import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 
 /**
  * Created by tranlinh on 31/01/2018.
@@ -152,6 +153,7 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                 break;
             case R.id.btn_logout:
                 FirebaseAuth.getInstance().signOut();
+                SharePreference.getInstance(getActivity()).resetShareReferenceData();
                 getBaseActivity().startActivity(MainActivity.class,true);
                 getBaseActivity().finish();
                 break;

@@ -91,6 +91,7 @@ public interface APIService {
             @Field(Define.RailServer.LawyerProfileFiled.CERTIFICATE) String certificate,
             @Field(Define.RailServer.LawyerProfileFiled.EDUCATION) String education,
             @Field(Define.RailServer.LawyerProfileFiled.INTRO) String intro,
-            @Field(Define.RailServer.LawyerProfileFiled.EXP) String exp
+            @Field(Define.RailServer.LawyerProfileFiled.EXP) String exp,
+            @Field(Define.RailServer.LawyerProfileFiled.WORK_PLACE) String workPlace
     );
 }

@@ -7,6 +7,8 @@
     android:background="@android:color/transparent"
     android:paddingRight="@dimen/login_layout_padding"
     android:paddingLeft="@dimen/login_layout_padding"
+    android:id="@+id/view_parrent"
+
     tools:context=".activity.MainActivity">
     <RelativeLayout
         android:layout_width="match_parent"

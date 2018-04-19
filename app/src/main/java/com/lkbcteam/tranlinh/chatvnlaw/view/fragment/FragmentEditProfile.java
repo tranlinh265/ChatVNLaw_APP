@@ -19,6 +19,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.ProfileInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
+import com.lkbcteam.tranlinh.chatvnlaw.other.SnackbarHelper;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.ProfileResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.EditProfilePresenter;
 import com.squareup.picasso.Picasso;
@@ -37,7 +38,7 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
 
     private ImageButton ibtnHomeMenu;
 
-    private TextView tvUserName,tvDisplayName;
+    private TextView tvUserName;
     private CircleImageView civUserAvatar;
     private EditText edtName,edtDayOfBirth,edtCardNumber,edtCertificate,edtCategory,edtExperience,edtIntro,edtAchievement,edtEducation,edtWorkPlace;
     private Button btnSubmit;
@@ -68,7 +69,6 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
         ibtnHomeMenu.setOnClickListener(this);
 
         tvUserName = view.findViewById(R.id.tv_username);
-        tvDisplayName = view.findViewById(R.id.tv_displayname);
         civUserAvatar = view.findViewById(R.id.civ_user_avatar);
         edtName = view.findViewById(R.id.edt_name);
         edtDayOfBirth = view.findViewById(R.id.edt_day_of_birth);
@@ -107,6 +107,7 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
                 goNextFragment(FragmentMenu.newInstance(2,true),true,false);
                 break;
             case R.id.btn_submit:
+                updateLawyerInfo();
                 break;
             case R.id.edt_day_of_birth:
                 break;
@@ -166,7 +167,29 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
 
     private void updateLawyerInfo(){
         String birthDay = edtDayOfBirth.getText().toString();
+        String displayName = edtName.getText().toString();
         String achievement = edtAchievement.getText().toString();
+        String cardNumber = edtCardNumber.getText().toString();
+        String certificate = edtCertificate.getText().toString();
+        String exp = edtExperience.getText().toString();
+        String intro = edtIntro.getText().toString();
+        String education = edtEducation.getText().toString();
+        String workPlace = edtWorkPlace.getText().toString();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("username", SharePreference.getInstance(getActivity()).getUsername());
+        bundle.putString("userToken",SharePreference.getInstance(getActivity()).getUserToken());
+        bundle.putString("email", SharePreference.getInstance(getActivity()).getEmail());
+        bundle.putString("birthDay", birthDay);
+        bundle.putString("displayName", displayName);
+        bundle.putString("achievement", achievement);
+        bundle.putString("cardNumber", cardNumber);
+        bundle.putString("certificate", certificate);
+        bundle.putString("exp",exp);
+        bundle.putString("intro", intro);
+        bundle.putString("education",education);
+        bundle.putString("workPlace", workPlace);
+        presenter.updateProfileAttr(bundle);
     }
 
     private void showDatePicker(){
@@ -189,5 +212,15 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
     @Override
     public void onLoadFailure(String error) {
         Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void updateSuccess() {
+        SnackbarHelper.showLongSnackBar(parrentLayout,Define.Notice.UPDATE_SUCCESS);
+    }
+
+    @Override
+    public void updateFalure(String error) {
+        SnackbarHelper.showLongSnackBar(parrentLayout,error);
     }
 }

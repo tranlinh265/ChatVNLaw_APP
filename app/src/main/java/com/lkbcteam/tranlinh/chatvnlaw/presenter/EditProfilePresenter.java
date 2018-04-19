@@ -1,6 +1,9 @@
 package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 
+import android.os.Bundle;
+
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.ProfileInterator;
+import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 
 /**
  * Created by tranlinh on 16/04/2018.
@@ -29,9 +32,32 @@ public class EditProfilePresenter implements ProfileInterator.LoadProfileDataLis
         callback.onLoadFailure(error);
     }
 
+    @Override
+    public void onUpdateSuccess() {
+        callback.updateSuccess();
+    }
+
+    @Override
+    public void onUpdateFalure(Object error) {
+        int errorCode = (int) error;
+        switch (errorCode){
+            case 401:
+                callback.updateFalure(Define.Notice.ERROR_INVALID_TOKEN);
+                break;
+            default:
+                callback.updateFalure(Define.Notice.UPDATE_FALURE);
+                break;
+        }
+    }
+
+    public void updateProfileAttr(Bundle bundle){
+        profileInterator.updateProfileData(bundle);
+    }
     public interface EditProfileView{
         void displayDefaultValue();
         void displayProfileValue(Object o);
         void onLoadFailure(String error);
+        void updateSuccess();
+        void updateFalure(String error);
     }
 }

@@ -53,6 +53,7 @@ public class Define {
             String EDUCATION = "lawyers[education]";
             String INTRO = "lawyers[intro]";
             String EXP = "lawyers[exp]";
+            String WORK_PLACE = "lawyers[workPlace]";
         }
     }
     public interface Pubnub{
@@ -199,6 +200,11 @@ public class Define {
          String CANCELREQUEST= "cancel";
     }
 
+    public interface Notice{
+        String UPDATE_SUCCESS = "Cập nhật thành công.";
+        String ERROR_INVALID_TOKEN = "Đăng nhập quá hạn, xin vui lòng đăng nhập lại.";
+        String UPDATE_FALURE = "Cập nhật không thành công, vui lòng thử lại sau.";
+    }
     public enum Specializes{
         HINH_SU("Hình sự"),
         SO_HUU_TRI_TUE("Sở hữu trí tuệ"),

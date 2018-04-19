@@ -33,6 +33,13 @@ public class SharePreference {
         return sharePreference;
     }
 
+    public void resetShareReferenceData(){
+        setUsername(null);
+        setEmail(null);
+        setRole(null);
+        setUserToken(null);
+        setUserId(null);
+    }
     private void pushString(String key, String value){
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(key, value);

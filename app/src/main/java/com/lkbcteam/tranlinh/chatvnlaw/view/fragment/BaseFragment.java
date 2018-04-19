@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.BaseActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.BaseFragmentContainer;
 
@@ -17,6 +18,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.BaseFragmentContai
 public abstract class BaseFragment  extends Fragment {
 
     private BaseActivity baseActivity;
+    protected View parrentLayout;
 
     public BaseActivity getBaseActivity(){
         return baseActivity;
@@ -39,7 +41,9 @@ public abstract class BaseFragment  extends Fragment {
         initData(view);
     }
 
-    protected void initView(View view){}
+    protected void initView(View view){
+        parrentLayout = view.findViewById(R.id.view_parrent);
+    }
 
     protected void initData(View view){}
 
