@@ -19,6 +19,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -75,5 +76,21 @@ public interface APIService {
     @GET(Define.RailServer.API_GET_PROFILE_DATA)
     Call<ProfileResponse> getLawyerProfileData(
             @Path("username") String username
+    );
+
+    @FormUrlEncoded
+    @PATCH(Define.RailServer.API_UPDATE_LAWYER_INFO)
+    Call<ProfileResponse> updateLawyerInfo(
+            @Path("username") String username,
+            @Header(Define.RailServer.X_USER_TOKEN) String userToken,
+            @Header(Define.RailServer.X_USER_EMAIL) String userEmail,
+            @Field(Define.RailServer.LawyerProfileFiled.BIRTHDAY) String birthDay,
+            @Field(Define.RailServer.LawyerProfileFiled.DISPLAY_NAME) String displayName,
+            @Field(Define.RailServer.LawyerProfileFiled.ACHIEVEMENT) String achievement,
+            @Field(Define.RailServer.LawyerProfileFiled.CARD_NUMBER) String cardNumber,
+            @Field(Define.RailServer.LawyerProfileFiled.CERTIFICATE) String certificate,
+            @Field(Define.RailServer.LawyerProfileFiled.EDUCATION) String education,
+            @Field(Define.RailServer.LawyerProfileFiled.INTRO) String intro,
+            @Field(Define.RailServer.LawyerProfileFiled.EXP) String exp
     );
 }

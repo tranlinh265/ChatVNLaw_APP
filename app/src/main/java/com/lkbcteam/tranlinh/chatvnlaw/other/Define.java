@@ -22,7 +22,7 @@ public class Define {
         String API_GET_USER_INFO = "api/users/{username}";
         String API_GET_ROOM_FILE_LIST = "/api/rooms/{roomId}/room_files/";
         String API_GET_PROFILE_DATA = "/api/lawyers/{username}";
-
+        String API_UPDATE_LAWYER_INFO = "/api/lawyers/{username}";
         String X_API_TOKEN_KEY = "x-api-token";
         String X_USER_TOKEN = "x-user-token";
         String X_USER_EMAIL = "x-user-email";
@@ -42,6 +42,17 @@ public class Define {
             String DISPLAYNAME = SIGNUP + "[profile_attributes][displayName]";
             String USERNAME = SIGNUP + "[profile_attributes][userName]";
             String ROLE = SIGNUP + "[user_role_attributes][role_id]";
+        }
+
+        interface LawyerProfileFiled{
+            String BIRTHDAY ="lawyers[profile_attributes][birthday]";
+            String DISPLAY_NAME = "lawyers[profile_attributes][displayName]";
+            String ACHIEVEMENT = "lawyers[achievement]";
+            String CARD_NUMBER = "lawyers[cardNumber]";
+            String CERTIFICATE = "lawyers[certificate]";
+            String EDUCATION = "lawyers[education]";
+            String INTRO = "lawyers[intro]";
+            String EXP = "lawyers[exp]";
         }
     }
     public interface Pubnub{
@@ -186,5 +197,46 @@ public class Define {
          String STREAM= "stream";
          String END= "end";
          String CANCELREQUEST= "cancel";
+    }
+
+    public enum Specializes{
+        HINH_SU("Hình sự"),
+        SO_HUU_TRI_TUE("Sở hữu trí tuệ"),
+        HON_NHAN_GIA_DINH("Hôn nhân & gia đình"),
+        NHA_DAT_XAY_DUNG("Nhà đất - Xây dựng"),
+        TAI_CHINH_NGAN_HANG("Tài chính - Ngân hàng"),
+        DAN_SU("Dân sự"),
+        LAO_DONG_BAO_HIEM("Lao động - Bảo hiểm xã hội"),
+        DOANH_NGHIEP("Doanh nghiệp");
+
+        private String value;
+
+        Specializes(String s) {
+            this.value = s;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public static int convertToIntValue(String s){
+            if(s.toLowerCase().equals(HINH_SU.getValue().toLowerCase()))
+                return 1;
+            if(s.toLowerCase().equals(SO_HUU_TRI_TUE.getValue().toLowerCase()))
+                return 2;
+            if(s.toLowerCase().equals(HON_NHAN_GIA_DINH.getValue().toLowerCase()))
+                return 3;
+            if(s.toLowerCase().equals(NHA_DAT_XAY_DUNG.getValue().toLowerCase()))
+                return 4;
+            if(s.toLowerCase().equals(TAI_CHINH_NGAN_HANG.getValue().toLowerCase()))
+                return 5;
+            if(s.toLowerCase().equals(DAN_SU.getValue().toLowerCase()))
+                return 6;
+            if(s.toLowerCase().equals(LAO_DONG_BAO_HIEM.getValue().toLowerCase()))
+                return 7;
+            if(s.toLowerCase().equals(DOANH_NGHIEP.getValue().toLowerCase()))
+                return 8;
+            return -1;
+        }
     }
 }

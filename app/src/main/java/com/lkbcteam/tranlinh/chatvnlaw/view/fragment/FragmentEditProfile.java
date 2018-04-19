@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.ProfileInterator;
+import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.ProfileResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.EditProfilePresenter;
@@ -132,8 +133,8 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
         edtExperience.setText(data.getLawyerInfo().getLawyerProfile().getExp());
         edtWorkPlace.setText(data.getLawyerInfo().getLawyerProfile().getWorkPlace());
         if(data.getLawyerInfo().getLawyerSpecializes().size() > 0){
-            for (ProfileResponse.LawyerSpecialize specialize : data.getLawyerInfo().getLawyerSpecializes()){
-                switch (specialize.getId()){
+            for (ProfileResponse.Specialize specialize : data.getLawyerInfo().getSpecializes()){
+                switch (Define.Specializes.convertToIntValue(specialize.getName())){
                     case 1:
                         cbHs.setChecked(true);
                         break;
@@ -163,13 +164,18 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
         }
     }
 
+    private void updateLawyerInfo(){
+        String birthDay = edtDayOfBirth.getText().toString();
+        String achievement = edtAchievement.getText().toString();
+    }
+
     private void showDatePicker(){
         String currentDay = edtDayOfBirth.getText().toString();
         String startDay = DEFAULT_START_DAY;
         String startMonth = DEFAULT_START_MONTH;
         String startYear = DEFAULT_START_YEAR;
 
-        if(TextUtils.isEmpty(currentDay)){
+        if(!TextUtils.isEmpty(currentDay)){
             startYear= currentDay.split("-")[0];
             startMonth = currentDay.split("-")[1];
             startDay = currentDay.split("-")[2];
