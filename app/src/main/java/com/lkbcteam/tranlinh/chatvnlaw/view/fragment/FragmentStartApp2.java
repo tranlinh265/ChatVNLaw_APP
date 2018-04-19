@@ -21,7 +21,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.ApiUtils;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.UserInfoResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by tranlinh on 29/03/2018.
@@ -60,41 +67,63 @@ public class FragmentStartApp2 extends BaseFragment {
         delayedTransactionHandler.postDelayed(runnable, 5000);
     }
 
+    private void relogin(){
+        Fragment previousFragment = getFragmentManager().findFragmentById(R.id.container_framelayout);
+        Fragment nextFragment = FragmentLogin.newInstance();
+
+        pbLoading.setVisibility(View.GONE);
+        // 1. Exit for Previous Fragment
+
+        Slide slide = new Slide();
+        slide.setDuration(FADE_DEFAULT_TIME);
+        previousFragment.setExitTransition(slide);
+        // 2. Shared Elements Transition
+        TransitionSet enterTransitionSet = new TransitionSet();
+        enterTransitionSet.addTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move));
+        enterTransitionSet.setDuration(MOVE_DEFAULT_TIME);
+        enterTransitionSet.setStartDelay(FADE_DEFAULT_TIME);
+        nextFragment.setSharedElementEnterTransition(enterTransitionSet);
+
+        // 3. Enter Transition for New Fragment
+        Fade enterFade = new Fade();
+        enterFade.setStartDelay(MOVE_DEFAULT_TIME + FADE_DEFAULT_TIME);
+        enterFade.setDuration(FADE_DEFAULT_TIME);
+        nextFragment.setEnterTransition(enterFade);
+
+        goNextFragment(nextFragment,false,ivLogo);
+    }
+
+    private void loginSuccess(String displayName){
+        pbLoading.setVisibility(View.GONE);
+        tvWelcome.setText(String.format(Define.Notice.WELCOME) + SharePreference.getInstance(getActivity()).getUsername());
+        tvWelcome.setVisibility(View.VISIBLE);
+        (new Handler()).postDelayed((Runnable) () -> {
+            getBaseActivity().startActivity(HomeActivity.class, false);
+        }, 3000);
+    }
     private void performTransition() {
         String userToken = SharePreference.getInstance(getActivity()).getUserToken();
-        if(firebaseUser != null && !TextUtils.isEmpty(userToken)){
+        String userName = SharePreference.getInstance(getActivity()).getUsername();
+        if(firebaseUser != null && !TextUtils.isEmpty(userToken) && !TextUtils.isEmpty(userName)){
             // hide progress bar and show welcome text
-            pbLoading.setVisibility(View.GONE);
-            tvWelcome.setText(String.format("Chào mừng @dawdwa"));
-            tvWelcome.setVisibility(View.VISIBLE);
-            (new Handler()).postDelayed((Runnable) () -> {
-                getBaseActivity().startActivity(HomeActivity.class, false);
-            }, 3000);
+            ApiUtils.getService().getUserInfo(userName).enqueue(new Callback<UserInfoResponse>() {
+                @Override
+                public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
+                    if(response.isSuccessful()){
+                        loginSuccess(response.body().getUserInfo().getProfile().getDisplayName());
+                    }else {
+                        relogin();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserInfoResponse> call, Throwable t) {
+                    relogin();
+                }
+            });
         }else{
             // relogin
-            Fragment previousFragment = getFragmentManager().findFragmentById(R.id.container_framelayout);
-            Fragment nextFragment = FragmentLogin.newInstance();
-
-            pbLoading.setVisibility(View.GONE);
-            // 1. Exit for Previous Fragment
-
-            Slide slide = new Slide();
-            slide.setDuration(FADE_DEFAULT_TIME);
-            previousFragment.setExitTransition(slide);
-            // 2. Shared Elements Transition
-            TransitionSet enterTransitionSet = new TransitionSet();
-            enterTransitionSet.addTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move));
-            enterTransitionSet.setDuration(MOVE_DEFAULT_TIME);
-            enterTransitionSet.setStartDelay(FADE_DEFAULT_TIME);
-            nextFragment.setSharedElementEnterTransition(enterTransitionSet);
-
-            // 3. Enter Transition for New Fragment
-            Fade enterFade = new Fade();
-            enterFade.setStartDelay(MOVE_DEFAULT_TIME + FADE_DEFAULT_TIME);
-            enterFade.setDuration(FADE_DEFAULT_TIME);
-            nextFragment.setEnterTransition(enterFade);
-
-            goNextFragment(nextFragment,false,ivLogo);
+            relogin();
         }
     }
     @Override

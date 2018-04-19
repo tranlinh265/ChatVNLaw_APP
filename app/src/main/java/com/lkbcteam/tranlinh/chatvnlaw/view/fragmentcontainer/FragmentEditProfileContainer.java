@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentProfile;
 import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentEditProfile;
 
 /**

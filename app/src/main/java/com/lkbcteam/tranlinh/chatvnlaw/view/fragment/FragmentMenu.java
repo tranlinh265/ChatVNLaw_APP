@@ -18,7 +18,9 @@ import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivityTodoList;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
+import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
+import com.lkbcteam.tranlinh.chatvnlaw.other.SnackbarHelper;
 
 /**
  * Created by tranlinh on 31/01/2018.
@@ -28,7 +30,6 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
 
     private ImageButton mIbtnCloseMenu;
     private int mPosition;
-    private boolean accessible;
 
     private View mHomeContainer, mNotiContainer, mTodosContainer, mProfileContainer, mSearchLawContainer, mSearchLawyerContainer;
     private Button mBtnLogout;
@@ -39,12 +40,6 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
         return fragmentMenu;
     }
 
-    public static FragmentMenu newInstance(int position, boolean accessible) {
-        FragmentMenu fragment = new FragmentMenu();
-        fragment.mPosition = position;
-        fragment.accessible = accessible;
-        return fragment;
-    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -106,7 +101,6 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                 }else{
                     getBaseActivity().startActivity(HomeActivity.class, false);
                 }
-//                goNextFragment(FragmentHome.newInstance(), true,true);
                 break;
             case R.id.item_noti_container:
 //                Intent intent = new Intent(getBaseActivity(), ActivityWebView.class);
@@ -115,17 +109,15 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                 break;
             case R.id.item_profile_container:
                 if(mPosition ==2){
-                    if(accessible){
+                    if(SharePreference.getInstance(getActivity()).getRole().equals("Lawyer")){
                         goBackFragment();
                     }else{
-                        Toast.makeText(getContext(), getContext().getString(R.string.notice_cant_access), Toast.LENGTH_LONG).show();
+                        SnackbarHelper.showLongSnackBar(parrentLayout, Define.Notice.LAWYER_ONLY);
                     }
-
                 }else{
                     getBaseActivity().startActivity(ActivityEditProfile.class,false);
                     getBaseActivity().finish();
                 }
-//                goNextFragment(FragmentProfile.newInstance(),true,true);
                 break;
             case R.id.item_search_law_container:
 //                goNextFragment(FragmentSearchLaw.newInstance(),true,true);
@@ -137,7 +129,6 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                     getBaseActivity().startActivity(ActivitySearchLawer.class,false);
                     getBaseActivity().finish();
                 }
-//                goNextFragment(FragmentSearchLawyer.newInstance(),true,true);
                 break;
             case R.id.item_todos_container:
                 if( mPosition == 3){
@@ -146,7 +137,6 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                     getBaseActivity().startActivity(ActivityTodoList.class,false);
                     getBaseActivity().finish();
                 }
-//                goNextFragment(FragmentTodos.newInstance(),true,true);
                 break;
             case R.id.ibtn_close:
                 goBackFragment();

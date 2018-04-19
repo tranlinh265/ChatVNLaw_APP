@@ -204,6 +204,8 @@ public class Define {
         String UPDATE_SUCCESS = "Cập nhật thành công.";
         String ERROR_INVALID_TOKEN = "Đăng nhập quá hạn, xin vui lòng đăng nhập lại.";
         String UPDATE_FALURE = "Cập nhật không thành công, vui lòng thử lại sau.";
+        String LAWYER_ONLY = "Chức năng chỉ dành riêng cho luật sư.";
+        String WELCOME = "Chào mừng ";
     }
     public enum Specializes{
         HINH_SU("Hình sự"),

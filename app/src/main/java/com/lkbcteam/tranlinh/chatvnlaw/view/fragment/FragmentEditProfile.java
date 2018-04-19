@@ -104,7 +104,7 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ibtn_home_menu:
-                goNextFragment(FragmentMenu.newInstance(2,true),true,false);
+                goNextFragment(FragmentMenu.newInstance(2),true,false);
                 break;
             case R.id.btn_submit:
                 updateLawyerInfo();
