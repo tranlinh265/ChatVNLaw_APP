@@ -21,6 +21,7 @@ public class SharePreference {
     private static final String USER_ID = APP_INFO + "USER_ID";
     private static final String ROLE = APP_INFO + "ROLE";
     private static final String EMAIL = APP_INFO + "EMAIL";
+    private static final String LAWYER_ID = APP_INFO + "LAWYER_ID";
 
     public SharePreference(Activity activity){
         this.sp = activity.getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE);
@@ -43,6 +44,11 @@ public class SharePreference {
     private void pushString(String key, String value){
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(key, value);
+        editor.apply();
+    }
+    private void pushInteger(String key, Integer value){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt(key,value);
         editor.apply();
     }
     public void setUsername(String username){
@@ -77,5 +83,11 @@ public class SharePreference {
     }
     public String getEmail(){
         return sp.getString(EMAIL, "");
+    }
+    public Integer getLawyerId(){
+        return sp.getInt(LAWYER_ID, 0);
+    }
+    public void setLawyerId(Integer lawyerId){
+        pushInteger(LAWYER_ID, lawyerId);
     }
 }

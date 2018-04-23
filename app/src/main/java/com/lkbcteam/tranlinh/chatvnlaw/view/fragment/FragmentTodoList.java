@@ -3,6 +3,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,9 +14,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
+import com.lkbcteam.tranlinh.chatvnlaw.adapter.TodoListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.TodoListAdapter1;
 import com.lkbcteam.tranlinh.chatvnlaw.model.TodoItem;
 import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.TodoList;
+import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.TaskResponse;
+import com.lkbcteam.tranlinh.chatvnlaw.other.custom.DialogTaskContent;
+import com.lkbcteam.tranlinh.chatvnlaw.presenter.TodoListPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,22 +30,23 @@ import java.util.List;
  * Created by tranlinh on 09/04/2018.
  */
 
-public class FragmentTodoList extends BaseFragment implements View.OnClickListener{
+public class FragmentTodoList extends BaseFragment implements View.OnClickListener, TodoListPresenter.onLoadData, TodoListAdapter.onClick,
+DialogTaskContent.DialogTaskContentListener{
 
     private ImageButton mIbtnHomeMenu;
     private ProgressBar progressBar;
-    private TodoList todoListLoader;
-    private List<TodoItem> todos;
-    private TodoListAdapter1 adapter;
+    private List<TaskResponse.Task> tasks;
+    private TodoListAdapter adapter;
     private RecyclerView rvTodoList;
     private TextView tvTitle;
     private TextView tvDataNotExist;
     private RecyclerView.LayoutManager mLayout;
+    private TodoListPresenter presenter;
+
+    private boolean isChanged = false;
 
     public static FragmentTodoList newInstance() {
-
         Bundle args = new Bundle();
-
         FragmentTodoList fragment = new FragmentTodoList();
         fragment.setArguments(args);
         return fragment;
@@ -70,17 +77,28 @@ public class FragmentTodoList extends BaseFragment implements View.OnClickListen
     @Override
     protected void initData(View view) {
         super.initData(view);
-        if (todos == null){
-            todos = new ArrayList<>();
+        if (tasks == null){
+            tasks = new ArrayList<>();
         }else{
-            todos.clear();
+            tasks.clear();
         }
         mLayout = new GridLayoutManager(getContext(),1);
         rvTodoList.setLayoutManager(mLayout);
-        adapter = new TodoListAdapter1(getContext(), todos);
+        adapter = new TodoListAdapter(getContext(),tasks);
+        adapter.setCallback(this);
         rvTodoList.setAdapter(adapter);
+        presenter = new TodoListPresenter(tasks);
+        presenter.setCallback(this);
+        loadTaskList();
     }
 
+    private void loadTaskList(){
+        Integer lawyerId = SharePreference.getInstance(getActivity()).getLawyerId();
+        String lawyerToken = SharePreference.getInstance(getActivity()).getUserToken();
+        String lawyerEmail = SharePreference.getInstance(getActivity()).getEmail();
+        presenter.loadTaskFromRail(String.valueOf(lawyerId), lawyerToken, lawyerEmail);
+
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -88,5 +106,46 @@ public class FragmentTodoList extends BaseFragment implements View.OnClickListen
                 goNextFragment(FragmentMenu.newInstance(3),true,false);
                 break;
         }
+    }
+
+    @Override
+    public void notifyDataChanged() {
+        progressBar.setVisibility(View.GONE);
+        rvTodoList.setVisibility(View.VISIBLE);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onError() {
+
+    }
+
+    @Override
+    public void onClickAddNewTaskIcon(Object o, int position) {
+        Bundle bundle = new Bundle();
+        bundle.putString("title", "Tạo công việc mới với " + ((TaskResponse.Task)o).getTargetUser());
+        bundle.putString("negativeBtn","Hủy");
+        bundle.putString("positiveBtn", "Tạo mới");
+
+        DialogFragment dialogFragment = DialogTaskContent.newInstance(bundle);
+        ((DialogTaskContent)dialogFragment).setListener(this);
+        dialogFragment.show(getFragmentManager(), "taskcontent");
+//        ((DialogTaskContent)dialogFragment).setButtonText("123", "456");
+
+    }
+
+    @Override
+    public void onClickEditTaskIcon(Object o, int position) {
+
+    }
+
+    @Override
+    public void onClickNegativeButton(DialogFragment dialogFragment) {
+        dialogFragment.dismiss();
+    }
+
+    @Override
+    public void onClickPositiveButton(DialogFragment dialogFragment) {
+        dialogFragment.dismiss();
     }
 }

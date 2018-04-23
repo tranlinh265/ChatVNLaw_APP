@@ -18,7 +18,7 @@ public class TaskResponse {
         return rooms;
     }
 
-    public void setTasks(List<Room> rooms) {
+    public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
     public class Room {
@@ -58,7 +58,14 @@ public class TaskResponse {
         }
 
     }
-    public class Task {
+    public static class Task {
+
+        private Integer roomId;
+        private String targetUser;
+
+        @SerializedName("id")
+        @Expose
+        private Integer taskId;
 
         @SerializedName("content")
         @Expose
@@ -94,5 +101,28 @@ public class TaskResponse {
             this.updatedAt = updatedAt;
         }
 
+        public Integer getRoomId() {
+            return roomId;
+        }
+
+        public void setRoomId(Integer roomId) {
+            this.roomId = roomId;
+        }
+
+        public String getTargetUser() {
+            return targetUser;
+        }
+
+        public void setTargetUser(String targetUser) {
+            this.targetUser = targetUser;
+        }
+
+        public Integer getTaskId() {
+            return taskId;
+        }
+
+        public void setTaskId(Integer taskId) {
+            this.taskId = taskId;
+        }
     }
 }

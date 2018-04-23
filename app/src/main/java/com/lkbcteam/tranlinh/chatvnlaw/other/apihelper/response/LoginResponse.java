@@ -30,6 +30,10 @@ public class LoginResponse {
     @Expose
     private RoomListResponse.Avatar avatar;
 
+    @SerializedName("lawyer_id")
+    @Expose
+    private Integer lawyerId;
+
     public String getId() {
         return id;
     }
@@ -84,5 +88,13 @@ public class LoginResponse {
 
     public void setAvatar(RoomListResponse.Avatar avatar) {
         this.avatar = avatar;
+    }
+
+    public Integer getLawyerId() {
+        return lawyerId;
+    }
+
+    public void setLawyerId(Integer lawyerId) {
+        this.lawyerId = lawyerId;
     }
 }

@@ -12,6 +12,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.ProfileResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomFileListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.SignupResponse;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.TaskResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.UserInfoResponse;
 
 import retrofit2.Call;
@@ -103,5 +104,12 @@ public interface APIService {
             @Header(Define.RailServer.X_USER_TOKEN) String userToken,
             @Header(Define.RailServer.X_USER_EMAIL) String email,
             @Field("users[status]") String status
+    );
+
+    @GET(Define.RailServer.API_GET_TASK)
+    Call<TaskResponse> getTask(
+            @Path("lawyer_id") String lawyerId,
+            @Header(Define.RailServer.X_USER_TOKEN) String userToken,
+            @Header(Define.RailServer.X_USER_EMAIL) String email
     );
 }

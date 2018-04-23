@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/colorGrayDark">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -12,11 +13,26 @@
             android:background="@color/colorGray"
             android:layout_alignBottom="@+id/tv_room_info"/>
         <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="voi anh abcde"
             android:id="@+id/tv_room_info"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_toLeftOf="@id/ibtn_add_new_task"
+            android:singleLine="true" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:id="@+id/ibtn_add_new_task"
+            android:background="@drawable/ic_add"
+            android:layout_alignParentTop="true"
+            android:layout_alignBottom="@+id/tv_room_info"
+            android:adjustViewBounds="true"
+            android:layout_marginRight="10dp"/>
     </RelativeLayout>
 
 </LinearLayout>

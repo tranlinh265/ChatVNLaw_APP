@@ -4,23 +4,39 @@
     android:layout_height="wrap_content"
     android:paddingLeft="20dp"
     android:paddingTop="5dp"
-    android:paddingBottom="5dp">
+    android:paddingBottom="5dp"
+    android:background="@color/colorGrayDark">
     <CheckBox
+        android:buttonTint="@color/colorGrayLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cb_task_status" />
+        android:id="@+id/cb_task_status"
+        android:layout_marginRight="10dp"/>
+    <ImageButton
+        android:id="@+id/ibtn_edit_task"
+        android:src="@drawable/ic_edit"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cb_task_status"
+        android:layout_alignLeft="@+id/cb_task_status"
+        android:layout_alignRight="@id/cb_task_status"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/cb_task_status"
         android:paddingTop="5dp"
+        android:textColor="@android:color/white"
         android:id="@+id/tv_task_content"
-        android:paddingRight="10dp"/>
+        android:paddingRight="10dp"
+        android:textSize="18sp" />
     <TextView
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_task_time"
         android:layout_below="@+id/tv_task_content"
         android:layout_alignParentRight="true"
-        android:paddingRight="10dp"/>
+        android:paddingRight="10dp"
+        android:textSize="12sp" />
 </RelativeLayout>

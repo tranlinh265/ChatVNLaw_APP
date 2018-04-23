@@ -42,6 +42,7 @@
     <string name="notice_data_not_exist">Không có dữ liệu</string>
     <string name="start_app_description">Tra cứu, tư vấn pháp luật trực tuyến</string>
 
+    <string name="job_with_format">Công việc với %s</string>
     <string name="logoTransitionName">logoTransitionName</string>
     <string name="target_user_avatar_transiton">targetUserAvatar</string>
 </resources>

@@ -24,7 +24,7 @@ public class Define {
         String API_GET_PROFILE_DATA = "/api/lawyers/{username}";
         String API_UPDATE_LAWYER_INFO = "/api/lawyers/{username}";
         String API_UPDATE_USER = "/api/users/{username}";
-
+        String API_GET_TASK = "/api/lawyers/{lawyer_id}/tasks";
 
         String X_API_TOKEN_KEY = "x-api-token";
         String X_USER_TOKEN = "x-user-token";

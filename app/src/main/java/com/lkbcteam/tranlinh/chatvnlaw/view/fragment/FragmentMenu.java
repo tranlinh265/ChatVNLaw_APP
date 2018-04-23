@@ -117,7 +117,7 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                 }else{
                     if(SharePreference.getInstance(getActivity()).getRole().equals("Lawyer")) {
                         getBaseActivity().startActivity(ActivityEditProfile.class,false);
-                        getBaseActivity().finish();
+//                        getBaseActivity().finish();
                     }else{
                         SnackbarHelper.showLongSnackBar(parrentLayout, Define.Notice.LAWYER_ONLY);
                     }
@@ -136,13 +136,29 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
 //                }
                 break;
             case R.id.item_todos_container:
+                if(mPosition == 3){
+                    if(SharePreference.getInstance(getActivity()).getRole().equals("Lawyer")){
+                        goBackFragment();
+                    }else{
+                        SnackbarHelper.showLongSnackBar(parrentLayout, Define.Notice.LAWYER_ONLY);
+                    }
+                }else{
+                    if(SharePreference.getInstance(getActivity()).getRole().equals("Lawyer")) {
+                        getBaseActivity().startActivity(ActivityTodoList.class,false);
+//                        getBaseActivity().finish();
+                    }else{
+                        SnackbarHelper.showLongSnackBar(parrentLayout, Define.Notice.LAWYER_ONLY);
+                    }
+
+                }
+                break;
 //                if( mPosition == 3){
 //                    goBackFragment();
 //                }else{
 //                    getBaseActivity().startActivity(ActivityTodoList.class,false);
 //                    getBaseActivity().finish();
 //                }
-                break;
+
             case R.id.ibtn_close:
                 goBackFragment();
                 break;

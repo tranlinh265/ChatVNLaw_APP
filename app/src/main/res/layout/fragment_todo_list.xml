@@ -25,7 +25,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:id="@+id/rv_todo_list"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"/>
 
         <ProgressBar
             android:layout_width="wrap_content"
