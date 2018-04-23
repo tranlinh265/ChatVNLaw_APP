@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +27,17 @@ import com.lkbcteam.tranlinh.chatvnlaw.presenter.TodoListPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.lkbcteam.tranlinh.chatvnlaw.other.custom.DialogTaskContent.DIALOG_CONTENT;
+
 /**
  * Created by tranlinh on 09/04/2018.
  */
 
-public class FragmentTodoList extends BaseFragment implements View.OnClickListener, TodoListPresenter.onLoadData, TodoListAdapter.onClick,
-DialogTaskContent.DialogTaskContentListener{
+public class FragmentTodoList extends BaseFragment implements View.OnClickListener
+        , TodoListPresenter.onLoadData
+        , TodoListAdapter.onClick
+        , DialogTaskContent.DialogTaskContentListener{
+    private final String ROOM_ID = "room_id";
 
     private ImageButton mIbtnHomeMenu;
     private ProgressBar progressBar;
@@ -123,20 +129,29 @@ DialogTaskContent.DialogTaskContentListener{
     @Override
     public void onClickAddNewTaskIcon(Object o, int position) {
         Bundle bundle = new Bundle();
-        bundle.putString("title", "Tạo công việc mới với " + ((TaskResponse.Task)o).getTargetUser());
-        bundle.putString("negativeBtn","Hủy");
-        bundle.putString("positiveBtn", "Tạo mới");
+        bundle.putString(DialogTaskContent.DIALOG_TITLE, "Tạo công việc mới với " + ((TaskResponse.Task)o).getTargetUser());
+        bundle.putString(DialogTaskContent.DIALOG_NEGATIVE_BUTTON_TEXT,"Hủy");
+        bundle.putString(DialogTaskContent.DIALOG_POSITIVE_BUTTON_TEXT, "Tạo mới");
+        bundle.putInt(ROOM_ID, ((TaskResponse.Task)o).getRoomId());
 
         DialogFragment dialogFragment = DialogTaskContent.newInstance(bundle);
         ((DialogTaskContent)dialogFragment).setListener(this);
-        dialogFragment.show(getFragmentManager(), "taskcontent");
-//        ((DialogTaskContent)dialogFragment).setButtonText("123", "456");
-
+        dialogFragment.show(getFragmentManager(), DialogTaskContent.TAG_NEW_TASK_DIALOG);
     }
 
     @Override
     public void onClickEditTaskIcon(Object o, int position) {
+        Bundle bundle = new Bundle();
+        bundle.putString(DialogTaskContent.DIALOG_TITLE, "Chỉnh sửa công việc");
+        bundle.putString(DialogTaskContent.DIALOG_NEGATIVE_BUTTON_TEXT,"Hủy");
+        bundle.putString(DialogTaskContent.DIALOG_POSITIVE_BUTTON_TEXT,"Chỉnh sửa");
 
+        bundle.putString(DIALOG_CONTENT,((TaskResponse.Task)o).getContent());
+        bundle.putString(DialogTaskContent.DIALOG_NEUTRA_BUTTON_TEXT, "Xóa");
+
+        DialogFragment dialogFragment = DialogTaskContent.newInstance(bundle);
+        ((DialogTaskContent)dialogFragment).setListener(this);
+        dialogFragment.show(getFragmentManager(), DialogTaskContent.TAG_EDIT_TASK_DIALOG);
     }
 
     @Override
@@ -146,6 +161,35 @@ DialogTaskContent.DialogTaskContentListener{
 
     @Override
     public void onClickPositiveButton(DialogFragment dialogFragment) {
+        String userToken = SharePreference.getInstance(getActivity()).getUserToken();
+        String userEmail = SharePreference.getInstance(getActivity()).getEmail();
+        String content = dialogFragment.getArguments().getString(DIALOG_CONTENT,"");
+
+        String roomId = String.valueOf(dialogFragment.getArguments().getInt(ROOM_ID,0));
+
+        if (dialogFragment.getTag().equals(DialogTaskContent.TAG_NEW_TASK_DIALOG)){
+            // create new task
+            if(!TextUtils.isEmpty(content)){
+                presenter.createNewTask(userToken, userEmail, roomId,content);
+                dialogFragment.dismiss();
+            }else{
+                // show dialog notice
+
+            }
+        }else{
+            // edit tag
+            if(!TextUtils.isEmpty(content)){
+
+            }else{
+
+            }
+
+            dialogFragment.dismiss();
+        }
+    }
+
+    @Override
+    public void onClickNeutralButton(DialogFragment dialogFragment) {
         dialogFragment.dismiss();
     }
 }

@@ -25,6 +25,8 @@ public class Define {
         String API_UPDATE_LAWYER_INFO = "/api/lawyers/{username}";
         String API_UPDATE_USER = "/api/users/{username}";
         String API_GET_TASK = "/api/lawyers/{lawyer_id}/tasks";
+        String API_CREATE_NEW_TASK = "/api/rooms/{room_id}/tasks";
+        String API_EDIT_TASK = "/api/rooms/{room_id}/tasks/{task_id}";
 
         String X_API_TOKEN_KEY = "x-api-token";
         String X_USER_TOKEN = "x-user-token";
@@ -57,6 +59,9 @@ public class Define {
             String INTRO = "lawyers[intro]";
             String EXP = "lawyers[exp]";
             String WORK_PLACE = "lawyers[workPlace]";
+        }
+        interface CreateTask{
+            String CONTENT = "tasks[content]";
         }
     }
     public interface Pubnub{

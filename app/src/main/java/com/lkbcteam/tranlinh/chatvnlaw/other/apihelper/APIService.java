@@ -7,6 +7,7 @@ import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.LawyerNameResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.SearchLawyerResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.TopLawyerResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.CreateTaskResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.LoginResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.ProfileResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomFileListResponse;
@@ -15,8 +16,12 @@ import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.SignupResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.TaskResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.UserInfoResponse;
 
+import java.util.Map;
+
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
@@ -112,4 +117,23 @@ public interface APIService {
             @Header(Define.RailServer.X_USER_TOKEN) String userToken,
             @Header(Define.RailServer.X_USER_EMAIL) String email
     );
+
+    @FormUrlEncoded
+    @POST(Define.RailServer.API_CREATE_NEW_TASK)
+    Call<CreateTaskResponse> createNewTask(
+            @Path("room_id")String roomId,
+            @Header(Define.RailServer.X_USER_TOKEN) String userToken,
+            @Header(Define.RailServer.X_USER_EMAIL) String userEmail,
+            @Field(Define.RailServer.CreateTask.CONTENT) String content
+    );
+
+    @FormUrlEncoded
+    @PATCH(Define.RailServer.API_EDIT_TASK)
+    Call<CreateTaskResponse>editTask(
+            @Path("room_id")String roomId,
+            @Header(Define.RailServer.X_USER_TOKEN) String userToken,
+            @Header(Define.RailServer.X_USER_EMAIL) String userEmail,
+            @FieldMap Map<String, String> map
+            );
+
 }

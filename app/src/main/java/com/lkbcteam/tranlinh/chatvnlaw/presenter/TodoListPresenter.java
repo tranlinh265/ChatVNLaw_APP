@@ -1,9 +1,12 @@
 package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.TodoListInterator;
+import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.CreateTaskResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.TaskResponse;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tranlinh on 23/04/2018.
@@ -34,14 +37,39 @@ public class TodoListPresenter implements TodoListInterator.onLoadData{
 
             tasks.add(task);
             for (TaskResponse.Task task1 : room.getTasks()){
+                task1.setRoomId(room.getId());
                 tasks.add(task1);
             }
         }
         callback.notifyDataChanged();
     }
 
+    public void createNewTask(String userToken, String userEmail, String roomId ,String content){
+        interator.createNewTask(userToken,userEmail,content,roomId);
+    }
+
     @Override
     public void onLoadError() {
+
+    }
+
+    @Override
+    public void onCreateTaskSuccess(Object o, String roomId) {
+        TaskResponse.Task task = (TaskResponse.Task)o;
+        task.setRoomId(Integer.valueOf(roomId));
+        int i;
+        for (i = tasks.size() - 1; i > 0; i--){
+           TaskResponse.Task task1 = tasks.get(i);
+           if(task1.getRoomId().equals(task.getRoomId())){
+               tasks.add(i+1, task);
+               break;
+           }
+        }
+        callback.notifyDataChanged();
+    }
+
+    @Override
+    public void onCreateTaskError() {
 
     }
 
