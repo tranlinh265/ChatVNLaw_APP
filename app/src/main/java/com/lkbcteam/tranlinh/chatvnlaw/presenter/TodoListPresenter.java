@@ -63,6 +63,17 @@ public class TodoListPresenter implements TodoListInterator.onLoadData{
 
         interator.editTask(bundle);
     }
+
+    public void deleteTask(String userToken, String userEmail, String roomId, String taskId, int position){
+        Bundle bundle = new Bundle();
+        bundle.putString(TodoListInterator.BUNDLE_USER_TOKEN , userToken);
+        bundle.putString(TodoListInterator.BUNDLE_USER_EMAIL , userEmail);
+        bundle.putString(TodoListInterator.BUNDLE_ROOM_ID, roomId);
+        bundle.putString(TodoListInterator.BUNDLE_TASK_ID, taskId);
+        bundle.putInt(DialogTaskContent.DIALOG_TASK_POSITION, position);
+
+        interator.deleteTask(bundle);
+    }
     @Override
     public void onLoadError() {
 
@@ -73,7 +84,7 @@ public class TodoListPresenter implements TodoListInterator.onLoadData{
         TaskResponse.Task task = (TaskResponse.Task)o;
         task.setRoomId(Integer.valueOf(roomId));
         int i;
-        for (i = tasks.size() - 1; i > 0; i--){
+        for (i = tasks.size() - 1; i >= 0; i--){
            TaskResponse.Task task1 = tasks.get(i);
            if(task1.getRoomId().equals(task.getRoomId())){
                tasks.add(i+1, task);
@@ -98,6 +109,17 @@ public class TodoListPresenter implements TodoListInterator.onLoadData{
 
     @Override
     public void onEditTaskError() {
+
+    }
+
+    @Override
+    public void onDeleteTaskSuccess(int position) {
+        tasks.remove(position);
+        callback.notifyDataChanged();
+    }
+
+    @Override
+    public void onDeleteTaskError() {
 
     }
 

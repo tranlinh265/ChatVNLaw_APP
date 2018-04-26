@@ -52,6 +52,30 @@ public class TodoListInterator {
         });
     }
 
+    public void deleteTask(Bundle bundle){
+        String userToken = bundle.getString(BUNDLE_USER_TOKEN, "");
+        String userEmail = bundle.getString(BUNDLE_USER_EMAIL, "");
+        String roomId = bundle.getString(BUNDLE_ROOM_ID , "");
+        String taskId = bundle.getString(BUNDLE_TASK_ID, "");
+        int position = bundle.getInt(DialogTaskContent.DIALOG_TASK_POSITION, -1);
+
+        ApiUtils.getService().deleteTask(roomId,taskId,userToken, userEmail).enqueue(new Callback<CreateTaskResponse>() {
+            @Override
+            public void onResponse(Call<CreateTaskResponse> call, Response<CreateTaskResponse> response) {
+                if (response.isSuccessful()){
+                    callback.onDeleteTaskSuccess(position);
+                }else{
+                    callback.onDeleteTaskError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CreateTaskResponse> call, Throwable t) {
+                t.printStackTrace();
+                callback.onDeleteTaskError();
+            }
+        });
+    }
     public void editTask(Bundle bundle){
         String userToken = bundle.getString(BUNDLE_USER_TOKEN, "");
         String userEmail = bundle.getString(BUNDLE_USER_EMAIL, "");
@@ -106,5 +130,7 @@ public class TodoListInterator {
         void onCreateTaskError();
         void onEditTaskSuccess(Object o, int position);
         void onEditTaskError();
+        void onDeleteTaskSuccess( int position);
+        void onDeleteTaskError();
     }
 }

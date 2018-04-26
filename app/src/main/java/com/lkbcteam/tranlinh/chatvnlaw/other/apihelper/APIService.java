@@ -136,7 +136,6 @@ public interface APIService {
             @Header(Define.RailServer.X_USER_EMAIL) String userEmail,
             @FieldMap Map<String, String> map
             );
-    @FormUrlEncoded
     @DELETE(Define.RailServer.API_DELETE_TASK)
     Call<CreateTaskResponse> deleteTask(
             @Path("room_id") String roomId,

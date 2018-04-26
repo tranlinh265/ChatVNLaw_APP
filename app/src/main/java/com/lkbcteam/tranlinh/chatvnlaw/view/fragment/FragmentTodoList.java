@@ -204,8 +204,9 @@ public class FragmentTodoList extends BaseFragment implements View.OnClickListen
         String userEmail = SharePreference.getInstance(getActivity()).getEmail();
         String roomId = String.valueOf(dialogFragment.getArguments().getInt(ROOM_ID,0));
         String taskId = dialogFragment.getArguments().getString(DialogTaskContent.DIALOG_TASK_ID, "");
+        int position = dialogFragment.getArguments().getInt(DialogTaskContent.DIALOG_TASK_POSITION, -1);
 
-
+        presenter.deleteTask(userToken,userEmail,roomId, taskId, position);
         dialogFragment.dismiss();
     }
 }

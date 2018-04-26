@@ -79,7 +79,7 @@ public class DialogTaskContent extends DialogFragment {
                 });
         if (!TextUtils.isEmpty(neutralBtnText)){
             builder.setNeutralButton(neutralBtnText, (dialog,which) ->{
-                listener.onClickNegativeButton(DialogTaskContent.this);
+                listener.onClickNeutralButton(DialogTaskContent.this);
             });
         }
         this.dialog = builder.create();
