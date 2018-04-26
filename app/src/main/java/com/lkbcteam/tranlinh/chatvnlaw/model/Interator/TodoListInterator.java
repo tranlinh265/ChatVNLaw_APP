@@ -1,8 +1,15 @@
 package com.lkbcteam.tranlinh.chatvnlaw.model.Interator;
 
+import android.os.Bundle;
+
+import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.ApiUtils;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.CreateTaskResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.TaskResponse;
+import com.lkbcteam.tranlinh.chatvnlaw.other.custom.DialogTaskContent;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,6 +22,13 @@ import retrofit2.Response;
 public class TodoListInterator {
 
     private onLoadData callback;
+
+    public static final String BUNDLE_USER_TOKEN = "userToken";
+    public static final String BUNDLE_USER_EMAIL = "userEmail";
+    public static final String BUNDLE_ROOM_ID = "roomId";
+    public static final String BUNDLE_TASK_ID = "taskId";
+    public static final String BUNDLE_TASK_CONTENT = "taskContent";
+    public static final String BUNDLE_TASK_STATUS = "taskStatus";
 
     public TodoListInterator(onLoadData callback){
         this.callback = callback;
@@ -34,6 +48,36 @@ public class TodoListInterator {
             @Override
             public void onFailure(Call<CreateTaskResponse> call, Throwable t) {
                 callback.onLoadError();
+            }
+        });
+    }
+
+    public void editTask(Bundle bundle){
+        String userToken = bundle.getString(BUNDLE_USER_TOKEN, "");
+        String userEmail = bundle.getString(BUNDLE_USER_EMAIL, "");
+
+        String roomId = bundle.getString(BUNDLE_ROOM_ID , "");
+        String taskId = bundle.getString(BUNDLE_TASK_ID, "");
+        String taskContent = bundle.getString(BUNDLE_TASK_CONTENT, "");
+        String taskStatus = bundle.getString(BUNDLE_TASK_STATUS,"");
+        int position = bundle.getInt(DialogTaskContent.DIALOG_TASK_POSITION, -1);
+        Map<String, String> map = new HashMap<>();
+        map.put(Define.RailServer.EditTask.CONTENT , taskContent);
+        map.put(Define.RailServer.EditTask.STATUS, taskStatus);
+
+        ApiUtils.getService().editTask(roomId,taskId,userToken,userEmail,map).enqueue(new Callback<CreateTaskResponse>() {
+            @Override
+            public void onResponse(Call<CreateTaskResponse> call, Response<CreateTaskResponse> response) {
+                if (response.isSuccessful()){
+                    callback.onEditTaskSuccess(response.body(),position);
+                }else{
+                    callback.onEditTaskError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CreateTaskResponse> call, Throwable t) {
+                callback.onEditTaskError();
             }
         });
     }
@@ -60,5 +104,7 @@ public class TodoListInterator {
         void onLoadError();
         void onCreateTaskSuccess(Object o, String roomId);
         void onCreateTaskError();
+        void onEditTaskSuccess(Object o, int position);
+        void onEditTaskError();
     }
 }

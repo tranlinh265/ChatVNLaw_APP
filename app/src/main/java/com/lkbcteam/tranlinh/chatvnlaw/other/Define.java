@@ -27,6 +27,7 @@ public class Define {
         String API_GET_TASK = "/api/lawyers/{lawyer_id}/tasks";
         String API_CREATE_NEW_TASK = "/api/rooms/{room_id}/tasks";
         String API_EDIT_TASK = "/api/rooms/{room_id}/tasks/{task_id}";
+        String API_DELETE_TASK = "/api/rooms/{room_id}/tasks/{task_id}";
 
         String X_API_TOKEN_KEY = "x-api-token";
         String X_USER_TOKEN = "x-user-token";
@@ -62,6 +63,10 @@ public class Define {
         }
         interface CreateTask{
             String CONTENT = "tasks[content]";
+        }
+        interface EditTask{
+            String CONTENT = "tasks[content]";
+            String STATUS = "tasks[status]";
         }
     }
     public interface Pubnub{

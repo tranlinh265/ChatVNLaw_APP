@@ -68,7 +68,11 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
             holder.ibtnAddTask.setOnClickListener(v -> callback.onClickAddNewTaskIcon(task, position));
         }else{
             holder.cbTaskStatus.setChecked(!task.getStatus().equals("Doing"));
-            holder.cbTaskStatus.setOnClickListener( v -> callback.onClickEditTaskIcon(task, position));
+            holder.cbTaskStatus.setOnClickListener( v ->
+            {
+                callback.onClickEditTaskIcon(task, position);
+                holder.cbTaskStatus.setChecked(!holder.cbTaskStatus.isChecked());
+            });
             holder.tvTaskContent.setText(task.getContent());
             String updateAt = task.getUpdatedAt().split("T")[0];
             holder.tvTaskTime.setText(updateAt);

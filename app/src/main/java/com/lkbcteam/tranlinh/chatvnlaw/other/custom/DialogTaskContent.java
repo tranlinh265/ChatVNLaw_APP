@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
@@ -30,11 +31,15 @@ public class DialogTaskContent extends DialogFragment {
     public static final String DIALOG_NEUTRA_BUTTON_TEXT = "neutral_text";
 
     public static final String DIALOG_CONTENT = "dialog_content";
+    public static final String DIALOG_TASK_ID = "task_id";
+    public static final String DIALOG_TASK_POSITION = "position";
+    public static final String DIAOG_TASK_STATUS = "task_status";
 
     private DialogTaskContentListener listener;
     private Dialog dialog;
 
     private EditText edtContent;
+    private CheckBox cbStatus;
 
     public static DialogTaskContent newInstance(Bundle bundle) {
         DialogTaskContent fragment = new DialogTaskContent();
@@ -60,10 +65,15 @@ public class DialogTaskContent extends DialogFragment {
                     if(edtContent == null){
                         edtContent = (EditText)this.dialog.findViewById(R.id.edt_task_content);
                     }
+                    if(cbStatus == null){
+                        cbStatus = (CheckBox)this.dialog.findViewById(R.id.cb_task_status);
+                    }
                     String content = edtContent.getText().toString();
+                    String status = cbStatus.isChecked() ? "Done" : "Doing";
 
                     DialogTaskContent dialogFragment = DialogTaskContent.this;
                     dialogFragment.getArguments().putString(DIALOG_CONTENT, content);
+                    dialogFragment.getArguments().putString(DIAOG_TASK_STATUS, status);
 
                     listener.onClickPositiveButton(dialogFragment);
                 });
@@ -76,10 +86,15 @@ public class DialogTaskContent extends DialogFragment {
 
         this.dialog.setOnShowListener(dialogInterface -> {
             String content = getArguments().getString(DIALOG_CONTENT, "");
+            String status = getArguments().getString(DIAOG_TASK_STATUS, "Doing");
 
+            cbStatus = (CheckBox) dialog.findViewById(R.id.cb_task_status);
             edtContent = (EditText) dialog.findViewById(R.id.edt_task_content);
             if(edtContent != null){
                 edtContent.setText(content);
+            }
+            if(cbStatus != null){
+                cbStatus.setChecked(!status.equals("Doing"));
             }
         });
         return dialog;

@@ -133,6 +133,8 @@ public class FragmentTodoList extends BaseFragment implements View.OnClickListen
         bundle.putString(DialogTaskContent.DIALOG_NEGATIVE_BUTTON_TEXT,"Hủy");
         bundle.putString(DialogTaskContent.DIALOG_POSITIVE_BUTTON_TEXT, "Tạo mới");
         bundle.putInt(ROOM_ID, ((TaskResponse.Task)o).getRoomId());
+        bundle.putInt(DialogTaskContent.DIALOG_TASK_POSITION, position);
+        bundle.putString(DialogTaskContent.DIALOG_TASK_ID, String.valueOf(((TaskResponse.Task)o).getTaskId()));
 
         DialogFragment dialogFragment = DialogTaskContent.newInstance(bundle);
         ((DialogTaskContent)dialogFragment).setListener(this);
@@ -145,9 +147,12 @@ public class FragmentTodoList extends BaseFragment implements View.OnClickListen
         bundle.putString(DialogTaskContent.DIALOG_TITLE, "Chỉnh sửa công việc");
         bundle.putString(DialogTaskContent.DIALOG_NEGATIVE_BUTTON_TEXT,"Hủy");
         bundle.putString(DialogTaskContent.DIALOG_POSITIVE_BUTTON_TEXT,"Chỉnh sửa");
+        bundle.putInt(ROOM_ID, ((TaskResponse.Task)o).getRoomId());
 
         bundle.putString(DIALOG_CONTENT,((TaskResponse.Task)o).getContent());
         bundle.putString(DialogTaskContent.DIALOG_NEUTRA_BUTTON_TEXT, "Xóa");
+        bundle.putInt(DialogTaskContent.DIALOG_TASK_POSITION , position);
+        bundle.putString(DialogTaskContent.DIALOG_TASK_ID, String.valueOf(((TaskResponse.Task)o).getTaskId()));
 
         DialogFragment dialogFragment = DialogTaskContent.newInstance(bundle);
         ((DialogTaskContent)dialogFragment).setListener(this);
@@ -179,17 +184,28 @@ public class FragmentTodoList extends BaseFragment implements View.OnClickListen
         }else{
             // edit tag
             if(!TextUtils.isEmpty(content)){
-
+                Bundle bundle = dialogFragment.getArguments();
+                String taskId = bundle.getString(DialogTaskContent.DIALOG_TASK_ID, "");
+                String status = bundle.getString(DialogTaskContent.DIAOG_TASK_STATUS, "");
+                int position = bundle.getInt(DialogTaskContent.DIALOG_TASK_POSITION, -1);
+                presenter.editTask(userToken,userEmail,roomId,taskId,content,status,position);
+                dialogFragment.dismiss();
             }else{
 
             }
 
-            dialogFragment.dismiss();
+
         }
     }
 
     @Override
     public void onClickNeutralButton(DialogFragment dialogFragment) {
+        String userToken = SharePreference.getInstance(getActivity()).getUserToken();
+        String userEmail = SharePreference.getInstance(getActivity()).getEmail();
+        String roomId = String.valueOf(dialogFragment.getArguments().getInt(ROOM_ID,0));
+        String taskId = dialogFragment.getArguments().getString(DialogTaskContent.DIALOG_TASK_ID, "");
+
+
         dialogFragment.dismiss();
     }
 }

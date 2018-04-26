@@ -1,9 +1,12 @@
 package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 
+import android.os.Bundle;
+
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.TodoListInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.CreateTaskResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.TaskResponse;
+import com.lkbcteam.tranlinh.chatvnlaw.other.custom.DialogTaskContent;
 
 import java.util.List;
 import java.util.Map;
@@ -48,6 +51,18 @@ public class TodoListPresenter implements TodoListInterator.onLoadData{
         interator.createNewTask(userToken,userEmail,content,roomId);
     }
 
+    public void editTask(String userToken, String userEmail, String roomId, String taskId, String content, String status, int position){
+        Bundle bundle = new Bundle();
+        bundle.putString(TodoListInterator.BUNDLE_USER_TOKEN , userToken);
+        bundle.putString(TodoListInterator.BUNDLE_USER_EMAIL , userEmail);
+        bundle.putString(TodoListInterator.BUNDLE_ROOM_ID, roomId);
+        bundle.putString(TodoListInterator.BUNDLE_TASK_CONTENT, content);
+        bundle.putString(TodoListInterator.BUNDLE_TASK_STATUS, status);
+        bundle.putString(TodoListInterator.BUNDLE_TASK_ID, taskId);
+        bundle.putInt(DialogTaskContent.DIALOG_TASK_POSITION, position);
+
+        interator.editTask(bundle);
+    }
     @Override
     public void onLoadError() {
 
@@ -70,6 +85,19 @@ public class TodoListPresenter implements TodoListInterator.onLoadData{
 
     @Override
     public void onCreateTaskError() {
+
+    }
+
+    @Override
+    public void onEditTaskSuccess(Object o,int position) {
+        TaskResponse.Task task = tasks.get(position);
+        task.setContent(((CreateTaskResponse) o).getTask().getContent());
+        task.setStatus(((CreateTaskResponse)o).getTask().getStatus());
+        callback.notifyDataChanged();
+    }
+
+    @Override
+    public void onEditTaskError() {
 
     }
 

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorGrayDark">
+    android:background="@color/colorGrayDark"
+    android:paddingTop="20dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,7 +19,6 @@
             android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="voi anh abcde"
             android:id="@+id/tv_room_info"
             android:layout_marginLeft="20dp"
             android:layout_toLeftOf="@id/ibtn_add_new_task"
