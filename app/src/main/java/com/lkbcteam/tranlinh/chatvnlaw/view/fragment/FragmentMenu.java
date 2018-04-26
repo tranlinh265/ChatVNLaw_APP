@@ -125,7 +125,7 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                 }
                 break;
             case R.id.item_search_law_container:
-//                goNextFragment(FragmentSearchLaw.newInstance(),true,true);
+                goNextFragment(FragmentSearchLaw.newInstance(),true,true);
                 break;
             case R.id.item_search_lawyer_container:
 //                if (mPosition == 5){

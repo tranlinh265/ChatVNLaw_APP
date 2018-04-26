@@ -15,21 +15,11 @@
             android:src="@drawable/ic_home_menu"
             android:backgroundTint="@color/colorGrayDark"/>
     </RelativeLayout>
-    <RelativeLayout
+    <WebView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/square_avatar"
-            android:adjustViewBounds="true"
-            android:id="@+id/img"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/img"
-            android:layout_alignTop="@+id/img"
-            android:background="@drawable/bg_transparent"/>
-    </RelativeLayout>
+        android:layout_height="fill_parent"
+        android:id="@+id/wv_law_content">
+
+    </WebView>
 
 </LinearLayout>
