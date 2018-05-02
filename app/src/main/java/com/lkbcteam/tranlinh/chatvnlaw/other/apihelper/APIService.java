@@ -7,11 +7,13 @@ import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.LawyerNameResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.SearchLawyerResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.TopLawyerResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.ArticleDetailResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.CreateTaskResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.LoginResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.ProfileResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomFileListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.SearchLawResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.SignupResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.TaskResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.UserInfoResponse;
@@ -142,5 +144,14 @@ public interface APIService {
             @Path("task_id")String taskId,
             @Header(Define.RailServer.X_USER_TOKEN) String userToken,
             @Header(Define.RailServer.X_USER_EMAIL) String userEmail
+    );
+
+    @GET(Define.RailServer.API_SEARCH_ARTICLES)
+    Call<SearchLawResponse> searchLaw(
+            @Query("query") String keyword
+    );
+    @GET(Define.RailServer.API_ARTICLE_DETAIL)
+    Call<ArticleDetailResponse> getArticleDetail(
+            @Path("articleId") String articleId
     );
 }

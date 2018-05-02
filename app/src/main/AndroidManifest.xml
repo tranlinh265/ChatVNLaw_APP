@@ -59,6 +59,8 @@
             android:theme="@style/AppTheme"/>
         <activity android:name=".activity.VideoCallActivity"
             android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.ActivitySearchLaw"
+            android:theme="@style/AppTheme"/>
         <service android:name=".other.notification.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>

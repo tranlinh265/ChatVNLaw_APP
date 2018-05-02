@@ -28,6 +28,8 @@ public class Define {
         String API_CREATE_NEW_TASK = "/api/rooms/{room_id}/tasks";
         String API_EDIT_TASK = "/api/rooms/{room_id}/tasks/{task_id}";
         String API_DELETE_TASK = "/api/rooms/{room_id}/tasks/{task_id}";
+        String API_SEARCH_ARTICLES = "/api/search/articles";
+        String API_ARTICLE_DETAIL = "/api/articles/{articleId}";
 
         String X_API_TOKEN_KEY = "x-api-token";
         String X_USER_TOKEN = "x-user-token";

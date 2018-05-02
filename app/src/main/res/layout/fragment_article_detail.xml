@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/view_parrent">
+    android:id="@+id/view_parrent"
+    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@color/colorGrayDark"
@@ -13,25 +14,12 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_home_menu"
             android:backgroundTint="@color/colorGrayDark"/>
-        <ImageButton
-            android:id="@+id/ibtn_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_action_search"
-            android:backgroundTint="@color/colorGrayDark"
-            android:layout_alignParentRight="true"/>
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
+    <WebView
         android:layout_width="match_parent"
-        android:id="@+id/rv_law_result"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent"
+        android:id="@+id/wv_law_content">
 
-    </android.support.v7.widget.RecyclerView>
-    <!--<WebView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:id="@+id/wv_law_content">-->
-
-    <!--</WebView>-->
+    </WebView>
 
 </LinearLayout>
