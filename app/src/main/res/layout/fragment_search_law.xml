@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/view_parrent"
-    >
+    android:id="@+id/view_parrent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@color/colorGrayDark"
@@ -14,22 +13,58 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_home_menu"
             android:backgroundTint="@color/colorGrayDark"/>
+        <ImageButton
+            android:id="@+id/ibtn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_search"
+            android:backgroundTint="@color/colorGrayDark"
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_no_data"
+            android:text="Không có kết quả nào"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/black"
+            android:textSize="24dp"
+            android:visibility="gone"/>
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/square_avatar"
-            android:adjustViewBounds="true"
-            android:id="@+id/img"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/img"
-            android:layout_alignTop="@+id/img"
-            android:background="@drawable/bg_transparent"/>
+            android:id="@+id/nsv_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/rv_law_result"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_current_position"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="center" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hiển thị thêm"
+                    android:textAllCaps="false"
+                    android:id="@+id/btn_load_more"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"/>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
     </RelativeLayout>
+
 
 </LinearLayout>

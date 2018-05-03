@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivityEditProfile;
+import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivitySearchLaw;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivitySearchLawer;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivityTodoList;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
@@ -125,6 +126,11 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                 }
                 break;
             case R.id.item_search_law_container:
+                if( mPosition == 4){
+                    goBackFragment();
+                }else{
+                    getBaseActivity().startActivity(ActivitySearchLaw.class, false);
+                }
 //                goNextFragment(FragmentSearchLaw.newInstance(),true,true);
                 break;
             case R.id.item_search_lawyer_container:

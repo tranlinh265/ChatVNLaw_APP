@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:paddingRight="24dp"
+    android:paddingLeft="24dp"
+    android:paddingBottom="24dp">
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Từ khóa tìm kiếm"
+        android:singleLine="true"
+        android:id="@+id/edt_keyword"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Chế độ tìm kiếm"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rg_mode">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chính xác cụm từ trên"
+            android:id="@+id/rb_match_all"/>
+        <RadioButton
+            android:id="@+id/rb_contain_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Có tất cả các từ trên"/>
+    </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sắp xếp theo"/>
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rg_sort_mode">
+        <RadioButton
+            android:id="@+id/rb_release_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngày ban hành"/>
+        <RadioButton
+            android:id="@+id/rb_effect_day"
+            android:text="Ngày có hiệu lực"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thứ tự sắp xếp"
+        />
+    <RadioGroup
+        android:id="@+id/rg_sort_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rb_new_to_old"
+            android:text="Mới tới cũ"/>
+        <RadioButton
+            android:id="@+id/rb_old_to_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cũ tới mới"/>
+    </RadioGroup>
+</LinearLayout>

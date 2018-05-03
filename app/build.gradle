@@ -85,6 +85,8 @@ dependencies {
     // facebook shimmer
     compile 'com.facebook.shimmer:shimmer:0.1.0@aar'
 
+    // jsoup
+    compile 'org.jsoup:jsoup:1.11.3'
 }
 
 apply plugin: 'com.google.gms.google-services'
