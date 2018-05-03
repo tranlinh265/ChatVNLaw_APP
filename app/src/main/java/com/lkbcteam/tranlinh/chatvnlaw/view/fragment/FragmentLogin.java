@@ -92,12 +92,12 @@ public class FragmentLogin extends BaseFragment implements View.OnClickListener,
     @Override
     public void onStart() {
         super.onStart();
-        if(loginPresenter != null){
-            if(loginPresenter.checkLogin()){
-                loginPresenter.initCloudMessaging();
-                loginPresenter.storeCurrentUser();
-                getBaseActivity().startActivity(HomeActivity.class,true);
-            }
-        }
+//        if(loginPresenter != null){
+//            if(loginPresenter.checkLogin()){
+//                loginPresenter.initCloudMessaging();
+//                loginPresenter.storeCurrentUser();
+//                getBaseActivity().startActivity(HomeActivity.class,true);
+//            }
+//        }
     }
 }

@@ -96,7 +96,7 @@ public class Define {
         String SEARCH_LAWYER = "/api/search/lawyers";
         String ALL_LAWYERS = "api/lawyers";
         String TOP_LAWYERS = "api/lawyers/top";
-        String LAWYER_NAME = "api/lawyers/names";
+        String LAWYER_NAME = "/api/search/lawyers_names";
     }
     public interface  Table{
          String TABLE_ROOMS = "rooms";

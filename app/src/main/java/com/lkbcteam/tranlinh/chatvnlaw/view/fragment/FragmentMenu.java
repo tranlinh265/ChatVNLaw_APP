@@ -134,12 +134,12 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
 //                goNextFragment(FragmentSearchLaw.newInstance(),true,true);
                 break;
             case R.id.item_search_lawyer_container:
-//                if (mPosition == 5){
-//                    goBackFragment();
-//                }else{
-//                    getBaseActivity().startActivity(ActivitySearchLawer.class,false);
-//                    getBaseActivity().finish();
-//                }
+                if (mPosition == 5){
+                    goBackFragment();
+                }else{
+                    getBaseActivity().startActivity(ActivitySearchLawer.class,false);
+                    getBaseActivity().finish();
+                }
                 break;
             case R.id.item_todos_container:
                 if(mPosition == 3){

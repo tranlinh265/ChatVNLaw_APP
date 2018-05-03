@@ -12,52 +12,14 @@ import java.util.List;
 public class LawyerNameResponse {
     @SerializedName("names")
     @Expose
-    private List<Name> names = null;
-    @SerializedName("status")
-    @Expose
-    private String status;
+    private List<String> names = null;
 
-    public List<Name> getNames() {
+    public List<String> getNames() {
         return names;
     }
 
-    public void setNames(List<Name> names) {
+    public void setNames(List<String> names) {
         this.names = names;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public class Name {
-
-        @SerializedName("id")
-        @Expose
-        private Object id;
-        @SerializedName("name")
-        @Expose
-        private String name;
-
-        public Object getId() {
-            return id;
-        }
-
-        public void setId(Object id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
     }
 }
 

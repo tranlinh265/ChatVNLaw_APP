@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.LawyerCardAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Lawyer;
 import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.LawyerNameResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.SearchLawyerResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.APIService;
@@ -50,7 +49,7 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
     private TextView tvTitle;
     private final String TITLE = "Tìm kiếm luật sư";
     private CardStackView csvSearchResult;
-    private List<Lawyer> lawyers;
+    private List<SearchLawyerResponse.Lawyer> lawyers;
     private LawyerCardAdapter adapter;
     private Button btnReload;
     private ProgressBar progressBar;
@@ -129,10 +128,10 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
             @Override
             public void onResponse(Call<LawyerNameResponse> call, Response<LawyerNameResponse> response) {
                 if(response.isSuccessful()){
-                    List<LawyerNameResponse.Name> names = response.body().getNames();
+                    List<String> names = response.body().getNames();
                     int i;
                     for (i = 0; i < names.size(); i++){
-                        suggestion.add(names.get(i).getName());
+                        suggestion.add(names.get(i));
                     }
                 }
             }
@@ -156,7 +155,11 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
                     lawyers.clear();
                     adapter.clear();
                     if(response.body().getLawyers().size() > 0){
-                        lawyers.addAll(response.body().getLawyers());
+                        for (SearchLawyerResponse.Lawyer lawyer : response.body().getLawyers()){
+                            if (lawyer != null){
+                                lawyers.add(lawyer);
+                            }
+                        }
                         adapter.addAll(lawyers);
                     }else{
                         btnReload.setVisibility(View.VISIBLE);

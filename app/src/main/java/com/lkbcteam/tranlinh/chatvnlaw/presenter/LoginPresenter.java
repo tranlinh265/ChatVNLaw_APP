@@ -68,7 +68,9 @@ public class LoginPresenter implements AccountInterator.AccountListener.Login {
         SharePreference.getInstance(baseActivity).setUserToken(response.getUserToken());
         SharePreference.getInstance(baseActivity).setUsername(response.getUserName());
         SharePreference.getInstance(baseActivity).setRole(response.getRole());
-        SharePreference.getInstance(baseActivity).setLawyerId(response.getLawyerId());
+        if(response.getLawyerId() != null){
+            SharePreference.getInstance(baseActivity).setLawyerId(response.getLawyerId());
+        }
     }
 
     public void setBaseActivity(BaseActivity baseActivity) {

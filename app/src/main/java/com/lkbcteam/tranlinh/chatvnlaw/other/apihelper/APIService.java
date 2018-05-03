@@ -39,7 +39,7 @@ import retrofit2.http.Query;
 
 public interface APIService {
     @GET(Define.Api.SEARCH_LAWYER)
-    Call<SearchLawyerResponse> searchLawyer( @Query("query") @Nullable String name, @Query("page") int page);
+    Call<SearchLawyerResponse> searchLawyer( @Query("name") @Nullable String name, @Query("page") int page);
     @GET(Define.Api.LAWYER_NAME)
     Call<LawyerNameResponse> getAllNameOfLawyer();
     @GET(Define.Api.TOP_LAWYERS)

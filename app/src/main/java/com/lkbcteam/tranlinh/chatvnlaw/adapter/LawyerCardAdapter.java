@@ -11,17 +11,15 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Lawyer;
-import com.lkbcteam.tranlinh.chatvnlaw.model.Specialization;
+import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.SearchLawyerResponse;
 import com.squareup.picasso.Picasso;
 
 /**
  * Created by tranlinh on 01/03/2018.
  */
 
-public class LawyerCardAdapter extends ArrayAdapter<Lawyer> {
+public class LawyerCardAdapter extends ArrayAdapter<SearchLawyerResponse.Lawyer> {
     private final int OFFSET = 6;
     private int totalResult = 0;
     private int currentPage = 0;
@@ -48,41 +46,41 @@ public class LawyerCardAdapter extends ArrayAdapter<Lawyer> {
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Lawyer lawyer = getItem(position);
-        viewHolder.tvLawyerName.setText(lawyer.getName());
+        SearchLawyerResponse.Lawyer lawyer = getItem(position);
+        viewHolder.tvLawyerName.setText(lawyer.getProfile().getDisplayName());
         viewHolder.tvLawyerIntro.setText(lawyer.getIntro());
-        viewHolder.tvCost.setText(String.valueOf(lawyer.getCost()));
+        viewHolder.tvCost.setText(String.valueOf(lawyer.getPrice()));
         viewHolder.rbLawyerRating.setRating(lawyer.getRate());
         viewHolder.tvCurrentPosition.setText(String.format(getContext().getString(R.string.current_position),currentPage*OFFSET +position+1,totalResult));
         Picasso.with(getContext())
-                .load(lawyer.getPhotoUrl())
+                .load(lawyer.getProfile().getAvatar().getUrl())
                 .placeholder(R.drawable.spinning_loading_icon)
                 .into(viewHolder.ivLawyerAva);
         for(int i = 0; i < lawyer.getSpecializations().size(); i++){
-            Specialization specialization = lawyer.getSpecializations().get(i);
-            switch (specialization.getId()){
-                case 1:
+            SearchLawyerResponse.Specialization specialization = lawyer.getSpecializations().get(i);
+            switch (specialization.getName()){
+                case "Hình sự":
                     convertView.findViewById(R.id.tv_hinh_su).setVisibility(View.VISIBLE);
                     break;
-                case 2:
+                case "Sở hữu trí tuệ":
                     convertView.findViewById(R.id.tv_so_huu_tri_tue).setVisibility(View.VISIBLE);
                     break;
-                case 3:
+                case "Hôn nhân & gia đình":
                     convertView.findViewById(R.id.tv_hon_nhan_gia_dinh).setVisibility(View.VISIBLE);
                     break;
-                case 4:
+                case "Nhà đất - Xây dựng":
                     convertView.findViewById(R.id.tv_nha_dat_xay_dung).setVisibility(View.VISIBLE);
                     break;
-                case 5:
+                case "Tài chính - Ngân hàng":
                     convertView.findViewById(R.id.tv_tai_chinh_ngan_hang).setVisibility(View.VISIBLE);
                     break;
-                case 6:
+                case "Dân sự":
                     convertView.findViewById(R.id.tv_dan_su).setVisibility(View.VISIBLE);
                     break;
-                case 7:
+                case "Lao động - Bảo hiểm xã hội":
                     convertView.findViewById(R.id.tv_lao_dong_bao_hiem).setVisibility(View.VISIBLE);
                     break;
-                case 8:
+                case "Doanh nghiệp":
                     convertView.findViewById(R.id.tv_doanh_nghiep).setVisibility(View.VISIBLE);
                     break;
                 default:
