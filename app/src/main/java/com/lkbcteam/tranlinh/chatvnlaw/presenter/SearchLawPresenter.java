@@ -1,9 +1,10 @@
 package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 
+import android.os.Bundle;
+
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.SearchLawInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.SearchLawResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,10 +21,14 @@ public class SearchLawPresenter implements SearchLawInterator.SearchLawListener{
         interator.setCallback(this);
     }
 
-    public void searchLaw(String keyWord){
+    public void searchLaw(Bundle keyWord){
+        keyWord.putString("page","1");
         interator.searchLaw(keyWord);
     }
 
+    public void loadMore(Bundle bundle){
+        interator.searchLaw(bundle);
+    }
     public List<SearchLawResponse.Article> getArticles() {
         return articles;
     }
@@ -37,12 +42,27 @@ public class SearchLawPresenter implements SearchLawInterator.SearchLawListener{
         articles.clear();
         SearchLawResponse response = (SearchLawResponse) o;
         articles.addAll(response.getArticles());
-        callback.notifyDataChanged();
+        String currentPosition = String.format("%d trong tổng số %d kết quả", articles.size(), response.getNumberArticles());
+        callback.onSearchFirstPageSuccess(currentPosition);
     }
 
     @Override
     public void onSearchFalure() {
 
+    }
+
+    @Override
+    public void onLoadMoreSuccess(Object o) {
+        SearchLawResponse response = (SearchLawResponse) o;
+        articles.addAll(response.getArticles());
+        String currentPosition = String.format("%d trong tổng số %d kết quả", articles.size(), response.getNumberArticles());
+        callback.onSearchMoreSuccess(currentPosition);
+    }
+
+    @Override
+    public void onNoDataFound() {
+        articles.clear();
+        callback.onNoDataFound();
     }
 
     public SearchLawListener getCallback() {
@@ -54,7 +74,8 @@ public class SearchLawPresenter implements SearchLawInterator.SearchLawListener{
     }
 
     public interface SearchLawListener{
-        void notifyDataChanged();
-        void notifyDataInserted();
+        void onSearchFirstPageSuccess(String currentPosition);
+        void onSearchMoreSuccess(String currentPosition);
+        void onNoDataFound();
     }
 }

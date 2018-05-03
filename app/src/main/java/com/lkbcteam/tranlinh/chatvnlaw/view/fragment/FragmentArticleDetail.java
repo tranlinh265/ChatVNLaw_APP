@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageButton;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.ArticleDetailResponse;
@@ -21,6 +22,8 @@ import com.lkbcteam.tranlinh.chatvnlaw.presenter.ArticleDetailPresenter;
 public class FragmentArticleDetail extends BaseFragment implements View.OnClickListener, ArticleDetailPresenter.ArticleDetailListener {
     private WebView webView;
     private ArticleDetailPresenter presenter;
+    private ImageButton ibtnBack;
+    private String articleId;
 
     public static FragmentArticleDetail newInstance() {
 
@@ -46,21 +49,29 @@ public class FragmentArticleDetail extends BaseFragment implements View.OnClickL
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 return true;
             }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return true;
+            }
         });
+        ibtnBack = view.findViewById(R.id.ibtn_home_menu);
+        ibtnBack.setOnClickListener(this);
     }
 
     @Override
     protected void initData(View view) {
         super.initData(view);
-        String articleId = getArguments().getString("articleId", "0");
+        articleId = getArguments().getString("articleId", "0");
         presenter = new ArticleDetailPresenter();
         presenter.setCallback(this);
-        presenter.getArticleDetai(articleId);
+        presenter.getArticleDetail(articleId);
     }
 
     @Override
     public void displayResult(ArticleDetailResponse response) {
-        webView.loadData(response.getFullHtml(), "text/html", "utf-8");
+        webView.loadDataWithBaseURL("https://vnlaw.datalab.vn"+"/articles/"+articleId,response.getFullHtml(), "text/html", "utf-8",null);
+        webView.setClickable(false);
     }
 
     @Override

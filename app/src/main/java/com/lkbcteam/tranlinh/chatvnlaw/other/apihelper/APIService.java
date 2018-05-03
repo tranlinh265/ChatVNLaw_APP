@@ -148,7 +148,11 @@ public interface APIService {
 
     @GET(Define.RailServer.API_SEARCH_ARTICLES)
     Call<SearchLawResponse> searchLaw(
-            @Query("query") String keyword
+            @Query("query") String keyword,
+            @Query("group1") String group1,
+            @Query("group2_1") String group2_1,
+            @Query("group2_2") String group2_2,
+            @Query("page") String page
     );
     @GET(Define.RailServer.API_ARTICLE_DETAIL)
     Call<ArticleDetailResponse> getArticleDetail(

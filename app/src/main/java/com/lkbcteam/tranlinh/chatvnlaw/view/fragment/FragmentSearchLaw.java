@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.adapter.SearchLawAdapter;
@@ -21,10 +23,6 @@ import com.lkbcteam.tranlinh.chatvnlaw.presenter.SearchLawPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.lkbcteam.tranlinh.chatvnlaw.other.custom.DialogSearchLaw.KEYWORD;
-import static com.lkbcteam.tranlinh.chatvnlaw.other.custom.DialogSearchLaw.RG_MODE;
-import static com.lkbcteam.tranlinh.chatvnlaw.other.custom.DialogSearchLaw.RG_MODE_VALUE;
-import static com.lkbcteam.tranlinh.chatvnlaw.other.custom.DialogSearchLaw.RG_SORT_MODE;
 
 /**
  * Created by tranlinh on 26/04/2018.
@@ -39,8 +37,17 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
     private SearchLawAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<SearchLawResponse.Article> articles;
+    private TextView tvCurrentPosition;
+    private Button btnLoadMore;
 
     private SearchLawPresenter presenter;
+
+    private boolean initView = false;
+    private int currentPage = 0;
+
+    private Bundle bundle;
+    private TextView tvNodata;
+    private View vContent;
 
     public static FragmentSearchLaw newInstance() {
 
@@ -65,19 +72,33 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
     @Override
     protected void initView(View view) {
         super.initView(view);
-        articles = new ArrayList<>();
+        if(articles == null){
+            articles = new ArrayList<>();
+            bundle = new Bundle();
+            initView = true;
+        }
 
         ibtnSearch = (ImageButton)view.findViewById(R.id.ibtn_search);
         ibtnBack = (ImageButton)view.findViewById(R.id.ibtn_home_menu);
         ibtnSearch.setOnClickListener(this);
         ibtnBack.setOnClickListener(this);
-        layoutManager = new GridLayoutManager(getContext(), 1);
+        layoutManager = new GridLayoutManager(getContext(), 1){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         rvLawResult = (RecyclerView)view.findViewById(R.id.rv_law_result);
         adapter = new SearchLawAdapter();
         adapter.setArticles(articles);
         adapter.setCallback(this);
         rvLawResult.setLayoutManager(layoutManager);
         rvLawResult.setAdapter(adapter);
+        tvCurrentPosition = (TextView)view.findViewById(R.id.tv_current_position);
+        btnLoadMore = (Button)view.findViewById(R.id.btn_load_more);
+        btnLoadMore.setOnClickListener(this);
+        tvNodata = (TextView)view.findViewById(R.id.tv_no_data);
+        vContent = (View)view.findViewById(R.id.nsv_content);
     }
 
     @Override
@@ -86,6 +107,9 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
         presenter = new SearchLawPresenter();
         presenter.setArticles(articles);
         presenter.setCallback(this);
+        if (articles.isEmpty() && initView){
+            presenter.searchLaw(bundle);
+        }
     }
 
     @Override
@@ -94,7 +118,7 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
             case R.id.ibtn_search:
                 // show dialog
                 DialogSearchLaw dialogSearchLaw = new DialogSearchLaw();
-                Bundle bundle = new Bundle();
+//                Bundle bundle = new Bundle();
                 dialogSearchLaw.setArguments(bundle);
                 dialogSearchLaw.setListener(this);
                 dialogSearchLaw.show(getFragmentManager(), "dialogSearchLaw");
@@ -102,28 +126,45 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
             case R.id.ibtn_home_menu:
                 goNextFragment(FragmentMenu.newInstance(4),true,false);
                 break;
+            case R.id.btn_load_more:
+                bundle.putString("page", String.valueOf(currentPage + 1));
+                presenter.loadMore(bundle);
+                break;
         }
     }
 
     @Override
     public void onClickPositiveButton(DialogFragment dialogFragment) {
-        Bundle bundle = dialogFragment.getArguments();
-        int rgModeChecked = bundle.getInt(RG_MODE,0);
-        int rgSoftModeChecked = bundle.getInt(RG_SORT_MODE, 0);
-        int rgSoftValueChecked = bundle.getInt(RG_MODE_VALUE, 0);
-        String keyword = bundle.getString(KEYWORD, "");
-
-        presenter.searchLaw(keyword);
+        bundle = dialogFragment.getArguments();
+        presenter.searchLaw(bundle);
     }
 
     @Override
-    public void notifyDataChanged() {
+    public void onSearchFirstPageSuccess(String currentPosition) {
+        tvNodata.setVisibility(View.GONE);
+        vContent.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
+        currentPage = 1;
+        tvCurrentPosition.setText(currentPosition);
+        vContent.scrollTo(0,0);
     }
 
     @Override
-    public void notifyDataInserted() {
+    public void onSearchMoreSuccess(String currentPosition) {
+        tvNodata.setVisibility(View.GONE);
+        vContent.setVisibility(View.VISIBLE);
+        adapter.notifyDataSetChanged();
+        currentPage++;
+        tvCurrentPosition.setText(currentPosition);
     }
+
+    @Override
+    public void onNoDataFound() {
+        adapter.notifyDataSetChanged();
+        tvNodata.setVisibility(View.VISIBLE);
+        vContent.setVisibility(View.GONE);
+    }
+
 
     @Override
     public void onClickArticleItem(int position) {

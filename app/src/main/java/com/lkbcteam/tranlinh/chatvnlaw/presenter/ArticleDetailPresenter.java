@@ -16,7 +16,7 @@ public class ArticleDetailPresenter implements ArticleDetailInterator.ArticleDet
         interator.setCallback(this);
     }
 
-    public void getArticleDetai(String articleId){
+    public void getArticleDetail(String articleId){
         interator.getArticleDetail(articleId);
     }
 
