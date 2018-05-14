@@ -34,7 +34,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_new_design,parent,false);
         ViewHolder vh = new ViewHolder(v);
 
         return vh;

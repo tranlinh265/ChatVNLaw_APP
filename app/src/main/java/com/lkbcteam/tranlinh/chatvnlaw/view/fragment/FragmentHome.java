@@ -41,8 +41,9 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     private RoomListAdapter adapter;
     private ImageButton ibtnHomeMenu;
     private HomePresenter homePresenter;
-    private CircleImageView civProfileImage;
-    private TextView tvUserDisplayName;
+    private TextView tvCountAllMess;
+//    private CircleImageView civProfileImage;
+//    private TextView tvUserDisplayName;
 
     public static FragmentHome newInstance() {
         FragmentHome fragment = new FragmentHome();
@@ -52,7 +53,7 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container,false);
+        return inflater.inflate(R.layout.fragment_home_new_design, container,false);
     }
 
     @Override
@@ -67,10 +68,11 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
         adapter = new RoomListAdapter(getContext(),roomList);
         adapter.setCallback(this);
         rvRoomList.setAdapter(adapter);
-        civProfileImage = view.findViewById(R.id.civ_home_profile);
-        tvUserDisplayName = view.findViewById(R.id.tv_welcome_user);
+//        civProfileImage = view.findViewById(R.id.civ_home_profile);
+//        tvUserDisplayName = view.findViewById(R.id.tv_welcome_user);
         ibtnHomeMenu = view.findViewById(R.id.ibtn_home_menu);
         ibtnHomeMenu.setOnClickListener(this);
+        tvCountAllMess = view.findViewById(R.id.tv_count_all_chat);
 
     }
 
@@ -94,7 +96,7 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
 
     @Override
     public void displayProfileImage(String url) {
-        Picasso.with(getActivity()).load(url).into(civProfileImage);
+//        Picasso.with(getActivity()).load(url).into(civProfileImage);
     }
 
 
@@ -120,7 +122,7 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
 
     @Override
     public void displayUserDisplayName(String displayName) {
-        tvUserDisplayName.setText(displayName);
+//        tvUserDisplayName.setText(displayName);
     }
 
     @Override

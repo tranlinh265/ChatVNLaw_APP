@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_parrent"
+    android:background="@android:color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_heightPercent="30%"
+        android:id="@+id/rl_toolbar">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/working"
+            android:scaleType="centerCrop"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu_light"
+            android:background="@android:color/transparent"
+            android:layout_margin="20dp"
+            android:id="@+id/ibtn_home_menu"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_toolbar"
+        android:layout_marginTop="20dp"
+        android:textColor="#989cad"
+        android:text="all chat"
+        android:textAllCaps="true"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/tv_all_chat"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_all_chat"
+        android:layout_alignTop="@+id/tv_all_chat"
+        android:layout_alignBottom="@id/tv_all_chat"
+        android:layout_marginLeft="5dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:adjustViewBounds="true"
+            android:layout_height="match_parent"
+            android:background="@drawable/circle_bg_small"
+            android:backgroundTint="#989cad" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="5"
+            android:id="@+id/tv_count_all_chat"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/tv_all_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_messages" />
+</android.support.percent.PercentRelativeLayout>
