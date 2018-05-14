@@ -21,12 +21,18 @@ public class ArticleDetailInterator {
         ApiUtils.getService().getArticleDetail(articleId).enqueue(new Callback<ArticleDetailResponse>() {
             @Override
             public void onResponse(Call<ArticleDetailResponse> call, Response<ArticleDetailResponse> response) {
-                callback.onLoadSuccess(response.body());
+                if (response.isSuccessful()){
+                    callback.onLoadSuccess(response.body());
+                }else{
+                    callback.onLoadFalure();
+                }
+
             }
 
             @Override
             public void onFailure(Call<ArticleDetailResponse> call, Throwable t) {
                 t.printStackTrace();
+                callback.onLoadFalure();
             }
         });
     }

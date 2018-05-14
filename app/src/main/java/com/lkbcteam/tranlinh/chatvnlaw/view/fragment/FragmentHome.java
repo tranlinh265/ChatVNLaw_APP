@@ -94,7 +94,7 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
 
     @Override
     public void displayProfileImage(String url) {
-        Picasso.with(getContext()).load(url).into(civProfileImage);
+        Picasso.with(getActivity()).load(url).into(civProfileImage);
     }
 
 

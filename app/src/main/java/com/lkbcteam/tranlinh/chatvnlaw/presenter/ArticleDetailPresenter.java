@@ -28,7 +28,7 @@ public class ArticleDetailPresenter implements ArticleDetailInterator.ArticleDet
 
     @Override
     public void onLoadFalure() {
-
+        callback.onLoadFalure();
     }
 
     public ArticleDetailListener getCallback() {
@@ -41,5 +41,6 @@ public class ArticleDetailPresenter implements ArticleDetailInterator.ArticleDet
 
     public interface ArticleDetailListener{
         void displayResult(ArticleDetailResponse response);
+        void onLoadFalure();
     }
 }

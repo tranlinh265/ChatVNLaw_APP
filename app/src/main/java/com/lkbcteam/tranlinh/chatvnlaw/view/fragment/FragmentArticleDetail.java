@@ -105,6 +105,11 @@ public class FragmentArticleDetail extends BaseFragment implements View.OnClickL
     }
 
     @Override
+    public void onLoadFalure() {
+
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ibtn_home_menu:
