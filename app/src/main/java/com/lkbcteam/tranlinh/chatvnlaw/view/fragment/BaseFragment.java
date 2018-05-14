@@ -11,6 +11,8 @@ import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.activity.BaseActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.BaseFragmentContainer;
 
+import java.util.ArrayList;
+
 /**
  * Created by tranlinh on 26/01/2018.
  */
@@ -70,6 +72,10 @@ public abstract class BaseFragment  extends Fragment {
 
     public void goNextFragment(Fragment fragment, boolean addToBackStack, boolean enterTransition, View sharedView){
         ((BaseFragmentContainer)getParentFragment()).replaceFragment(fragment,addToBackStack,enterTransition,sharedView);
+    }
+
+    public void goNextFragment(Fragment fragment, boolean addToBackStack, boolean enterTransition, ArrayList<View> sharedViews){
+        ((BaseFragmentContainer)getParentFragment()).replaceFragment(fragment,addToBackStack,enterTransition,sharedViews);
     }
     public void goBackFragment(){
         ((BaseFragmentContainer)getParentFragment()).popFragment();

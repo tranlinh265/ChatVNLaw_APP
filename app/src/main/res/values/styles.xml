@@ -104,7 +104,7 @@
     <style name="MenuStyle.Description">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">#260e04</item>
     </style>
     <style name="ProfileStyle">
         <item name="android:layout_marginRight">30dp</item>

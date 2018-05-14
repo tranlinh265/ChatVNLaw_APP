@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
 import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.BaseFragment;
 
+import java.util.ArrayList;
+
 /**
  * Created by tranlinh on 26/01/2018.
  */
@@ -90,7 +92,31 @@ public abstract class BaseFragmentContainer extends BaseFragment {
             ex.printStackTrace();
         }
     }
+    public void replaceFragment(Fragment fragment, boolean addToBackStack, boolean enterTransition, ArrayList<View> sharedViews){
+        try{
+            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+            String tag = fragment.getClass().getSimpleName();
+            if (addToBackStack){
+                fragmentTransaction.addToBackStack(tag);
+            }
+            if (enterTransition){
+                fragmentTransaction.setCustomAnimations( R.animator.trans_left_in,R.animator.trans_left_out,R.animator.trans_right_in, R.animator.trans_right_out);
+            }else{
+                fragmentTransaction.setCustomAnimations(R.animator.trans_right_in, R.animator.trans_right_out, R.animator.trans_left_in,R.animator.trans_left_out);
+            }
+            if (!sharedViews.isEmpty()) {
+                for (View view : sharedViews){
+                    fragmentTransaction.addSharedElement(view, view.getTransitionName());
+                }
+            }
+            fragmentTransaction.replace(R.id.container_framelayout, fragment,tag);
+            fragmentTransaction.commit();
+            getChildFragmentManager().executePendingTransactions();
 
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
     public boolean popFragment(){
         try{
             boolean isPop = false;

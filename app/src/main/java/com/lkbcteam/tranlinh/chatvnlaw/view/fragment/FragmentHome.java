@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,8 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     private ImageButton ibtnHomeMenu;
     private HomePresenter homePresenter;
     private TextView tvCountAllMess;
+    private ImageView ivTop;
+
 //    private CircleImageView civProfileImage;
 //    private TextView tvUserDisplayName;
 
@@ -73,7 +76,7 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
         ibtnHomeMenu = view.findViewById(R.id.ibtn_home_menu);
         ibtnHomeMenu.setOnClickListener(this);
         tvCountAllMess = view.findViewById(R.id.tv_count_all_chat);
-
+        ivTop = view.findViewById(R.id.iv_home_top_image);
     }
 
     @Override
@@ -89,7 +92,13 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ibtn_home_menu:
-                goNextFragment(FragmentMenu.newInstance(0),true,false);
+                Fragment nextFragment = FragmentMenu.newInstance(0);
+                Fragment previousFragment = getFragmentManager().findFragmentById(R.id.container_framelayout);
+                Transition sharedElementEnterTransition = TransitionInflater.from(getContext()).inflateTransition(R.transition.default_transition);
+                sharedElementEnterTransition.setDuration(FADE_DEFAULT_TIME);
+                previousFragment.setSharedElementReturnTransition(sharedElementEnterTransition);
+                nextFragment.setSharedElementEnterTransition(sharedElementEnterTransition);
+                goNextFragment(nextFragment,true,false,ivTop);
                 break;
         }
     }
@@ -136,7 +145,11 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
         previousFragment.setSharedElementReturnTransition(sharedElementEnterTransition);
         nextFragment.setSharedElementEnterTransition(sharedElementEnterTransition);
 
-        goNextFragment(nextFragment,true,true,view);
+        ArrayList<View> views  = new ArrayList<>();
+        views.add(view);
+        views.add(ivTop);
+
+        goNextFragment(nextFragment,true,true,views);
     }
 
     @Override
