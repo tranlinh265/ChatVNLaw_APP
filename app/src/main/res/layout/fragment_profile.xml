@@ -3,85 +3,88 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/view_parrent"
-    android:focusable="true" android:focusableInTouchMode="true">
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="#46519d">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/colorGrayDark"
         android:layout_height="?android:attr/actionBarSize">
         <ImageButton
             android:id="@+id/ibtn_home_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_home_menu"
-            android:backgroundTint="@color/colorGrayDark"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGray"
-            android:layout_alignParentBottom="true"/>
+            android:src="@drawable/ic_action_close_light"
+            android:backgroundTint="@android:color/transparent"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ibtn_home_menu"
+            android:src="@drawable/ic_action_save"
+            android:backgroundTint="@android:color/transparent"
+            android:id="@+id/ibtn_save"/>
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?android:attr/actionBarSize"
-        android:background="@color/colorGrayDark">
+        android:layout_marginTop="?android:attr/actionBarSize">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/square_avatar"
-                android:id="@+id/civ_user_avatar"/>
-            <TextView
-                android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/colorBlueLight"
-                android:textStyle="bold"
-                android:id="@+id/tv_displayname" />
-            <TextView
-                android:id="@+id/tv_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/colorBlueLight" />
-            <TextView
-                style="@style/ProfileStyle.Label"
-                android:text="@string/profile_name"
-                android:id="@+id/tv_label_name" />
+                android:layout_marginBottom="100dp">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/avatar"
+                    android:id="@+id/civ_user_avatar"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="23dp"
+                    android:layout_toRightOf="@id/civ_user_avatar"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/tv_displayname" />
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_alignLeft="@id/tv_displayname"
+                    android:layout_below="@id/tv_displayname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#888fbf" />
+            </RelativeLayout>
             <EditText
                 android:layout_below="@+id/tv_label_name"
                 style="@style/ProfileStyle.Edittext"
-                android:id="@+id/edt_name" />
-            <TextView
-                style="@style/ProfileStyle.Label"
-                android:text="@string/profile_birth"/>
+                android:id="@+id/edt_name"
+                android:hint="@string/profile_name"/>
             <EditText
+                android:hint="@string/profile_birth"
                 android:focusable="false"
                 style="@style/ProfileStyle.Edittext"
                 android:editable="false"
-                android:id="@+id/edt_day_of_birth"/>
-            <TextView
-                style="@style/ProfileStyle.Label"
-                android:text="@string/profile_card_number"/>
+                android:id="@+id/edt_day_of_birth" />
             <EditText
+                android:hint="@string/profile_card_number"
                 style="@style/ProfileStyle.Edittext"
                 android:id="@+id/edt_card_number"/>
-            <TextView
-                style="@style/ProfileStyle.Label"
-                android:text="@string/profile_certificate"
-                />
+            <EditText
+                android:hint="@string/profile_certificate"
+                style="@style/ProfileStyle.Edittext"
+                android:id="@+id/edt_certificate" />
             <EditText
                 style="@style/ProfileStyle.Edittext"
-                android:id="@+id/edt_certificate"/>
-            <TextView
-                style="@style/ProfileStyle.Label"
                 android:text="@string/profile_category"
-                />
+                android:textColor="#7780b7"
+                android:backgroundTint="@android:color/transparent"
+                android:enabled="false"/>
             <com.google.android.flexbox.FlexboxLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,35 +152,25 @@
                     android:id="@+id/cb_dn"/>
 
             </com.google.android.flexbox.FlexboxLayout>
-            <TextView
-                style="@style/ProfileStyle.Label"
-                android:text="@string/profile_experience" />
             <EditText
+                android:hint="@string/profile_experience"
                 style="@style/ProfileStyle.Edittext"
                 android:id="@+id/edt_experience"
                 android:numeric="decimal"/>
-            <TextView
-                style="@style/ProfileStyle.Label"
-                android:text="@string/profile_intro"/>
             <EditText
+                android:hint="@string/profile_intro"
                 style="@style/ProfileStyle.Edittext"
                 android:id="@+id/edt_intro" />
-            <TextView
-                style="@style/ProfileStyle.Label"
-                android:text="@string/profile_achievement"/>
             <EditText
+                android:hint="@string/profile_achievement"
                 style="@style/ProfileStyle.Edittext"
                 android:id="@+id/edt_achievement" />
-            <TextView
-                style="@style/ProfileStyle.Label"
-                android:text="@string/profile_education"/>
             <EditText
+                android:hint="@string/profile_education"
                 style="@style/ProfileStyle.Edittext"
                 android:id="@+id/edt_education" />
-            <TextView
-                style="@style/ProfileStyle.Label"
-                android:text="@string/profile_workplace"/>
             <EditText
+                android:hint="@string/profile_workplace"
                 style="@style/ProfileStyle.Edittext"
                 android:id="@+id/edt_workplace" />
             <Button
@@ -192,7 +185,8 @@
                 android:textAllCaps="false"
                 android:layout_margin="@dimen/padding_medium_10"
                 android:paddingRight="@dimen/padding_large_50"
-                android:paddingLeft="@dimen/padding_large_50"/>
+                android:paddingLeft="@dimen/padding_large_50"
+                android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
 </android.support.percent.PercentRelativeLayout>

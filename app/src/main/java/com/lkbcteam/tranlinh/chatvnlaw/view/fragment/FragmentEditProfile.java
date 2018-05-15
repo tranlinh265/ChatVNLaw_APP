@@ -38,11 +38,13 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
 
     private ImageButton ibtnHomeMenu;
 
+    private TextView tvDisplayName;
     private TextView tvUserName;
     private CircleImageView civUserAvatar;
     private EditText edtName,edtDayOfBirth,edtCardNumber,edtCertificate,edtCategory,edtExperience,edtIntro,edtAchievement,edtEducation,edtWorkPlace;
     private Button btnSubmit;
     private CheckBox cbHs, cbShtt, cbHngd, cbNdxd, cbTcnh, cbDs, cbLdbhxh, cbDn;
+    private ImageButton ibtnSave;
 
     private EditProfilePresenter presenter;
 
@@ -68,6 +70,8 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
         ibtnHomeMenu = view.findViewById(R.id.ibtn_home_menu);
         ibtnHomeMenu.setOnClickListener(this);
 
+        tvDisplayName = view.findViewById(R.id.tv_displayname);
+
         tvUserName = view.findViewById(R.id.tv_username);
         civUserAvatar = view.findViewById(R.id.civ_user_avatar);
         edtName = view.findViewById(R.id.edt_name);
@@ -91,6 +95,8 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
         cbDn = view.findViewById(R.id.cb_dn);
         edtDayOfBirth.setOnClickListener( v -> showDatePicker());
         btnSubmit.setOnClickListener(this);
+        ibtnSave = view.findViewById(R.id.ibtn_save);
+        ibtnSave.setOnClickListener(this);
     }
 
     @Override
@@ -106,7 +112,7 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
             case R.id.ibtn_home_menu:
                 goNextFragment(FragmentMenu.newInstance(2),true,false);
                 break;
-            case R.id.btn_submit:
+            case R.id.ibtn_save:
                 updateLawyerInfo();
                 break;
             case R.id.edt_day_of_birth:
@@ -122,6 +128,7 @@ public class FragmentEditProfile extends BaseFragment implements View.OnClickLis
     @Override
     public void displayProfileValue(Object o) {
         ProfileResponse data = (ProfileResponse) o;
+        tvDisplayName.setText(data.getLawyerInfo().getBaseProfile().getDisplayName());
         tvUserName.setText(data.getLawyerInfo().getBaseProfile().getUserName());
         edtName.setText(data.getLawyerInfo().getBaseProfile().getDisplayName());
         Picasso.with(getContext()).load(data.getLawyerInfo().getBaseProfile().getAvatar().getUrl()).into(civUserAvatar);
