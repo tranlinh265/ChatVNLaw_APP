@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorGrayDark"
     android:paddingTop="20dp">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,7 +10,6 @@
             android:layout_marginLeft="10dp"
             android:layout_width="5dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorGray"
             android:layout_alignBottom="@+id/tv_room_info"/>
         <TextView
             android:paddingTop="5dp"

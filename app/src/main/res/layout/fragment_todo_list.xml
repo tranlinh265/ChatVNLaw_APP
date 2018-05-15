@@ -4,10 +4,13 @@
     android:layout_height="match_parent"
     android:id="@+id/view_parrent"
 
-    android:background="@color/colorGrayDark">
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar" />
+    android:background="#46519d">
+    <ImageButton
+        android:id="@+id/ibtn_home_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_back_light"
+        android:backgroundTint="@android:color/transparent"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -22,7 +25,6 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:id="@+id/rv_todo_list"
             android:visibility="gone"
