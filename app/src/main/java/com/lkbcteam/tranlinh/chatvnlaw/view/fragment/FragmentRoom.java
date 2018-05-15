@@ -9,12 +9,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.text.TextUtils;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +75,7 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
     private TextView tvTargetUserDisplayName;
     private ImageButton ibtnPickImage;
     private int position = 0;
+    private ImageView ivTopImage;
 
     private View.OnClickListener mHideSoftKey = view -> {
         View currentFocus = getActivity().getCurrentFocus();
@@ -138,6 +143,8 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         ibtnPickImage = view.findViewById(R.id.ibtn_pick_image);
         ibtnPickImage.setOnClickListener(this);
         ibtnPickImage.setVisibility(View.GONE);
+        ivTopImage = (ImageView)view.findViewById(R.id.iv_top_image);
+
         rvChatContentContainer.addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -211,7 +218,17 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
                 }
                 break;
             case R.id.ibtn_info:
-                goNextFragment(FragmentRoomInfo.newInstance(room),true,true);
+
+                Fragment nextFragment = FragmentRoomInfo.newInstance(room);
+                Fragment previousFragment = getFragmentManager().findFragmentById(R.id.container_framelayout);
+
+                Transition sharedElementEnterTransition = TransitionInflater.from(getContext()).inflateTransition(R.transition.default_transition);
+                sharedElementEnterTransition.setDuration(FADE_DEFAULT_TIME);
+
+                previousFragment.setSharedElementReturnTransition(sharedElementEnterTransition);
+                nextFragment.setSharedElementEnterTransition(sharedElementEnterTransition);
+
+                goNextFragment(nextFragment,true,true, ivTopImage);
                 break;
             case R.id.ibtn_pick_image:
                 requestPermission();

@@ -18,6 +18,7 @@ import java.util.ArrayList;
  */
 
 public abstract class BaseFragment  extends Fragment {
+    protected static final long FADE_DEFAULT_TIME = 1300;
 
     private BaseActivity baseActivity;
     protected View parrentLayout;

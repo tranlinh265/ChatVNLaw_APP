@@ -8,7 +8,8 @@
         android:layout_height="match_parent"
         android:src="@drawable/working"
         android:scaleType="centerCrop"
-        android:transitionName="topImage"/>
+        android:transitionName="topImage"
+        android:id="@+id/iv_top_image"/>
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,39 +25,37 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/ic_menu_left"
+            android:src="@drawable/ic_action_back_light"
             android:id="@+id/ibtn_back"
-            android:backgroundTint="@color/colorGrayDark"/>
+            android:backgroundTint="@android:color/transparent"/>
         <ImageButton
-            android:src="@drawable/ic_info"
+            android:src="@drawable/ic_action_info_light"
             android:id="@+id/ibtn_info"
-            android:backgroundTint="@color/colorGrayDark"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_toRightOf="@+id/ibtn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"/>
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/default_avatar"
-            android:layout_toRightOf="@id/ibtn_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:id="@+id/iv_target_user_avatar"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             />
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:layout_toRightOf="@id/iv_target_user_avatar"
-            android:layout_toLeftOf="@+id/ibtn_info"
+            android:textSize="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/ibtn_info"
+            android:layout_toLeftOf="@+id/iv_target_user_avatar"
             android:layout_centerVertical="true"
-            android:gravity="center"
+            android:gravity="right"
             android:id="@+id/tv_sender_displayname"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGray"
-            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -92,7 +91,8 @@
             android:layout_toLeftOf="@+id/btn_send"
             android:layout_toRightOf="@+id/ibtn_pick_image"
             android:textColor="@android:color/white"
-            android:backgroundTint="@color/colorGray"
+            android:backgroundTint="#8b6b61"
+            android:alpha="0.7"
             android:paddingBottom="3dp"
             android:paddingLeft="20dp"
             android:layout_marginLeft="20dp"
@@ -102,7 +102,7 @@
             android:maxHeight="?android:attr/actionBarSize"/>
         <ImageButton
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_send"
+            android:src="@drawable/ic_action_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

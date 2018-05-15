@@ -2,12 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/view_parrent"
-    >
-
+    android:id="@+id/view_parrent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/working"
+        android:scaleType="centerCrop"
+        android:transitionName="topImage"
+        android:paddingRight="100dp"
+        android:paddingEnd="100dp"/>
     <ScrollView
         android:paddingTop="?android:attr/actionBarSize"
-        android:background="@color/colorGrayDark"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -19,7 +24,11 @@
                 android:layout_height="wrap_content"
                 android:text="Files"
                 android:id="@+id/label_files"
-                style="@style/RoomInfo.Label"/>
+                android:textSize="25dp"
+                android:paddingLeft="20dp"
+                android:textColor="#102027"
+                android:gravity="right"
+                android:layout_marginRight="20dp"/>
             <android.support.v7.widget.RecyclerView
                 android:layout_below="@+id/label_files"
                 android:layout_width="match_parent"
@@ -31,7 +40,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Photos"
-                style="@style/RoomInfo.Label"
+                android:textColor="#102027"
+                android:textSize="25dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="right"
+                android:layout_marginRight="20dp"
                 android:id="@+id/label_photos"
                 android:layout_below="@+id/rv_file_container"/>
             <LinearLayout
@@ -56,16 +69,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:id="@+id/tb_actionbar"
-        android:background="@color/colorGrayDark">
+        android:id="@+id/tb_actionbar">
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/ic_menu_left"
+            android:src="@drawable/ic_action_back_light"
             android:id="@+id/ibtn_back"
-            android:backgroundTint="@color/colorGrayDark"/>
+            android:backgroundTint="@android:color/transparent"/>
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -73,11 +85,7 @@
             android:layout_toRightOf="@id/ibtn_back"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:id="@+id/tv_sender_displayname"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGray"
-            android:layout_alignParentBottom="true"/>
+            android:id="@+id/tv_sender_displayname"
+            android:visibility="gone"/>
     </RelativeLayout>
 </RelativeLayout>
