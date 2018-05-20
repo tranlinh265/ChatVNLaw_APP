@@ -62,13 +62,16 @@ public class FragmentArticleDetail extends BaseFragment implements View.OnClickL
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
                 return true;
             }
         });
+
+        webView.getSettings().setJavaScriptEnabled(true);
         ibtnBack = view.findViewById(R.id.ibtn_home_menu);
         ibtnBack.setOnClickListener(this);
         btnSearch = view.findViewById(R.id.btn_search);
-//        btnSearch.setOnClickListener(this);
+        btnSearch.setOnClickListener(this);
         btnSearch.setVisibility(View.GONE);
         ibtnInfo = view.findViewById(R.id.ibtn_info);
         ibtnInfo.setOnClickListener(this);
@@ -86,7 +89,7 @@ public class FragmentArticleDetail extends BaseFragment implements View.OnClickL
     @Override
     public void displayResult(ArticleDetailResponse response) {
         articleDetailResponse = response;
-        webView.loadDataWithBaseURL("https://vnlaw.datalab.vn"+"/articles/"+articleId,response.getFullHtml(), "text/html", "utf-8",null);
+        webView.loadDataWithBaseURL(null,response.getFullHtml(), "text/html", "utf-8",null);
         webView.setClickable(false);
         if (bundle == null){
             bundle = new Bundle();
@@ -118,7 +121,8 @@ public class FragmentArticleDetail extends BaseFragment implements View.OnClickL
             case R.id.btn_search:
                 Document doc = Jsoup.parseBodyFragment(articleDetailResponse.getFullHtml());
                 Element element = doc.getElementsByAttributeValue("name","1_1_1_1_0_0").first();
-                webView.loadDataWithBaseURL("https://vnlaw.datalab.vn"+"/articles/"+articleId,element.outerHtml(), "text/html", "utf-8",null);
+//                webView.loadDataWithBaseURL(null,"<script> document.getElementsByName(\"1_1_1_1_0_0\").first().scrollIntoView();  </script>", "text/html", "utf-8",null);
+                webView.loadDataWithBaseURL(null,"<script> document.getElementById(\"toanvancontent\").scrollIntoView();  </script>", "text/html", "utf-8",null);
 
                 break;
             case R.id.ibtn_info:
