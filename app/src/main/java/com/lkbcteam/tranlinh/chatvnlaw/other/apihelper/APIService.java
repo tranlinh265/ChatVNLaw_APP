@@ -2,10 +2,9 @@ package com.lkbcteam.tranlinh.chatvnlaw.other.apihelper;
 
 import android.support.annotation.Nullable;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.LawyerNameResponse;
-import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.SearchLawyerResponse;
-import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.TopLawyerResponse;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.LawyerNameResponse;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.SearchLawyerResponse;
+import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.TopLawyerResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.ArticleDetailResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.CreateTaskResponse;
@@ -26,7 +25,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;

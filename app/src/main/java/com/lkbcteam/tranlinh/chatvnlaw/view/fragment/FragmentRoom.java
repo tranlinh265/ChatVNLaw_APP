@@ -31,7 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.ChatContentAdapter;
+import com.lkbcteam.tranlinh.chatvnlaw.other.adapter.ChatContentAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Message;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.RoomPresenter;
@@ -115,16 +115,11 @@ public class FragmentRoom extends BaseFragment implements RoomPresenter.RoomView
         super.initView(view);
         civTargetUserAvatar = view.findViewById(R.id.iv_target_user_avatar);
         tvTargetUserDisplayName = view.findViewById(R.id.tv_sender_displayname);
-//        Bundle bundle = getArguments();
-//        if(bundle!=null){
-//            String position = bundle.getString("position");
-            civTargetUserAvatar.setTransitionName(getContext().getString(R.string.target_user_avatar_transiton) + this.position);
-//            RoomListResponse.Room room = (RoomListResponse.Room)bundle.getSerializable("room");
-//            setRoom(room);
-            setTargetUser();
-            Picasso.with(getContext()).load(targetUser.getAvatar().getThumbSmall().getUrl()).into(civTargetUserAvatar);
-            tvTargetUserDisplayName.setText(targetUser.getDisplayName());
-//        }
+        civTargetUserAvatar.setTransitionName(getContext().getString(R.string.target_user_avatar_transiton) + this.position);
+        setTargetUser();
+        Picasso.with(getContext()).load(targetUser.getAvatar().getThumbSmall().getUrl()).into(civTargetUserAvatar);
+        tvTargetUserDisplayName.setText(targetUser.getDisplayName());
+
         mMessageList = new ArrayList<>();
         rvChatContentContainer = view.findViewById(R.id.rv_chat_content_container);
         mLayout = new GridLayoutManager(getContext(),1);

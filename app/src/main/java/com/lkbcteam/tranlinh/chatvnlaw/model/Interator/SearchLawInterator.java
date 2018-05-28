@@ -2,7 +2,6 @@ package com.lkbcteam.tranlinh.chatvnlaw.model.Interator;
 
 import android.os.Bundle;
 
-import com.lkbcteam.tranlinh.chatvnlaw.model.apiresponse.SearchLawyerResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.ApiUtils;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.SearchLawResponse;
 

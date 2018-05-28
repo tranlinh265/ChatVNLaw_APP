@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.view.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.ApiUtils;

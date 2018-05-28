@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.BaseActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.view.activity.BaseActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.view.fragmentcontainer.BaseFragmentContainer;
 
 import java.util.ArrayList;

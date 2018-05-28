@@ -48,50 +48,11 @@ public class FileListInterator {
         });
     }
 
-    public void loadFileItem(String roomId){
-        database.getReference().child(Define.Table.TABLE_ROOMS).child(roomId).child(Define.Room.SHARED_FILES)
-                .addChildEventListener(childEventListener);
-    }
-
-    public void loadImageItem(String roomId){
-        database.getReference().child(Define.Table.TABLE_ROOMS).child(roomId).child(Define.Room.SHARED_IMAGES)
-                .addChildEventListener(childEventListener);
-    }
-
-    private ChildEventListener childEventListener = new ChildEventListener() {
-        @Override
-        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-            File file = dataSnapshot.getValue(File.class);
-            loadFileListListener.onLoadSuccess(file);
-        }
-
-        @Override
-        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-        }
-
-        @Override
-        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-            loadFileListListener.onLoadFalure(databaseError.getMessage());
-        }
-    };
-
     /**
      * Created by tranlinh on 24/03/2018.
      */
 
     public interface LoadFileListListener {
-        void onLoadSuccess(File file);
         void onLoadFalure(String error);
         void onLoadFromRailsSuccess(RoomFileListResponse response);
     }

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.FragmentSearchLawyer;
+import com.lkbcteam.tranlinh.chatvnlaw.view.fragment.FragmentSearchLawyer;
 
 /**
  * Created by tranlinh on 01/03/2018.

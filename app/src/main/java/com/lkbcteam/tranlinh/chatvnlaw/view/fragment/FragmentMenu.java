@@ -8,17 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivityEditProfile;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivitySearchLaw;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivitySearchLawer;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.ActivityTodoList;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
+import com.lkbcteam.tranlinh.chatvnlaw.view.activity.ActivityEditProfile;
+import com.lkbcteam.tranlinh.chatvnlaw.view.activity.ActivitySearchLaw;
+import com.lkbcteam.tranlinh.chatvnlaw.view.activity.ActivitySearchLawer;
+import com.lkbcteam.tranlinh.chatvnlaw.view.activity.ActivityTodoList;
+import com.lkbcteam.tranlinh.chatvnlaw.view.activity.HomeActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.view.activity.MainActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.other.Define;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SnackbarHelper;
@@ -104,9 +102,7 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                 }
                 break;
             case R.id.item_noti_container:
-//                Intent intent = new Intent(getBaseActivity(), ActivityWebView.class);
-//                startActivity(intent);
-//                goNextFragment(FragmentNotification.newInstance(), true,true);
+
                 break;
             case R.id.item_profile_container:
                 if(mPosition ==2){
@@ -131,7 +127,6 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                 }else{
                     getBaseActivity().startActivity(ActivitySearchLaw.class, false);
                 }
-//                goNextFragment(FragmentSearchLaw.newInstance(),true,true);
                 break;
             case R.id.item_search_lawyer_container:
                 if (mPosition == 5){
@@ -151,19 +146,12 @@ public class FragmentMenu extends BaseFragment implements View.OnClickListener{
                 }else{
                     if(SharePreference.getInstance(getActivity()).getRole().equals("Lawyer")) {
                         getBaseActivity().startActivity(ActivityTodoList.class,false);
-//                        getBaseActivity().finish();
                     }else{
                         SnackbarHelper.showLongSnackBar(parrentLayout, Define.Notice.LAWYER_ONLY);
                     }
 
                 }
                 break;
-//                if( mPosition == 3){
-//                    goBackFragment();
-//                }else{
-//                    getBaseActivity().startActivity(ActivityTodoList.class,false);
-//                    getBaseActivity().finish();
-//                }
 
             case R.id.ibtn_close:
                 goBackFragment();

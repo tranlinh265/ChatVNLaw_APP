@@ -35,30 +35,7 @@ public class RoomInfoPresenter implements FileListInterator.LoadFileListListener
     public void getRoomFileListFromRails(String userToken, String userEmail, String roomId){
         fileListInterator.loadRoomFileFromRails(userToken,userEmail,roomId);
     }
-    public void loadFileList(String roomId){
-        fileListInterator.loadFileItem(roomId);
-    }
 
-    public void loadImageList(String roomId){
-        fileListInterator.loadImageItem(roomId);
-    }
-
-    @Override
-    public void onLoadSuccess(File file) {
-//        if(file.getContentType().contains("image")){
-//            imageList.add(file);
-//            if(imageList.size() % 2 == 1){
-//                leftImageList.add(file);
-//                roomInfoView.notifyWhenImageListChange(true,leftImageList.size() -1);
-//            }else{
-//                rightImageList.add(file);
-//                roomInfoView.notifyWhenImageListChange(false,rightImageList.size() -1);
-//            }
-//        }else{
-//            fileList.add(file);
-//            roomInfoView.notifyWhenFileListChange(fileList.size() - 1);
-//        }
-    }
 
     @Override
     public void onLoadFalure(String error) {

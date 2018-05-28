@@ -17,17 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.RoomListAdapter;
+import com.lkbcteam.tranlinh.chatvnlaw.view.activity.HomeActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.other.adapter.RoomListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.HomePresenter;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by tranlinh on 24/03/2018.

@@ -9,13 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.SearchLawAdapter;
+import com.lkbcteam.tranlinh.chatvnlaw.other.adapter.SearchLawAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.SearchLawResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.custom.DialogSearchLaw;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.SearchLawPresenter;

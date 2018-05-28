@@ -15,10 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.TodoListAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.TodoListAdapter1;
-import com.lkbcteam.tranlinh.chatvnlaw.model.TodoItem;
-import com.lkbcteam.tranlinh.chatvnlaw.model.loaddata.TodoList;
+import com.lkbcteam.tranlinh.chatvnlaw.other.adapter.TodoListAdapter;
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.TaskResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.custom.DialogTaskContent;

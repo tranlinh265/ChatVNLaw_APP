@@ -1,13 +1,7 @@
 package com.lkbcteam.tranlinh.chatvnlaw.presenter;
 
-import android.app.Activity;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.MediaStore;
-
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.RoomListInterator;
 import com.lkbcteam.tranlinh.chatvnlaw.model.Interator.UserInfoInterator;
-import com.lkbcteam.tranlinh.chatvnlaw.model.entity.Room;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomListResponse;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.UserInfoResponse;
 
@@ -31,9 +25,6 @@ public class HomePresenter implements RoomListInterator.LoadRoomListListener, Us
         userInfoInterator = new UserInfoInterator(this);
     }
 
-    public void loadRoomListFromFirebase(){
-        roomListInterator.getRoomList();
-    }
 
     public void loadRoomListFromRail(String userToken){
         roomListInterator.getRoomListFromRail(userToken);
@@ -51,17 +42,6 @@ public class HomePresenter implements RoomListInterator.LoadRoomListListener, Us
 
     @Override
     public void onLoadRoomListFromRailFalure(String error) {
-        homeView.displayError(error);
-    }
-
-    @Override
-    public void onLoadRoomListSuccess(Room room) {
-//        roomList.add(room);
-//        homeView.notifyDataInsert(roomList.size() -1);
-    }
-
-    @Override
-    public void onLoadRoomListFalure(String error) {
         homeView.displayError(error);
     }
 

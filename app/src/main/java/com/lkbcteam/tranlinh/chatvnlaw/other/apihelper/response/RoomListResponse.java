@@ -24,33 +24,6 @@ public class RoomListResponse {
         this.rooms = rooms;
     }
 
-    public class Profile {
-
-        @SerializedName("displayName")
-        @Expose
-        private String displayName;
-        @SerializedName("avatar")
-        @Expose
-        private Avatar avatar;
-
-        public String getDisplayName() {
-            return displayName;
-        }
-
-        public void setDisplayName(String displayName) {
-            this.displayName = displayName;
-        }
-
-        public Avatar getAvatar() {
-            return avatar;
-        }
-
-        public void setAvatar(Avatar avatar) {
-            this.avatar = avatar;
-        }
-
-    }
-
     public class Room {
 
         @SerializedName("id")

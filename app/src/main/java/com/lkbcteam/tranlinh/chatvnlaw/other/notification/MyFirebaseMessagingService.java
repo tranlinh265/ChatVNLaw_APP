@@ -12,7 +12,7 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.MainActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.view.activity.MainActivity;
 
 /**
  * Created by tranlinh on 05/03/2018.

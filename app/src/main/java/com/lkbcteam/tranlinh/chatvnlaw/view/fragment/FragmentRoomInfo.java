@@ -12,8 +12,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.FileListAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageListAdapter;
+import com.lkbcteam.tranlinh.chatvnlaw.other.adapter.FileListAdapter;
+import com.lkbcteam.tranlinh.chatvnlaw.other.adapter.ImageListAdapter;
 
 import com.lkbcteam.tranlinh.chatvnlaw.other.SharePreference;
 import com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response.RoomFileListResponse;

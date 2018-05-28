@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.activity.HomeActivity;
+import com.lkbcteam.tranlinh.chatvnlaw.view.activity.HomeActivity;
 import com.lkbcteam.tranlinh.chatvnlaw.presenter.LoginPresenter;
 
 /**

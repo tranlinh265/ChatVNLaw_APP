@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.lkbcteam.tranlinh.chatvnlaw.activity.BaseActivity;
-
 /**
  * Created by tranlinh on 26/03/2018.
  */

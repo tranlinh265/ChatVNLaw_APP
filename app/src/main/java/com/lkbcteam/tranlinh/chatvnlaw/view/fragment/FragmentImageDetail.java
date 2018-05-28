@@ -11,8 +11,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageDetailAdapter;
-import com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageDetailViewPager;
+import com.lkbcteam.tranlinh.chatvnlaw.other.adapter.ImageDetailAdapter;
+import com.lkbcteam.tranlinh.chatvnlaw.other.adapter.ImageDetailViewPager;
 import com.lkbcteam.tranlinh.chatvnlaw.model.entity.File;
 
 import java.util.List;

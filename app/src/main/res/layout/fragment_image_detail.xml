@@ -28,7 +28,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent">
-        <com.lkbcteam.tranlinh.chatvnlaw.adapter.ImageDetailViewPager
+        <com.lkbcteam.tranlinh.chatvnlaw.other.adapter.ImageDetailViewPager
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:id="@+id/pager"/>
