@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorGrayDark"
+    android:background="#212121"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     android:minHeight="?attr/actionBarSize"
@@ -22,12 +22,13 @@
             android:id="@+id/ibtn_home_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_home_menu"
-            android:backgroundTint="@color/colorGrayDark"/>
+            android:src="@drawable/ic_action_back_light"
+            android:backgroundTint="@android:color/transparent"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textSize="18dp"
             android:layout_centerInParent="true"
             android:id="@+id/tv_fragment_title"
             android:textColor="@android:color/white"/>

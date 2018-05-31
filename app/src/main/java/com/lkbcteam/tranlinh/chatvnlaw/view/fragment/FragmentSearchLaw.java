@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
@@ -47,6 +48,7 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
     private Bundle bundle;
     private TextView tvNodata;
     private View vContent;
+    private RelativeLayout rlProgress, rlResult;
 
     public static FragmentSearchLaw newInstance() {
 
@@ -76,7 +78,9 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
             bundle = new Bundle();
             initView = true;
         }
-
+        rlProgress = (RelativeLayout)view.findViewById(R.id.rl_progressbar);
+        rlResult = (RelativeLayout)view.findViewById(R.id.rl_result);
+        rlResult.setVisibility(View.GONE);
         ibtnSearch = (ImageButton)view.findViewById(R.id.ibtn_search);
         ibtnBack = (ImageButton)view.findViewById(R.id.ibtn_home_menu);
         ibtnSearch.setOnClickListener(this);
@@ -115,6 +119,8 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ibtn_search:
+                if (rlProgress.getVisibility() == View.VISIBLE)
+                    return;
                 // show dialog
                 DialogSearchLaw dialogSearchLaw = new DialogSearchLaw();
 //                Bundle bundle = new Bundle();
@@ -126,6 +132,7 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
                 goNextFragment(FragmentMenu.newInstance(4),true,false);
                 break;
             case R.id.btn_load_more:
+                rlProgress.setVisibility(View.VISIBLE);
                 bundle.putString("page", String.valueOf(currentPage + 1));
                 presenter.loadMore(bundle);
                 break;
@@ -140,6 +147,9 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
 
     @Override
     public void onSearchFirstPageSuccess(String currentPosition) {
+        rlProgress.setVisibility(View.GONE);
+        rlResult.setVisibility(View.VISIBLE);
+
         tvNodata.setVisibility(View.GONE);
         vContent.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
@@ -150,6 +160,8 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
 
     @Override
     public void onSearchMoreSuccess(String currentPosition) {
+        rlProgress.setVisibility(View.GONE);
+        rlResult.setVisibility(View.VISIBLE);
         tvNodata.setVisibility(View.GONE);
         vContent.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
@@ -159,6 +171,8 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
 
     @Override
     public void onNoDataFound() {
+        rlProgress.setVisibility(View.GONE);
+        rlResult.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
         tvNodata.setVisibility(View.VISIBLE);
         vContent.setVisibility(View.GONE);

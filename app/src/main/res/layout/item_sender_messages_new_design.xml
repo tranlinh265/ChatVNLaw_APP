@@ -9,7 +9,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/square_avatar"
-        android:id="@+id/iv_sender_picture"/>
+        android:id="@+id/iv_sender_picture"
+        android:visibility="gone"/>
     <TextView
         android:textColor="@color/colorGrayLight"
         android:id="@+id/tv_text_time_stamp"

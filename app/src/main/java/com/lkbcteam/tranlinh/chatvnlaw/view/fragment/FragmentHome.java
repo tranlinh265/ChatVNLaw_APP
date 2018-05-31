@@ -107,8 +107,8 @@ public class FragmentHome extends BaseFragment implements HomePresenter.HomeView
 
 
     @Override
-    public void displayListRoom() {
-
+    public void displayNumberOfListRoom(int count) {
+        tvCountAllMess.setText(String.valueOf(count));
     }
 
     @Override

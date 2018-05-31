@@ -39,6 +39,8 @@ public class RoomListResponse {
         @Expose
         private String description;
 
+        private String lastMessage;
+
         public boolean currentUserIsLawyer = false;
 
         public void setCurrentUserIsLawyer(String uid){
@@ -80,6 +82,13 @@ public class RoomListResponse {
             this.description = description;
         }
 
+        public String getLastMessage() {
+            return lastMessage;
+        }
+
+        public void setLastMessage(String lastMessage) {
+            this.lastMessage = lastMessage;
+        }
     }
 
     public class Thumb {

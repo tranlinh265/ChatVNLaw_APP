@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
-import com.lkbcteam.tranlinh.chatvnlaw.fragment.*;
 
 /**
  * Created by tranlinh on 29/03/2018.

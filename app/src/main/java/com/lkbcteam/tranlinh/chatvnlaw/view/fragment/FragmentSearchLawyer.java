@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lkbcteam.tranlinh.chatvnlaw.R;
@@ -56,6 +57,7 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
     private int totalResult = 0;
     private final int OFFSET = 6;
     private ArrayList<String> suggestion = new ArrayList<>();
+    private RelativeLayout rlProgress, rlResult;
 
     public static FragmentSearchLawyer newInstance() {
         return new FragmentSearchLawyer();
@@ -89,6 +91,9 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
         btnReload = view.findViewById(R.id.btn_reload);
         btnReload.setOnClickListener(this);
         toolbar = view.findViewById(R.id.toolbar);
+        rlProgress = view.findViewById(R.id.rl_progressbar);
+        rlResult = view.findViewById(R.id.rl_result);
+        rlResult.setVisibility(View.GONE);
         if (toolbar != null) {
             ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -100,7 +105,8 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
         currentPage = 0;
         btnReload.setVisibility(View.INVISIBLE);
         csvSearchResult.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
+        rlResult.setVisibility(View.GONE);
+        rlProgress.setVisibility(View.VISIBLE);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -166,10 +172,14 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
                     adapter.notifyDataSetChanged();
                     csvSearchResult.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
+                    rlProgress.setVisibility(View.GONE);
+                    rlResult.setVisibility(View.VISIBLE);
                 }else {
                     lawyers.clear();
                     adapter.clear();
                     keyword = "";
+                    rlProgress.setVisibility(View.GONE);
+                    rlResult.setVisibility(View.VISIBLE);
                     csvSearchResult.setVisibility(View.INVISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
                 }
@@ -178,6 +188,8 @@ public class FragmentSearchLawyer extends BaseFragment implements View.OnClickLi
             @Override
             public void onFailure(Call<SearchLawyerResponse> call, Throwable t) {
                 t.printStackTrace();
+                rlProgress.setVisibility(View.GONE);
+                rlResult.setVisibility(View.VISIBLE);
                 btnReload.setVisibility(View.VISIBLE);
                 csvSearchResult.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.INVISIBLE);

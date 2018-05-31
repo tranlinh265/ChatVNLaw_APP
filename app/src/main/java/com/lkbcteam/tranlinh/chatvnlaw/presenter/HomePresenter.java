@@ -38,11 +38,21 @@ public class HomePresenter implements RoomListInterator.LoadRoomListListener, Us
         this.roomList.clear();
         this.roomList.addAll(rooms);
         homeView.notifyDataChanged();
+        homeView.displayNumberOfListRoom(rooms.size());
     }
 
     @Override
     public void onLoadRoomListFromRailFalure(String error) {
         homeView.displayError(error);
+    }
+
+    @Override
+    public void notifyDataChange(RoomListResponse.Room room, int position) {
+        if (roomList.get(position).getId().equals(room.getId())){
+            roomList.get(position).setLastMessage(room.getLastMessage());
+            homeView.notifyDataChanged();
+        }
+//        homeView.notifyDataChanged();
     }
 
     @Override
@@ -57,7 +67,7 @@ public class HomePresenter implements RoomListInterator.LoadRoomListListener, Us
 
     public interface HomeView {
         void displayProfileImage(String url);
-        void displayListRoom();
+        void displayNumberOfListRoom(int count);
         void notifyDataChanged();
         void displayError(String error);
         void notifyDataInsert(int position);

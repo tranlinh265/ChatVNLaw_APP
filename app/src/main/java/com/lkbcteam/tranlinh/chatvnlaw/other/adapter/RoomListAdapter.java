@@ -60,6 +60,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.ViewHo
             holder.mLayoutContainer.setOnClickListener(v -> {
                 callback.onChatMessageItemClicked(room, position, holder.civProfileImage);
             });
+            holder.tvMessageContent.setText(room.getLastMessage());
         }
     }
 

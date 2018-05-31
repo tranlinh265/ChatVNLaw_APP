@@ -103,7 +103,7 @@ public class SearchLawyerResponse {
         private Integer price;
         @SerializedName("rate")
         @Expose
-        private Integer rate;
+        private float rate;
         @SerializedName("specializations")
         @Expose
         private List<Specialization> specializations = null;
@@ -127,11 +127,11 @@ public class SearchLawyerResponse {
             this.price = price;
         }
 
-        public Integer getRate() {
+        public float getRate() {
             return rate;
         }
 
-        public void setRate(Integer rate) {
+        public void setRate(float rate) {
             this.rate = rate;
         }
 
