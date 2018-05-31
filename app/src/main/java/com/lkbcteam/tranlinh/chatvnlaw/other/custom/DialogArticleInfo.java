@@ -50,6 +50,9 @@ public class DialogArticleInfo extends DialogFragment {
             TextView tvEffectDay = (TextView)dialog.findViewById(R.id.tv_effect_day);
             TextView tvDayReport = (TextView)dialog.findViewById(R.id.tv_day_report);
             TextView tvEffectStatus = (TextView)dialog.findViewById(R.id.tv_effect_status);
+            TextView tvTopic = (TextView)dialog.findViewById(R.id.tv_topic);
+            TextView tvNeighbor = (TextView)dialog.findViewById(R.id.tv_neighbors);
+
 
             tvNumericalSymbol.setText(bundle.getString("numerical_symbol", ""));
             tvArticleType.setText(bundle.getString("article_type", ""));
@@ -62,6 +65,8 @@ public class DialogArticleInfo extends DialogFragment {
             tvEffectDay.setText(bundle.getString("effect_day", ""));
             tvDayReport.setText(bundle.getString("day_report", ""));
             tvEffectStatus.setText(bundle.getString("effect_status", ""));
+            tvTopic.setText(bundle.getString("topic", ""));
+            tvNeighbor.setText(bundle.getString("neighbor", ""));
         });
         return dialog;
     }

@@ -3,6 +3,7 @@ package com.lkbcteam.tranlinh.chatvnlaw.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +106,17 @@ public class FragmentArticleDetail extends BaseFragment implements View.OnClickL
         bundle.putString("effect_day", response.getDetail().getEffectDay());
         bundle.putString("day_report", response.getDetail().getDayReport());
         bundle.putString("effect_status", response.getDetail().getEffectDay());
+
+        String topic = response.getDetail().getTopics();
+        if (!TextUtils.isEmpty(topic)) {
+            topic = topic.replace("#", "\n");
+            bundle.putString("topic", topic);
+        }
+        String neighbor = "";
+        for (ArticleDetailResponse.Neighbor neighbor1 : response.getNeighbors()){
+            neighbor += "Văn bản "+neighbor1.getNumericalSymbol() + "\n";
+        }
+        bundle.putString("neighbor",neighbor);
     }
 
     @Override

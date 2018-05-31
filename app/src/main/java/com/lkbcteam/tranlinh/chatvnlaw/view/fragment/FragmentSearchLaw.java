@@ -111,7 +111,12 @@ public class FragmentSearchLaw  extends BaseFragment implements SearchLawAdapter
         presenter.setArticles(articles);
         presenter.setCallback(this);
         if (articles.isEmpty() && initView){
+            rlProgress.setVisibility(View.VISIBLE);
+            rlResult.setVisibility(View.GONE);
             presenter.searchLaw(bundle);
+        }else {
+            rlProgress.setVisibility(View.GONE);
+            rlResult.setVisibility(View.VISIBLE);
         }
     }
 

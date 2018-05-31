@@ -3,6 +3,8 @@ package com.lkbcteam.tranlinh.chatvnlaw.other.apihelper.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by tranlinh on 03/05/2018.
  */
@@ -17,6 +19,10 @@ public class ArticleDetailResponse {
     @SerializedName("detail")
     @Expose
     private Detail detail;
+
+    @SerializedName("neighbors")
+    @Expose
+    private List<Neighbor> neighbors = null;
 
     public String getFullHtml() {
         return fullHtml;
@@ -40,6 +46,52 @@ public class ArticleDetailResponse {
 
     public void setDetail(Detail detail) {
         this.detail = detail;
+    }
+
+    public List<Neighbor> getNeighbors() {
+        return neighbors;
+    }
+
+    public void setNeighbors(List<Neighbor> neighbors) {
+        this.neighbors = neighbors;
+    }
+
+    public class Neighbor {
+
+        @SerializedName("id")
+        @Expose
+        private String id;
+        @SerializedName("title")
+        @Expose
+        private String title;
+        @SerializedName("numerical_symbol")
+        @Expose
+        private String numericalSymbol;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getNumericalSymbol() {
+            return numericalSymbol;
+        }
+
+        public void setNumericalSymbol(String numericalSymbol) {
+            this.numericalSymbol = numericalSymbol;
+        }
+
     }
 
     public class Detail {
@@ -80,6 +132,9 @@ public class ArticleDetailResponse {
         @SerializedName("effect_status")
         @Expose
         private String effectStatus;
+        @SerializedName("topics")
+        @Expose
+        private String topics;
 
         public String getTitle() {
             return title;
@@ -177,5 +232,12 @@ public class ArticleDetailResponse {
             this.effectStatus = effectStatus;
         }
 
+        public String getTopics() {
+            return topics;
+        }
+
+        public void setTopics(String topics) {
+            this.topics = topics;
+        }
     }
 }

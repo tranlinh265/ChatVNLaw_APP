@@ -71,6 +71,7 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
             holder.mFileUrl.setVisibility(View.GONE);
             holder.mIvImageContent.setVisibility(View.GONE);
             holder.mTextContent.setVisibility(View.GONE);
+            holder.mIvSenderPicture.setVisibility(View.GONE);
         }
         final Message message = mMessageList.get(position);
         if(message != null){
@@ -80,7 +81,7 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
                 return;
             }
             holder.mLayoutContainer.setOnClickListener(this.mOnClickContentItem);
-            Picasso.with(mContext).load(targetUserPhotourl).resize(50,50).centerCrop().into(holder.mIvSenderPicture);
+//            Picasso.with(mContext).load(targetUserPhotourl).resize(50,50).centerCrop().into(holder.mIvSenderPicture);
 
             if(message.getmMessageInfo() != null){
                 if(message.getmMessageInfo().getContentType() != null){
@@ -123,7 +124,7 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
 
                 if (position == 0) {
                     if (holder.getViewType() ==2)
-                        holder.mIvSenderPicture.setVisibility(View.VISIBLE);
+                        holder.mIvSenderPicture.setVisibility(View.GONE);
                     return;
                 }
                 if (holder.getViewType() == 0 && mMessageList.get(position -1).getIsCurrentUser()){
@@ -140,7 +141,7 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
                     int duration = (int) (TimeUnit.MILLISECONDS.toMinutes(Long.parseLong(message.getmMessageInfo().getMsgTimeStamp())) -
                             TimeUnit.MILLISECONDS.toMinutes(Long.parseLong(mMessageList.get(position -1).getmMessageInfo().getMsgTimeStamp())));
                     if(duration <= 5){
-                        holder.mIvSenderPicture.setVisibility(View.INVISIBLE);
+                        holder.mIvSenderPicture.setVisibility(View.GONE);
                         holder.mTextTimeStamp.setVisibility(View.GONE);
                         holder.mLayoutContainer.setBackgroundResource(R.drawable.chat_content_bg_0101);
                     }

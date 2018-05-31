@@ -91,7 +91,7 @@
             android:layout_toLeftOf="@+id/btn_send"
             android:layout_toRightOf="@+id/ibtn_pick_image"
             android:textColor="@android:color/white"
-            android:backgroundTint="#8b6b61"
+            android:backgroundTint="#6a4f4b"
             android:alpha="0.7"
             android:paddingBottom="3dp"
             android:paddingLeft="20dp"
